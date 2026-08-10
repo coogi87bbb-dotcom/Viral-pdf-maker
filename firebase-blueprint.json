@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "users": {
+      "title": "Users",
+      "description": "User profiles and subscription state",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "member"] },
+        "registrationKeyUsed": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string" },
+        "lastLoginAt": { "type": "string" },
+        "campaignsCount": { "type": "number" }
+      },
+      "required": ["uid", "email", "role", "registrationKeyUsed", "status", "createdAt"]
+    },
+    "campaigns": {
+      "title": "Campaigns",
+      "description": "Saved user viral content campaigns",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "topic": { "type": "string" },
+        "targetAudience": { "type": "string" },
+        "goal": { "type": "string" },
+        "coreHook": { "type": "string" },
+        "monetizationAngle": { "type": "string" },
+        "platforms": { "type": "object" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "topic", "createdAt"]
+    },
+    "calendar_events": {
+      "title": "Calendar Events",
+      "description": "Scheduled social media posts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "day": { "type": "string" },
+        "time": { "type": "string" },
+        "platform": { "type": "string" },
+        "title": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "createdAt"]
+    },
+    "activity_logs": {
+      "title": "Activity Logs",
+      "description": "Platform telemetry and owner activity logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "action": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "userId", "action", "timestamp"]
+    },
+    "templates": {
+      "title": "Templates",
+      "description": "Saved user campaign templates and post formats",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "coreHookStructure": { "type": "string" },
+        "bodyFormatTemplate": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "coreHookStructure", "bodyFormatTemplate"]
+    }
+  }
+}

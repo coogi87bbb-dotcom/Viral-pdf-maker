@@ -1,0 +1,6 @@
+{
+  "name": "Viral PDF Creator",
+  "description": "Professional PDF Studio & Viral Content Engine for creating, publishing, and monetizing high-DPI documents, books, and omni-channel campaigns.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
