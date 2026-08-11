@@ -61,6 +61,20 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
   }
+  /* Without this, a click whose mousedown->mouseup has even a hair of
+     pointer drag (very common on trackpads) gets interpreted as a
+     text-selection gesture instead of a click - the button/card visually
+     highlights its label like a copy-selection and the onClick never
+     fires. Scoped to real buttons and this app's cursor-pointer
+     convention (used consistently for clickable divs/cards throughout),
+     so it doesn't touch legitimately selectable text (document content,
+     inputs/textareas, which aren't buttons and don't carry
+     cursor-pointer). */
+  button,
+  .cursor-pointer {
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 /* Enterprise Glassmorphism Utility. Only consumer today is the landing
