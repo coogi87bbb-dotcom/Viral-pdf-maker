@@ -224,7 +224,7 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
         className="absolute -bottom-40 -right-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tl from-slate-200/10 via-amber-500/10 to-transparent blur-3xl pointer-events-none"
         style={{ animation: 'pulse 8s infinite alternate' }}
       />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-slate-900/40 blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-surface-1/40 blur-[130px] pointer-events-none" />
 
       {/* Interactive 3D Canvas Mesh */}
       <canvas ref={canvasRef} className="w-full h-full opacity-80" />
