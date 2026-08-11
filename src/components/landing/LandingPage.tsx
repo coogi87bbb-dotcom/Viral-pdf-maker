@@ -21,7 +21,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
   const pageRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-surface-0 text-ink-primary font-sans selection:bg-accent-amber-400 selection:text-slate-950 relative overflow-x-hidden">
+    // No bg-* here deliberately: ScrollFrameStage's fixed wrapper paints its
+    // own full gradient background beneath the video frames, and this root
+    // is NOT a stacking-context-establishing element (position: relative
+    // with no z-index of its own) - if it had an opaque background AND the
+    // video used a negative z-index, the video would paint behind this
+    // element's own background layer instead of just behind its sibling
+    // content, hiding it entirely regardless of DOM order. Keeping this
+    // root transparent sidesteps that failure mode rather than fighting it
+    // with more z-index layering.
+    <div ref={pageRef} className="min-h-screen text-ink-primary font-sans selection:bg-accent-amber-400 selection:text-slate-950 relative overflow-x-hidden">
       <ScrollFrameStage scrollContainerRef={pageRef} />
 
       <div className="relative z-10">

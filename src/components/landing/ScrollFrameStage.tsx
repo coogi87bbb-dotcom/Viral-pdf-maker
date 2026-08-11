@@ -195,8 +195,15 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ className = 
   }, [ready, prefersReducedMotion, onProgress, scrollContainerRef]);
 
   return (
+    // z-0, not a negative z-index: this is a `position: fixed` sibling of
+    // the page's z-10 content wrapper, rendered first in the DOM, so DOM
+    // order already puts it behind content with equal-or-higher stacking
+    // - negative z-index isn't needed to achieve that, and is actively
+    // dangerous here (see the comment in LandingPage.tsx) if an ancestor
+    // ever gains an opaque background without also establishing its own
+    // stacking context.
     <div
-      className={`fixed inset-0 -z-10 pointer-events-none ${className}`}
+      className={`fixed inset-0 z-0 pointer-events-none ${className}`}
       style={{ background: 'linear-gradient(160deg, #080b11 0%, #0d1017 55%, #11141c 100%)' }}
     >
       {/* Ambient color blobs, reusing the existing hero's technique — violet
