@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { REQUIRED_REGISTRATION_KEY, OWNER_EMAIL } from '../lib/firebase';
-import { 
-  Lock, 
-  Mail, 
-  Key, 
-  User, 
-  Sparkles, 
-  ShieldCheck, 
-  CheckCircle2, 
-  AlertCircle, 
+import { OWNER_EMAIL } from '../lib/firebase';
+import {
+  Lock,
+  Mail,
+  User,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  AlertCircle,
   ArrowRight,
   Flame,
   Award,
@@ -23,7 +22,6 @@ export const AuthModal: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [regKey, setRegKey] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -51,18 +49,17 @@ export const AuthModal: React.FC = () => {
 
     try {
       if (isOwnerEmail) {
-        // Owner signs in directly without key requirement
+        // Owner signs in directly; if the account doesn't exist yet, create it.
         try {
           await login(email, password);
         } catch (loginErr) {
-          // If account not created yet, automatically sign up owner
-          await signUp(email, password, displayName || 'System Owner', REQUIRED_REGISTRATION_KEY);
+          await signUp(email, password, displayName || 'System Owner');
         }
       } else if (isSignUp) {
-        if (!email || !password || !displayName || !regKey) {
-          throw new Error('Please fill out all fields, including your VIP Registration Key.');
+        if (!email || !password || !displayName) {
+          throw new Error('Please fill out all fields.');
         }
-        await signUp(email, password, displayName, regKey);
+        await signUp(email, password, displayName);
       } else {
         if (!email || !password) {
           throw new Error('Please enter both email and password.');
@@ -83,10 +80,6 @@ export const AuthModal: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFillVipKey = () => {
-    setRegKey(REQUIRED_REGISTRATION_KEY);
   };
 
   return (
@@ -221,32 +214,6 @@ export const AuthModal: React.FC = () => {
                 />
               </div>
             </div>
-
-            {/* Registration Key input required during registration for non-owner users */}
-            {isSignUp && !isOwnerEmail && (
-              <div className="space-y-1.5 pt-1">
-                <div className="flex items-center justify-between">
-                  <label className="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
-                    <Key className="h-3.5 w-3.5 text-amber-400" />
-                    <span>Registration VIP Key (Required)</span>
-                  </label>
-                </div>
-                <div className="relative">
-                  <Key className="absolute left-3.5 top-3 h-4 w-4 text-amber-500" />
-                  <input
-                    type="text"
-                    value={regKey}
-                    onChange={(e) => setRegKey(e.target.value)}
-                    placeholder="Enter key: PERAINCVIP2026"
-                    className="w-full bg-slate-950 border border-amber-500/50 rounded-xl pl-10 pr-4 py-2.5 text-xs text-amber-200 font-mono placeholder-slate-600 focus:outline-none focus:border-amber-400"
-                    required={isSignUp && !isOwnerEmail}
-                  />
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">
-                  Must match the VIP license key provided in your order confirmation: <code className="text-amber-400 font-mono">PERAINCVIP2026</code>
-                </p>
-              </div>
-            )}
 
             <button
               type="submit"

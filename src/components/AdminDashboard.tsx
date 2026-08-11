@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { 
+import {
   auth,
-  db, 
-  OWNER_EMAIL, 
-  REQUIRED_REGISTRATION_KEY, 
-  UserProfile, 
-  collection, 
-  getDocs, 
-  doc, 
+  db,
+  OWNER_EMAIL,
+  UserProfile,
+  collection,
+  getDocs,
+  doc,
   updateDoc,
   onSnapshot,
   signInWithEmailAndPassword,
@@ -16,10 +15,9 @@ import {
   reauthenticateWithCredential
 } from '../lib/firebase';
 import { 
-  ShieldAlert, 
-  Users, 
-  Key, 
-  Activity, 
+  ShieldAlert,
+  Users,
+  Activity,
   Search, 
   RefreshCw, 
   DollarSign, 
@@ -41,9 +39,6 @@ import {
   Lock,
   Server,
   Megaphone,
-  Plus,
-  Copy,
-  Check,
   Download,
   Terminal,
   Cpu,
@@ -66,22 +61,9 @@ export const AdminDashboard: React.FC = () => {
   const [usersList, setUsersList] = useState<UserProfile[]>([]);
   const [activityLogs, setActivityLogs] = useState<ActivityLog[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeLicenseKey, setActiveLicenseKey] = useState(REQUIRED_REGISTRATION_KEY);
   const [loading, setLoading] = useState(true);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'appA' | 'appB' | 'appC' | 'users' | 'keys' | 'logs'>('overview');
-
-  // One-Click License Generator State
-  const [showKeyGenModal, setShowKeyGenModal] = useState(false);
-  const [newKeyTag, setNewKeyTag] = useState('');
-  const [generatedKey, setGeneratedKey] = useState<string | null>(null);
-  const [copiedKey, setCopiedKey] = useState(false);
-  const [generatedKeysList, setGeneratedKeysList] = useState<string[]>([
-    REQUIRED_REGISTRATION_KEY,
-    'VIP-GUMROAD-8829-PRO',
-    'VIP-AGENCY-PASS-2026',
-    'VIP-ENTERPRISE-LIFETIME'
-  ]);
+  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'appA' | 'appB' | 'appC' | 'users' | 'logs'>('overview');
 
   // Broadcast System Banner State
   const [showBroadcastModal, setShowBroadcastModal] = useState(false);
@@ -118,7 +100,6 @@ export const AdminDashboard: React.FC = () => {
             email: OWNER_EMAIL,
             displayName: userProfile?.displayName || 'System Owner',
             role: 'admin',
-            registrationKeyUsed: 'OWNER_VIP_ACCESS',
             status: 'active',
             createdAt: new Date().toISOString(),
             lastLoginAt: new Date().toISOString(),
@@ -179,15 +160,6 @@ export const AdminDashboard: React.FC = () => {
     }
   };
 
-  const generateNewVIPKey = () => {
-    const tag = newKeyTag ? newKeyTag.toUpperCase().replace(/[^A-Z0-9]/g, '') : 'VIP';
-    const rand = Math.floor(1000 + Math.random() * 9000);
-    const key = `VIP-KEY-${tag}-${rand}-2026`;
-    setGeneratedKey(key);
-    setGeneratedKeysList([key, ...generatedKeysList]);
-    setActionMessage(`Generated new VIP License Key: ${key}`);
-  };
-
   if (!isAuthorizedOwner) {
     return (
       <div className="bg-red-950/40 border border-red-800 rounded-3xl p-8 text-center space-y-4 max-w-xl mx-auto my-12">
@@ -203,8 +175,7 @@ export const AdminDashboard: React.FC = () => {
   const filteredUsers = usersList.filter(
     (u) =>
       u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      u.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      u.registrationKeyUsed.toLowerCase().includes(searchQuery.toLowerCase())
+      u.displayName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalCampaignsGenerated = usersList.reduce((acc, curr) => acc + (curr.campaignsCount || 0), 0) || 142;
@@ -253,14 +224,6 @@ export const AdminDashboard: React.FC = () => {
 
           {/* Quick Action Buttons for Owner */}
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
-            <button
-              onClick={() => setShowKeyGenModal(true)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
-            >
-              <Key className="h-4 w-4 text-slate-950" />
-              <span>Generate VIP Key</span>
-            </button>
-
             <button
               onClick={() => setShowBroadcastModal(true)}
               className="px-4 py-2.5 rounded-xl bg-slate-900 border border-amber-500/30 hover:border-amber-400 text-amber-300 font-bold text-xs flex items-center gap-2 transition-all cursor-pointer"
@@ -362,8 +325,7 @@ export const AdminDashboard: React.FC = () => {
             { id: 'appA', label: 'App A: PDF Studio', icon: FileText },
             { id: 'appB', label: 'App B: Viral OS Engine', icon: Flame },
             { id: 'appC', label: 'App C: GigScale Engine', icon: Zap },
-            { id: 'users', label: 'VIP License Buyers', icon: Users },
-            { id: 'keys', label: 'Key Generator', icon: Key },
+            { id: 'users', label: 'Users', icon: Users },
             { id: 'logs', label: 'Audit Logs', icon: Radio }
           ].map((tab) => {
             const Icon = tab.icon;
@@ -500,38 +462,8 @@ export const AdminDashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Key License Manager & Live Telemetry Feed */}
+          {/* Right Column: Live Telemetry Feed */}
           <div className="space-y-6">
-            <div className="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Key className="h-5 w-5 text-amber-400" />
-                  <h3 className="text-sm font-bold text-white">VIP License Gate</h3>
-                </div>
-                <button
-                  onClick={() => setShowKeyGenModal(true)}
-                  className="text-[10px] text-amber-400 font-bold hover:underline cursor-pointer"
-                >
-                  + Generate
-                </button>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-slate-950 border border-amber-500/30 space-y-2">
-                <div className="flex justify-between items-center">
-                  <span className="text-[10px] font-bold uppercase text-slate-400">Master Default Key:</span>
-                  <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold">
-                    ENFORCED
-                  </span>
-                </div>
-                <div className="text-base font-mono font-black text-amber-200 tracking-wider">
-                  {activeLicenseKey}
-                </div>
-                <p className="text-[10px] text-slate-400 leading-relaxed">
-                  Required upon registration for non-owner sign-ups. Strictly enforced by Firebase Auth.
-                </p>
-              </div>
-            </div>
-
             <div className="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
@@ -601,10 +533,10 @@ export const AdminDashboard: React.FC = () => {
             <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-xs">
               <div className="text-amber-400 font-bold uppercase text-[11px] flex items-center gap-2">
                 <Sparkles className="h-4 w-4" />
-                <span>License & Monetization Integration SLA</span>
+                <span>Access Model</span>
               </div>
               <p className="text-slate-300 leading-relaxed">
-                All 3 web apps operate under a single unified VIP pass model. When a user purchases a VIP license, they enter their License Key at registration to unlock lifetime access to PDF Studio, Viral OS, and GigScale Engine.
+                All 3 web apps operate under a single account model. Users sign in with Google or email/password to unlock PDF Studio, Viral OS, and GigScale Engine.
               </p>
             </div>
           </div>
@@ -737,7 +669,6 @@ export const AdminDashboard: React.FC = () => {
                 <thead className="bg-slate-950 text-slate-400 font-bold uppercase tracking-wider text-[10px] border-b border-slate-800">
                   <tr>
                     <th className="p-3.5">User / Email</th>
-                    <th className="p-3.5">VIP Key Used</th>
                     <th className="p-3.5">Registered</th>
                     <th className="p-3.5">Status</th>
                     <th className="p-3.5 text-right">Action</th>
@@ -746,7 +677,7 @@ export const AdminDashboard: React.FC = () => {
                 <tbody className="divide-y divide-slate-800/60">
                   {filteredUsers.length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="p-6 text-center text-slate-500 italic">
+                      <td colSpan={4} className="p-6 text-center text-slate-500 italic">
                         {loading ? 'Loading user data from Firebase...' : 'No users found matching query.'}
                       </td>
                     </tr>
@@ -767,10 +698,6 @@ export const AdminDashboard: React.FC = () => {
                               </div>
                               <div className="text-[11px] text-slate-400 font-mono">{u.email}</div>
                             </div>
-                          </td>
-
-                          <td className="p-3.5 font-mono text-[11px] text-amber-300">
-                            {u.registrationKeyUsed || REQUIRED_REGISTRATION_KEY}
                           </td>
 
                           <td className="p-3.5 text-[11px] text-slate-400">
@@ -817,50 +744,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* TAB 7: KEY GENERATOR MANAGEMENT */}
-      {activeTab === 'keys' && (
-        <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-6 shadow-xl">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Key className="h-5 w-5 text-amber-400" />
-                <span>Generated VIP License Keys</span>
-              </h2>
-              <p className="text-xs text-slate-400">All active keys accepted by Firebase Auth during registration</p>
-            </div>
-
-            <button
-              onClick={() => setShowKeyGenModal(true)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs flex items-center gap-2 shadow-lg shadow-amber-500/20 cursor-pointer"
-            >
-              <Plus className="h-4 w-4" />
-              <span>Create New VIP Key</span>
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {generatedKeysList.map((k, idx) => (
-              <div key={idx} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-between font-mono text-xs">
-                <div>
-                  <div className="text-amber-300 font-bold">{k}</div>
-                  <div className="text-[10px] text-slate-500 mt-0.5">Status: ACTIVE • VIP UNLOCK</div>
-                </div>
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(k);
-                    setActionMessage(`Copied ${k} to clipboard!`);
-                  }}
-                  className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
-                >
-                  <Copy className="h-4 w-4" />
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* TAB 8: AUDIT LOGS */}
+      {/* TAB 7: AUDIT LOGS */}
       {activeTab === 'logs' && (
         <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
           <div className="flex items-center justify-between">
@@ -883,72 +767,6 @@ export const AdminDashboard: React.FC = () => {
                 <div className="text-[11px] font-mono text-slate-400">User: {log.userEmail}</div>
               </div>
             ))}
-          </div>
-        </div>
-      )}
-
-      {/* MODAL: GENERATE VIP KEY */}
-      {showKeyGenModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
-                  <Key className="h-6 w-6" />
-                </div>
-                <div>
-                  <h3 className="text-base font-extrabold text-white">Generate VIP License Key</h3>
-                  <p className="text-xs text-slate-400">Issue custom access keys for buyers</p>
-                </div>
-              </div>
-              <button
-                onClick={() => {
-                  setShowKeyGenModal(false);
-                  setGeneratedKey(null);
-                }}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white cursor-pointer"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="space-y-4 text-xs">
-              <div className="space-y-1">
-                <label className="text-slate-300 font-mono">Custom Tag Prefix (Optional):</label>
-                <input
-                  type="text"
-                  placeholder="e.g. SPECIAL, PROMO, AGENCY"
-                  value={newKeyTag}
-                  onChange={(e) => setNewKeyTag(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-amber-500"
-                />
-              </div>
-
-              {generatedKey && (
-                <div className="p-4 rounded-2xl bg-slate-950 border border-amber-500/40 space-y-2 text-center">
-                  <div className="text-[10px] text-slate-400 uppercase font-mono">YOUR GENERATED KEY:</div>
-                  <div className="text-lg font-black font-mono text-amber-300 select-all">{generatedKey}</div>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(generatedKey);
-                      setCopiedKey(true);
-                      setTimeout(() => setCopiedKey(false), 2000);
-                    }}
-                    className="px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 text-xs font-bold hover:bg-amber-500/30 transition-all cursor-pointer inline-flex items-center gap-1.5"
-                  >
-                    {copiedKey ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-                    <span>{copiedKey ? 'Copied!' : 'Copy Key'}</span>
-                  </button>
-                </div>
-              )}
-
-              <button
-                onClick={generateNewVIPKey}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs transition-all cursor-pointer shadow-lg shadow-amber-500/20"
-              >
-                Generate Key Now
-              </button>
-            </div>
           </div>
         </div>
       )}

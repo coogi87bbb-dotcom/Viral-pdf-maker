@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# bun.lock is the authoritative lockfile for this project; don't let a
+# stray `npm install` introduce a second, competing one.
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
