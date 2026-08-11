@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Flame, 
   Search, 
@@ -165,7 +166,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
     setError(null);
 
     try {
-      const response = await fetch('/api/viral/trending-pulse', {
+      const response = await apiFetch('/api/viral/trending-pulse', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ category: targetCat, query: customQuery })

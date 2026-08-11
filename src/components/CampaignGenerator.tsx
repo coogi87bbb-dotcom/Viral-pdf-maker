@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Sparkles, 
   Zap, 
@@ -109,7 +110,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
     }, 1800);
 
     try {
-      const response = await fetch('/api/viral/generate-campaign', {
+      const response = await apiFetch('/api/viral/generate-campaign', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

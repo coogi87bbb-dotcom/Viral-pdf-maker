@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Bookmark, 
   Plus, 
@@ -163,7 +164,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
 
     setIsAiGenerating(true);
     try {
-      const res = await fetch('/api/viral/generate-template', {
+      const res = await apiFetch('/api/viral/generate-template', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic: aiPromptTopic })

@@ -1,23 +1,66 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // --- Helpers ---
+    // isOwner() is derived from the verified Firebase Auth ID token, never from
+    // client-supplied state (client JS can be edited/inspected; the token cannot).
+    // Requires the account to have completed email verification so an attacker
+    // can't self-register the owner's address and claim admin before it's verified.
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return isSignedIn()
+        && request.auth.token.email != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() == 'coogi87bbb@gmail.com';
+    }
+
+    function isSelf(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // --- Users ---
+    // Each user can read/create their own profile. Only the profile's own
+    // fields may be self-updated, and no one but the verified owner can ever
+    // set role == 'admin' on any document (create or update).
     match /users/{userId} {
-      allow read, write: if request.auth != null;
+      allow read: if isSelf(userId) || isOwner();
+      allow create: if isSelf(userId)
+        && (request.resource.data.role == 'member' || isOwner());
+      allow update: if (isSelf(userId) && request.resource.data.role == resource.data.role) || isOwner();
+      allow delete: if isOwner();
     }
+
+    // --- User-owned collections ---
+    // Every document must carry a userId field set to the creator's uid;
+    // only that user (or the owner) may read/modify/delete it.
     match /campaigns/{campaignId} {
-      allow read, write: if request.auth != null;
+      allow read, update, delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isOwner());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
     }
+
     match /calendar_events/{eventId} {
-      allow read, write: if request.auth != null;
+      allow read, update, delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isOwner());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
     }
-    match /activity_logs/{logId} {
-      allow read, write: if request.auth != null;
-    }
+
     match /templates/{templateId} {
-      allow read, write: if request.auth != null;
+      allow read, update, delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isOwner());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
     }
-    match /{document=**} {
-      allow read, write: if request.auth != null;
+
+    // --- Activity logs ---
+    // Any signed-in user may append an entry about their own action; only the
+    // owner can read the log (it's surfaced in the admin dashboard).
+    match /activity_logs/{logId} {
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+      allow read: if isOwner();
+      allow update, delete: if isOwner();
     }
+
+    // No catch-all: anything not explicitly matched above is denied by default.
   }
 }

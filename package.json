@@ -1,5 +1,5 @@
 {
-  "name": "react-example",
+  "name": "viral-pdf-maker",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +8,8 @@
     "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -21,6 +22,7 @@
     "firebase": "^12.17.0",
     "googleapis": "^174.0.0",
     "html2canvas": "^1.4.1",
+    "jose": "^5.9.6",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.546.0",
     "mammoth": "^1.12.0",
@@ -40,6 +42,6 @@
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
-    "vite": "^6.2.3"
+    "vitest": "^3.2.4"
   }
 }

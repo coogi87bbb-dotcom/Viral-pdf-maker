@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Calendar as CalendarIcon, 
   Clock, 
@@ -272,7 +273,7 @@ export const ContentCalendar: React.FC = () => {
   const handleGenerateAICalendar = async () => {
     setGeneratingCalendar(true);
     try {
-      const response = await fetch('/api/viral/generate-calendar', {
+      const response = await apiFetch('/api/viral/generate-calendar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -302,7 +303,7 @@ export const ContentCalendar: React.FC = () => {
     setGeneratingCopy(true);
 
     try {
-      const response = await fetch('/api/viral/generate-post-copy', {
+      const response = await apiFetch('/api/viral/generate-post-copy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

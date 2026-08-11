@@ -6,6 +6,8 @@ import { GoogleGenAI, Type, Schema } from '@google/genai';
 import zlib from 'zlib';
 import { PDFParse } from 'pdf-parse';
 import mammoth from 'mammoth';
+import { assertSafeExternalUrl, extractDocId } from './server-utils';
+import { requireAuth } from './auth-middleware';
 
 // Safe resolver for pdf-parse v2 PDFParse class
 async function parsePdfBuffer(buffer: Buffer): Promise<{ text: string }> {
@@ -40,22 +42,6 @@ function getGenAI() {
     throw new Error('GEMINI_API_KEY environment variable is missing.');
   }
   return new GoogleGenAI({ apiKey });
-}
-
-// Extract Google Doc ID or Drive File ID from URL or raw string
-function extractDocId(urlOrId: string): string {
-  const trimmed = urlOrId.trim();
-  // Match /d/ID or /file/d/ID
-  const matchD = trimmed.match(/\/(?:file\/)?d\/([a-zA-Z0-9-_]+)/);
-  if (matchD && matchD[1]) {
-    return matchD[1];
-  }
-  // Match id=ID or open?id=ID
-  const matchId = trimmed.match(/[?&]id=([a-zA-Z0-9-_]+)/);
-  if (matchId && matchId[1]) {
-    return matchId[1];
-  }
-  return trimmed;
 }
 
 // Clean HTML to readable plain text
@@ -422,10 +408,19 @@ process.on('uncaughtException', (err) => {
   });
 });
 
-// Health Check
+// Health Check (intentionally public — no user/session data, just a liveness probe)
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
+
+// Every other /api/* route requires a valid Firebase ID token. The whole
+// client app is already gated behind sign-in (App.tsx renders <AuthModal />
+// when there's no user), so there's no legitimate unauthenticated caller of
+// anything below this line — these were previously wide open to anyone,
+// including the Gemini-backed generation routes (a cost/abuse vector) and
+// the self-healing telemetry/action routes (internal state disclosure and
+// mutation).
+app.use('/api', requireAuth);
 
 // Self-Healing Backend Telemetry & Health Endpoint
 app.get('/api/heal/telemetry', (req, res) => {
@@ -823,7 +818,9 @@ app.post('/api/docs/import', async (req, res) => {
     if (docUrlOrId.startsWith('http://') || docUrlOrId.startsWith('https://')) {
       if (!docUrlOrId.includes('docs.google.com') && !docUrlOrId.includes('drive.google.com')) {
         try {
-          const webRes = await fetch(docUrlOrId, {
+          const safeUrl = await assertSafeExternalUrl(docUrlOrId);
+          const webRes = await fetch(safeUrl, {
+            redirect: 'error',
             headers: {
               'User-Agent':
                 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'

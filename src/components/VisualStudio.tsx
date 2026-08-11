@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Image as ImageIcon, 
   Sparkles, 
@@ -145,7 +146,7 @@ export const VisualStudio: React.FC = () => {
         ? promptText 
         : `${archetype?.promptPrefix || ''} "${promptText}", 4k graphic design`;
 
-      const response = await fetch('/api/viral/generate-image', {
+      const response = await apiFetch('/api/viral/generate-image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   BarChart3, 
   Sparkles, 
@@ -163,7 +164,7 @@ export const ViralityAnalyzer: React.FC = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('/api/viral/analyze', {
+      const response = await apiFetch('/api/viral/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: contentToAnalyze, platform })
