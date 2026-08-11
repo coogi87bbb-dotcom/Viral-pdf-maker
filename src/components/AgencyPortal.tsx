@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Building2, 
   Briefcase, 
@@ -206,7 +207,7 @@ export const AgencyPortal: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/viral/agency-pitch', {
+      const response = await apiFetch('/api/viral/agency-pitch', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

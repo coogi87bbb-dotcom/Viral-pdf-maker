@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   FileCode2, 
   Sparkles, 
@@ -157,7 +158,7 @@ Structure your response cleanly using Markdown:
     setLoading(true);
 
     try {
-      const response = await fetch('/api/viral/generate-blueprint', {
+      const response = await apiFetch('/api/viral/generate-blueprint', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic, targetAudience, monetizationGoal, targetModel, personaTone })
@@ -200,7 +201,7 @@ Structure your response cleanly using Markdown:
     setSimulatorResult(null);
 
     try {
-      const response = await fetch('/api/viral/test-blueprint', {
+      const response = await apiFetch('/api/viral/test-blueprint', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

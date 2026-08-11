@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   ShieldCheck, 
   Cpu, 
@@ -146,7 +147,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
     setAgentOutput('');
 
     try {
-      const res = await fetch('/api/agents/execute', {
+      const res = await apiFetch('/api/agents/execute', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

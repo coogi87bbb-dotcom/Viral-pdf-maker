@@ -22,6 +22,7 @@
     "firebase": "^12.17.0",
     "googleapis": "^174.0.0",
     "html2canvas": "^1.4.1",
+    "jose": "^5.9.6",
     "jspdf": "^4.2.1",
     "lucide-react": "^0.546.0",
     "mammoth": "^1.12.0",

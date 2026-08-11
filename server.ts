@@ -7,6 +7,7 @@ import zlib from 'zlib';
 import { PDFParse } from 'pdf-parse';
 import mammoth from 'mammoth';
 import { assertSafeExternalUrl, extractDocId } from './server-utils';
+import { requireAuth } from './auth-middleware';
 
 // Safe resolver for pdf-parse v2 PDFParse class
 async function parsePdfBuffer(buffer: Buffer): Promise<{ text: string }> {
@@ -407,10 +408,19 @@ process.on('uncaughtException', (err) => {
   });
 });
 
-// Health Check
+// Health Check (intentionally public — no user/session data, just a liveness probe)
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date().toISOString() });
 });
+
+// Every other /api/* route requires a valid Firebase ID token. The whole
+// client app is already gated behind sign-in (App.tsx renders <AuthModal />
+// when there's no user), so there's no legitimate unauthenticated caller of
+// anything below this line — these were previously wide open to anyone,
+// including the Gemini-backed generation routes (a cost/abuse vector) and
+// the self-healing telemetry/action routes (internal state disclosure and
+// mutation).
+app.use('/api', requireAuth);
 
 // Self-Healing Backend Telemetry & Health Endpoint
 app.get('/api/heal/telemetry', (req, res) => {

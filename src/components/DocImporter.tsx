@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { FileText, Link as LinkIcon, Sparkles, AlertCircle, Check, X, BookOpen, UploadCloud, FileUp, Info, HelpCircle, ArrowRight } from 'lucide-react';
 import mammoth from 'mammoth';
 import { DocumentData } from '../types';
@@ -64,7 +65,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
 
           if (targetUrl) {
             setDocUrl(targetUrl);
-            const res = await fetch('/api/docs/import', {
+            const res = await apiFetch('/api/docs/import', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ docUrlOrId: targetUrl })
@@ -135,7 +136,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
         reader.readAsDataURL(file);
       });
 
-      const response = await fetch('/api/docs/parse-file', {
+      const response = await apiFetch('/api/docs/parse-file', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -177,7 +178,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
     setErrorMsg(null);
 
     try {
-      const res = await fetch('/api/docs/import', {
+      const res = await apiFetch('/api/docs/import', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ docUrlOrId: docUrl })

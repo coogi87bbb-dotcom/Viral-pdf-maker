@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Trophy, 
   CheckCircle2, 
@@ -172,7 +173,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
     setCustomAnalysisError(null);
 
     try {
-      const response = await fetch('/api/viral/competitor-analysis', {
+      const response = await apiFetch('/api/viral/competitor-analysis', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

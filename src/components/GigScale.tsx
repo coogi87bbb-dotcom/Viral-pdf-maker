@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { useAuth } from '../context/AuthContext';
 import { OWNER_EMAIL } from '../lib/firebase';
 import { MotionPanel3D } from './MotionPanel3D';
@@ -268,7 +269,7 @@ export const GigScale: React.FC = () => {
     setGeneratedPitch('');
 
     try {
-      const res = await fetch('/api/gemini/generate', {
+      const res = await apiFetch('/api/gemini/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import {
   Edit3,
   Plus,
@@ -78,7 +79,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
     setAiLoadingMap((prev) => ({ ...prev, [key]: true }));
 
     try {
-      const res = await fetch('/api/ai/quick-edit-action', {
+      const res = await apiFetch('/api/ai/quick-edit-action', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, section, customPrompt })

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import { 
   Video, 
   VideoOff,
@@ -429,7 +430,7 @@ export const TeleprompterStudio: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/viral/teleprompter', {
+      const response = await apiFetch('/api/viral/teleprompter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ topic, platform, videoLength })

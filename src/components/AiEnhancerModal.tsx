@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiFetch } from '../lib/apiClient';
 import {
   Sparkles,
   Wand2,
@@ -175,7 +176,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
       // Step 1: If Google Doc or Drive link provided, import content
       if (gdocLink.trim().length > 0) {
         setLoadingStatus('Extracting link content...');
-        const importRes = await fetch('/api/docs/import', {
+        const importRes = await apiFetch('/api/docs/import', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ docUrlOrId: gdocLink.trim() })
@@ -218,7 +219,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
       onClose();
 
       // Step 3: Background Gemini AI polish (non-blocking)
-      fetch('/api/ai/enhance-doc', {
+      apiFetch('/api/ai/enhance-doc', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
