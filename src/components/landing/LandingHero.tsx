@@ -1,46 +1,26 @@
-import React, { useCallback, useRef } from 'react';
-import { motion, useMotionValue, useTransform } from 'motion/react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { ScrollFrameStage } from './ScrollFrameStage';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface LandingHeroProps {
   onGetStarted: () => void;
 }
 
-// Subtle parallax range for the headline as the hero scrolls — deliberately
-// small (a few rem of total drift across the whole 0->1 pin range) so it
-// reads as "drift", not a second scroll-jack effect competing with the
-// canvas crossfade underneath it.
-const HEADLINE_PARALLAX_PX = 48;
-
 export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
-  const prefersReducedMotion = useReducedMotion();
-
-  // Single source of truth for scroll progress (0..1), fed by
-  // ScrollFrameStage's ScrollTrigger onUpdate — the headline parallax reads
-  // off the same value instead of running its own independent ScrollTrigger.
-  const scrollProgress = useMotionValue(0);
-  const handleProgress = useCallback((p: number) => scrollProgress.set(p), [scrollProgress]);
-  const headlineY = useTransform(scrollProgress, [0, 1], [0, -HEADLINE_PARALLAX_PX]);
-
-  // GSAP pins this section itself (via ScrollFrameStage's triggerRef prop) —
-  // it's the normal-flow ancestor with a real intrinsic height that both the
-  // canvas layer and the headline live inside, so they stay pinned together.
-  const heroSectionRef = useRef<HTMLElement>(null);
-
   return (
-    <section ref={heroSectionRef} className="relative h-[100vh] min-h-[640px] overflow-hidden">
-      <ScrollFrameStage className="absolute inset-0 -z-10" triggerRef={heroSectionRef} onProgress={handleProgress} />
-
-      {/* Legibility scrim, between the canvas and the headline. On desktop
-          the "contain"-fit image naturally letterboxes and leaves the left
-          side clear, but on narrow viewports the portrait image fills the
-          full section width (no free horizontal space at all), so the
-          headline would otherwise sit directly on top of a stark-white
-          product photo — this gradient guarantees text contrast at every
-          breakpoint rather than relying on incidental image negative space. */}
+    <section className="relative h-[100vh] min-h-[640px] overflow-hidden">
+      {/* Legibility scrim, between the fixed video backdrop and the
+          headline. On desktop the "contain"-fit frame naturally
+          letterboxes and leaves the left side clear, but on narrow
+          viewports the portrait frame fills the full section width (no
+          free horizontal space at all), so the headline would otherwise
+          sit directly on top of the video — this gradient guarantees text
+          contrast at every breakpoint rather than relying on incidental
+          frame negative space. Sections further down the page rely on
+          their own near-opaque card backgrounds for this instead (see
+          LandingFeatureGrid/Proof/CTA), since they don't have a bare
+          headline sitting directly on the video. */}
       <div
         className="pointer-events-none absolute inset-0 z-[5]"
         style={{
@@ -50,13 +30,13 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
       />
 
       {/* Center-left, vertically-centered headline column, overlaid on the
-          scroll-driven canvas stage. */}
+          page-wide scroll-driven video backdrop (mounted once at
+          LandingPage level, not owned by this section). */}
       <div className="relative z-10 flex h-full items-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={prefersReducedMotion ? undefined : { y: headlineY }}
           className="max-w-xl space-y-7 px-6 sm:px-10 lg:px-16"
         >
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-gradient-to-r from-amber-500/10 to-violet-500/10 text-amber-300 text-[10px] font-mono font-bold border border-amber-500/20 uppercase tracking-widest">
