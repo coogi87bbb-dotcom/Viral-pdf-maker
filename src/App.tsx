@@ -13,6 +13,7 @@ import { GuidedStepper } from './components/GuidedStepper';
 import { DocEditorModal } from './components/DocEditorModal';
 import { Studio3DBackground } from './components/Studio3DBackground';
 import { MotionPanel3D } from './components/MotionPanel3D';
+import { LandingPage } from './components/landing/LandingPage';
 
 // Viral OS Components
 import { ViralHeader, ActiveTab as ViralTab } from './components/ViralHeader';
@@ -45,6 +46,7 @@ type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-
 function MainWorkspace() {
   const { user, userProfile, logout, loading } = useAuth();
   const [appMode, setAppMode] = useState<AppMode>('pdf-studio');
+  const [showLanding, setShowLanding] = useState(true);
 
   // Document State - defaults to the Creator Monetization Playbook sample
   const [document, setDocument] = useState<DocumentData>(SAMPLE_DOCUMENTS[0].doc);
@@ -192,8 +194,12 @@ function MainWorkspace() {
     );
   }
 
-  // Require single sign-in once upfront when entering the website
+  // Signed-out visitors see the marketing landing page first; clicking
+  // "Get Started"/"Sign In" there flips to the existing auth gate below.
   if (!user) {
+    if (showLanding) {
+      return <LandingPage onGetStarted={() => setShowLanding(false)} />;
+    }
     return <AuthModal />;
   }
 
