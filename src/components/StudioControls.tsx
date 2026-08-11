@@ -268,26 +268,26 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
   return (
     <div
       id="studio-controls-bar"
-      className="w-full bg-slate-900 border border-slate-800/80 rounded-3xl text-slate-200 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] shadow-2xl overflow-hidden select-none transition-all duration-200"
+      className="w-full bg-surface-1 border border-white/10 rounded-3xl text-ink-secondary flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] shadow-[var(--shadow-floating)] overflow-hidden select-none"
     >
       {/* Controls Header */}
-      <div className="p-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-950/90 shrink-0 z-20 backdrop-blur-md">
+      <div className="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-0/90 shrink-0 z-20 backdrop-blur-md">
         <div className="flex items-center space-x-2">
-          <Sliders className="w-4 h-4 text-amber-400" />
+          <Sliders className="w-4 h-4 text-accent-amber-400" />
           <h2 className="font-bold text-xs text-white">Studio Design Controls</h2>
         </div>
         {onToggleSplitScreen && (
           <button
             type="button"
             onClick={onToggleSplitScreen}
-            className={`px-2 py-1 rounded-lg border text-[10px] font-bold flex items-center space-x-1 transition-all ${
+            className={`px-2 py-1 rounded-lg border text-[10px] font-bold flex items-center space-x-1 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
               isSplitScreen
-                ? 'bg-amber-500/20 text-amber-300 border-amber-400/50'
-                : 'bg-slate-800 text-slate-400 border-slate-700 hover:text-slate-200'
+                ? 'bg-accent-amber-500/20 text-accent-amber-300 border-accent-amber-400/50'
+                : 'bg-surface-2 text-ink-muted border-white/10 hover:text-ink-secondary'
             }`}
             title="Toggle Side-by-Side Split Screen"
           >
-            <Columns className="w-3 h-3 text-amber-400" />
+            <Columns className="w-3 h-3 text-accent-amber-400" />
             <span>Split View: {isSplitScreen ? 'ON' : 'OFF'}</span>
           </button>
         )}
@@ -298,26 +298,26 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
         {onOpenMockupModal && (
           <button
             onClick={onOpenMockupModal}
-            className="w-full p-2.5 bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 border border-amber-500/40 hover:border-amber-400 rounded-xl text-slate-100 flex items-center justify-between shadow-md transition-all group"
+            className="w-full p-2.5 bg-gradient-to-r from-surface-1 via-surface-0 to-surface-1 border border-accent-amber-500/40 hover:border-accent-amber-400 rounded-xl text-ink-primary flex items-center justify-between shadow-[var(--shadow-elevated)] transition-colors active:scale-[0.98] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
             title="Generate Pinterest Pin graphics, Gumroad 3D covers, and marketing text"
           >
             <div className="flex items-center space-x-2.5">
-              <div className="p-1.5 rounded-lg bg-slate-900 border border-amber-500/50 text-amber-400">
+              <div className="p-1.5 rounded-lg bg-surface-1 border border-accent-amber-500/50 text-accent-amber-400">
                 <ShoppingBag className="w-4 h-4" />
               </div>
               <div className="text-left">
                 <div className="flex items-center space-x-1.5">
-                  <span className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
+                  <span className="text-xs font-bold text-white group-hover:text-accent-amber-300 transition-colors">
                     Pinterest & 3D Mockup
                   </span>
-                  <span className="text-[9px] bg-amber-400 text-slate-950 px-1 py-0.2 rounded font-extrabold uppercase">
+                  <span className="text-[9px] bg-accent-amber-400 text-slate-950 px-1 py-0.2 rounded font-extrabold uppercase">
                     PRO
                   </span>
                 </div>
-                <p className="text-[10px] text-slate-300">Generate Pinterest Pin graphics & sales copy</p>
+                <p className="text-[10px] text-ink-secondary">Generate Pinterest Pin graphics & sales copy</p>
               </div>
             </div>
-            <span className="text-amber-400 text-xs font-bold group-hover:translate-x-0.5 transition-transform">➔</span>
+            <span className="text-accent-amber-400 text-xs font-bold group-hover:translate-x-0.5 transition-transform">➔</span>
           </button>
         )}
 
@@ -325,23 +325,23 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
         <div className="grid grid-cols-3 gap-1.5">
           <button
             onClick={onOpenImporter}
-            className="flex flex-col items-center justify-center p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-[11px] font-semibold text-slate-200 transition-colors"
+            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-ink-secondary transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
             title="Import Word doc, Google Doc link, or text file"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-400 mb-0.5" />
+            <FileText className="w-3.5 h-3.5 text-accent-amber-400 mb-0.5" />
             <span>Load Doc</span>
           </button>
           <button
             onClick={onOpenEditor}
-            className="flex flex-col items-center justify-center p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-[11px] font-semibold text-amber-300 transition-colors"
+            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-accent-amber-300 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
             title="Edit titles, chapters, and content directly"
           >
-            <Edit3 className="w-3.5 h-3.5 text-amber-400 mb-0.5" />
+            <Edit3 className="w-3.5 h-3.5 text-accent-amber-400 mb-0.5" />
             <span>Edit Text</span>
           </button>
           <button
             onClick={onOpenAiEnhancer}
-            className="flex flex-col items-center justify-center p-2 bg-amber-500 hover:bg-amber-400 rounded-xl text-[11px] font-bold text-slate-950 shadow-md shadow-amber-500/20 transition-all"
+            className="flex flex-col items-center justify-center p-2 bg-accent-amber-500 hover:brightness-105 rounded-xl text-[11px] font-bold text-slate-950 shadow-[var(--shadow-glow-amber)] transition-[transform,opacity,filter] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
             title="AI Polish with Gemini"
           >
             <Sparkles className="w-3.5 h-3.5 text-slate-950 mb-0.5" />
@@ -350,7 +350,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
         </div>
 
         {/* Section Accordion Navigation Tabs */}
-        <div className="flex border-b border-slate-800 bg-slate-950 p-1 rounded-xl gap-1 overflow-x-auto text-[11px] font-semibold">
+        <div className="flex border-b border-white/10 bg-surface-0 p-1 rounded-xl gap-1 overflow-x-auto text-[11px] font-semibold">
           {[
             { id: 'themes', label: 'Themes', icon: Palette },
             { id: 'cover', label: 'Cover', icon: Layout },
@@ -367,10 +367,10 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveSection(tab.id as any)}
-                className={`px-2.5 py-1.5 rounded-lg flex items-center space-x-1 whitespace-nowrap transition-all ${
+                className={`px-2.5 py-1.5 rounded-lg flex items-center space-x-1 whitespace-nowrap transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                   active
-                    ? 'bg-amber-500 text-slate-950 font-bold shadow'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900'
+                    ? 'bg-accent-amber-500 text-slate-950 font-bold shadow-[var(--shadow-glow-amber)]'
+                    : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                 }`}
               >
                 <Icon className="w-3 h-3" />
