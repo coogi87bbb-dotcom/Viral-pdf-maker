@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { 
-  Flame, 
-  Sparkles, 
-  Zap, 
-  Target, 
-  BarChart3, 
-  FileCode2, 
-  Image as ImageIcon, 
-  Calendar, 
+import {
+  Flame,
+  Sparkles,
+  Zap,
+  Target,
+  BarChart3,
+  FileCode2,
+  Image as ImageIcon,
+  Calendar,
   DollarSign,
   Trophy,
   Video,
@@ -28,16 +28,16 @@ import {
   FileDown
 } from 'lucide-react';
 
-export type ActiveTab = 
-  | 'campaign' 
+export type ActiveTab =
+  | 'campaign'
   | 'pulse'
-  | 'hooks' 
+  | 'hooks'
   | 'templates'
-  | 'analyzer' 
+  | 'analyzer'
   | 'teleprompter'
-  | 'visuals' 
-  | 'blueprint' 
-  | 'calendar' 
+  | 'visuals'
+  | 'blueprint'
+  | 'calendar'
   | 'gigscale'
   | 'agency'
   | 'matrix'
@@ -49,6 +49,8 @@ interface HeaderProps {
   setActiveTab: (tab: ActiveTab) => void;
   onQuickStart: () => void;
 }
+
+const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400';
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuickStart }) => {
   const { user, userProfile, isOwner, logout } = useAuth();
@@ -78,14 +80,14 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
     : baseTabs;
 
   return (
-    <header className="sticky top-0 z-50 bg-[#08090e]/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-slate-800/80 text-slate-100 shadow-2xl">
+    <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 text-ink-primary shadow-[var(--shadow-elevated)]">
       {/* Top Banner */}
-      <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 border-b border-amber-500/20 px-4 py-1.5 text-xs font-medium text-amber-200 text-center flex items-center justify-between">
+      <div className="bg-gradient-to-r from-surface-0 via-surface-1 to-surface-0 border-b border-accent-amber-500/20 px-4 py-1.5 text-xs font-medium text-accent-amber-200 text-center flex items-center justify-between">
         <div className="flex items-center gap-2 mx-auto sm:mx-0">
-          <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-          <span className="font-mono text-amber-300">ViralOS v10.0 Active — 3D Liquid Gold Engine</span>
-          <span className="hidden sm:inline-block text-amber-500/50">•</span>
-          <span className="hidden sm:inline-block text-slate-300 font-mono text-[11px]">X • Instagram • TikTok • Facebook • Threads • Pinterest • LinkedIn</span>
+          <span className="flex h-2 w-2 rounded-full bg-accent-amber-400 animate-pulse" />
+          <span className="font-mono text-accent-amber-300">ViralOS v10.0 Active — 3D Liquid Gold Engine</span>
+          <span className="hidden sm:inline-block text-accent-amber-500/50">•</span>
+          <span className="hidden sm:inline-block text-ink-secondary font-mono text-[11px]">X • Instagram • TikTok • Facebook • Threads • Pinterest • LinkedIn</span>
         </div>
 
         {user && (
@@ -99,15 +101,15 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                   setActiveTab('admin');
                 }
               }}
-              className="text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer group p-1 rounded-md hover:bg-slate-900/60"
+              className={`text-ink-secondary hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer group p-1 rounded-md hover:bg-surface-0/60 ${FOCUS_RING}`}
               title={isOwner ? "Click to open Owner Control Center" : "VIP Account"}
             >
-              <User className="h-3 w-3 text-rose-400 group-hover:scale-110 transition-transform" />
-              <span className="font-bold text-white group-hover:text-rose-300 transition-colors">
+              <User className="h-3 w-3 text-accent-violet-400 group-hover:scale-110 transition-transform" />
+              <span className="font-bold text-white group-hover:text-accent-violet-300 transition-colors">
                 {userProfile?.displayName || user.email}
               </span>
               {isOwner && (
-                <span className="px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-mono text-[9px] border border-amber-500/30">
+                <span className="px-1.5 py-0.2 rounded bg-accent-amber-500/20 text-accent-amber-300 font-mono text-[9px] border border-accent-amber-500/30">
                   OWNER
                 </span>
               )}
@@ -121,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                   logout();
                 }
               }}
-              className="px-2 py-0.5 rounded bg-slate-900 hover:bg-red-600 text-slate-300 hover:text-white transition-all flex items-center gap-1 border border-slate-700"
+              className={`px-2 py-0.5 rounded bg-surface-0 hover:bg-rose-600 text-ink-secondary hover:text-white transition-colors flex items-center gap-1 border border-white/10 ${FOCUS_RING}`}
             >
               <LogOut className="h-3 w-3" />
               <span>Sign Out</span>
@@ -132,37 +134,37 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          
+
           {/* Logo & Brand */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-amber-500 via-amber-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20 flex items-center justify-center border border-amber-400/30">
-                <div className="h-full w-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Flame className="h-5 w-5 text-amber-400 animate-pulse" />
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-accent-amber-500 via-accent-amber-400 to-accent-amber-600 p-0.5 shadow-[var(--shadow-glow-amber)] flex items-center justify-center border border-accent-amber-400/30">
+                <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
+                  <Flame className="h-5 w-5 text-accent-amber-400 animate-pulse" />
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
+                  <h1 className="text-xl font-extrabold tracking-[-0.03em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-amber-200 bg-clip-text text-transparent">
                     ViralOS
                   </h1>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-amber-500/20 text-accent-amber-300 border border-accent-amber-500/30">
                     ENTERPRISE
                   </span>
                 </div>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-ink-muted">
                   Omni-Social Content & Digital Marketing OS
                 </p>
               </div>
             </div>
 
             {/* Platform Badges */}
-            <div className="hidden xl:flex items-center gap-1.5 bg-slate-900/80 p-1.5 rounded-lg border border-slate-800">
+            <div className="hidden xl:flex items-center gap-1.5 bg-surface-0/80 p-1.5 rounded-lg border border-white/10">
               <span title="X / Twitter" className="p-1.5 rounded bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"><Twitter className="h-3.5 w-3.5" /></span>
-              <span title="Instagram" className="p-1.5 rounded bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors"><Instagram className="h-3.5 w-3.5" /></span>
+              <span title="Instagram" className="p-1.5 rounded bg-accent-amber-500/10 text-accent-amber-400 hover:bg-accent-amber-500/20 transition-colors"><Instagram className="h-3.5 w-3.5" /></span>
               <span title="TikTok" className="p-1.5 rounded bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"><Video className="h-3.5 w-3.5" /></span>
               <span title="Facebook" className="p-1.5 rounded bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 transition-colors"><Facebook className="h-3.5 w-3.5" /></span>
-              <span title="Threads" className="p-1.5 rounded bg-amber-500/10 text-amber-400 hover:bg-amber-500/20 transition-colors"><AtSign className="h-3.5 w-3.5" /></span>
+              <span title="Threads" className="p-1.5 rounded bg-accent-amber-500/10 text-accent-amber-400 hover:bg-accent-amber-500/20 transition-colors"><AtSign className="h-3.5 w-3.5" /></span>
               <span title="Pinterest" className="p-1.5 rounded bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"><Pin className="h-3.5 w-3.5" /></span>
               <span title="LinkedIn" className="p-1.5 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"><Linkedin className="h-3.5 w-3.5" /></span>
             </div>
@@ -180,16 +182,16 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                     logout();
                   }
                 }}
-                className="sm:hidden px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-slate-300 flex items-center gap-1 cursor-pointer"
+                className={`sm:hidden px-3 py-2 rounded-xl bg-surface-0 border border-white/10 text-xs font-bold text-ink-secondary flex items-center gap-1 cursor-pointer active:scale-[0.98] ${FOCUS_RING}`}
               >
-                <LogOut className="h-3.5 w-3.5 text-rose-400" />
+                <LogOut className="h-3.5 w-3.5 text-accent-violet-400" />
                 <span>Exit</span>
               </button>
             )}
 
             <button
               onClick={onQuickStart}
-              className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold shadow-lg shadow-amber-500/20 transition-all active:scale-[0.98] cursor-pointer"
+              className={`w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-accent-amber-400 hover:brightness-105 text-slate-950 text-xs font-bold shadow-[var(--shadow-glow-amber)] transition-[transform,opacity,filter] active:scale-[0.98] cursor-pointer ${FOCUS_RING}`}
             >
               <Zap className="h-4 w-4 text-slate-950 fill-slate-950" />
               <span>Generate Viral Campaign</span>
@@ -198,7 +200,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="mt-4 flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none border-t border-slate-800/80 pt-3">
+        <nav className="mt-4 flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none border-t border-white/10 pt-3">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -207,25 +209,25 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors active:scale-[0.98] cursor-pointer ${FOCUS_RING} ${
                   isActive
                     ? isAdminTab
-                      ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30 font-bold'
-                      : 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
+                      ? 'bg-rose-600 text-white shadow-[0_10px_30px_rgba(225,29,72,0.3)] font-bold'
+                      : 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)] font-bold'
                     : isAdminTab
-                    ? 'text-amber-400 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/60'
+                    ? 'text-accent-amber-400 bg-accent-amber-500/10 hover:bg-accent-amber-500/20 border border-accent-amber-500/30'
+                    : 'text-ink-muted hover:text-ink-primary hover:bg-surface-0/60'
                 }`}
               >
-                <Icon className={`h-4 w-4 ${isActive ? (isAdminTab ? 'text-white' : 'text-slate-950') : isAdminTab ? 'text-amber-400' : 'text-slate-400'}`} />
+                <Icon className={`h-4 w-4 ${isActive ? (isAdminTab ? 'text-white' : 'text-slate-950') : isAdminTab ? 'text-accent-amber-400' : 'text-ink-muted'}`} />
                 <span>{tab.label}</span>
                 <span
                   className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                     isActive
                       ? 'bg-slate-950/20 text-slate-950 font-bold'
                       : isAdminTab
-                      ? 'bg-amber-500/20 text-amber-300'
-                      : 'bg-slate-800 text-slate-400 border border-slate-700/50'
+                      ? 'bg-accent-amber-500/20 text-accent-amber-300'
+                      : 'bg-surface-2 text-ink-muted border border-white/10'
                   }`}
                 >
                   {tab.badge}

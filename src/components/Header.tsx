@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Sparkles, Download, Palette, Layout, ShoppingBag, CheckCircle, ExternalLink, Columns } from 'lucide-react';
+import { FileText, Sparkles, Download, Layout, ShoppingBag, CheckCircle, Columns } from 'lucide-react';
 
 interface HeaderProps {
   onOpenImporter: () => void;
@@ -14,6 +14,8 @@ interface HeaderProps {
   onToggleSplitScreen: () => void;
 }
 
+const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0';
+
 export const Header: React.FC<HeaderProps> = ({
   onOpenImporter,
   onOpenAiEnhancer,
@@ -27,43 +29,43 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSplitScreen
 }) => {
   return (
-    <header id="app-header" className="bg-[#08090e]/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-slate-800/80 text-slate-100 sticky top-0 z-30 shadow-2xl">
+    <header id="app-header" className="bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 text-ink-primary sticky top-0 z-30 shadow-[var(--shadow-elevated)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand & Document Name */}
         <div className="flex items-center space-x-3 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-amber-400 to-slate-200 p-0.5 flex items-center justify-center shadow-lg shadow-amber-500/20">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <FileText className="w-5 h-5 text-amber-400" />
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-accent-amber-500 via-accent-amber-400 to-slate-200 p-0.5 flex items-center justify-center shadow-[var(--shadow-glow-amber)]">
+            <div className="w-full h-full bg-surface-0 rounded-[10px] flex items-center justify-center">
+              <FileText className="w-5 h-5 text-accent-amber-400" />
             </div>
           </div>
           <div className="min-w-0">
             <div className="flex items-center space-x-2">
-              <span className="font-extrabold text-base sm:text-lg bg-gradient-to-r from-amber-300 via-slate-100 to-amber-200 bg-clip-text text-transparent tracking-tight">
+              <span className="font-extrabold text-base sm:text-lg bg-gradient-to-r from-accent-amber-300 via-slate-100 to-accent-amber-200 bg-clip-text text-transparent tracking-tight">
                 DocCraft
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-slate-900 text-amber-300 border border-amber-500/30 font-semibold font-mono">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-surface-0 text-accent-amber-300 border border-accent-amber-500/30 font-semibold font-mono">
                 Studio PDF
               </span>
-              <span className="hidden md:inline-flex items-center text-[10px] px-2 py-0.5 rounded-full bg-slate-900 text-slate-300 border border-slate-700/60 font-mono">
-                <CheckCircle className="w-3 h-3 mr-1 text-amber-400" />
+              <span className="hidden md:inline-flex items-center text-[10px] px-2 py-0.5 rounded-full bg-surface-0 text-ink-secondary border border-white/10 font-mono">
+                <CheckCircle className="w-3 h-3 mr-1 text-accent-amber-400" />
                 Drive Synced
               </span>
             </div>
-            <p className="text-xs text-slate-400 truncate max-w-[200px] sm:max-w-xs md:max-w-md font-medium">
+            <p className="text-xs text-ink-muted truncate max-w-[200px] sm:max-w-xs md:max-w-md font-medium">
               {docTitle || 'Untitled Document'}
             </p>
           </div>
         </div>
 
         {/* Center Tabs: Studio Canvas vs Gumroad / Pinterest Mockup */}
-        <div className="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800 space-x-1 shadow-inner">
+        <div className="flex items-center bg-surface-0 p-1 rounded-xl border border-white/10 space-x-1 shadow-inner">
           <button
             id="tab-canvas-btn"
             onClick={() => setActiveTab('canvas')}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] ${FOCUS_RING} ${
               activeTab === 'canvas'
-                ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20'
-                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900'
+                ? 'bg-accent-amber-500 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
             }`}
           >
             <Layout className="w-3.5 h-3.5" />
@@ -72,17 +74,17 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="tab-mockup-btn"
             onClick={() => setActiveTab('mockup')}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] ${FOCUS_RING} ${
               activeTab === 'mockup'
-                ? 'bg-slate-800 text-amber-300 border border-amber-500/50 shadow-md'
-                : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                ? 'bg-surface-2 text-accent-amber-300 border border-accent-amber-500/50 shadow-[var(--shadow-elevated)]'
+                : 'text-ink-secondary hover:text-white hover:bg-surface-2'
             }`}
             title="Pinterest Pins, 3D Cover Mockups, & Gumroad Sales Copy"
           >
-            <ShoppingBag className="w-3.5 h-3.5 text-amber-400" />
+            <ShoppingBag className="w-3.5 h-3.5 text-accent-amber-400" />
             <span className="hidden sm:inline">Pinterest & 3D Mockup</span>
             <span className="sm:hidden">Pinterest</span>
-            <span className="text-[9px] bg-amber-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold uppercase tracking-tight">
+            <span className="text-[9px] bg-accent-amber-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold uppercase tracking-tight">
               NEW
             </span>
           </button>
@@ -94,18 +96,18 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="toggle-split-screen-header-btn"
             onClick={onToggleSplitScreen}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all ${
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors active:scale-[0.98] ${FOCUS_RING} ${
               isSplitScreen
-                ? 'bg-amber-500/20 text-amber-300 border-amber-400/60 shadow-sm shadow-amber-950/40 ring-1 ring-amber-400/30'
-                : 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-300'
+                ? 'bg-accent-amber-500/20 text-accent-amber-300 border-accent-amber-400/60 shadow-[var(--shadow-elevated)] ring-1 ring-accent-amber-400/30'
+                : 'bg-surface-1 hover:bg-surface-2 border-white/10 text-ink-secondary'
             }`}
             title="Toggle Side-by-Side Split Screen View"
           >
-            <Columns className="w-3.5 h-3.5 text-amber-400" />
+            <Columns className="w-3.5 h-3.5 text-accent-amber-400" />
             <span className="hidden sm:inline">Split View</span>
             <span
               className={`text-[9px] px-1.5 py-0.2 rounded font-mono font-bold ${
-                isSplitScreen ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                isSplitScreen ? 'bg-accent-amber-500 text-slate-950' : 'bg-surface-2 text-ink-muted'
               }`}
             >
               {isSplitScreen ? 'ON' : 'OFF'}
@@ -116,10 +118,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="import-doc-btn"
             onClick={onOpenImporter}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-xs text-slate-200 font-medium transition-colors"
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-surface-1 hover:bg-surface-2 border border-white/10 text-xs text-ink-secondary font-medium transition-colors active:scale-[0.98] ${FOCUS_RING}`}
             title="Import from Google Docs, Google Drive, or plain text"
           >
-            <FileText className="w-3.5 h-3.5 text-amber-400" />
+            <FileText className="w-3.5 h-3.5 text-accent-amber-400" />
             <span className="hidden sm:inline">Import Doc</span>
           </button>
 
@@ -128,10 +130,10 @@ export const Header: React.FC<HeaderProps> = ({
             id="ai-enhance-btn"
             onClick={onOpenAiEnhancer}
             disabled={isAiLoading}
-            className="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/40 text-xs font-semibold shadow-md shadow-amber-500/10 transition-all disabled:opacity-50"
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-surface-1 hover:bg-surface-2 text-accent-amber-300 border border-accent-amber-500/40 text-xs font-semibold shadow-[var(--shadow-elevated)] transition-colors active:scale-[0.98] disabled:opacity-50 ${FOCUS_RING}`}
             title="AI Format & Professional Restructure with Gemini"
           >
-            <Sparkles className={`w-3.5 h-3.5 text-amber-400 ${isAiLoading ? 'animate-spin' : ''}`} />
+            <Sparkles className={`w-3.5 h-3.5 text-accent-amber-400 ${isAiLoading ? 'animate-spin' : ''}`} />
             <span className="hidden sm:inline">AI Enhancer</span>
           </button>
 
@@ -139,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="mobile-mockup-btn"
             onClick={onOpenMockupModal}
-            className="lg:hidden flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-amber-500/40 text-amber-300 text-xs font-medium"
+            className={`lg:hidden flex items-center space-x-1.5 px-2.5 py-1.5 rounded-lg bg-surface-1 border border-accent-amber-500/40 text-accent-amber-300 text-xs font-medium active:scale-[0.98] ${FOCUS_RING}`}
           >
             <ShoppingBag className="w-3.5 h-3.5" />
           </button>
@@ -148,7 +150,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="export-pdf-main-btn"
             onClick={onExportPdf}
-            className="flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-amber-500/20"
+            className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-accent-amber-500 to-accent-amber-400 hover:brightness-105 text-slate-950 font-bold text-xs transition-[transform,opacity,filter] active:scale-[0.98] shadow-[var(--shadow-glow-amber)] ${FOCUS_RING}`}
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export PDF</span>

@@ -41,18 +41,19 @@ export const MotionPanel3D: React.FC<MotionPanel3DProps> = ({
           whileHover || {
             scale: 1.02,
             rotateY: 2,
-            transition: { duration: 0.3, ease: 'easeOut' },
+            transition: { type: 'spring', stiffness: 300, damping: 24 },
           }
         }
         viewport={{ once: viewportOnce, margin: '-40px' }}
         transition={{
-          duration: 0.7,
+          type: 'spring',
+          stiffness: 120,
+          damping: 18,
           delay: delay,
-          ease: [0.16, 1, 0.3, 1],
         }}
         className={`${
           frosted
-            ? 'bg-[#08090e]/80 backdrop-blur-[20px] backdrop-saturate-150 border border-slate-800/80 shadow-[0_16px_50px_rgba(0,0,0,0.6)] ring-1 ring-white/5 rounded-2xl p-1.5 sm:p-2.5 transition-all'
+            ? 'bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border border-slate-800/80 shadow-[var(--shadow-floating)] ring-1 ring-white/5 rounded-2xl p-1.5 sm:p-2.5'
             : ''
         } ${className}`}
         style={{ transformStyle: 'preserve-3d' }}
