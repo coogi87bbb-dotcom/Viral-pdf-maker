@@ -129,7 +129,7 @@ export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
       <button
         type="button"
         onClick={toggleListening}
-        className={`inline-flex items-center gap-1.5 rounded-xl font-bold transition-all shadow-md active:scale-95 ${
+        className={`inline-flex items-center gap-1.5 rounded-xl font-bold transition-colors shadow-md active:scale-95 ${
           isListening
             ? 'bg-red-600 hover:bg-red-500 text-white animate-pulse ring-2 ring-red-400'
             : 'bg-violet-600/90 hover:bg-violet-500 text-white border border-violet-400/30'
@@ -151,15 +151,15 @@ export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
           </>
         ) : (
           <>
-            <Mic className="h-4 w-4 text-amber-300" />
+            <Mic className="h-4 w-4 text-accent-amber-300" />
             <span>{label}</span>
           </>
         )}
       </button>
 
       {isListening && transcriptPreview && (
-        <div className="flex items-center gap-1.5 text-[11px] text-amber-300 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg mt-1 animate-fade-in">
-          <Volume2 className="h-3.5 w-3.5 animate-pulse text-amber-400 shrink-0" />
+        <div className="flex items-center gap-1.5 text-[11px] text-accent-amber-300 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg mt-1 animate-fade-in">
+          <Volume2 className="h-3.5 w-3.5 animate-pulse text-accent-amber-400 shrink-0" />
           <span className="truncate max-w-xs font-mono">&quot;{transcriptPreview}&quot;</span>
         </div>
       )}

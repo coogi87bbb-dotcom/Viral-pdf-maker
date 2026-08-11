@@ -187,15 +187,15 @@ export const AdminDashboard: React.FC = () => {
       {activeBroadcast && (
         <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/10 to-amber-500/20 border border-amber-500/40 text-amber-200 text-xs font-medium flex items-center justify-between gap-4 shadow-xl">
           <div className="flex items-center gap-3">
-            <Megaphone className="h-5 w-5 text-amber-400 shrink-0 animate-bounce" />
+            <Megaphone className="h-5 w-5 text-accent-amber-400 shrink-0 animate-bounce" />
             <div>
-              <span className="font-extrabold text-amber-300 uppercase tracking-wider text-[10px] mr-2">SYSTEM BROADCAST:</span>
+              <span className="font-extrabold text-accent-amber-300 uppercase tracking-wider text-[10px] mr-2">SYSTEM BROADCAST:</span>
               <span>{activeBroadcast}</span>
             </div>
           </div>
           <button
             onClick={() => setActiveBroadcast(null)}
-            className="text-amber-400/60 hover:text-white font-mono text-xs cursor-pointer"
+            className="text-accent-amber-400/60 hover:text-white font-mono text-xs cursor-pointer"
           >
             Clear
           </button>
@@ -210,14 +210,14 @@ export const AdminDashboard: React.FC = () => {
 
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/40 text-xs font-black text-amber-300 font-mono uppercase tracking-wider shadow-inner">
-              <Crown className="h-4 w-4 text-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/40 text-xs font-black text-accent-amber-300 font-mono uppercase tracking-wider shadow-inner">
+              <Crown className="h-4 w-4 text-accent-amber-400" />
               <span>UNIFIED MASTER OWNER DASHBOARD • EXECUTIVE ADMIN</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
               Executive Platform Command Center
             </h1>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-ink-secondary max-w-2xl leading-relaxed">
               Managing 100% of <strong className="text-indigo-300">App A (Viral PDF Studio)</strong>, <strong className="text-rose-300">App B (Viral OS Engine)</strong>, and <strong className="text-emerald-300">App C (GigScale Service Engine)</strong> in real time.
             </p>
           </div>
@@ -226,9 +226,9 @@ export const AdminDashboard: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={() => setShowBroadcastModal(true)}
-              className="px-4 py-2.5 rounded-xl bg-slate-900 border border-amber-500/30 hover:border-amber-400 text-amber-300 font-bold text-xs flex items-center gap-2 transition-all cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-surface-1 border border-amber-500/30 hover:border-accent-amber-400 text-accent-amber-300 font-bold text-xs flex items-center gap-2 transition-colors cursor-pointer"
             >
-              <Megaphone className="h-4 w-4 text-amber-400" />
+              <Megaphone className="h-4 w-4 text-accent-amber-400" />
               <span>Broadcast Notice</span>
             </button>
 
@@ -243,29 +243,29 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         {actionMessage && (
-          <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs flex items-center justify-between">
+          <div className="p-3 rounded-xl bg-accent-amber-500/10 border border-amber-500/30 text-accent-amber-300 text-xs flex items-center justify-between">
             <span className="font-mono">{actionMessage}</span>
-            <button onClick={() => setActionMessage(null)} className="text-slate-400 hover:text-white font-bold">✕</button>
+            <button onClick={() => setActionMessage(null)} className="text-ink-muted hover:text-white font-bold">✕</button>
           </div>
         )}
 
         {/* TOP LEVEL FINANCIAL & SYSTEM METRIC GRID */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3 pt-2">
           {/* Revenue MRR */}
-          <div className="bg-slate-900/90 p-4 rounded-2xl border border-amber-500/30 space-y-1">
+          <div className="bg-surface-1/90 p-4 rounded-2xl border border-amber-500/30 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1">
-                <DollarSign className="h-3.5 w-3.5 text-amber-400" />
+              <span className="text-[10px] font-bold text-accent-amber-300 uppercase tracking-wider flex items-center gap-1">
+                <DollarSign className="h-3.5 w-3.5 text-accent-amber-400" />
                 Monthly Revenue
               </span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">+24%</span>
             </div>
-            <div className="text-2xl font-black text-amber-300">$18,450</div>
-            <div className="text-[10px] text-slate-400">ARR Runway: $221.4k</div>
+            <div className="text-2xl font-black text-accent-amber-300">$18,450</div>
+            <div className="text-[10px] text-ink-muted">ARR Runway: $221.4k</div>
           </div>
 
           {/* App A Metric */}
-          <div className="bg-slate-900/90 p-4 rounded-2xl border border-indigo-500/30 space-y-1">
+          <div className="bg-surface-1/90 p-4 rounded-2xl border border-indigo-500/30 space-y-1">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-bold text-indigo-300 uppercase tracking-wider flex items-center gap-1">
                 <FileText className="h-3.5 w-3.5 text-indigo-400" />
@@ -274,11 +274,11 @@ export const AdminDashboard: React.FC = () => {
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">High-DPI</span>
             </div>
             <div className="text-2xl font-black text-white">1,840+</div>
-            <div className="text-[10px] text-slate-400">PDFs Published</div>
+            <div className="text-[10px] text-ink-muted">PDFs Published</div>
           </div>
 
           {/* App B Metric */}
-          <div className="bg-slate-900/90 p-4 rounded-2xl border border-rose-500/30 space-y-1">
+          <div className="bg-surface-1/90 p-4 rounded-2xl border border-rose-500/30 space-y-1">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-bold text-rose-300 uppercase tracking-wider flex items-center gap-1">
                 <Flame className="h-3.5 w-3.5 text-rose-400" />
@@ -287,11 +287,11 @@ export const AdminDashboard: React.FC = () => {
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono">13 AI Tools</span>
             </div>
             <div className="text-2xl font-black text-white">{totalCampaignsGenerated}</div>
-            <div className="text-[10px] text-slate-400">7-Network Campaigns</div>
+            <div className="text-[10px] text-ink-muted">7-Network Campaigns</div>
           </div>
 
           {/* App C Metric */}
-          <div className="bg-slate-900/90 p-4 rounded-2xl border border-emerald-500/30 space-y-1">
+          <div className="bg-surface-1/90 p-4 rounded-2xl border border-emerald-500/30 space-y-1">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-bold text-emerald-300 uppercase tracking-wider flex items-center gap-1">
                 <Zap className="h-3.5 w-3.5 text-emerald-400" />
@@ -300,17 +300,17 @@ export const AdminDashboard: React.FC = () => {
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono">$150-$2.5k</span>
             </div>
             <div className="text-2xl font-black text-emerald-400">$28,450</div>
-            <div className="text-[10px] text-slate-400">Client Deal Flow</div>
+            <div className="text-[10px] text-ink-muted">Client Deal Flow</div>
           </div>
 
           {/* Users & License Keys Metric */}
-          <div className="bg-slate-900/90 p-4 rounded-2xl border border-slate-700 space-y-1">
+          <div className="bg-surface-1/90 p-4 rounded-2xl border border-white/15 space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1">
-                <Users className="h-3.5 w-3.5 text-amber-400" />
+              <span className="text-[10px] font-bold text-ink-secondary uppercase tracking-wider flex items-center gap-1">
+                <Users className="h-3.5 w-3.5 text-accent-amber-400" />
                 VIP Accounts
               </span>
-              <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-mono">Gumroad</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-accent-amber-500/20 text-accent-amber-300 font-mono">Gumroad</span>
             </div>
             <div className="text-2xl font-black text-white">{usersList.length} VIPs</div>
             <div className="text-[10px] text-emerald-400 font-bold">{activeUsersCount} Active Licenses</div>
@@ -318,7 +318,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         {/* SUB-NAVIGATION TABS */}
-        <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-slate-800">
+        <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-white/10">
           {[
             { id: 'overview', label: 'Master Overview', icon: Crown },
             { id: 'revenue', label: 'Revenue & Financials', icon: DollarSign },
@@ -334,10 +334,10 @@ export const AdminDashboard: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                   isActive
-                    ? 'bg-amber-500 text-slate-950 font-black shadow-lg shadow-amber-500/20'
-                    : 'bg-slate-900 text-slate-400 border border-slate-800 hover:text-white hover:bg-slate-800'
+                    ? 'bg-accent-amber-500 text-slate-950 font-black shadow-lg shadow-amber-500/20'
+                    : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white hover:bg-surface-2'
                 }`}
               >
                 <Icon className="h-3.5 w-3.5" />
@@ -353,10 +353,10 @@ export const AdminDashboard: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main 3 Apps Health & Telemetry Cards */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
+            <div className="bg-surface-1 p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-black text-white flex items-center gap-2">
-                  <Layers className="h-5 w-5 text-amber-400" />
+                  <Layers className="h-5 w-5 text-accent-amber-400" />
                   <span>3-App Web Application Health</span>
                 </h2>
                 <span className="text-xs text-emerald-400 font-mono font-bold">100% Operational SLA</span>
@@ -364,7 +364,7 @@ export const AdminDashboard: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {/* App A */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-indigo-500/30 space-y-3 relative overflow-hidden">
+                <div className="p-4 rounded-2xl bg-surface-0 border border-indigo-500/30 space-y-3 relative overflow-hidden">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-indigo-400 font-extrabold text-xs">
                       <FileText className="h-4 w-4" />
@@ -372,17 +372,17 @@ export const AdminDashboard: React.FC = () => {
                     </div>
                     <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
                   </div>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-ink-secondary">
                     High-DPI PDF layout engine, 3D hardcover mockup generator, custom themes & AI enhancer.
                   </p>
-                  <div className="pt-2 border-t border-slate-800 text-[11px] flex items-center justify-between text-slate-400">
+                  <div className="pt-2 border-t border-white/10 text-[11px] flex items-center justify-between text-ink-muted">
                     <span>Engine: Active</span>
                     <span className="text-emerald-400 font-bold">1,840 PDFs Rendered</span>
                   </div>
                 </div>
 
                 {/* App B */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-rose-500/30 space-y-3 relative overflow-hidden">
+                <div className="p-4 rounded-2xl bg-surface-0 border border-rose-500/30 space-y-3 relative overflow-hidden">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-rose-400 font-extrabold text-xs">
                       <Flame className="h-4 w-4" />
@@ -390,17 +390,17 @@ export const AdminDashboard: React.FC = () => {
                     </div>
                     <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
                   </div>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-ink-secondary">
                     13 AI growth tools, Google Trend Pulse, Teleprompter, Visual Studio & Meta-Architect.
                   </p>
-                  <div className="pt-2 border-t border-slate-800 text-[11px] flex items-center justify-between text-slate-400">
+                  <div className="pt-2 border-t border-white/10 text-[11px] flex items-center justify-between text-ink-muted">
                     <span>Gemini AI: Synced</span>
                     <span className="text-emerald-400 font-bold">{totalCampaignsGenerated} Campaigns</span>
                   </div>
                 </div>
 
                 {/* App C */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-emerald-500/30 space-y-3 relative overflow-hidden">
+                <div className="p-4 rounded-2xl bg-surface-0 border border-emerald-500/30 space-y-3 relative overflow-hidden">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-emerald-400 font-extrabold text-xs">
                       <Zap className="h-4 w-4" />
@@ -408,10 +408,10 @@ export const AdminDashboard: React.FC = () => {
                     </div>
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   </div>
-                  <p className="text-xs text-slate-300">
+                  <p className="text-xs text-ink-secondary">
                     Freelance service packages, client deal board, cold outreach studio & 10x profit auditor.
                   </p>
-                  <div className="pt-2 border-t border-slate-800 text-[11px] flex items-center justify-between text-slate-400">
+                  <div className="pt-2 border-t border-white/10 text-[11px] flex items-center justify-between text-ink-muted">
                     <span>Pipeline: Active</span>
                     <span className="text-emerald-400 font-bold">$28,450 Orders</span>
                   </div>
@@ -420,39 +420,39 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             {/* REAL-TIME SYSTEM API PING & SERVICE STATUS */}
-            <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
+            <div className="bg-surface-1 p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
               <h2 className="text-base font-black text-white flex items-center gap-2">
-                <Wifi className="h-5 w-5 text-amber-400" />
+                <Wifi className="h-5 w-5 text-accent-amber-400" />
                 <span>Live System Service Pings & Infrastructure Status</span>
               </h2>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-slate-400 text-[10px] font-mono">FIRESTORE DB</div>
+                <div className="p-3.5 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                  <div className="text-ink-muted text-[10px] font-mono">FIRESTORE DB</div>
                   <div className="text-emerald-400 font-bold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Connected (11ms)</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-slate-400 text-[10px] font-mono">FIREBASE AUTH</div>
+                <div className="p-3.5 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                  <div className="text-ink-muted text-[10px] font-mono">FIREBASE AUTH</div>
                   <div className="text-emerald-400 font-bold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Active (9ms)</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-slate-400 text-[10px] font-mono">GEMINI 2.5 FLASH</div>
+                <div className="p-3.5 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                  <div className="text-ink-muted text-[10px] font-mono">GEMINI 2.5 FLASH</div>
                   <div className="text-emerald-400 font-bold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>Operational</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                  <div className="text-slate-400 text-[10px] font-mono">HIGH-DPI PDF CDN</div>
+                <div className="p-3.5 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                  <div className="text-ink-muted text-[10px] font-mono">HIGH-DPI PDF CDN</div>
                   <div className="text-emerald-400 font-bold flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-emerald-400" />
                     <span>100% SLA</span>
@@ -464,24 +464,24 @@ export const AdminDashboard: React.FC = () => {
 
           {/* Right Column: Live Telemetry Feed */}
           <div className="space-y-6">
-            <div className="bg-slate-900 p-5 rounded-2xl border border-slate-800 space-y-4 shadow-xl">
+            <div className="bg-surface-1 p-5 rounded-2xl border border-white/10 space-y-4 shadow-xl">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Radio className="h-4 w-4 text-amber-400 animate-pulse" />
+                  <Radio className="h-4 w-4 text-accent-amber-400 animate-pulse" />
                   <span>Realtime Platform Audit Feed</span>
                 </h3>
               </div>
 
               <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
                 {activityLogs.map((log) => (
-                  <div key={log.id} className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] space-y-1">
-                    <div className="flex justify-between items-center text-slate-300">
+                  <div key={log.id} className="p-2.5 rounded-xl bg-surface-0 border border-white/10 text-[11px] space-y-1">
+                    <div className="flex justify-between items-center text-ink-secondary">
                       <span className="font-bold">{log.action}</span>
                       <span className="text-[9px] font-mono text-slate-500">
                         {new Date(log.timestamp).toLocaleTimeString()}
                       </span>
                     </div>
-                    <div className="text-[10px] font-mono text-amber-400 truncate">{log.userEmail}</div>
+                    <div className="text-[10px] font-mono text-accent-amber-400 truncate">{log.userEmail}</div>
                   </div>
                 ))}
               </div>
@@ -493,49 +493,49 @@ export const AdminDashboard: React.FC = () => {
       {/* TAB 2: REVENUE & FINANCIAL INTELLIGENCE */}
       {activeTab === 'revenue' && (
         <div className="space-y-6">
-          <div className="bg-slate-900 p-6 rounded-3xl border border-amber-500/30 space-y-6 shadow-xl">
+          <div className="bg-surface-1 p-6 rounded-3xl border border-amber-500/30 space-y-6 shadow-xl">
             <div className="flex items-center gap-3">
-              <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
+              <div className="p-3 rounded-2xl bg-accent-amber-500/10 border border-amber-500/30 text-accent-amber-400">
                 <DollarSign className="h-6 w-6" />
               </div>
               <div>
                 <h2 className="text-lg font-black text-white">Commercial Monetization & Revenue Engine</h2>
-                <p className="text-xs text-slate-400">Executive financial metrics, VIP license sales, and ARPU projections</p>
+                <p className="text-xs text-ink-muted">Executive financial metrics, VIP license sales, and ARPU projections</p>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                <span className="text-xs text-slate-400">Monthly Recurring Revenue (MRR)</span>
-                <div className="text-2xl font-black text-amber-300">$18,450 / mo</div>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Monthly Recurring Revenue (MRR)</span>
+                <div className="text-2xl font-black text-accent-amber-300">$18,450 / mo</div>
                 <span className="text-[10px] text-emerald-400 font-bold">+18.4% MoM</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                <span className="text-xs text-slate-400">Annual Run Rate (ARR)</span>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Annual Run Rate (ARR)</span>
                 <div className="text-2xl font-black text-white">$221,400 / yr</div>
-                <span className="text-[10px] text-slate-400">Projected Run Rate</span>
+                <span className="text-[10px] text-ink-muted">Projected Run Rate</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                <span className="text-xs text-slate-400">Average Revenue Per User (ARPU)</span>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Average Revenue Per User (ARPU)</span>
                 <div className="text-2xl font-black text-emerald-400">$149.00</div>
-                <span className="text-[10px] text-slate-400">Lifetime VIP Access</span>
+                <span className="text-[10px] text-ink-muted">Lifetime VIP Access</span>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-                <span className="text-xs text-slate-400">GigScale Agency Orders (GOV)</span>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">GigScale Agency Orders (GOV)</span>
                 <div className="text-2xl font-black text-indigo-400">$28,450</div>
                 <span className="text-[10px] text-indigo-300 font-bold">Client Deals In Pipeline</span>
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-xs">
-              <div className="text-amber-400 font-bold uppercase text-[11px] flex items-center gap-2">
+            <div className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3 font-mono text-xs">
+              <div className="text-accent-amber-400 font-bold uppercase text-[11px] flex items-center gap-2">
                 <Sparkles className="h-4 w-4" />
                 <span>Access Model</span>
               </div>
-              <p className="text-slate-300 leading-relaxed">
+              <p className="text-ink-secondary leading-relaxed">
                 All 3 web apps operate under a single account model. Users sign in with Google or email/password to unlock PDF Studio, Viral OS, and GigScale Engine.
               </p>
             </div>
@@ -545,30 +545,30 @@ export const AdminDashboard: React.FC = () => {
 
       {/* TAB 3: APP A ANALYTICAL DASHBOARD */}
       {activeTab === 'appA' && (
-        <div className="bg-slate-900 p-6 rounded-3xl border border-indigo-500/30 space-y-6 shadow-xl">
+        <div className="bg-surface-1 p-6 rounded-3xl border border-indigo-500/30 space-y-6 shadow-xl">
           <div className="flex items-center gap-3">
             <div className="p-3 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400">
               <FileText className="h-6 w-6" />
             </div>
             <div>
               <h2 className="text-lg font-black text-white">App A: Viral PDF Creator & 3D Mockup Studio</h2>
-              <p className="text-xs text-slate-400">High-DPI PDF document publishing analytics & template usage</p>
+              <p className="text-xs text-ink-muted">High-DPI PDF document publishing analytics & template usage</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Total PDF Lead Magnets Exported</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Total PDF Lead Magnets Exported</span>
               <div className="text-2xl font-black text-white">1,840</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">3D Book & Digital Product Mockups</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">3D Book & Digital Product Mockups</span>
               <div className="text-2xl font-black text-indigo-400">4,120</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">AI Text-to-Layout Enhancements</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">AI Text-to-Layout Enhancements</span>
               <div className="text-2xl font-black text-emerald-400">920</div>
             </div>
           </div>
@@ -577,31 +577,31 @@ export const AdminDashboard: React.FC = () => {
 
       {/* TAB 4: APP B ANALYTICAL DASHBOARD */}
       {activeTab === 'appB' && (
-        <div className="bg-slate-900 p-6 rounded-3xl border border-rose-500/30 space-y-6 shadow-xl">
+        <div className="bg-surface-1 p-6 rounded-3xl border border-rose-500/30 space-y-6 shadow-xl">
           <div className="flex items-center gap-3">
             <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400">
               <Flame className="h-6 w-6" />
             </div>
             <div>
               <h2 className="text-lg font-black text-white">App B: Viral OS Content Engine (13 AI Tools)</h2>
-              <p className="text-xs text-slate-400">Omni-campaign generation analytics across 7 social networks</p>
+              <p className="text-xs text-ink-muted">Omni-campaign generation analytics across 7 social networks</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Total Campaigns Generated</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Total Campaigns Generated</span>
               <div className="text-2xl font-black text-white">{totalCampaignsGenerated}</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Google Trends Pulses Scraped</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Google Trends Pulses Scraped</span>
               <div className="text-2xl font-black text-rose-400">890</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Psychological Hook Frameworks Applied</span>
-              <div className="text-2xl font-black text-amber-400">2,450</div>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Psychological Hook Frameworks Applied</span>
+              <div className="text-2xl font-black text-accent-amber-400">2,450</div>
             </div>
           </div>
         </div>
@@ -609,31 +609,31 @@ export const AdminDashboard: React.FC = () => {
 
       {/* TAB 5: APP C ANALYTICAL DASHBOARD */}
       {activeTab === 'appC' && (
-        <div className="bg-slate-900 p-6 rounded-3xl border border-emerald-500/30 space-y-6 shadow-xl">
+        <div className="bg-surface-1 p-6 rounded-3xl border border-emerald-500/30 space-y-6 shadow-xl">
           <div className="flex items-center gap-3">
             <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
               <Zap className="h-6 w-6" />
             </div>
             <div>
               <h2 className="text-lg font-black text-white">App C: GigScale Freelance & Service Engine</h2>
-              <p className="text-xs text-slate-400">High-ticket retainer deal flow & client order pipeline</p>
+              <p className="text-xs text-ink-muted">High-ticket retainer deal flow & client order pipeline</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Active Pipeline Volume</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Active Pipeline Volume</span>
               <div className="text-2xl font-black text-emerald-400">$28,450</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">Service Packages Listed</span>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">Service Packages Listed</span>
               <div className="text-2xl font-black text-white">12 Gigs</div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
-              <span className="text-xs text-slate-400">10x Profit Audits Generated</span>
-              <div className="text-2xl font-black text-amber-400">145</div>
+            <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+              <span className="text-xs text-ink-muted">10x Profit Audits Generated</span>
+              <div className="text-2xl font-black text-accent-amber-400">145</div>
             </div>
           </div>
         </div>
@@ -642,13 +642,13 @@ export const AdminDashboard: React.FC = () => {
       {/* TAB 6: VIP USERS MANAGEMENT TABLE */}
       {activeTab === 'users' && (
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900 p-4 rounded-2xl border border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-surface-1 p-4 rounded-2xl border border-white/10">
             <div>
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Users className="h-4 w-4 text-amber-400" />
+                <Users className="h-4 w-4 text-accent-amber-400" />
                 <span>Registered VIP License Holders</span>
               </h2>
-              <p className="text-xs text-slate-400">Manage registered buyers across all 3 web application modules.</p>
+              <p className="text-xs text-ink-muted">Manage registered buyers across all 3 web application modules.</p>
             </div>
 
             <div className="relative w-full sm:w-64">
@@ -658,15 +658,15 @@ export const AdminDashboard: React.FC = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search user email or key..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl pl-9 pr-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500"
               />
             </div>
           </div>
 
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl">
+          <div className="bg-surface-1 rounded-2xl border border-white/10 overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-slate-950 text-slate-400 font-bold uppercase tracking-wider text-[10px] border-b border-slate-800">
+              <table className="w-full text-left text-xs text-ink-secondary">
+                <thead className="bg-surface-0 text-ink-muted font-bold uppercase tracking-wider text-[10px] border-b border-white/10">
                   <tr>
                     <th className="p-3.5">User / Email</th>
                     <th className="p-3.5">Registered</th>
@@ -685,22 +685,22 @@ export const AdminDashboard: React.FC = () => {
                     filteredUsers.map((u) => {
                       const isUserOwner = u.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
                       return (
-                        <tr key={u.uid} className="hover:bg-slate-800/50 transition-colors">
+                        <tr key={u.uid} className="hover:bg-surface-2/50 transition-colors">
                           <td className="p-3.5">
                             <div className="space-y-0.5">
                               <div className="font-bold text-white flex items-center gap-1.5">
                                 <span>{u.displayName || 'VIP Creator'}</span>
                                 {isUserOwner && (
-                                  <span className="px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 text-[9px] font-mono font-bold">
+                                  <span className="px-1.5 py-0.2 rounded bg-accent-amber-500/20 text-accent-amber-300 text-[9px] font-mono font-bold">
                                     MASTER OWNER
                                   </span>
                                 )}
                               </div>
-                              <div className="text-[11px] text-slate-400 font-mono">{u.email}</div>
+                              <div className="text-[11px] text-ink-muted font-mono">{u.email}</div>
                             </div>
                           </td>
 
-                          <td className="p-3.5 text-[11px] text-slate-400">
+                          <td className="p-3.5 text-[11px] text-ink-muted">
                             {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Just Now'}
                           </td>
 
@@ -721,10 +721,10 @@ export const AdminDashboard: React.FC = () => {
                             {!isUserOwner ? (
                               <button
                                 onClick={() => handleToggleUserStatus(u.uid, u.status)}
-                                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
+                                className={`px-2.5 py-1 rounded-lg text-[10px] font-bold transition-colors cursor-pointer ${
                                   u.status === 'suspended'
                                     ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                                    : 'bg-slate-800 hover:bg-red-600 text-slate-300 hover:text-white'
+                                    : 'bg-surface-2 hover:bg-red-600 text-ink-secondary hover:text-white'
                                 }`}
                               >
                                 {u.status === 'suspended' ? 'Unsuspend' : 'Suspend'}
@@ -746,10 +746,10 @@ export const AdminDashboard: React.FC = () => {
 
       {/* TAB 7: AUDIT LOGS */}
       {activeTab === 'logs' && (
-        <div className="bg-slate-900 p-6 rounded-3xl border border-slate-800 space-y-4 shadow-xl">
+        <div className="bg-surface-1 p-6 rounded-3xl border border-white/10 space-y-4 shadow-xl">
           <div className="flex items-center justify-between">
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              <Radio className="h-5 w-5 text-amber-400 animate-pulse" />
+              <Radio className="h-5 w-5 text-accent-amber-400 animate-pulse" />
               <span>Full System Audit Trail</span>
             </h2>
             <span className="text-xs text-slate-500 font-mono">Firebase Realtime Sync</span>
@@ -757,14 +757,14 @@ export const AdminDashboard: React.FC = () => {
 
           <div className="space-y-2 max-h-96 overflow-y-auto pr-1">
             {activityLogs.map((log) => (
-              <div key={log.id} className="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs space-y-1">
-                <div className="flex justify-between items-center text-slate-300">
+              <div key={log.id} className="p-3 rounded-2xl bg-surface-0 border border-white/10 text-xs space-y-1">
+                <div className="flex justify-between items-center text-ink-secondary">
                   <span className="font-bold text-amber-200">{log.action}</span>
                   <span className="text-[10px] font-mono text-slate-500">
                     {new Date(log.timestamp).toLocaleString()}
                   </span>
                 </div>
-                <div className="text-[11px] font-mono text-slate-400">User: {log.userEmail}</div>
+                <div className="text-[11px] font-mono text-ink-muted">User: {log.userEmail}</div>
               </div>
             ))}
           </div>
@@ -773,21 +773,21 @@ export const AdminDashboard: React.FC = () => {
 
       {/* MODAL: BROADCAST SYSTEM NOTICE */}
       {showBroadcastModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        <div className="fixed inset-0 z-50 bg-surface-0/85 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
+                <div className="p-2.5 rounded-2xl bg-accent-amber-500/10 border border-amber-500/30 text-accent-amber-400">
                   <Megaphone className="h-6 w-6" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-white">Broadcast System Notice</h3>
-                  <p className="text-xs text-slate-400">Display announcement banner across all web apps</p>
+                  <p className="text-xs text-ink-muted">Display announcement banner across all web apps</p>
                 </div>
               </div>
               <button
                 onClick={() => setShowBroadcastModal(false)}
-                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white cursor-pointer"
+                className="p-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-muted hover:text-white cursor-pointer"
               >
                 ✕
               </button>
@@ -795,12 +795,12 @@ export const AdminDashboard: React.FC = () => {
 
             <div className="space-y-4 text-xs">
               <div className="space-y-1">
-                <label className="text-slate-300 font-mono">Announcement Message:</label>
+                <label className="text-ink-secondary font-mono">Announcement Message:</label>
                 <textarea
                   rows={3}
                   value={broadcastText}
                   onChange={(e) => setBroadcastText(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white focus:outline-none focus:border-amber-500"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-white focus:outline-none focus:border-amber-500"
                 />
               </div>
 
@@ -810,7 +810,7 @@ export const AdminDashboard: React.FC = () => {
                   setShowBroadcastModal(false);
                   setActionMessage('System announcement broadcasted successfully!');
                 }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs transition-all cursor-pointer shadow-lg shadow-amber-500/20"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs transition-colors cursor-pointer shadow-lg shadow-amber-500/20"
               >
                 Publish Broadcast Notice
               </button>
