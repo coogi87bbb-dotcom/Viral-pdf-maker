@@ -95,9 +95,14 @@ export const LandingFeatureGrid: React.FC = () => {
                 <MotionPanel3D
                   tiltX={10}
                   delay={i * 0.1}
+                  frosted={false}
                   whileHover={{ scale: 1.03, rotateY: 3, y: -4, transition: { duration: 0.5, ease: 'easeOut' } }}
                 >
-                  <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 sm:p-6 shadow-xl space-y-4 h-full">
+                  {/* Single translucent layer (MotionPanel3D's own frosted
+                      background is disabled above) so the page-wide video
+                      backdrop stays visible through the card instead of
+                      compounding two dark layers into something opaque. */}
+                  <div className="bg-surface-1/30 backdrop-blur-xl backdrop-saturate-150 rounded-2xl border border-white/10 p-5 sm:p-6 shadow-xl space-y-4 h-full">
                     <div
                       className={`h-11 w-11 rounded-xl bg-gradient-to-tr ${accent.badge} p-0.5 flex items-center justify-center`}
                     >

@@ -26,6 +26,11 @@ interface AuthContextType {
   userProfile: UserProfile | null;
   loading: boolean;
   isOwner: boolean;
+  /** Set when a signInWithRedirect() return (e.g. Google sign-in in an
+   * embedded/iframe context) fails to resolve to a signed-in user — surfaced
+   * so AuthModal can show it instead of the failure silently dumping the
+   * visitor back on the signed-out landing page with no explanation. */
+  authError: string | null;
   signUp: (email: string, pass: string, displayName?: string) => Promise<void>;
   login: (email: string, pass: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -39,6 +44,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<FirebaseUser | null>(null);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   // Optimistic-only hint for instant UI (e.g. show the admin tab while the
   // Firestore profile is still loading). It grants no actual data access —
@@ -88,32 +94,79 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
+    let cancelled = false;
+    // Whether getRedirectResult() has settled (resolved OR rejected) yet.
+    // onAuthStateChanged can fire once with a null user before Firebase
+    // finishes internally processing a pending signInWithRedirect() return
+    // (the path taken for Google sign-in in an embedded/iframe context,
+    // e.g. this environment's own preview) — if we painted the signed-out
+    // landing page on that first null callback, a slow-resolving redirect
+    // would flash "signed out" even though a sign-in might still be
+    // completing, with no guarantee the UI ever gets a second callback to
+    // correct itself before the visitor notices. So: don't commit to the
+    // signed-out UI on a null callback until the redirect check has
+    // definitely settled one way or the other.
+    let redirectSettled = false;
+    let pendingSignOut: (() => void) | null = null;
+
+    const finishSignedOut = () => {
+      if (cancelled) return;
+      setUser(null);
+      setUserProfile(null);
+      setLoading(false);
+    };
+
     // Completes a signInWithRedirect() started elsewhere (e.g. the popup
     // fallback below). onAuthStateChanged will also fire with the same
-    // user, but only this call gives us access to the result for logging.
+    // user, but only this call gives us access to the result for logging
+    // and to a genuine error if the redirect sign-in itself failed.
     getRedirectResult(auth)
       .then((res) => {
         if (res?.user) {
           logActivity(res.user.uid, res.user.email || '', 'User logged in with Google (redirect)');
         }
       })
-      .catch((err) => console.warn('Google redirect sign-in notice:', err));
+      .catch((err) => {
+        console.warn('Google redirect sign-in notice:', err);
+        if (!cancelled) setAuthError(err?.message || 'Google sign-in failed. Please try again.');
+      })
+      .finally(() => {
+        redirectSettled = true;
+        if (pendingSignOut) {
+          const run = pendingSignOut;
+          pendingSignOut = null;
+          run();
+        }
+      });
 
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         fetchProfileByUid(currentUser.uid, currentUser.email || '', currentUser.displayName || '')
-          .then((p) => setUserProfile(p))
-          .catch(() => setUserProfile(null))
-          .finally(() => setLoading(false));
+          .then((p) => {
+            if (!cancelled) setUserProfile(p);
+          })
+          .catch(() => {
+            if (!cancelled) setUserProfile(null);
+          })
+          .finally(() => {
+            if (!cancelled) setLoading(false);
+          });
+        return;
+      }
+
+      if (redirectSettled) {
+        finishSignedOut();
       } else {
-        setUser(null);
-        setUserProfile(null);
-        setLoading(false);
+        // Hold off — a redirect result may still be resolving.
+        pendingSignOut = finishSignedOut;
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      cancelled = true;
+      unsubscribe();
+    };
   }, []);
 
   const refreshProfile = async () => {
@@ -191,6 +244,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   ]);
 
   const signInWithGoogle = async () => {
+    setAuthError(null);
     if (isEmbeddedInIframe()) {
       await signInWithRedirect(auth, googleProvider);
       return; // page navigates away; redirect result is handled on return
@@ -226,6 +280,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         userProfile,
         loading,
         isOwner,
+        authError,
         signUp,
         login,
         signInWithGoogle,

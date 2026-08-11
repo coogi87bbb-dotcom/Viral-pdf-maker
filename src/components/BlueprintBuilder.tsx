@@ -228,7 +228,7 @@ Structure your response cleanly using Markdown:
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300 mb-2">
             <FileCode2 className="h-3.5 w-3.5 text-violet-400" />
@@ -240,14 +240,14 @@ Structure your response cleanly using Markdown:
               10x Architect
             </span>
           </h2>
-          <p className="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">
+          <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
             Convert any niche or product idea into an enterprise-grade, copy-and-paste Master System Instruction. Features strict multi-pass chain-of-thought protocols, negative constraint filters, modular code blocks, and a live execution simulator.
           </p>
         </div>
 
         {/* 1-Click Industrial Architecture Presets */}
         <div>
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2 mb-2">
+          <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
             <Cpu className="h-4 w-4 text-violet-400" />
             <span>Select 1-Click System Architecture Blueprint Preset:</span>
           </label>
@@ -258,17 +258,17 @@ Structure your response cleanly using Markdown:
                 key={preset.id}
                 type="button"
                 onClick={() => handleSelectPreset(preset)}
-                className={`p-3 rounded-2xl border text-left transition-all space-y-1.5 relative overflow-hidden ${
+                className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
                   selectedPreset === preset.id
-                    ? 'bg-slate-900 border-violet-500 ring-2 ring-violet-500/50 shadow-xl'
-                    : 'bg-slate-950 border-slate-800/90 text-slate-400 hover:bg-slate-900'
+                    ? 'bg-surface-1 border-violet-500 ring-2 ring-violet-500/50 shadow-xl'
+                    : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
                 <div className="text-xs font-black text-white truncate">{preset.label}</div>
-                <p className="text-[10px] text-slate-400 line-clamp-2 leading-relaxed">
+                <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
                   {preset.description}
                 </p>
-                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-violet-300">
+                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-violet-300">
                   {preset.targetModel}
                 </span>
               </button>
@@ -280,40 +280,40 @@ Structure your response cleanly using Markdown:
         <form onSubmit={handleGenerate} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary block mb-1.5">
                 Target Niche / Topic Domain
               </label>
               <input
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
                 required
               />
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary block mb-1.5">
                 Target Audience / ICP
               </label>
               <input
                 type="text"
                 value={targetAudience}
                 onChange={(e) => setTargetAudience(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
                 required
               />
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-1.5">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary block mb-1.5">
                 Monetization & Profit Goal
               </label>
               <input
                 type="text"
                 value={monetizationGoal}
                 onChange={(e) => setMonetizationGoal(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
                 required
               />
             </div>
@@ -321,13 +321,13 @@ Structure your response cleanly using Markdown:
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-1">
                 Target AI Model Architecture
               </label>
               <select
                 value={targetModel}
                 onChange={(e) => setTargetModel(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
               >
                 <option value="Gemini 3.6 Flash">Gemini 3.6 Flash (High-Speed Autonomous Workflows)</option>
                 <option value="Gemini 3.1 Pro">Gemini 3.1 Pro (Complex Multi-Step Enterprise Reasoning)</option>
@@ -337,13 +337,13 @@ Structure your response cleanly using Markdown:
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-1">
                 Agent Identity & Tone Profile
               </label>
               <select
                 value={personaTone}
                 onChange={(e) => setPersonaTone(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
               >
                 <option value="Senior Systems Architect & Growth Hacker">Senior Systems Architect & Growth Hacker</option>
                 <option value="Ruthless Direct Response Copywriter">Ruthless Direct Response Copywriter</option>
@@ -356,7 +356,7 @@ Structure your response cleanly using Markdown:
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-2xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(212,175,55,0.3)] border-b-4 border-amber-700 transition-all flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+            className="w-full py-4 rounded-2xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(212,175,55,0.3)] border-b-4 border-amber-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
           >
             {loading ? (
               <>
@@ -375,15 +375,15 @@ Structure your response cleanly using Markdown:
 
       {/* BLUEPRINT DASHBOARD DISPLAY */}
       {blueprint && (
-        <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-6 shadow-2xl space-y-6">
+        <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-6">
           {/* Blueprint Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2">
                 <Terminal className="h-5 w-5 text-violet-400" />
                 <h3 className="text-xl font-extrabold text-white">{blueprint.title}</h3>
               </div>
-              <div className="flex items-center gap-3 mt-1.5 text-xs text-slate-400">
+              <div className="flex items-center gap-3 mt-1.5 text-xs text-ink-muted">
                 <span>Model Target: <strong className="text-violet-300 font-mono">{blueprint.targetModel}</strong></span>
                 {blueprint.complianceGrade && (
                   <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold">
@@ -402,7 +402,7 @@ Structure your response cleanly using Markdown:
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black flex items-center gap-2 shadow-lg shadow-amber-500/20 transition-colors cursor-pointer"
               >
                 {copied ? <Check className="h-4 w-4 text-slate-950" /> : <Copy className="h-4 w-4 text-slate-950" />}
                 <span>{copied ? 'Copied Master Prompt!' : 'Copy System Instruction'}</span>
@@ -410,20 +410,20 @@ Structure your response cleanly using Markdown:
 
               <button
                 onClick={handleDownloadTxt}
-                className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer"
+                className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <Download className="h-4 w-4 text-amber-400" />
+                <Download className="h-4 w-4 text-accent-amber-400" />
                 <span>Export .TXT</span>
               </button>
             </div>
           </div>
 
           {/* Blueprint Navigation Tabs */}
-          <div className="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-3">
+          <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-3">
             <button
               onClick={() => setActiveTab('prompt')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === 'prompt' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-slate-950 text-slate-400 hover:text-white'
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'prompt' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <FileCode2 className="h-4 w-4" />
@@ -432,18 +432,18 @@ Structure your response cleanly using Markdown:
 
             <button
               onClick={() => setActiveTab('architecture')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === 'architecture' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-slate-950 text-slate-400 hover:text-white'
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'architecture' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
-              <Layers className="h-4 w-4 text-amber-400" />
+              <Layers className="h-4 w-4 text-accent-amber-400" />
               <span>Modular Architecture</span>
             </button>
 
             <button
               onClick={() => setActiveTab('cot')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === 'cot' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-slate-950 text-slate-400 hover:text-white'
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'cot' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
@@ -452,8 +452,8 @@ Structure your response cleanly using Markdown:
 
             <button
               onClick={() => setActiveTab('constraints')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === 'constraints' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-slate-950 text-slate-400 hover:text-white'
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'constraints' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <ShieldAlert className="h-4 w-4 text-rose-400" />
@@ -462,8 +462,8 @@ Structure your response cleanly using Markdown:
 
             <button
               onClick={() => setActiveTab('simulator')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-                activeTab === 'simulator' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-slate-950 text-slate-400 hover:text-white'
+              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
+                activeTab === 'simulator' ? 'bg-amber-400 text-slate-950 shadow-lg shadow-amber-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <Play className="h-4 w-4 text-slate-950 fill-slate-950" />
@@ -475,14 +475,14 @@ Structure your response cleanly using Markdown:
           {activeTab === 'prompt' && (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                <label className="text-xs font-bold uppercase tracking-wider text-ink-muted">
                   Ready to paste into Gemini / AI Studio System Instruction Field:
                 </label>
                 {blueprint.variablePlaceholders && (
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
-                    <span className="text-amber-400">Placeholders:</span>
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-muted">
+                    <span className="text-accent-amber-400">Placeholders:</span>
                     {blueprint.variablePlaceholders.map((ph, idx) => (
-                      <span key={idx} className="bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800 text-amber-300">
+                      <span key={idx} className="bg-surface-0 px-1.5 py-0.5 rounded border border-white/10 text-accent-amber-300">
                         {ph}
                       </span>
                     ))}
@@ -490,7 +490,7 @@ Structure your response cleanly using Markdown:
                 )}
               </div>
 
-              <div className="bg-slate-950 rounded-2xl border border-slate-800 p-5 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto shadow-inner border-l-4 border-l-amber-500">
+              <div className="bg-surface-0 rounded-2xl border border-white/10 p-5 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto shadow-inner border-l-4 border-l-amber-500">
                 {blueprint.systemPrompt}
               </div>
             </div>
@@ -500,32 +500,32 @@ Structure your response cleanly using Markdown:
           {activeTab === 'architecture' && (
             <div className="space-y-4">
               <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <Layers className="h-4 w-4 text-amber-400" />
+                <Layers className="h-4 w-4 text-accent-amber-400" />
                 <span>Core System Architecture Modules</span>
               </h4>
 
               <div className="grid grid-cols-1 gap-4">
                 {blueprint.architectureModules && blueprint.architectureModules.length > 0 ? (
                   blueprint.architectureModules.map((mod, idx) => (
-                    <div key={idx} className="bg-slate-950 p-5 rounded-2xl border border-slate-800 space-y-2">
+                    <div key={idx} className="bg-surface-0 p-5 rounded-2xl border border-white/10 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-amber-400 uppercase tracking-wider">
+                        <span className="text-xs font-black text-accent-amber-400 uppercase tracking-wider">
                           Module 0{idx + 1}: {mod.moduleName}
                         </span>
-                        <span className="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-mono bg-surface-2 text-ink-secondary px-2 py-0.5 rounded">
                           Production Ready
                         </span>
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">{mod.description}</p>
+                      <p className="text-xs text-ink-secondary leading-relaxed">{mod.description}</p>
                       {mod.codeSnippet && (
-                        <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 font-mono text-[11px] text-cyan-300 overflow-x-auto">
+                        <div className="bg-surface-1 p-3 rounded-xl border border-white/10 font-mono text-[11px] text-cyan-300 overflow-x-auto">
                           {mod.codeSnippet}
                         </div>
                       )}
                     </div>
                   ))
                 ) : (
-                  <p className="text-xs text-slate-400">Standard system architecture loaded into system prompt.</p>
+                  <p className="text-xs text-ink-muted">Standard system architecture loaded into system prompt.</p>
                 )}
               </div>
             </div>
@@ -541,11 +541,11 @@ Structure your response cleanly using Markdown:
 
               <div className="space-y-3">
                 {blueprint.chainOfThoughtSteps.map((step, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 flex items-start gap-3">
+                  <div key={idx} className="p-4 rounded-2xl bg-surface-0 border border-white/10 flex items-start gap-3">
                     <span className="h-6 w-6 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold flex items-center justify-center shrink-0">
                       {idx + 1}
                     </span>
-                    <p className="text-xs text-slate-300 font-sans leading-relaxed pt-0.5">{step}</p>
+                    <p className="text-xs text-ink-secondary font-sans leading-relaxed pt-0.5">{step}</p>
                   </div>
                 ))}
               </div>
@@ -585,26 +585,26 @@ Structure your response cleanly using Markdown:
 
           {/* TAB 5: LIVE SYSTEM INSTRUCTION SIMULATOR */}
           {activeTab === 'simulator' && (
-            <div className="space-y-5 bg-slate-950 p-6 rounded-2xl border border-slate-800">
+            <div className="space-y-5 bg-surface-0 p-6 rounded-2xl border border-white/10">
               <div>
                 <h4 className="text-sm font-extrabold text-white flex items-center gap-2 mb-1">
-                  <Play className="h-4 w-4 text-amber-300 fill-amber-300" />
+                  <Play className="h-4 w-4 text-accent-amber-300 fill-amber-300" />
                   <span>Live Gemini Execution Playground</span>
                 </h4>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-ink-muted">
                   Input a test prompt below to test how Gemini 3.6 Flash responds when constrained by this exact Master System Instruction.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
+                <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block">
                   Test User Input Prompt:
                 </label>
                 <textarea
                   value={testInputPrompt}
                   onChange={(e) => setTestInputPrompt(e.target.value)}
                   rows={2}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500 font-sans"
+                  className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500 font-sans"
                   placeholder="e.g. Write a 30-second video hook for my SaaS launch"
                 />
               </div>
@@ -612,7 +612,7 @@ Structure your response cleanly using Markdown:
               <button
                 onClick={handleRunSimulator}
                 disabled={simulating || !testInputPrompt.trim()}
-                className="px-6 py-3 rounded-xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(212,175,55,0.4)] border-b-4 border-amber-700 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+                className="px-6 py-3 rounded-xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(212,175,55,0.4)] border-b-4 border-amber-700 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
               >
                 {simulating ? (
                   <>
@@ -635,14 +635,14 @@ Structure your response cleanly using Markdown:
               )}
 
               {simulatorResult && (
-                <div className="space-y-2 pt-2 border-t border-slate-800">
-                  <div className="flex items-center justify-between text-xs text-slate-400 font-mono">
+                <div className="space-y-2 pt-2 border-t border-white/10">
+                  <div className="flex items-center justify-between text-xs text-ink-muted font-mono">
                     <span className="text-emerald-400 font-bold flex items-center gap-1">
                       <CheckCircle className="h-3.5 w-3.5" />
                       <span>Live Model Output (Gemini 3.6 Flash):</span>
                     </span>
                   </div>
-                  <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 font-mono text-xs text-slate-200 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[350px]">
+                  <div className="bg-surface-1 rounded-xl border border-white/10 p-4 font-mono text-xs text-ink-secondary leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[350px]">
                     {simulatorResult}
                   </div>
                 </div>

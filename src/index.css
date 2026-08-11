@@ -1,28 +1,112 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
+
+/*
+ * Design tokens — single source of truth for the app's visual identity.
+ * See CLAUDE.md "Design System" for the rules these encode. Tailwind v4's
+ * @theme block registers these as real utility classes (bg-surface-2,
+ * text-accent-amber-400, font-display, shadow-elevated, ...) so components
+ * can pull from shared tokens instead of hand-writing arbitrary hex values.
+ *
+ * Color-safety: every value below is hex/rgb/hsl, never oklch()/color-mix()/
+ * lab() — html2canvas (src/utils/pdfExport.ts) can't parse those, see
+ * CLAUDE.md's "html2canvas / OKLCH color-safety rule".
+ */
+@theme {
+  /* Depth ladder: base page -> base card -> elevated -> floating/modal */
+  --color-surface-0: #080b11;
+  --color-surface-1: #0d1017;
+  --color-surface-2: #11141c;
+  --color-surface-3: #161a24;
+
+  /* Brand accents */
+  --color-accent-amber-300: #fcd34d;
+  --color-accent-amber-400: #fbbf24;
+  --color-accent-amber-500: #f59e0b;
+  --color-accent-amber-600: #d97706;
+  --color-accent-violet-400: #a78bfa;
+  --color-accent-violet-500: #8b5cf6;
+  --color-accent-violet-600: #7c3aed;
+
+  /* Text scale, derived from the existing #f1f5f9 base */
+  --color-ink-primary: #f1f5f9;
+  --color-ink-secondary: #cbd5e1;
+  --color-ink-muted: #7c869b;
+
+  /* Typography pairing: display/serif for headings, sans for body/UI */
+  --font-display: 'Newsreader', 'Playfair Display', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Layered, color-tinted shadows — replace flat shadow-md/shadow-2xl */
+  --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.4),
+    0 12px 32px -8px rgba(245, 158, 11, 0.12),
+    0 24px 64px -16px rgba(0, 0, 0, 0.55);
+  --shadow-floating: 0 2px 4px rgba(0, 0, 0, 0.45),
+    0 20px 48px -12px rgba(139, 92, 246, 0.16),
+    0 32px 80px -20px rgba(0, 0, 0, 0.6);
+  --shadow-glow-amber: 0 10px 40px rgba(245, 158, 11, 0.35);
+  --shadow-glow-violet: 0 10px 40px rgba(139, 92, 246, 0.35);
+}
 
 @layer base {
   html {
     color-scheme: dark;
   }
   body {
-    background-color: #080B11;
-    color: #f1f5f9;
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--color-surface-0);
+    color: var(--color-ink-primary);
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+  }
+  /* Without this, a click whose mousedown->mouseup has even a hair of
+     pointer drag (very common on trackpads) gets interpreted as a
+     text-selection gesture instead of a click - the button/card visually
+     highlights its label like a copy-selection and the onClick never
+     fires. Scoped to real buttons and this app's cursor-pointer
+     convention (used consistently for clickable divs/cards throughout),
+     so it doesn't touch legitimately selectable text (document content,
+     inputs/textareas, which aren't buttons and don't carry
+     cursor-pointer). */
+  button,
+  .cursor-pointer {
+    -webkit-user-select: none;
+    user-select: none;
   }
 }
 
-/* Enterprise Glassmorphism Utility */
+/* Enterprise Glassmorphism Utility. Only consumer today is the landing
+   page's CTA card (src/components/landing/LandingCTA.tsx), sitting over
+   the page-wide scroll video — kept deliberately light so the video reads
+   through, not just decoratively translucent. */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-elevated);
 }
 
 .bg-radial {
   background-image: radial-gradient(circle at center, var(--tw-gradient-stops));
+}
+
+/* Subtle grain/noise overlay for atmosphere on large surfaces (hero/landing
+   backgrounds). Usage: add class="grain-overlay" to a relatively-positioned
+   ancestor; this pseudo-element paints texture above it without extra DOM. */
+.grain-overlay {
+  position: relative;
+}
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Custom sleek scrollbar for enterprise UI */
@@ -31,7 +115,7 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #080b11;
+  background: var(--color-surface-0);
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
@@ -70,5 +154,3 @@
     page-break-inside: avoid !important;
   }
 }
-
-

@@ -212,7 +212,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+      <div className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-xs font-semibold text-rose-300 mb-2">
@@ -222,7 +222,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
               Real-Time 10-Topic Viral Pulse
             </h2>
-            <p className="text-sm text-slate-400 mt-1 max-w-2xl">
+            <p className="text-sm text-ink-muted mt-1 max-w-2xl">
               Tap into 10 real-time viral web trends, search spikes, and breaking industry discussions. Powered by Google Search Grounding to keep your content ahead of the algorithm curve.
             </p>
           </div>
@@ -231,9 +231,9 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
             <button
               onClick={() => handleFetchTrends()}
               disabled={loading}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 via-pink-600 to-violet-600 hover:from-rose-500 hover:to-violet-500 text-white font-bold text-xs shadow-lg shadow-rose-600/20 transition-all flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 via-pink-600 to-violet-600 hover:from-rose-500 hover:to-violet-500 text-white font-bold text-xs shadow-lg shadow-rose-600/20 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer"
             >
-              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-amber-300" /> : <Globe className="h-4 w-4 text-amber-300" />}
+              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-accent-amber-300" /> : <Globe className="h-4 w-4 text-accent-amber-300" />}
               <span>{loading ? 'Grounding 10 Live Web Trends...' : 'Scan Live Web Pulse (10 Topics)'}</span>
             </button>
           </div>
@@ -242,7 +242,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
         {/* Category Selector Pills (10 Options) */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block">
+            <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block">
               Select Trend Industry Sector (10 Niche Categories):
             </label>
             <span className="text-[11px] text-rose-400 font-medium">Click any to fetch 10 live trends</span>
@@ -252,10 +252,10 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
               <button
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
                   category === cat
                     ? 'bg-rose-500 text-white shadow-md shadow-rose-500/20'
-                    : 'bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800'
+                    : 'bg-surface-1 border border-white/10 text-ink-secondary hover:bg-surface-2'
                 }`}
               >
                 {cat}
@@ -274,13 +274,13 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                 value={customQuery}
                 onChange={(e) => setCustomQuery(e.target.value)}
                 placeholder="Search live topic on Google (e.g., 'SaaS marketing', 'AI video', 'Real Estate')..."
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500"
               />
             </div>
             <button
               onClick={() => handleFetchTrends()}
               disabled={loading}
-              className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition-all cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold transition-colors cursor-pointer"
             >
               Search Web
             </button>
@@ -293,7 +293,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
               placeholder="Filter these 10 loaded topics..."
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-violet-500"
+              className="w-full bg-surface-0 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-violet-500"
             />
           </div>
         </div>
@@ -308,8 +308,8 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
 
       {/* Real-time 10-Trend Cards */}
       <div className="space-y-4">
-        <div className="flex items-center justify-between text-xs text-slate-400">
-          <span className="font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+        <div className="flex items-center justify-between text-xs text-ink-muted">
+          <span className="font-bold text-ink-secondary uppercase tracking-wider flex items-center gap-2">
             <Flame className="h-4 w-4 text-rose-500" />
             <span>Spiking Viral Trends Radar ({displayedTrends.length} Loaded)</span>
           </span>
@@ -320,7 +320,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
           {displayedTrends.map((trend, idx) => (
             <div
               key={trend.id || idx}
-              className="bg-slate-900/90 rounded-2xl border border-slate-800 p-5 shadow-xl space-y-4 flex flex-col justify-between hover:border-rose-500/50 transition-all group relative"
+              className="bg-surface-1/90 rounded-2xl border border-white/10 p-5 shadow-xl space-y-4 flex flex-col justify-between hover:border-rose-500/50 transition-colors group relative"
             >
               <div className="space-y-3">
                 {/* Rank Badge & Metrics Header */}
@@ -329,13 +329,13 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                     <span className="px-2.5 py-0.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 font-extrabold text-xs">
                       #{idx + 1} Trend
                     </span>
-                    <span className="px-2 py-0.5 rounded-full bg-slate-950 border border-slate-800 text-rose-400 font-mono text-[10px] font-bold flex items-center gap-1">
+                    <span className="px-2 py-0.5 rounded-full bg-surface-0 border border-white/10 text-rose-400 font-mono text-[10px] font-bold flex items-center gap-1">
                       <TrendingUp className="h-3 w-3 text-rose-400" />
                       {trend.searchVolumeGrowth}
                     </span>
                   </div>
 
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="text-[10px] font-bold text-ink-muted uppercase tracking-wide bg-surface-0 px-2 py-0.5 rounded border border-white/10">
                     {trend.platformFocus}
                   </span>
                 </div>
@@ -348,10 +348,10 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                 {/* Virality Score Bar */}
                 <div className="space-y-1">
                   <div className="flex justify-between text-[10px] font-bold">
-                    <span className="text-slate-400">Virality Index:</span>
+                    <span className="text-ink-muted">Virality Index:</span>
                     <span className="text-rose-400 font-mono">{trend.viralityScore}/100</span>
                   </div>
-                  <div className="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden">
+                  <div className="h-1.5 w-full bg-surface-0 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-amber-400 rounded-full"
                       style={{ width: `${trend.viralityScore}%` }}
@@ -360,7 +360,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                 </div>
 
                 {/* Grounded Summary */}
-                <p className="text-xs text-slate-300 leading-relaxed bg-slate-950 p-3 rounded-xl border border-slate-800/80">
+                <p className="text-xs text-ink-secondary leading-relaxed bg-surface-0 p-3 rounded-xl border border-white/10">
                   {trend.summary}
                 </p>
 
@@ -395,7 +395,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                 {/* Hashtags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
                   {trend.recommendedHashtags?.map((tag, tIdx) => (
-                    <span key={tIdx} className="px-2 py-0.5 rounded bg-slate-800 text-slate-400 text-[10px] font-mono">
+                    <span key={tIdx} className="px-2 py-0.5 rounded bg-surface-2 text-ink-muted text-[10px] font-mono">
                       {tag}
                     </span>
                   ))}
@@ -406,9 +406,9 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
               {onSelectTrendForCampaign && (
                 <button
                   onClick={() => onSelectTrendForCampaign(trend.topic)}
-                  className="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-rose-600 text-white font-bold text-xs transition-all flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-rose-600/20 cursor-pointer mt-3"
+                  className="w-full py-2.5 rounded-xl bg-surface-2 hover:bg-rose-600 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-rose-600/20 cursor-pointer mt-3"
                 >
-                  <Zap className="h-3.5 w-3.5 text-amber-300" />
+                  <Zap className="h-3.5 w-3.5 text-accent-amber-300" />
                   <span>Generate Campaign for this Trend</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>

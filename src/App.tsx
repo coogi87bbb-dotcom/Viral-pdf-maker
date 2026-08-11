@@ -44,7 +44,7 @@ import { OWNER_EMAIL } from './lib/firebase';
 type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'owner-admin';
 
 function MainWorkspace() {
-  const { user, userProfile, logout, loading } = useAuth();
+  const { user, userProfile, logout, loading, authError } = useAuth();
   const [appMode, setAppMode] = useState<AppMode>('pdf-studio');
   const [showLanding, setShowLanding] = useState(true);
 
@@ -181,14 +181,14 @@ function MainWorkspace() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 text-slate-100">
+      <div className="min-h-screen bg-surface-0 flex flex-col items-center justify-center p-4 text-ink-primary">
         <div className="flex flex-col items-center gap-4">
-          <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-500 p-0.5 animate-pulse flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.5)]">
-            <div className="h-full w-full bg-slate-950 rounded-[14px] flex items-center justify-center">
-              <Flame className="h-6 w-6 text-amber-400" />
+          <div className="h-12 w-12 rounded-2xl bg-gradient-to-tr from-accent-amber-300 via-accent-amber-400 to-accent-amber-500 p-0.5 animate-pulse flex items-center justify-center shadow-[var(--shadow-glow-amber)]">
+            <div className="h-full w-full bg-surface-0 rounded-[14px] flex items-center justify-center">
+              <Flame className="h-6 w-6 text-accent-amber-400" />
             </div>
           </div>
-          <p className="text-xs font-mono text-slate-400">Loading Pro Creator Platform Workspace...</p>
+          <p className="text-xs font-mono text-ink-muted">Loading Pro Creator Platform Workspace...</p>
         </div>
       </div>
     );
@@ -196,65 +196,70 @@ function MainWorkspace() {
 
   // Signed-out visitors see the marketing landing page first; clicking
   // "Get Started"/"Sign In" there flips to the existing auth gate below.
+  // authError bypasses that (even though showLanding defaults back to true
+  // on every fresh page load, which is exactly what happens after a full
+  // signInWithRedirect() round-trip) — otherwise a failed redirect sign-in
+  // would land back on the landing page with the error set but nothing on
+  // screen to show it, since only AuthModal renders authError.
   if (!user) {
-    if (showLanding) {
+    if (showLanding && !authError) {
       return <LandingPage onGetStarted={() => setShowLanding(false)} />;
     }
     return <AuthModal />;
   }
 
   return (
-    <div className="min-h-screen bg-[#08090d] text-slate-100 font-sans selection:bg-amber-400 selection:text-slate-950 flex flex-col relative overflow-x-hidden">
+    <div className="min-h-screen bg-surface-0 text-ink-primary font-sans selection:bg-accent-amber-400 selection:text-slate-950 flex flex-col relative overflow-x-hidden">
       {/* Global 3D Liquid Gold & Metallic Silver Mouse-Tracking Background */}
       <Studio3DBackground intensity="medium" className="fixed inset-0 z-0 opacity-90" />
 
       {/* GLOBAL TOP NAVIGATION BAR */}
-      <header className="sticky top-0 z-50 bg-[#0c0e14]/90 backdrop-blur-xl border-b border-slate-800/80 px-4 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+      <header className="sticky top-0 z-50 bg-surface-1/90 backdrop-blur-xl border-b border-white/10 px-4 py-2.5 shadow-[var(--shadow-elevated)]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
           {/* Logo & Platform Title */}
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 p-0.5 shadow-lg shadow-amber-500/15 border border-amber-400/30">
-              <div className="h-full w-full bg-[#090b10] rounded-[10px] flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-amber-400" />
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-accent-amber-400 via-accent-amber-500 to-accent-amber-600 p-0.5 shadow-[var(--shadow-glow-amber)] border border-accent-amber-400/30">
+              <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-accent-amber-400" />
               </div>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-sm tracking-wider text-white uppercase">VIRAL STUDIO OS</span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-300 font-bold border border-amber-500/20">
+                <span className="font-extrabold text-sm tracking-wider text-white uppercase font-display">VIRAL STUDIO OS</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-accent-amber-500/10 text-accent-amber-300 font-bold border border-accent-amber-500/20">
                   3D EXECUTIVE
                 </span>
               </div>
-              <p className="text-[10px] text-slate-400 font-normal">High-DPI Publishing, 3D Book Mockups & Creator Workspaces</p>
+              <p className="text-[10px] text-ink-muted font-normal">High-DPI Publishing, 3D Book Mockups & Creator Workspaces</p>
             </div>
           </div>
 
           {/* MAIN APP MODE SWITCHER TABS - EXECUTIVE STYLING */}
-          <div className="flex flex-wrap items-center justify-center bg-[#090b10]/90 border border-slate-800 p-1 rounded-xl gap-1 shadow-inner">
+          <div className="flex flex-wrap items-center justify-center bg-surface-0/90 border border-white/10 p-1 rounded-xl gap-1 shadow-inner">
             <button
               onClick={() => setAppMode('pdf-studio')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                 appMode === 'pdf-studio'
-                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/80'
+                  ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
               }`}
             >
-              <FileText className={`h-3.5 w-3.5 ${appMode === 'pdf-studio' ? 'text-slate-950' : 'text-amber-400'}`} />
+              <FileText className={`h-3.5 w-3.5 ${appMode === 'pdf-studio' ? 'text-slate-950' : 'text-accent-amber-400'}`} />
               <span>PDF & Mockup Studio</span>
             </button>
 
             <button
               onClick={() => setAppMode('viral-os')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                 appMode === 'viral-os'
-                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/80'
+                  ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
               }`}
             >
-              <Flame className={`h-3.5 w-3.5 ${appMode === 'viral-os' ? 'text-slate-950' : 'text-amber-400'}`} />
+              <Flame className={`h-3.5 w-3.5 ${appMode === 'viral-os' ? 'text-slate-950' : 'text-accent-amber-400'}`} />
               <span>Viral OS Engine</span>
               <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'viral-os' ? 'bg-slate-950 text-amber-300' : 'bg-slate-900 text-amber-400 border border-slate-800'
+                appMode === 'viral-os' ? 'bg-slate-950 text-accent-amber-300' : 'bg-surface-1 text-accent-amber-400 border border-white/10'
               }`}>
                 13 AI Tools
               </span>
@@ -262,16 +267,16 @@ function MainWorkspace() {
 
             <button
               onClick={() => setAppMode('gig-scale')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                 appMode === 'gig-scale'
-                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/80'
+                  ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
               }`}
             >
-              <Zap className={`h-3.5 w-3.5 ${appMode === 'gig-scale' ? 'text-slate-950' : 'text-amber-400'}`} />
+              <Zap className={`h-3.5 w-3.5 ${appMode === 'gig-scale' ? 'text-slate-950' : 'text-accent-amber-400'}`} />
               <span>GigScale Engine</span>
               <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'gig-scale' ? 'bg-slate-950 text-amber-300' : 'bg-slate-900 text-slate-400 border border-slate-800'
+                appMode === 'gig-scale' ? 'bg-slate-950 text-accent-amber-300' : 'bg-surface-1 text-ink-muted border border-white/10'
               }`}>
                 Agency OS
               </span>
@@ -279,16 +284,16 @@ function MainWorkspace() {
 
             <button
               onClick={() => setAppMode('digital-kit')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                 appMode === 'digital-kit'
-                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/80'
+                  ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
               }`}
             >
-              <Package className={`h-3.5 w-3.5 ${appMode === 'digital-kit' ? 'text-slate-950' : 'text-amber-400'}`} />
+              <Package className={`h-3.5 w-3.5 ${appMode === 'digital-kit' ? 'text-slate-950' : 'text-accent-amber-400'}`} />
               <span>Digital Kit Studio</span>
               <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'digital-kit' ? 'bg-slate-950 text-amber-300' : 'bg-slate-900 text-slate-400 border border-slate-800'
+                appMode === 'digital-kit' ? 'bg-slate-950 text-accent-amber-300' : 'bg-surface-1 text-ink-muted border border-white/10'
               }`}>
                 Kit Builder
               </span>
@@ -296,16 +301,16 @@ function MainWorkspace() {
 
             <button
               onClick={() => setAppMode('agent-ops')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                 appMode === 'agent-ops'
-                  ? 'bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20'
-                  : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/80'
+                  ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
               }`}
             >
-              <Bot className={`h-3.5 w-3.5 ${appMode === 'agent-ops' ? 'text-slate-950' : 'text-amber-400'}`} />
+              <Bot className={`h-3.5 w-3.5 ${appMode === 'agent-ops' ? 'text-slate-950' : 'text-accent-amber-400'}`} />
               <span>AI Agent Ops</span>
               <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'agent-ops' ? 'bg-slate-950 text-amber-300' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                appMode === 'agent-ops' ? 'bg-slate-950 text-accent-amber-300' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
               }`}>
                 Self-Healing
               </span>
@@ -314,13 +319,13 @@ function MainWorkspace() {
             {user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() && (
               <button
                 onClick={() => setAppMode('owner-admin')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
                   appMode === 'owner-admin'
-                    ? 'bg-amber-400 text-slate-950 shadow-md'
-                    : 'bg-slate-900 text-amber-300 border border-amber-500/30 hover:bg-slate-800'
+                    ? 'bg-accent-amber-400 text-slate-950 shadow-[var(--shadow-glow-amber)]'
+                    : 'bg-surface-1 text-accent-amber-300 border border-accent-amber-500/30 hover:bg-surface-2'
                 }`}
               >
-                <Crown className="h-3.5 w-3.5 text-amber-400" />
+                <Crown className="h-3.5 w-3.5 text-accent-amber-400" />
                 <span>Master Admin</span>
               </button>
             )}
@@ -329,10 +334,10 @@ function MainWorkspace() {
           {/* User Account Session & Sign Out */}
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-semibold text-slate-200 truncate max-w-[130px]">
+              <span className="text-xs font-semibold text-ink-secondary truncate max-w-[130px]">
                 {userProfile?.displayName || user.displayName || user.email?.split('@')[0] || 'VIP Member'}
               </span>
-              <span className="text-[10px] text-amber-400/90 font-mono flex items-center justify-end gap-1">
+              <span className="text-[10px] text-accent-amber-400/90 font-mono flex items-center justify-end gap-1">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Connected</span>
               </span>
@@ -341,9 +346,9 @@ function MainWorkspace() {
             <button
               onClick={logout}
               title="Sign Out of Creator Platform"
-              className="px-3 py-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-surface-1/80 hover:bg-surface-2 border border-white/10 text-ink-secondary hover:text-white transition-colors active:scale-[0.98] flex items-center gap-1.5 text-xs font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
             >
-              <LogOut className="h-3.5 w-3.5 text-slate-400" />
+              <LogOut className="h-3.5 w-3.5 text-ink-muted" />
               <span className="hidden md:inline font-sans text-xs">Sign Out</span>
             </button>
           </div>
@@ -383,7 +388,7 @@ function MainWorkspace() {
             {activeTab === 'canvas' ? (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1 w-full">
                 {/* Left Controls Panel */}
-                <div className={`${isSplitScreen ? 'lg:col-span-4 xl:col-span-4 2xl:col-span-3' : 'hidden'} transition-all`}>
+                <div className={`${isSplitScreen ? 'lg:col-span-4 xl:col-span-4 2xl:col-span-3' : 'hidden'}`}>
                   <MotionPanel3D delay={0.1} tiltX={8}>
                     <StudioControls
                       document={document}
@@ -403,7 +408,7 @@ function MainWorkspace() {
                 </div>
 
                 {/* Right Interactive Canvas Preview Panel */}
-                <div className={`${isSplitScreen ? 'lg:col-span-8 xl:col-span-8 2xl:col-span-9' : 'lg:col-span-12'} flex flex-col transition-all`}>
+                <div className={`${isSplitScreen ? 'lg:col-span-8 xl:col-span-8 2xl:col-span-9' : 'lg:col-span-12'} flex flex-col`}>
                   <MotionPanel3D delay={0.2} tiltX={10}>
                     <ScaledCanvasStage
                       document={document}

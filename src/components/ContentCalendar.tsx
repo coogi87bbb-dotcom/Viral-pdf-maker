@@ -447,7 +447,7 @@ export const ContentCalendar: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-300 mb-2">
@@ -460,7 +460,7 @@ export const ContentCalendar: React.FC = () => {
                 2x Posts / Day
               </span>
             </h2>
-            <p className="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">
+            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
               Programmatic distribution queue enforcing <strong>2 posts per day</strong> (Morning Peak & Evening Peak) across X, Instagram, TikTok, LinkedIn, Pinterest, Threads, and Facebook. Features 1-click AI weekly campaign generation, live post copy enhancer, and multi-format CSV/Markdown exports.
             </p>
           </div>
@@ -469,15 +469,15 @@ export const ContentCalendar: React.FC = () => {
           <div className="flex flex-wrap items-center gap-2.5 shrink-0">
             <button
               onClick={() => setShowGeneratorBar(!showGeneratorBar)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black shadow-lg shadow-emerald-600/25 transition-all flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black shadow-lg shadow-emerald-600/25 transition-colors flex items-center gap-2"
             >
-              <Wand2 className="h-4 w-4 text-amber-300" />
+              <Wand2 className="h-4 w-4 text-accent-amber-300" />
               <span>1-Click AI 2x/Day Generator</span>
             </button>
 
             <button
               onClick={handleExportCSV}
-              className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors"
             >
               {exported ? <Check className="h-4 w-4 text-emerald-400" /> : <Download className="h-4 w-4 text-emerald-400" />}
               <span>{exported ? 'CSV Exported' : 'Export CSV (Buffer)'}</span>
@@ -485,7 +485,7 @@ export const ContentCalendar: React.FC = () => {
 
             <button
               onClick={handleExportMarkdown}
-              className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors"
             >
               {exportedMD ? <Check className="h-4 w-4 text-emerald-400" /> : <FileText className="h-4 w-4 text-fuchsia-400" />}
               <span>{exportedMD ? 'Brief Exported' : 'Export MD Brief'}</span>
@@ -493,7 +493,7 @@ export const ContentCalendar: React.FC = () => {
 
             <button
               onClick={handleCopyTextDigest}
-              className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all"
+              className="px-3.5 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors"
             >
               {copiedDigest ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-cyan-400" />}
               <span>{copiedDigest ? 'Copied' : 'Copy All Text'}</span>
@@ -503,7 +503,7 @@ export const ContentCalendar: React.FC = () => {
 
         {/* 1-CLICK AI CALENDAR GENERATOR COLLAPSIBLE BAR */}
         {showGeneratorBar && (
-          <div className="bg-slate-950 p-5 rounded-2xl border border-emerald-500/30 space-y-4 animate-fadeIn">
+          <div className="bg-surface-0 p-5 rounded-2xl border border-emerald-500/30 space-y-4 animate-fadeIn">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-extrabold text-emerald-400 uppercase tracking-wider flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-emerald-400" />
@@ -516,7 +516,7 @@ export const ContentCalendar: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block mb-1">
+                <label className="text-[11px] font-bold text-ink-secondary uppercase tracking-wider block mb-1">
                   Campaign Topic / Brand Niche:
                 </label>
                 <input
@@ -524,18 +524,18 @@ export const ContentCalendar: React.FC = () => {
                   value={campaignNiche}
                   onChange={(e) => setCampaignNiche(e.target.value)}
                   placeholder="e.g. AI Automation & SaaS Growth"
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-emerald-500 font-sans"
+                  className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-emerald-500 font-sans"
                 />
               </div>
 
               <div>
-                <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block mb-1">
+                <label className="text-[11px] font-bold text-ink-secondary uppercase tracking-wider block mb-1">
                   Brand Voice Profile:
                 </label>
                 <select
                   value={brandVoice}
                   onChange={(e) => setBrandVoice(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-emerald-500 font-semibold"
+                  className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-emerald-500 font-semibold"
                 >
                   <option value="Bold Direct Response & High Authority">Bold Direct Response & High Authority</option>
                   <option value="Educational & Step-by-Step Framework">Educational & Step-by-Step Framework</option>
@@ -548,16 +548,16 @@ export const ContentCalendar: React.FC = () => {
             <button
               onClick={handleGenerateAICalendar}
               disabled={generatingCalendar}
-              className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs shadow-lg shadow-emerald-600/20 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {generatingCalendar ? (
                 <>
-                  <RefreshCw className="h-4 w-4 animate-spin text-amber-300" />
+                  <RefreshCw className="h-4 w-4 animate-spin text-accent-amber-300" />
                   <span>Synthesizing 14 Platform-Optimized Posts (2x / Day)...</span>
                 </>
               ) : (
                 <>
-                  <Zap className="h-4 w-4 text-amber-300 fill-amber-300" />
+                  <Zap className="h-4 w-4 text-accent-amber-300 fill-amber-300" />
                   <span>Generate Complete 14-Post Weekly Matrix Now</span>
                 </>
               )}
@@ -566,10 +566,10 @@ export const ContentCalendar: React.FC = () => {
         )}
 
         {/* CHANNEL BEST TIME & FILTER BAR */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-800/80">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-white/10">
           {/* Platform Filter Buttons */}
           <div className="flex flex-wrap items-center gap-1.5">
-            <span className="text-xs font-bold text-slate-400 mr-1 flex items-center gap-1">
+            <span className="text-xs font-bold text-ink-muted mr-1 flex items-center gap-1">
               <Filter className="h-3.5 w-3.5" />
               <span>Filter:</span>
             </span>
@@ -578,10 +578,10 @@ export const ContentCalendar: React.FC = () => {
               <button
                 key={plat}
                 onClick={() => setSelectedPlatformFilter(plat)}
-                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase transition-all flex items-center gap-1 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-bold uppercase transition-colors flex items-center gap-1 ${
                   selectedPlatformFilter === plat
                     ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                    : 'bg-slate-950 text-slate-400 hover:text-white border border-slate-800'
+                    : 'bg-surface-0 text-ink-muted hover:text-white border border-white/10'
                 }`}
               >
                 {plat !== 'all' && getPlatformIcon(plat as SocialPlatform)}
@@ -592,7 +592,7 @@ export const ContentCalendar: React.FC = () => {
 
           {/* Status Filter */}
           <div className="flex items-center gap-3 text-xs font-mono">
-            <span className="text-slate-400">
+            <span className="text-ink-muted">
               Total Queue: <strong className="text-emerald-400">{filteredEvents.length} Slots</strong>
             </span>
             <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-bold">
@@ -610,20 +610,20 @@ export const ContentCalendar: React.FC = () => {
           const eveningEvents = dayEvents.filter((e) => e.slot === 'Evening Peak');
 
           return (
-            <div key={day} className="bg-slate-900/90 rounded-2xl border border-slate-800 p-3 space-y-3 flex flex-col min-h-[480px]">
+            <div key={day} className="bg-surface-1/90 rounded-2xl border border-white/10 p-3 space-y-3 flex flex-col min-h-[480px]">
               {/* Day Column Header */}
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+              <div className="flex items-center justify-between border-b border-white/10 pb-2">
                 <span className="text-xs font-black text-white uppercase">{day}</span>
-                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-800 text-emerald-400">
+                <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-surface-2 text-emerald-400">
                   {dayEvents.length}/2 Posts
                 </span>
               </div>
 
               {/* MORNING PEAK SLOT CONTAINER */}
               <div className="space-y-2 flex-1">
-                <div className="flex items-center justify-between text-[10px] font-mono font-extrabold text-amber-400 bg-amber-500/10 px-2 py-1 rounded border border-amber-500/20">
+                <div className="flex items-center justify-between text-[10px] font-mono font-extrabold text-accent-amber-400 bg-accent-amber-500/10 px-2 py-1 rounded border border-amber-500/20">
                   <span className="flex items-center gap-1">
-                    <Sun className="h-3 w-3 text-amber-400" />
+                    <Sun className="h-3 w-3 text-accent-amber-400" />
                     <span>MORNING SLOT 1</span>
                   </span>
                   <span>7:30 - 9:00 AM</span>
@@ -636,7 +636,7 @@ export const ContentCalendar: React.FC = () => {
                       <div
                         key={evt.id}
                         onClick={() => { setActiveModalEvent(evt); setIsEditing(true); }}
-                        className={`p-2.5 rounded-xl border text-xs space-y-2 transition-all cursor-pointer hover:scale-[1.02] relative group ${platConfig.bgColor} ${platConfig.borderColor}`}
+                        className={`p-2.5 rounded-xl border text-xs space-y-2 transition-colors cursor-pointer hover:scale-[1.02] relative group ${platConfig.bgColor} ${platConfig.borderColor}`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
@@ -658,12 +658,12 @@ export const ContentCalendar: React.FC = () => {
                           {evt.title}
                         </p>
 
-                        <div className="flex items-center justify-between text-[9px] text-slate-400 pt-1 border-t border-slate-800/40 font-mono">
+                        <div className="flex items-center justify-between text-[9px] text-ink-muted pt-1 border-t border-white/10 font-mono">
                           <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3 text-amber-400" />
+                            <Clock className="h-3 w-3 text-accent-amber-400" />
                             {evt.time}
                           </span>
-                          <span className="text-slate-300 font-bold">{evt.mediaType || 'Post'}</span>
+                          <span className="text-ink-secondary font-bold">{evt.mediaType || 'Post'}</span>
                         </div>
                       </div>
                     );
@@ -671,7 +671,7 @@ export const ContentCalendar: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => handleAddSlotPost(day, 'Morning Peak')}
-                    className="w-full py-3 rounded-xl border border-dashed border-slate-800 hover:border-amber-500/50 text-[10px] font-bold text-slate-500 hover:text-amber-400 transition-all flex items-center justify-center gap-1"
+                    className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-amber-500/50 text-[10px] font-bold text-slate-500 hover:text-accent-amber-400 transition-colors flex items-center justify-center gap-1"
                   >
                     <Plus className="h-3 w-3" />
                     <span>Add Morning Post</span>
@@ -680,7 +680,7 @@ export const ContentCalendar: React.FC = () => {
               </div>
 
               {/* EVENING PEAK SLOT CONTAINER */}
-              <div className="space-y-2 flex-1 pt-2 border-t border-slate-800/80">
+              <div className="space-y-2 flex-1 pt-2 border-t border-white/10">
                 <div className="flex items-center justify-between text-[10px] font-mono font-extrabold text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded border border-indigo-500/20">
                   <span className="flex items-center gap-1">
                     <Moon className="h-3 w-3 text-indigo-400" />
@@ -696,7 +696,7 @@ export const ContentCalendar: React.FC = () => {
                       <div
                         key={evt.id}
                         onClick={() => { setActiveModalEvent(evt); setIsEditing(true); }}
-                        className={`p-2.5 rounded-xl border text-xs space-y-2 transition-all cursor-pointer hover:scale-[1.02] relative group ${platConfig.bgColor} ${platConfig.borderColor}`}
+                        className={`p-2.5 rounded-xl border text-xs space-y-2 transition-colors cursor-pointer hover:scale-[1.02] relative group ${platConfig.bgColor} ${platConfig.borderColor}`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-1.5">
@@ -716,12 +716,12 @@ export const ContentCalendar: React.FC = () => {
                           {evt.title}
                         </p>
 
-                        <div className="flex items-center justify-between text-[9px] text-slate-400 pt-1 border-t border-slate-800/40 font-mono">
+                        <div className="flex items-center justify-between text-[9px] text-ink-muted pt-1 border-t border-white/10 font-mono">
                           <span className="flex items-center gap-1">
                             <Clock className="h-3 w-3 text-indigo-400" />
                             {evt.time}
                           </span>
-                          <span className="text-slate-300 font-bold">{evt.mediaType || 'Post'}</span>
+                          <span className="text-ink-secondary font-bold">{evt.mediaType || 'Post'}</span>
                         </div>
                       </div>
                     );
@@ -729,7 +729,7 @@ export const ContentCalendar: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => handleAddSlotPost(day, 'Evening Peak')}
-                    className="w-full py-3 rounded-xl border border-dashed border-slate-800 hover:border-indigo-500/50 text-[10px] font-bold text-slate-500 hover:text-indigo-400 transition-all flex items-center justify-center gap-1"
+                    className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-indigo-500/50 text-[10px] font-bold text-slate-500 hover:text-indigo-400 transition-colors flex items-center justify-center gap-1"
                   >
                     <Plus className="h-3 w-3" />
                     <span>Add Evening Post</span>
@@ -744,8 +744,8 @@ export const ContentCalendar: React.FC = () => {
       {/* POST DETAIL & AI COPY EDIT MODAL */}
       {activeModalEvent && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-2xl w-full p-6 space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 {getPlatformIcon(activeModalEvent.platform)}
                 <h3 className="text-lg font-extrabold text-white">
@@ -754,7 +754,7 @@ export const ContentCalendar: React.FC = () => {
               </div>
               <button
                 onClick={() => setActiveModalEvent(null)}
-                className="text-slate-400 hover:text-white p-1 rounded-lg bg-slate-800"
+                className="text-ink-muted hover:text-white p-1 rounded-lg bg-surface-2"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -763,16 +763,16 @@ export const ContentCalendar: React.FC = () => {
             <div className="space-y-4">
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                  <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider">
                     Post Headline / Hook Title:
                   </label>
                   <button
                     type="button"
                     onClick={handleEnhanceActivePost}
                     disabled={generatingCopy}
-                    className="text-xs text-amber-300 font-bold hover:text-amber-200 flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
+                    className="text-xs text-accent-amber-300 font-bold hover:text-amber-200 flex items-center gap-1 bg-accent-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
                   >
-                    {generatingCopy ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 text-amber-400" />}
+                    {generatingCopy ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 text-accent-amber-400" />}
                     <span>✨ AI Sparkle Write Caption</span>
                   </button>
                 </div>
@@ -780,19 +780,19 @@ export const ContentCalendar: React.FC = () => {
                   type="text"
                   value={activeModalEvent.title}
                   onChange={(e) => setActiveModalEvent({ ...activeModalEvent, title: e.target.value })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                  <label className="text-[11px] font-bold text-ink-muted uppercase tracking-wider block mb-1">
                     Social Platform
                   </label>
                   <select
                     value={activeModalEvent.platform}
                     onChange={(e: any) => setActiveModalEvent({ ...activeModalEvent, platform: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-xs font-semibold"
+                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-white text-xs font-semibold"
                   >
                     <option value="x">X (Twitter)</option>
                     <option value="instagram">Instagram</option>
@@ -805,25 +805,25 @@ export const ContentCalendar: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                  <label className="text-[11px] font-bold text-ink-muted uppercase tracking-wider block mb-1">
                     Scheduled Time
                   </label>
                   <input
                     type="text"
                     value={activeModalEvent.time}
                     onChange={(e) => setActiveModalEvent({ ...activeModalEvent, time: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-xs font-mono"
+                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-white text-xs font-mono"
                   />
                 </div>
 
                 <div>
-                  <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                  <label className="text-[11px] font-bold text-ink-muted uppercase tracking-wider block mb-1">
                     Media Format
                   </label>
                   <select
                     value={activeModalEvent.mediaType || 'Carousel Deck'}
                     onChange={(e: any) => setActiveModalEvent({ ...activeModalEvent, mediaType: e.target.value })}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-white text-xs font-semibold"
+                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-white text-xs font-semibold"
                   >
                     <option value="Video Reel">Video Reel</option>
                     <option value="Carousel Deck">Carousel Deck</option>
@@ -835,7 +835,7 @@ export const ContentCalendar: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1">
+                <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block mb-1">
                   Full Caption & Post Body Copy:
                 </label>
                 <textarea
@@ -843,27 +843,27 @@ export const ContentCalendar: React.FC = () => {
                   onChange={(e) => setActiveModalEvent({ ...activeModalEvent, caption: e.target.value })}
                   rows={5}
                   placeholder="Full post text..."
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-white text-xs font-sans focus:outline-none focus:border-emerald-500 leading-relaxed"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3.5 text-white text-xs font-sans focus:outline-none focus:border-emerald-500 leading-relaxed"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-1">
+                <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block mb-1">
                   Hashtags (Space separated):
                 </label>
                 <input
                   type="text"
                   value={(activeModalEvent.hashtags || []).join(' ')}
                   onChange={(e) => setActiveModalEvent({ ...activeModalEvent, hashtags: e.target.value.split(' ') })}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs font-mono text-emerald-400 focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-xs font-mono text-emerald-400 focus:outline-none focus:border-emerald-500"
                 />
               </div>
             </div>
 
-            <div className="flex items-center justify-end gap-3 pt-3 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
               <button
                 onClick={() => setActiveModalEvent(null)}
-                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-bold hover:bg-slate-700"
+                className="px-4 py-2 rounded-xl bg-surface-2 text-ink-secondary text-xs font-bold hover:bg-slate-700"
               >
                 Cancel
               </button>
