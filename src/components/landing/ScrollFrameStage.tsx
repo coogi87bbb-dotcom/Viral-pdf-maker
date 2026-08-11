@@ -4,12 +4,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
-// Real video-frame sequence: 144 frames extracted at the source video's
-// native 24fps/6s length via ffmpeg (`fps=24,scale=720:-1`, webp q80) into
-// src/assets/landing/frames/. import.meta.glob pulls every frame in as a
-// Vite-fingerprinted URL, eagerly (this hero needs them all before the
-// scroll-scrub can start), sorted by filename so index order matches
-// playback order (frame_0001.webp, frame_0002.webp, ...).
+// Real video-frame sequence: 72 frames extracted at 12fps from the 6s
+// source video via ffmpeg, with the studio backdrop color-keyed to
+// transparent so the app's own dark gradient/blobs show through instead of
+// a flat white box (`fps=12,colorkey=0xE3E3E3:0.15:0.06,format=rgba,
+// scale=720:-1`, webp q80 — alpha roughly doubles per-frame cost vs an
+// opaque encode, so fps is halved from a first 24fps pass to keep total
+// payload in the same ~9-10MB ballpark) into src/assets/landing/frames/.
+// import.meta.glob pulls every frame in as a Vite-fingerprinted URL,
+// eagerly (this hero needs them all before the scroll-scrub can start),
+// sorted by filename so index order matches playback order
+// (frame_0001.webp, frame_0002.webp, ...).
 const frameModules = import.meta.glob<string>('../../assets/landing/frames/*.webp', {
   eager: true,
   import: 'default',
