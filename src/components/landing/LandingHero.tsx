@@ -25,7 +25,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
         className="pointer-events-none absolute inset-0 z-[5]"
         style={{
           background:
-            'linear-gradient(90deg, rgba(8,11,17,0.96) 0%, rgba(8,11,17,0.88) 45%, rgba(8,11,17,0.4) 70%, rgba(8,11,17,0) 100%)',
+            'linear-gradient(90deg, rgba(8,11,17,0.55) 0%, rgba(8,11,17,0.38) 45%, rgba(8,11,17,0.12) 70%, rgba(8,11,17,0) 100%)',
         }}
       />
 

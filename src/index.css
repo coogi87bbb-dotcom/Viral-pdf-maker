@@ -63,11 +63,14 @@
   }
 }
 
-/* Enterprise Glassmorphism Utility */
+/* Enterprise Glassmorphism Utility. Only consumer today is the landing
+   page's CTA card (src/components/landing/LandingCTA.tsx), sitting over
+   the page-wide scroll video — kept deliberately light so the video reads
+   through, not just decoratively translucent. */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 23, 42, 0.28);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow-elevated);
 }

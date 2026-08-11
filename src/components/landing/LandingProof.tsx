@@ -12,8 +12,8 @@ export const LandingProof: React.FC = () => {
   return (
     <section className="relative py-4 sm:py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <MotionPanel3D tiltX={6} className="w-full">
-          <div className="bg-slate-900/90 rounded-2xl border border-slate-800 p-6 sm:p-8 shadow-xl">
+        <MotionPanel3D tiltX={6} className="w-full" frosted={false}>
+          <div className="bg-surface-1/30 backdrop-blur-xl backdrop-saturate-150 rounded-2xl border border-white/10 p-6 sm:p-8 shadow-xl">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
               {STATS.map((stat) => (
                 <div key={stat.label} className="text-center space-y-1.5">

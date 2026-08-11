@@ -34,7 +34,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       <ScrollFrameStage scrollContainerRef={pageRef} />
 
       <div className="relative z-10">
-        <header className="sticky top-0 z-20 bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 shadow-2xl">
+        <header className="sticky top-0 z-20 bg-surface-1/35 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 shadow-2xl">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-700 p-0.5 flex items-center justify-center">
