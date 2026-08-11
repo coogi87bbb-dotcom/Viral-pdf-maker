@@ -44,7 +44,7 @@ import { OWNER_EMAIL } from './lib/firebase';
 type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'owner-admin';
 
 function MainWorkspace() {
-  const { user, userProfile, logout, loading } = useAuth();
+  const { user, userProfile, logout, loading, authError } = useAuth();
   const [appMode, setAppMode] = useState<AppMode>('pdf-studio');
   const [showLanding, setShowLanding] = useState(true);
 
@@ -196,8 +196,13 @@ function MainWorkspace() {
 
   // Signed-out visitors see the marketing landing page first; clicking
   // "Get Started"/"Sign In" there flips to the existing auth gate below.
+  // authError bypasses that (even though showLanding defaults back to true
+  // on every fresh page load, which is exactly what happens after a full
+  // signInWithRedirect() round-trip) — otherwise a failed redirect sign-in
+  // would land back on the landing page with the error set but nothing on
+  // screen to show it, since only AuthModal renders authError.
   if (!user) {
-    if (showLanding) {
+    if (showLanding && !authError) {
       return <LandingPage onGetStarted={() => setShowLanding(false)} />;
     }
     return <AuthModal />;

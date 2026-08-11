@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 
 export const AuthModal: React.FC = () => {
-  const { login, signUp, signInWithGoogle } = useAuth();
+  const { login, signUp, signInWithGoogle, authError } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -112,12 +112,12 @@ export const AuthModal: React.FC = () => {
 
       {/* Form Body */}
       <div className="p-6 sm:p-8 space-y-5 relative z-10">
-        {error && (
+        {(error || authError) && (
           <div className="p-3.5 rounded-2xl bg-red-950/50 border border-red-800/60 text-red-300 text-xs flex items-start gap-2.5">
             <AlertCircle className="h-4 w-4 text-red-400 shrink-0 mt-0.5" />
             <div className="space-y-1">
               <span className="font-bold text-red-200">Access Error</span>
-              <p>{error}</p>
+              <p>{error || authError}</p>
             </div>
           </div>
         )}
