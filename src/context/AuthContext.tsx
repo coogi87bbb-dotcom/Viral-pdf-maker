@@ -8,6 +8,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   googleProvider,
   signOut,
   onAuthStateChanged,
@@ -86,6 +88,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(() => {
+    // Completes a signInWithRedirect() started elsewhere (e.g. the popup
+    // fallback below). onAuthStateChanged will also fire with the same
+    // user, but only this call gives us access to the result for logging.
+    getRedirectResult(auth)
+      .then((res) => {
+        if (res?.user) {
+          logActivity(res.user.uid, res.user.email || '', 'User logged in with Google (redirect)');
+        }
+      })
+      .catch((err) => console.warn('Google redirect sign-in notice:', err));
+
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
@@ -152,13 +165,52 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     logActivity(u.uid, cleanEmail, 'User logged in');
   };
 
+  // Environments that embed the app in a cross-origin iframe (e.g. Google
+  // AI Studio's preview) routinely block window.open, so a popup there is
+  // doomed before we even try it — go straight to redirect in that case.
+  const isEmbeddedInIframe = () => {
+    try {
+      return window.top !== window.self;
+    } catch {
+      // Cross-origin access to window.top throws, which itself confirms
+      // we're embedded in a frame we don't control.
+      return true;
+    }
+  };
+
+  // Note: auth/unauthorized-domain is deliberately excluded — it's a
+  // domain-allowlist check enforced identically for popup and redirect, so
+  // retrying with redirect would just fail the same way. That one requires
+  // adding the domain in the Firebase Console (Authentication > Settings >
+  // Authorized domains), not a client-side fallback.
+  const POPUP_FALLBACK_CODES = new Set([
+    'auth/popup-blocked',
+    'auth/popup-closed-by-user',
+    'auth/cancelled-popup-request',
+    'auth/operation-not-supported-in-this-environment'
+  ]);
+
   const signInWithGoogle = async () => {
-    const res = await signInWithPopup(auth, googleProvider);
-    const u = res.user;
-    const profile = await fetchProfileByUid(u.uid, u.email || '', u.displayName || undefined);
-    setUser(u);
-    setUserProfile(profile);
-    logActivity(u.uid, u.email || '', 'User logged in with Google');
+    if (isEmbeddedInIframe()) {
+      await signInWithRedirect(auth, googleProvider);
+      return; // page navigates away; redirect result is handled on return
+    }
+
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const u = res.user;
+      const profile = await fetchProfileByUid(u.uid, u.email || '', u.displayName || undefined);
+      setUser(u);
+      setUserProfile(profile);
+      logActivity(u.uid, u.email || '', 'User logged in with Google');
+    } catch (err) {
+      const code = (err as { code?: string })?.code;
+      if (code && POPUP_FALLBACK_CODES.has(code)) {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      }
+      throw err;
+    }
   };
 
   const logout = async () => {
