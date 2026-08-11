@@ -130,7 +130,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
   const effectiveScale = computeScale();
 
   return (
-    <div className={`flex-1 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-white/10/80 rounded-3xl shadow-2xl ${className}`}>
+    <div className={`flex-1 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-white/10 rounded-3xl shadow-2xl ${className}`}>
       {/* Control Toolbar Header */}
       <div className="px-3 py-2 bg-surface-1/90 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 shrink-0 z-10 backdrop-blur-md">
         {/* Device Viewport Mode Selector */}

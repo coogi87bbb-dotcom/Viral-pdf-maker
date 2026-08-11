@@ -226,7 +226,7 @@ export const VisualStudio: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Studio Banner Header */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-2xl space-y-6">
+      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 text-xs font-semibold text-fuchsia-300 mb-2">
@@ -239,17 +239,17 @@ export const VisualStudio: React.FC = () => {
                 v10.0 Pro
               </span>
             </h2>
-            <p className="text-sm text-slate-400 mt-2 max-w-3xl leading-relaxed">
+            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
               Design high-converting video thumbnails, 5-slide carousel decks, Pinterest SEO pins, and social share cards. Features live canvas typography overlays, social app UI safe-zone guides, and AI prompt engineering.
             </p>
           </div>
 
           {/* Quick Studio Mode Selector */}
-          <div className="flex items-center gap-1 bg-slate-950 p-1.5 rounded-2xl border border-slate-800 shrink-0">
+          <div className="flex items-center gap-1 bg-surface-0 p-1.5 rounded-2xl border border-white/10 shrink-0">
             <button
               onClick={() => setStudioMode('single')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                studioMode === 'single' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
+                studioMode === 'single' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
               }`}
             >
               <FileImage className="h-4 w-4" />
@@ -258,8 +258,8 @@ export const VisualStudio: React.FC = () => {
 
             <button
               onClick={() => setStudioMode('carousel')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                studioMode === 'carousel' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
+                studioMode === 'carousel' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
               }`}
             >
               <Layers className="h-4 w-4" />
@@ -268,8 +268,8 @@ export const VisualStudio: React.FC = () => {
 
             <button
               onClick={() => setStudioMode('ab_variants')}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
-                studioMode === 'ab_variants' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
+                studioMode === 'ab_variants' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
               }`}
             >
               <Grid className="h-4 w-4" />
@@ -280,7 +280,7 @@ export const VisualStudio: React.FC = () => {
 
         {/* Style Archetype Selector Cards */}
         <div>
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2 mb-2">
+          <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
             <Palette className="h-4 w-4 text-fuchsia-400" />
             <span>Select 1-Click Aesthetic Style Archetype:</span>
           </label>
@@ -291,19 +291,19 @@ export const VisualStudio: React.FC = () => {
                 key={arch.id}
                 type="button"
                 onClick={() => handleSelectArchetype(arch)}
-                className={`p-3 rounded-2xl border text-left transition-all space-y-1.5 relative overflow-hidden ${
+                className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
                   selectedArchetype === arch.id
-                    ? 'bg-slate-900 border-fuchsia-500 ring-2 ring-fuchsia-500/50 shadow-xl'
-                    : 'bg-slate-950 border-slate-800/90 text-slate-400 hover:bg-slate-900'
+                    ? 'bg-surface-1 border-fuchsia-500 ring-2 ring-fuchsia-500/50 shadow-xl'
+                    : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-black text-white truncate">{arch.label}</span>
                 </div>
-                <p className="text-[10px] text-slate-400 line-clamp-2 leading-relaxed">
+                <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
                   {arch.description}
                 </p>
-                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-slate-800 text-fuchsia-300">
+                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-fuchsia-300">
                   {arch.badge}
                 </span>
               </button>
@@ -315,7 +315,7 @@ export const VisualStudio: React.FC = () => {
         <form onSubmit={handleGenerate} className="space-y-4">
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2">
                 <Type className="h-4 w-4 text-cyan-400" />
                 <span>Headline Concept / Visual Text Prompt:</span>
               </label>
@@ -323,9 +323,9 @@ export const VisualStudio: React.FC = () => {
               <button
                 type="button"
                 onClick={handleEnhancePrompt}
-                className="text-xs text-amber-300 font-bold hover:text-amber-200 flex items-center gap-1 bg-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
+                className="text-xs text-accent-amber-300 font-bold hover:text-amber-200 flex items-center gap-1 bg-accent-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
               >
-                <Wand2 className="h-3.5 w-3.5 text-amber-400" />
+                <Wand2 className="h-3.5 w-3.5 text-accent-amber-400" />
                 <span>Magic Prompt Engineer (10x)</span>
               </button>
             </div>
@@ -338,20 +338,20 @@ export const VisualStudio: React.FC = () => {
               }}
               rows={2}
               placeholder="e.g. 3 AI WORKFLOWS TO REPLACE A $50K AGENCY"
-              className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-fuchsia-500 leading-relaxed font-sans shadow-inner"
+              className="w-full bg-surface-0 border border-white/10 rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-fuchsia-500 leading-relaxed font-sans shadow-inner"
               required
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-1">
                 Target Aspect Ratio
               </label>
               <select
                 value={aspectRatio}
                 onChange={(e) => setAspectRatio(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
               >
                 <option value="1:1">1:1 Square (Instagram / LinkedIn Carousel)</option>
                 <option value="9:16">9:16 Vertical (TikTok / Reels / Shorts / Story)</option>
@@ -362,13 +362,13 @@ export const VisualStudio: React.FC = () => {
             </div>
 
             <div>
-              <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+              <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-1">
                 Target Social Platform Ruleset
               </label>
               <select
                 value={platform}
                 onChange={(e: any) => setPlatform(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
               >
                 <option value="instagram">Instagram Carousel / Reel Thumbnail</option>
                 <option value="tiktok">TikTok Video Cover Thumbnail</option>
@@ -390,16 +390,16 @@ export const VisualStudio: React.FC = () => {
           <button
             type="submit"
             disabled={loading || !promptText.trim()}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-fuchsia-600 via-pink-600 to-violet-600 hover:from-fuchsia-500 hover:via-pink-500 hover:to-violet-500 text-white font-black text-sm shadow-xl shadow-fuchsia-600/25 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-fuchsia-600 via-pink-600 to-violet-600 hover:from-fuchsia-500 hover:via-pink-500 hover:to-violet-500 text-white font-black text-sm shadow-xl shadow-fuchsia-600/25 transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
           >
             {loading ? (
               <>
-                <RefreshCw className="h-5 w-5 animate-spin text-amber-300" />
+                <RefreshCw className="h-5 w-5 animate-spin text-accent-amber-300" />
                 <span>Rendering 4K AI Visual Asset & Applying Overlays...</span>
               </>
             ) : (
               <>
-                <Zap className="h-5 w-5 text-amber-300 fill-amber-300" />
+                <Zap className="h-5 w-5 text-accent-amber-300 fill-amber-300" />
                 <span>
                   {studioMode === 'carousel'
                     ? 'Generate 5-Slide AI Carousel Deck'
@@ -417,8 +417,8 @@ export const VisualStudio: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* MAIN CANVAS PREVIEW CARD */}
         {selectedAsset && (
-          <div className="lg:col-span-8 bg-slate-900/90 rounded-3xl border border-slate-800 p-6 shadow-2xl space-y-6">
-            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div className="lg:col-span-8 bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-6">
+            <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm font-black text-white uppercase">
@@ -428,7 +428,7 @@ export const VisualStudio: React.FC = () => {
                     {selectedAsset.aspectRatio}
                   </span>
                   {selectedAsset.styleTheme && (
-                    <span className="text-xs font-semibold text-slate-400">
+                    <span className="text-xs font-semibold text-ink-muted">
                       • {selectedAsset.styleTheme}
                     </span>
                   )}
@@ -440,17 +440,17 @@ export const VisualStudio: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setShowSafeZone(!showSafeZone)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-all ${
-                    showSafeZone ? 'bg-amber-500/20 text-amber-300 border-amber-500/30' : 'bg-slate-800 border-slate-700 text-slate-400'
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-colors ${
+                    showSafeZone ? 'bg-accent-amber-500/20 text-accent-amber-300 border-amber-500/30' : 'bg-surface-2 border-white/15 text-ink-muted'
                   }`}
                 >
-                  {showSafeZone ? <Eye className="h-4 w-4 text-amber-400" /> : <EyeOff className="h-4 w-4 text-slate-400" />}
+                  {showSafeZone ? <Eye className="h-4 w-4 text-accent-amber-400" /> : <EyeOff className="h-4 w-4 text-ink-muted" />}
                   <span>App Safe-Zone Overlay</span>
                 </button>
 
                 <button
                   onClick={handleCopyUrl}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
                 >
                   {copiedUrl ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-violet-400" />}
                   <span>{copiedUrl ? 'Copied' : 'Copy URL'}</span>
@@ -468,7 +468,7 @@ export const VisualStudio: React.FC = () => {
             </div>
 
             {/* LIVE GRAPHIC CANVAS DISPLAY WITH OVERLAYS */}
-            <div className="relative bg-slate-950 rounded-2xl p-4 border border-slate-800 flex items-center justify-center min-h-[420px] max-h-[520px] overflow-hidden shadow-2xl">
+            <div className="relative bg-surface-0 rounded-2xl p-4 border border-white/10 flex items-center justify-center min-h-[420px] max-h-[520px] overflow-hidden shadow-2xl">
               {/* Background Generated Image */}
               <img
                 src={selectedAsset.imageUrl}
@@ -479,7 +479,7 @@ export const VisualStudio: React.FC = () => {
 
               {/* LIVE OVERLAY TEXT LAYER */}
               <div 
-                className={`absolute inset-x-8 z-20 flex flex-col items-center text-center p-4 transition-all ${
+                className={`absolute inset-x-8 z-20 flex flex-col items-center text-center p-4 transition-colors ${
                   overlayPosition === 'top' ? 'top-8' : overlayPosition === 'bottom' ? 'bottom-12' : 'top-1/2 -translate-y-1/2'
                 }`}
               >
@@ -499,7 +499,7 @@ export const VisualStudio: React.FC = () => {
 
                 {/* Author Handle Watermark */}
                 {authorHandle && (
-                  <span className="mt-2 text-[10px] font-mono font-bold text-slate-300/80 bg-black/60 px-2.5 py-0.5 rounded-full border border-white/20">
+                  <span className="mt-2 text-[10px] font-mono font-bold text-ink-secondary/80 bg-black/60 px-2.5 py-0.5 rounded-full border border-white/20">
                     {authorHandle}
                   </span>
                 )}
@@ -507,21 +507,21 @@ export const VisualStudio: React.FC = () => {
 
               {/* SOCIAL APP SAFE-ZONE UI OVERLAYS (TikTok / Reel / YouTube) */}
               {showSafeZone && (
-                <div className="absolute inset-0 pointer-events-none border-2 border-dashed border-amber-400/40 rounded-xl p-4 flex flex-col justify-between">
-                  <div className="flex justify-between items-center text-[9px] font-mono text-amber-300 font-bold bg-black/70 px-2 py-1 rounded border border-amber-400/30">
+                <div className="absolute inset-0 pointer-events-none border-2 border-dashed border-accent-amber-400/40 rounded-xl p-4 flex flex-col justify-between">
+                  <div className="flex justify-between items-center text-[9px] font-mono text-accent-amber-300 font-bold bg-black/70 px-2 py-1 rounded border border-accent-amber-400/30">
                     <span>⚠️ SOCIAL APP UI SAFE ZONE</span>
                     <span>SAFE HEADER TOP (80px)</span>
                   </div>
 
                   {/* Right side Reels / TikTok button placeholders */}
                   <div className="absolute right-4 bottom-20 flex flex-col gap-3 items-center opacity-70">
-                    <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-[8px] text-white">❤️</div>
-                    <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-[8px] text-white">💬</div>
-                    <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center text-[8px] text-white">✈️</div>
+                    <div className="h-8 w-8 rounded-full bg-surface-2 border border-slate-600 flex items-center justify-center text-[8px] text-white">❤️</div>
+                    <div className="h-8 w-8 rounded-full bg-surface-2 border border-slate-600 flex items-center justify-center text-[8px] text-white">💬</div>
+                    <div className="h-8 w-8 rounded-full bg-surface-2 border border-slate-600 flex items-center justify-center text-[8px] text-white">✈️</div>
                   </div>
 
                   {/* Bottom Caption Box Overlay */}
-                  <div className="bg-black/80 p-2 rounded border border-amber-400/30 text-[9px] font-mono text-amber-300 max-w-xs">
+                  <div className="bg-black/80 p-2 rounded border border-accent-amber-400/30 text-[9px] font-mono text-accent-amber-300 max-w-xs">
                     📱 CAPTION & USERNAME ZONE (Keep clear of critical text)
                   </div>
                 </div>
@@ -529,13 +529,13 @@ export const VisualStudio: React.FC = () => {
             </div>
 
             {/* Prompt Meta Box */}
-            <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 text-xs font-mono text-slate-300">
+            <div className="bg-surface-0 p-3.5 rounded-2xl border border-white/10 text-xs font-mono text-ink-secondary">
               <strong className="text-fuchsia-400">AI Prompt Stack:</strong> {selectedAsset.prompt}
             </div>
 
             {/* IF CAROUSEL DECK MODE: 5 SEQUENTIAL SLIDES DISPLAY */}
             {selectedAsset.slides && selectedAsset.slides.length > 0 && (
-              <div className="space-y-4 pt-2 border-t border-slate-800">
+              <div className="space-y-4 pt-2 border-t border-white/10">
                 <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
                   <Layers className="h-4 w-4 text-fuchsia-400" />
                   <span>5-Slide Sequential Carousel Deck Preview</span>
@@ -543,12 +543,12 @@ export const VisualStudio: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
                   {selectedAsset.slides.map((slide) => (
-                    <div key={slide.slideNumber} className="bg-slate-950 p-3 rounded-2xl border border-slate-800 space-y-2">
+                    <div key={slide.slideNumber} className="bg-surface-0 p-3 rounded-2xl border border-white/10 space-y-2">
                       <div className="flex items-center justify-between text-[10px] font-mono font-bold text-fuchsia-400">
                         <span>SLIDE #{slide.slideNumber}</span>
                       </div>
                       <div className="font-bold text-xs text-white line-clamp-1">{slide.title}</div>
-                      <p className="text-[10px] text-slate-400 line-clamp-2 leading-tight">{slide.description}</p>
+                      <p className="text-[10px] text-ink-muted line-clamp-2 leading-tight">{slide.description}</p>
                     </div>
                   ))}
                 </div>
@@ -560,15 +560,15 @@ export const VisualStudio: React.FC = () => {
         {/* RIGHT SIDEBAR: LIVE TEXT OVERLAY CONTROLS & GALLERY */}
         <div className="lg:col-span-4 space-y-6">
           {/* Text Overlay Customizer Card */}
-          <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-6 shadow-2xl space-y-5">
-            <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-3">
+          <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-5">
+            <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2 border-b border-white/10 pb-3">
               <Sliders className="h-4 w-4 text-fuchsia-400" />
               <span>Canvas Text Overlay Controls</span>
             </h3>
 
             {/* Badge Pill Input */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              <label className="text-xs font-bold text-ink-muted uppercase tracking-wider block">
                 Sticker / Badge Text Overlay:
               </label>
               <input
@@ -576,13 +576,13 @@ export const VisualStudio: React.FC = () => {
                 value={badgeOverlay}
                 onChange={(e) => setBadgeOverlay(e.target.value)}
                 placeholder="e.g. DO NOT IGNORE ⚠️"
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-fuchsia-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-fuchsia-500"
               />
             </div>
 
             {/* Headline Text Input */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              <label className="text-xs font-bold text-ink-muted uppercase tracking-wider block">
                 Main Headline Text Overlay:
               </label>
               <textarea
@@ -590,13 +590,13 @@ export const VisualStudio: React.FC = () => {
                 onChange={(e) => setHeadlineOverlay(e.target.value)}
                 rows={2}
                 placeholder="e.g. 3 AI WORKFLOWS TO REPLACE $50K AGENCIES"
-                className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500"
               />
             </div>
 
             {/* Typography Font Picker */}
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              <label className="text-xs font-bold text-ink-muted uppercase tracking-wider block">
                 Typography Font Style:
               </label>
               <div className="grid grid-cols-2 gap-2">
@@ -604,7 +604,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('impact')}
                   className={`p-2 rounded-xl border text-xs font-black uppercase ${
-                    fontStyle === 'impact' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-slate-950 border-slate-800 text-slate-400'
+                    fontStyle === 'impact' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Heavy Impact
@@ -613,7 +613,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('serif')}
                   className={`p-2 rounded-xl border text-xs font-serif font-bold ${
-                    fontStyle === 'serif' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-slate-950 border-slate-800 text-slate-400'
+                    fontStyle === 'serif' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Editorial Serif
@@ -622,7 +622,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('mono')}
                   className={`p-2 rounded-xl border text-xs font-mono font-bold ${
-                    fontStyle === 'mono' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-slate-950 border-slate-800 text-slate-400'
+                    fontStyle === 'mono' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Tech Mono
@@ -631,7 +631,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('sans')}
                   className={`p-2 rounded-xl border text-xs font-bold ${
-                    fontStyle === 'sans' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-slate-950 border-slate-800 text-slate-400'
+                    fontStyle === 'sans' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Clean Sans
@@ -640,15 +640,15 @@ export const VisualStudio: React.FC = () => {
             </div>
 
             {/* Position & Badge Color Selectors */}
-            <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-800">
+            <div className="grid grid-cols-2 gap-3 pt-2 border-t border-white/10">
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <label className="text-xs font-bold text-ink-muted uppercase tracking-wider block mb-1">
                   Text Position:
                 </label>
                 <select
                   value={overlayPosition}
                   onChange={(e: any) => setOverlayPosition(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-white"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white"
                 >
                   <option value="top">Top Header</option>
                   <option value="center">Center Focused</option>
@@ -657,13 +657,13 @@ export const VisualStudio: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-1">
+                <label className="text-xs font-bold text-ink-muted uppercase tracking-wider block mb-1">
                   Badge Pill Color:
                 </label>
                 <select
                   value={badgeColor}
                   onChange={(e: any) => setBadgeColor(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-xl px-2.5 py-2 text-xs text-white"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-2.5 py-2 text-xs text-white"
                 >
                   <option value="amber">🟡 Viral Yellow</option>
                   <option value="rose">🔴 Shocking Red</option>
@@ -676,7 +676,7 @@ export const VisualStudio: React.FC = () => {
           </div>
 
           {/* Asset Gallery Sidebar */}
-          <div className="bg-slate-900/90 rounded-3xl border border-slate-800 p-5 shadow-2xl space-y-4">
+          <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-5 shadow-2xl space-y-4">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center justify-between">
               <span>Studio Asset Gallery ({gallery.length})</span>
             </h3>
@@ -686,17 +686,17 @@ export const VisualStudio: React.FC = () => {
                 <div
                   key={asset.id}
                   onClick={() => setSelectedAsset(asset)}
-                  className={`p-3 rounded-2xl border cursor-pointer transition-all flex items-center gap-3 ${
+                  className={`p-3 rounded-2xl border cursor-pointer transition-colors flex items-center gap-3 ${
                     selectedAsset?.id === asset.id
                       ? 'bg-fuchsia-500/10 border-fuchsia-500 ring-2 ring-fuchsia-500/30'
-                      : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+                      : 'bg-surface-0 border-white/10 hover:border-white/15'
                   }`}
                 >
                   <img
                     src={asset.imageUrl}
                     alt="Thumbnail"
                     referrerPolicy="no-referrer"
-                    className="h-16 w-16 object-cover rounded-xl shrink-0 border border-slate-800"
+                    className="h-16 w-16 object-cover rounded-xl shrink-0 border border-white/10"
                   />
                   <div className="overflow-hidden space-y-0.5">
                     <span className="text-[10px] font-black text-fuchsia-400 uppercase block">

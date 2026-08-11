@@ -705,7 +705,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   </div>
 
                   {/* Preset Brand Crest Picker (Over 20 Options) */}
-                  <div className="space-y-1.5 border-t border-white/10/80 pt-2.5">
+                  <div className="space-y-1.5 border-t border-white/10 pt-2.5">
                     <div className="flex items-center justify-between">
                       <label className="block text-[10px] font-bold text-ink-secondary flex items-center space-x-1">
                         <Crown className="w-3 h-3 text-accent-amber-400" />

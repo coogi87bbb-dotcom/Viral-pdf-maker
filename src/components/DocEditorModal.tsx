@@ -471,7 +471,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                 {activeSection && (
                   <div className="bg-surface-0 border border-amber-500/30 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
                     {/* Chapter Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10/80 pb-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
                       <div className="flex items-center space-x-2">
                         <span className="text-xs font-black bg-accent-amber-500 text-slate-950 px-2.5 py-1 rounded-lg uppercase tracking-wider">
                           Chapter {activeSection.chapterNumber || selectedSectionIndex + 1}
@@ -686,7 +686,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     )}
 
                     {/* Chapter Callout Box Controls */}
-                    <div className="pt-3 border-t border-white/10/80 space-y-3">
+                    <div className="pt-3 border-t border-white/10 space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-accent-amber-300 flex items-center space-x-1.5">
                           <AlertCircle className="w-4 h-4 text-accent-amber-400" />

@@ -349,7 +349,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
               </div>
 
               {/* Auto AI Enhance Checkbox Option */}
-              <div className="flex items-center space-x-2.5 p-3 bg-surface-0 border border-white/10/80 rounded-xl">
+              <div className="flex items-center space-x-2.5 p-3 bg-surface-0 border border-white/10 rounded-xl">
                 <input
                   type="checkbox"
                   id="auto-enhance-cb"
@@ -425,7 +425,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                 </p>
               </div>
 
-              <div className="flex items-center space-x-2.5 p-3 bg-surface-0 border border-white/10/80 rounded-xl">
+              <div className="flex items-center space-x-2.5 p-3 bg-surface-0 border border-white/10 rounded-xl">
                 <input
                   type="checkbox"
                   id="auto-enhance-url-cb"

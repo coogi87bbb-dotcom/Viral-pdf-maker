@@ -382,7 +382,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
               </div>
             </div>
 
-            <div className="pt-2 border-t border-white/10/80 flex justify-between items-center text-xs">
+            <div className="pt-2 border-t border-white/10 flex justify-between items-center text-xs">
               <button
                 type="button"
                 onClick={() => setIsSuccessState(false)}
@@ -527,7 +527,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-amber-400"
               />
 
-              <div className="max-h-40 overflow-y-auto pr-1 grid grid-cols-2 gap-1.5 rounded-xl border border-white/10/80 bg-surface-0 p-2">
+              <div className="max-h-40 overflow-y-auto pr-1 grid grid-cols-2 gap-1.5 rounded-xl border border-white/10 bg-surface-0 p-2">
                 {TARGET_DIGITAL_PRODUCT_FORMATS
                   .filter(fmt => fmt.toLowerCase().includes(searchFormat.toLowerCase()))
                   .map((fmt) => (
@@ -538,7 +538,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                       className={`p-2 rounded-lg border text-[11px] text-left transition-colors ${
                         docType === fmt
                           ? 'bg-purple-950/90 border-purple-400 text-purple-200 font-bold ring-1 ring-purple-400/50 shadow-sm'
-                          : 'bg-surface-1/60 border-white/10/80 text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
+                          : 'bg-surface-1/60 border-white/10 text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                       }`}
                     >
                       <div className="line-clamp-2">{fmt}</div>
