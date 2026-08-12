@@ -211,14 +211,14 @@ export const DocImporter: React.FC<DocImporterProps> = ({
   return (
     <ModalShell id="doc-importer-modal" maxWidthClassName="max-w-2xl" scrollable>
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-amber-500/20 flex items-center justify-between bg-surface-0">
+        <div className="px-6 py-4 border-b border-rosegold-500/20 flex items-center justify-between bg-surface-0">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-lg bg-accent-amber-500/20 text-accent-amber-400 border border-amber-500/30 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-accent-rosegold-500/20 text-accent-rosegold-400 border border-rosegold-500/30 flex items-center justify-center">
               <FileText className="w-4 h-4" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white">Import Document into PDF Converter</h3>
-              <p className="text-xs text-accent-amber-300">Upload Word (.docx), Google Doc link, text file, or pre-loaded samples</p>
+              <p className="text-xs text-accent-rosegold-300">Upload Word (.docx), Google Doc link, text file, or pre-loaded samples</p>
             </div>
           </div>
           <button
@@ -234,7 +234,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
           <button
             onClick={() => { setTab('file'); setErrorMsg(null); }}
             className={`py-3 text-xs font-semibold border-b-2 flex items-center space-x-2 whitespace-nowrap transition-colors ${
-              tab === 'file' ? 'border-accent-amber-400 text-accent-amber-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
+              tab === 'file' ? 'border-accent-rosegold-400 text-accent-rosegold-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
             <UploadCloud className="w-3.5 h-3.5" />
@@ -243,7 +243,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
           <button
             onClick={() => { setTab('url'); setErrorMsg(null); }}
             className={`py-3 text-xs font-semibold border-b-2 flex items-center space-x-2 whitespace-nowrap transition-colors ${
-              tab === 'url' ? 'border-accent-amber-400 text-accent-amber-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
+              tab === 'url' ? 'border-accent-rosegold-400 text-accent-rosegold-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
             <LinkIcon className="w-3.5 h-3.5" />
@@ -252,7 +252,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
           <button
             onClick={() => { setTab('paste'); setErrorMsg(null); }}
             className={`py-3 text-xs font-semibold border-b-2 flex items-center space-x-2 whitespace-nowrap transition-colors ${
-              tab === 'paste' ? 'border-accent-amber-400 text-accent-amber-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
+              tab === 'paste' ? 'border-accent-rosegold-400 text-accent-rosegold-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
             <FileUp className="w-3.5 h-3.5" />
@@ -261,7 +261,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
           <button
             onClick={() => { setTab('samples'); setErrorMsg(null); }}
             className={`py-3 text-xs font-semibold border-b-2 flex items-center space-x-2 whitespace-nowrap transition-colors ${
-              tab === 'samples' ? 'border-accent-amber-400 text-accent-amber-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
+              tab === 'samples' ? 'border-accent-rosegold-400 text-accent-rosegold-300' : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
             <BookOpen className="w-3.5 h-3.5 text-purple-400" />
@@ -285,7 +285,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                         setTab('paste');
                         setErrorMsg(null);
                       }}
-                      className="mt-1.5 px-3 py-1 bg-accent-amber-500/20 hover:bg-accent-amber-500/30 text-accent-amber-300 font-semibold text-[11px] rounded-lg border border-amber-500/30 transition-colors inline-flex items-center space-x-1"
+                      className="mt-1.5 px-3 py-1 bg-accent-rosegold-500/20 hover:bg-accent-rosegold-500/30 text-accent-rosegold-300 font-semibold text-[11px] rounded-lg border border-rosegold-500/30 transition-colors inline-flex items-center space-x-1"
                     >
                       <span>Or click here to paste document text directly &rarr;</span>
                     </button>
@@ -320,10 +320,10 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   fileInputRef.current?.click();
                 }}
                 className={`border-2 border-dashed rounded-2xl p-8 text-center transition-colors cursor-pointer flex flex-col items-center justify-center ${
-                  dragOver ? 'border-accent-amber-400 bg-accent-amber-500/10' : 'border-white/10 hover:border-white/15 bg-surface-0/60'
+                  dragOver ? 'border-accent-rosegold-400 bg-accent-rosegold-500/10' : 'border-white/10 hover:border-white/15 bg-surface-0/60'
                 }`}
               >
-                <div className="w-12 h-12 rounded-2xl bg-accent-amber-500/10 text-accent-amber-400 flex items-center justify-center mb-3">
+                <div className="w-12 h-12 rounded-2xl bg-accent-rosegold-500/10 text-accent-rosegold-400 flex items-center justify-center mb-3">
                   <UploadCloud className="w-6 h-6" />
                 </div>
                 <p className="text-sm font-bold text-white mb-1">
@@ -340,7 +340,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                       e.stopPropagation();
                       fileInputRef.current?.click();
                     }}
-                    className="px-6 py-3 bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:opacity-95 text-slate-950 font-bold text-xs rounded-xl cursor-pointer transition-colors inline-flex items-center space-x-2 shadow-lg shadow-amber-950/40"
+                    className="px-6 py-3 bg-gradient-to-r from-rosegold-500 via-rosegold-400 to-yellow-500 hover:opacity-95 text-slate-950 font-bold text-xs rounded-xl cursor-pointer transition-colors inline-flex items-center space-x-2 shadow-lg shadow-rosegold-950/40"
                   >
                     <Sparkles className="w-4 h-4 text-slate-950" />
                     <span>Browse Computer Files (All Types)</span>
@@ -355,33 +355,33 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   id="auto-enhance-cb"
                   checked={autoEnhanceOnUpload}
                   onChange={(e) => setAutoEnhanceOnUpload(e.target.checked)}
-                  className="w-4 h-4 rounded border-white/15 text-amber-500 focus:ring-amber-400 focus:ring-offset-slate-900 bg-surface-1 cursor-pointer"
+                  className="w-4 h-4 rounded border-white/15 text-rosegold-500 focus:ring-rosegold-400 focus:ring-offset-slate-900 bg-surface-1 cursor-pointer"
                 />
                 <label htmlFor="auto-enhance-cb" className="text-xs font-semibold text-ink-secondary cursor-pointer flex items-center space-x-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-accent-amber-400 shrink-0" />
+                  <Sparkles className="w-3.5 h-3.5 text-accent-rosegold-400 shrink-0" />
                   <span>Automatically open AI Publishing Studio generator upon loading</span>
                 </label>
               </div>
 
               {/* Google Docs (.gdoc) Explanation Box */}
-              <div className="p-4 bg-surface-0 border border-amber-500/30 rounded-2xl text-xs space-y-2.5">
+              <div className="p-4 bg-surface-0 border border-rosegold-500/30 rounded-2xl text-xs space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2 text-accent-amber-400 font-bold">
+                  <div className="flex items-center space-x-2 text-accent-rosegold-400 font-bold">
                     <Info className="w-4 h-4 shrink-0" />
                     <span>Why are Google Docs (.gdoc) greyed out in computer file dialogs?</span>
                   </div>
-                  <span className="text-[10px] bg-accent-amber-500/20 text-accent-amber-300 font-mono px-2 py-0.5 rounded-full font-bold border border-amber-500/30">
+                  <span className="text-[10px] bg-accent-rosegold-500/20 text-accent-rosegold-300 font-mono px-2 py-0.5 rounded-full font-bold border border-rosegold-500/30">
                     Google Drive Cloud Notice
                   </span>
                 </div>
                 <p className="text-ink-secondary text-[11px] leading-relaxed">
-                  Google Docs (<code className="text-accent-amber-300 bg-amber-950/80 px-1.5 py-0.5 rounded font-mono">.gdoc</code> files) in Google Drive for Desktop are web cloud shortcuts, not offline document files on your hard drive. Because of this, operating systems (macOS & Windows) grey them out in browser file selectors.
+                  Google Docs (<code className="text-accent-rosegold-300 bg-rosegold-950/80 px-1.5 py-0.5 rounded font-mono">.gdoc</code> files) in Google Drive for Desktop are web cloud shortcuts, not offline document files on your hard drive. Because of this, operating systems (macOS & Windows) grey them out in browser file selectors.
                 </p>
                 <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <button
                     type="button"
                     onClick={() => { setTab('url'); setErrorMsg(null); }}
-                    className="px-3.5 py-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:opacity-95 text-slate-950 font-extrabold text-xs rounded-xl transition-colors inline-flex items-center justify-center space-x-1.5 shadow-md"
+                    className="px-3.5 py-2 bg-gradient-to-r from-rosegold-500 to-yellow-500 hover:opacity-95 text-slate-950 font-extrabold text-xs rounded-xl transition-colors inline-flex items-center justify-center space-x-1.5 shadow-md"
                   >
                     <LinkIcon className="w-3.5 h-3.5" />
                     <span>Switch to Google Doc URL Tab (Instant Import)</span>
@@ -392,7 +392,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                     onClick={() => { setTab('paste'); setErrorMsg(null); }}
                     className="px-3.5 py-2 bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/10 font-semibold text-xs rounded-xl transition-colors inline-flex items-center justify-center space-x-1.5"
                   >
-                    <FileUp className="w-3.5 h-3.5 text-accent-amber-400" />
+                    <FileUp className="w-3.5 h-3.5 text-accent-rosegold-400" />
                     <span>Or Copy & Paste Text</span>
                   </button>
                 </div>
@@ -400,7 +400,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
 
               {loading && (
                 <div className="text-center py-4 space-y-2">
-                  <div className="inline-block w-6 h-6 border-2 border-accent-amber-400 border-t-transparent rounded-full animate-spin" />
+                  <div className="inline-block w-6 h-6 border-2 border-accent-rosegold-400 border-t-transparent rounded-full animate-spin" />
                   <p className="text-xs text-ink-muted font-medium">Reading and parsing document contents...</p>
                 </div>
               )}
@@ -418,7 +418,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   value={docUrl}
                   onChange={(e) => setDocUrl(e.target.value)}
                   placeholder="https://docs.google.com/document/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit"
-                  className="w-full bg-surface-1 border border-white/15 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-amber-400"
+                  className="w-full bg-surface-1 border border-white/15 rounded-lg px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-rosegold-400"
                 />
                 <p className="text-[11px] text-ink-muted mt-2">
                   Tip: Make sure "Anyone with the link can view" is enabled in Google Docs Share settings.
@@ -431,10 +431,10 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   id="auto-enhance-url-cb"
                   checked={autoEnhanceOnUpload}
                   onChange={(e) => setAutoEnhanceOnUpload(e.target.checked)}
-                  className="w-4 h-4 rounded border-white/15 text-amber-500 focus:ring-amber-400 focus:ring-offset-slate-900 bg-surface-1 cursor-pointer"
+                  className="w-4 h-4 rounded border-white/15 text-rosegold-500 focus:ring-rosegold-400 focus:ring-offset-slate-900 bg-surface-1 cursor-pointer"
                 />
                 <label htmlFor="auto-enhance-url-cb" className="text-xs font-semibold text-ink-secondary cursor-pointer flex items-center space-x-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-accent-amber-400 shrink-0" />
+                  <Sparkles className="w-3.5 h-3.5 text-accent-rosegold-400 shrink-0" />
                   <span>Automatically launch AI Publishing Studio generator upon importing</span>
                 </label>
               </div>
@@ -467,7 +467,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                     handleFetchGoogleDoc();
                   }}
                   disabled={loading}
-                  className="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 text-xs font-bold rounded-xl shadow-md flex items-center justify-center space-x-2 disabled:opacity-50"
+                  className="px-5 py-2.5 bg-gradient-to-r from-rosegold-500 to-rosegold-400 hover:from-rosegold-400 hover:to-rosegold-300 text-slate-950 text-xs font-bold rounded-xl shadow-md flex items-center justify-center space-x-2 disabled:opacity-50"
                 >
                   {loading ? (
                     <span>Fetching Doc...</span>
@@ -493,7 +493,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   value={docTitleInput}
                   onChange={(e) => setDocTitleInput(e.target.value)}
                   placeholder="e.g. My 10-Step Guide to Organic Traffic"
-                  className="w-full bg-surface-0 border border-white/10 rounded-lg px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-amber-400"
+                  className="w-full bg-surface-0 border border-white/10 rounded-lg px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-rosegold-400"
                 />
               </div>
 
@@ -506,7 +506,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                   value={rawTextInput}
                   onChange={(e) => setRawTextInput(e.target.value)}
                   placeholder="Paste your standard Google Doc text, draft chapters, or plain document paragraphs here..."
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3.5 text-xs text-ink-secondary placeholder-slate-500 focus:outline-none focus:border-accent-amber-400 font-mono"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3.5 text-xs text-ink-secondary placeholder-slate-500 focus:outline-none focus:border-accent-rosegold-400 font-mono"
                 />
               </div>
 
@@ -536,9 +536,9 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                       setAutoEnhanceOnUpload(true);
                       handleImportPastedText();
                     }}
-                    className="px-5 py-2.5 bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 hover:opacity-95 text-white text-xs font-bold rounded-xl shadow-lg flex items-center space-x-2"
+                    className="px-5 py-2.5 bg-gradient-to-r from-rosegold-500 via-purple-600 to-indigo-600 hover:opacity-95 text-white text-xs font-bold rounded-xl shadow-lg flex items-center space-x-2"
                   >
-                    <Sparkles className="w-4 h-4 text-accent-amber-300" />
+                    <Sparkles className="w-4 h-4 text-accent-rosegold-300" />
                     <span>Load & Run AI Publishing Studio</span>
                   </button>
                 </div>
@@ -558,11 +558,11 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                     onImportDocument(sample.doc, sample.rawText);
                     onClose();
                   }}
-                  className="p-4 bg-surface-0 border border-white/10 hover:border-accent-amber-400/60 rounded-xl cursor-pointer transition-colors hover:scale-[1.01] group flex items-start justify-between"
+                  className="p-4 bg-surface-0 border border-white/10 hover:border-accent-rosegold-400/60 rounded-xl cursor-pointer transition-colors hover:scale-[1.01] group flex items-start justify-between"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center space-x-2">
-                      <span className="text-sm font-bold text-white group-hover:text-accent-amber-300 transition-colors">
+                      <span className="text-sm font-bold text-white group-hover:text-accent-rosegold-300 transition-colors">
                         {sample.name}
                       </span>
                       <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800/60 font-semibold">
@@ -571,7 +571,7 @@ export const DocImporter: React.FC<DocImporterProps> = ({
                     </div>
                     <p className="text-xs text-ink-muted">{sample.description}</p>
                   </div>
-                  <div className="px-3 py-1.5 bg-surface-2 group-hover:bg-accent-amber-500 group-hover:text-slate-950 rounded-lg text-xs font-semibold text-ink-secondary transition-colors shrink-0 ml-3">
+                  <div className="px-3 py-1.5 bg-surface-2 group-hover:bg-accent-rosegold-500 group-hover:text-slate-950 rounded-lg text-xs font-semibold text-ink-secondary transition-colors shrink-0 ml-3">
                     Load Sample
                   </div>
                 </div>

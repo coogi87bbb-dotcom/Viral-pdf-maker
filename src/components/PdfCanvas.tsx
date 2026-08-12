@@ -1607,7 +1607,7 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
                       </p>
                     );
                   }
-                  return renderFormattedParagraph(pText, textPrimaryColor, primaryColor, pIdx);
+                  return renderFormattedParagraph(pText, textPrimaryColor, primaryColor, pIdx, paperBgColor);
                 })}
               </div>
 

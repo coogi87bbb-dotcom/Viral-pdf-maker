@@ -628,7 +628,8 @@ export function renderFormattedParagraph(
   pText: string,
   textColor: string,
   primaryColor: string,
-  keyIdx: number | string
+  keyIdx: number | string,
+  paperBgColor: string = '#ffffff'
 ) {
   if (!pText) return null;
 
@@ -658,7 +659,18 @@ export function renderFormattedParagraph(
 
     return (
       <div key={keyIdx} className="my-3 p-3 rounded-xl bg-slate-900 border border-slate-800 text-white flex items-center space-x-3 shadow-md">
-        <span className="px-2.5 py-1 bg-amber-500 text-slate-950 font-black text-xs rounded uppercase font-mono tracking-wider shrink-0">
+        {/* Was hardcoded to a fixed app-brand color regardless of which PDF
+            theme the document uses — this badge renders inside the exported
+            page itself, so on any theme other than that one brand color it
+            looked mismatched/off-brand. Uses the document's own primaryColor
+            now, same contrast pattern as the "Crest Pill Badge" logo variant
+            above in PdfCanvas.tsx (light paper color for text on a colored
+            fill, since primaryColor spans both light and dark across
+            themes.ts). */}
+        <span
+          className="px-2.5 py-1 font-black text-xs rounded uppercase font-mono tracking-wider shrink-0"
+          style={{ backgroundColor: primaryColor, color: paperBgColor }}
+        >
           {badgeText}
         </span>
         <span className="font-bold text-sm sm:text-base tracking-wide flex-1 text-slate-100">
@@ -746,7 +758,15 @@ export function renderFormattedParagraph(
       return (
         <div key={keyIdx} className="my-2 p-2.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
           <p className="text-sm sm:text-base leading-relaxed" style={{ color: textColor }}>
-            <span className="font-extrabold tracking-wide uppercase text-xs mr-2 px-2 py-0.5 rounded bg-amber-500/10 text-amber-600 border border-amber-500/20" style={{ color: primaryColor }}>
+            {/* Tint/border were hardcoded to a fixed app-brand color too —
+                same issue as the PROMPT banner above. Derived from the
+                document's own primaryColor at low alpha instead, matching
+                the pattern already used for the sub-heading underline
+                earlier in this file. */}
+            <span
+              className="font-extrabold tracking-wide uppercase text-xs mr-2 px-2 py-0.5 rounded border"
+              style={{ backgroundColor: `${primaryColor}1a`, color: primaryColor, borderColor: `${primaryColor}33` }}
+            >
               {label}
             </span>
             {formatBoldInline(rest, primaryColor)}

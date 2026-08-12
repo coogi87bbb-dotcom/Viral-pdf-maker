@@ -19,7 +19,47 @@
   --color-surface-2: #11141c;
   --color-surface-3: #161a24;
 
-  /* Brand accents */
+  /* Brand accents.
+   * Studio OS chrome primary is "rose gold" (a custom warm blush-copper
+   * metallic, distinct from Tailwind's stock rose/pink swatches) rather
+   * than amber/gold: a softer, boutique-luxury metallic instead of a flat
+   * gold accent. Amber tokens are kept for genuine semantic use
+   * (warning/caution states, and product features where the user selects
+   * "amber" as a document/teleprompter/mockup theme option) — those are
+   * deliberately NOT rose gold, see CLAUDE.md Design System. Violet stays
+   * reserved for AI-context panels, unchanged.
+   */
+  --color-accent-rosegold-100: #fbe4e0;
+  --color-accent-rosegold-200: #f6c9bf;
+  --color-accent-rosegold-300: #efa898;
+  --color-accent-rosegold-400: #e38a72;
+  --color-accent-rosegold-500: #d4735a;
+  --color-accent-rosegold-600: #b85c46;
+  --color-accent-rosegold-700: #954935;
+  --color-accent-rosegold-800: #73392a;
+  --color-accent-rosegold-900: #572b20;
+  --color-accent-rosegold-950: #351a13;
+
+  /* Bare (non "accent-"-prefixed) mirror of the ramp above, same hex
+   * values. Studio OS chrome was originally written against Tailwind's
+   * built-in `amber-400`/`amber-500/20`/etc. shade classes (not the
+   * `accent-amber-*` token classes) in many places — those got mechanically
+   * renamed to `rosegold-400` etc. during the rebrand. Tailwind has no
+   * built-in "rosegold" swatch, so those classes only resolve if a bare
+   * `--color-rosegold-*` token exists here too; without this block they
+   * silently produce no CSS at all (invisible border/bg/shadow), which is
+   * exactly the breakage the first pass of this rebrand caused. */
+  --color-rosegold-100: #fbe4e0;
+  --color-rosegold-200: #f6c9bf;
+  --color-rosegold-300: #efa898;
+  --color-rosegold-400: #e38a72;
+  --color-rosegold-500: #d4735a;
+  --color-rosegold-600: #b85c46;
+  --color-rosegold-700: #954935;
+  --color-rosegold-800: #73392a;
+  --color-rosegold-900: #572b20;
+  --color-rosegold-950: #351a13;
+
   --color-accent-amber-300: #fcd34d;
   --color-accent-amber-400: #fbbf24;
   --color-accent-amber-500: #f59e0b;
@@ -46,6 +86,7 @@
     0 20px 48px -12px rgba(139, 92, 246, 0.16),
     0 32px 80px -20px rgba(0, 0, 0, 0.6);
   --shadow-glow-amber: 0 10px 40px rgba(245, 158, 11, 0.35);
+  --shadow-glow-rosegold: 0 10px 40px rgba(212, 115, 90, 0.35);
   --shadow-glow-violet: 0 10px 40px rgba(139, 92, 246, 0.35);
 }
 
@@ -79,14 +120,24 @@
 
 /* Enterprise Glassmorphism Utility. Only consumer today is the landing
    page's CTA card (src/components/landing/LandingCTA.tsx), sitting over
-   the page-wide scroll video — kept deliberately light so the video reads
-   through, not just decoratively translucent. */
+   the page-wide scroll video. Zero fill, zero blur — the video shows
+   straight through with nothing softening it. The card reads as a
+   hairline-bordered outline, not a filled plate. Text legibility comes
+   from .text-legible (a text-shadow) on the copy inside, not from an
+   opaque backing. */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.28);
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: var(--shadow-elevated);
+}
+
+/* Keeps headline/body copy readable when it sits directly over the
+   scroll-driven video backdrop with little to no card fill behind it
+   (see .glass-panel and the landing feature/proof cards) — a soft drop
+   shadow on the glyphs themselves rather than a background scrim, so the
+   card underneath can stay almost invisible. */
+.text-legible {
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .bg-radial {

@@ -1226,7 +1226,7 @@ ${formatInstructions}
 
 Raw Content Input:
 """
-${rawText.slice(0, 15000)}
+${rawText.slice(0, 200000)}
 """
 
 Instructions:
@@ -1237,6 +1237,7 @@ Instructions:
 5. Provide structured tableData where appropriate.
 6. Create a high-converting Title, Subtitle, Author, and Back-Cover Call To Action page.
 7. Provide short marketing copy suitable for Gumroad / Pinterest listing.
+8. CRITICAL — completeness: every fact, figure, name, step, and detail present in the Raw Content Input above must appear somewhere in the output. Reorganizing, polishing, and formatting are expected; silently dropping, condensing away, or skipping any of the source content is not — this is a reformat of the full source into a professional publication, not a summary of it. If the source is long, use more sections/chapters rather than omitting material.
 
 Return pure structured JSON matching the requested schema.`;
 
@@ -1246,7 +1247,13 @@ Return pure structured JSON matching the requested schema.`;
       config: {
         responseMimeType: 'application/json',
         responseSchema,
-        temperature: 0.3
+        temperature: 0.3,
+        // Explicit, generous cap (well above this schema's typical output
+        // for even a long multi-chapter document) so a large, fully-
+        // preserved source document can't get its JSON response cut off
+        // mid-structure — a truncated response here fails JSON.parse
+        // entirely rather than just losing a little content.
+        maxOutputTokens: 65536
       }
     });
 

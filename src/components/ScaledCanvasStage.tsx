@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ZoomIn, ZoomOut, RotateCcw, Columns, Maximize2, Sparkles, BookOpen, Smartphone, Monitor, Tablet, Wifi, Battery, Signal, Eye } from 'lucide-react';
 import { DocumentData, StudioSettings, PageSize, DEFAULT_STUDIO_SETTINGS } from '../types';
 import { PdfCanvas } from './PdfCanvas';
-import { Studio3DBackground } from './Studio3DBackground';
 
 interface ScaledCanvasStageProps {
   document: DocumentData;
@@ -141,7 +140,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
               onClick={() => setDeviceMode('desktop')}
               className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors ${
                 deviceMode === 'desktop'
-                  ? 'bg-accent-amber-500 text-slate-950 shadow-sm'
+                  ? 'bg-accent-rosegold-500 text-slate-950 shadow-sm'
                   : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
               }`}
               title="Desktop Print/PDF Document View"
@@ -155,7 +154,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
               onClick={() => setDeviceMode('mobile')}
               className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors ${
                 deviceMode === 'mobile'
-                  ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 text-slate-950 shadow-md shadow-amber-950/40 ring-1 ring-amber-300'
+                  ? 'bg-gradient-to-r from-rosegold-500 via-rosegold-400 to-yellow-500 text-slate-950 shadow-md shadow-rosegold-950/40 ring-1 ring-rosegold-300'
                   : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
               }`}
               title="Mobile Smartphone Live Preview (iPhone / Android)"
@@ -169,7 +168,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
               onClick={() => setDeviceMode('tablet')}
               className={`flex items-center space-x-1 px-2.5 py-1 rounded-lg font-bold text-[11px] transition-colors ${
                 deviceMode === 'tablet'
-                  ? 'bg-accent-amber-500 text-slate-950 shadow-sm'
+                  ? 'bg-accent-rosegold-500 text-slate-950 shadow-sm'
                   : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
               }`}
               title="Tablet E-Reader View"
@@ -179,7 +178,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
             </button>
           </div>
 
-          <div className="hidden sm:flex items-center space-x-1 text-[10px] bg-accent-amber-500/10 text-accent-amber-300 border border-amber-500/30 px-2 py-1 rounded-full font-bold">
+          <div className="hidden sm:flex items-center space-x-1 text-[10px] bg-accent-rosegold-500/10 text-accent-rosegold-300 border border-rosegold-500/30 px-2 py-1 rounded-full font-bold">
             <span>{deviceMode === 'mobile' ? 'Mobile Phone Preview' : deviceMode === 'tablet' ? 'Tablet Reader' : 'Full Page View'}</span>
             <span className="opacity-60">•</span>
             <span>{Math.round(effectiveScale * 100)}%</span>
@@ -207,7 +206,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
                 onClick={() => setZoomMode('fit-page')}
                 className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-colors ${
                   zoomMode === 'fit-page'
-                    ? 'bg-accent-amber-500 text-slate-950 shadow-sm'
+                    ? 'bg-accent-rosegold-500 text-slate-950 shadow-sm'
                     : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
                 }`}
                 title="Scale entire page to fit inside view"
@@ -220,7 +219,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
                 onClick={() => setZoomMode('fit-width')}
                 className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-colors ${
                   zoomMode === 'fit-width'
-                    ? 'bg-accent-amber-500 text-slate-950 shadow-sm'
+                    ? 'bg-accent-rosegold-500 text-slate-950 shadow-sm'
                     : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
                 }`}
                 title="Scale width to fill view width"
@@ -236,7 +235,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
                 }}
                 className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-colors ${
                   zoomMode === 'custom' && customZoom === 1.0
-                    ? 'bg-accent-amber-500 text-slate-950 shadow-sm'
+                    ? 'bg-accent-rosegold-500 text-slate-950 shadow-sm'
                     : 'text-ink-muted hover:text-slate-200 hover:bg-surface-2'
                 }`}
                 title="100% Actual Size"
@@ -264,12 +263,12 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
               onClick={onToggleSplitScreen}
               className={`px-2.5 py-1 rounded-xl border text-[11px] font-bold flex items-center space-x-1.5 transition-colors ${
                 isSplitScreen
-                  ? 'bg-accent-amber-500/20 text-accent-amber-300 border-amber-400/50'
+                  ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border-rosegold-400/50'
                   : 'bg-surface-2 text-ink-muted border-white/15 hover:text-slate-200'
               }`}
               title="Toggle Side-by-Side Split View"
             >
-              <Columns className="w-3.5 h-3.5 text-accent-amber-400" />
+              <Columns className="w-3.5 h-3.5 text-accent-rosegold-400" />
               <span className="hidden sm:inline">Split Screen</span>
             </button>
           )}
@@ -281,14 +280,20 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
         ref={containerRef}
         className="flex-1 w-full h-full overflow-y-auto overflow-x-auto p-2 sm:p-4 flex justify-center items-start bg-surface-0 relative z-0"
       >
-        {/* Dynamic 3D Studio Background Effect */}
-        <Studio3DBackground />
+        {/* The app-shell-level Studio3DBackground (mounted once, fixed, in
+            App.tsx) already covers this view. A second copy used to live
+            here as a plain (non-fixed) child of this *scrolling* container
+            — it scrolled along with the PDF pages instead of staying put
+            as a backdrop, and ran a fully independent animation loop on
+            top of the global one, which is what made scrolling the PDF
+            Studio feel laggy/janky ("the whole screen is moving"). Do not
+            re-add a background canvas here. */}
 
         {deviceMode === 'mobile' ? (
           /* Real-time Smartphone Live Preview Mockup Frame */
           <div className="flex flex-col items-center my-2 space-y-3">
             <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-white/10 text-xs text-ink-secondary">
-              <Eye className="w-3.5 h-3.5 text-accent-amber-400 animate-pulse" />
+              <Eye className="w-3.5 h-3.5 text-accent-rosegold-400 animate-pulse" />
               <span className="font-semibold text-[11px]">Smartphone Live Reader View</span>
               <span className="text-[10px] text-ink-muted">(Scroll inside screen)</span>
             </div>
@@ -310,7 +315,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
               </div>
 
               {/* Scrollable Mobile Phone Screen Body */}
-              <div className="flex-1 bg-surface-0 overflow-y-auto overflow-x-hidden relative p-2 flex justify-center items-start scrollbar-thin scrollbar-thumb-amber-500/40">
+              <div className="flex-1 bg-surface-0 overflow-y-auto overflow-x-hidden relative p-2 flex justify-center items-start scrollbar-thin scrollbar-thumb-rosegold-500/40">
                 <div
                   style={{
                     width: `${Math.round(pageWidth * effectiveScale)}px`,
@@ -340,7 +345,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
           /* Tablet E-Reader Viewport */
           <div className="flex flex-col items-center my-2 space-y-3">
             <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-white/10 text-xs text-ink-secondary">
-              <Tablet className="w-3.5 h-3.5 text-accent-amber-400" />
+              <Tablet className="w-3.5 h-3.5 text-accent-rosegold-400" />
               <span className="font-semibold text-[11px]">Tablet & E-Reader Live View</span>
             </div>
 

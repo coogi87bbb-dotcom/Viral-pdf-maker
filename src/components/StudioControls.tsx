@@ -273,21 +273,21 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
       {/* Controls Header */}
       <div className="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-0/90 shrink-0 z-20 backdrop-blur-md">
         <div className="flex items-center space-x-2">
-          <Sliders className="w-4 h-4 text-accent-amber-400" />
+          <Sliders className="w-4 h-4 text-accent-rosegold-400" />
           <h2 className="font-bold text-xs text-white">Studio Design Controls</h2>
         </div>
         {onToggleSplitScreen && (
           <button
             type="button"
             onClick={onToggleSplitScreen}
-            className={`px-2 py-1 rounded-lg border text-[10px] font-bold flex items-center space-x-1 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
+            className={`px-2 py-1 rounded-lg border text-[10px] font-bold flex items-center space-x-1 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
               isSplitScreen
-                ? 'bg-accent-amber-500/20 text-accent-amber-300 border-accent-amber-400/50'
+                ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border-accent-rosegold-400/50'
                 : 'bg-surface-2 text-ink-muted border-white/10 hover:text-ink-secondary'
             }`}
             title="Toggle Side-by-Side Split Screen"
           >
-            <Columns className="w-3 h-3 text-accent-amber-400" />
+            <Columns className="w-3 h-3 text-accent-rosegold-400" />
             <span>Split View: {isSplitScreen ? 'ON' : 'OFF'}</span>
           </button>
         )}
@@ -298,26 +298,26 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
         {onOpenMockupModal && (
           <button
             onClick={onOpenMockupModal}
-            className="w-full p-2.5 bg-gradient-to-r from-surface-1 via-surface-0 to-surface-1 border border-accent-amber-500/40 hover:border-accent-amber-400 rounded-xl text-ink-primary flex items-center justify-between shadow-[var(--shadow-elevated)] transition-colors active:scale-[0.98] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
+            className="w-full p-2.5 bg-gradient-to-r from-surface-1 via-surface-0 to-surface-1 border border-accent-rosegold-500/40 hover:border-accent-rosegold-400 rounded-xl text-ink-primary flex items-center justify-between shadow-[var(--shadow-elevated)] transition-colors active:scale-[0.98] group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
             title="Generate Pinterest Pin graphics, Gumroad 3D covers, and marketing text"
           >
             <div className="flex items-center space-x-2.5">
-              <div className="p-1.5 rounded-lg bg-surface-1 border border-accent-amber-500/50 text-accent-amber-400">
+              <div className="p-1.5 rounded-lg bg-surface-1 border border-accent-rosegold-500/50 text-accent-rosegold-400">
                 <ShoppingBag className="w-4 h-4" />
               </div>
               <div className="text-left">
                 <div className="flex items-center space-x-1.5">
-                  <span className="text-xs font-bold text-white group-hover:text-accent-amber-300 transition-colors">
+                  <span className="text-xs font-bold text-white group-hover:text-accent-rosegold-300 transition-colors">
                     Pinterest & 3D Mockup
                   </span>
-                  <span className="text-[9px] bg-accent-amber-400 text-slate-950 px-1 py-0.2 rounded font-extrabold uppercase">
+                  <span className="text-[9px] bg-accent-rosegold-400 text-slate-950 px-1 py-0.2 rounded font-extrabold uppercase">
                     PRO
                   </span>
                 </div>
                 <p className="text-[10px] text-ink-secondary">Generate Pinterest Pin graphics & sales copy</p>
               </div>
             </div>
-            <span className="text-accent-amber-400 text-xs font-bold group-hover:translate-x-0.5 transition-transform">➔</span>
+            <span className="text-accent-rosegold-400 text-xs font-bold group-hover:translate-x-0.5 transition-transform">➔</span>
           </button>
         )}
 
@@ -325,23 +325,23 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
         <div className="grid grid-cols-3 gap-1.5">
           <button
             onClick={onOpenImporter}
-            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-ink-secondary transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
+            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-ink-secondary transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
             title="Import Word doc, Google Doc link, or text file"
           >
-            <FileText className="w-3.5 h-3.5 text-accent-amber-400 mb-0.5" />
+            <FileText className="w-3.5 h-3.5 text-accent-rosegold-400 mb-0.5" />
             <span>Load Doc</span>
           </button>
           <button
             onClick={onOpenEditor}
-            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-accent-amber-300 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
+            className="flex flex-col items-center justify-center p-2 bg-surface-1 hover:bg-surface-2 border border-white/10 rounded-xl text-[11px] font-semibold text-accent-rosegold-300 transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
             title="Edit titles, chapters, and content directly"
           >
-            <Edit3 className="w-3.5 h-3.5 text-accent-amber-400 mb-0.5" />
+            <Edit3 className="w-3.5 h-3.5 text-accent-rosegold-400 mb-0.5" />
             <span>Edit Text</span>
           </button>
           <button
             onClick={onOpenAiEnhancer}
-            className="flex flex-col items-center justify-center p-2 bg-accent-amber-500 hover:brightness-105 rounded-xl text-[11px] font-bold text-slate-950 shadow-[var(--shadow-glow-amber)] transition-[transform,opacity,filter] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
+            className="flex flex-col items-center justify-center p-2 bg-accent-rosegold-500 hover:brightness-105 rounded-xl text-[11px] font-bold text-slate-950 shadow-[var(--shadow-glow-rosegold)] transition-[transform,opacity,filter] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
             title="AI Polish with Gemini"
           >
             <Sparkles className="w-3.5 h-3.5 text-slate-950 mb-0.5" />
@@ -367,9 +367,9 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveSection(tab.id as any)}
-                className={`px-2.5 py-1.5 rounded-lg flex items-center space-x-1 whitespace-nowrap transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400 ${
+                className={`px-2.5 py-1.5 rounded-lg flex items-center space-x-1 whitespace-nowrap transition-colors active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
                   active
-                    ? 'bg-accent-amber-500 text-slate-950 font-bold shadow-[var(--shadow-glow-amber)]'
+                    ? 'bg-accent-rosegold-500 text-slate-950 font-bold shadow-[var(--shadow-glow-rosegold)]'
                     : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                 }`}
               >
@@ -385,7 +385,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-ink-secondary flex items-center space-x-1.5">
-                <Palette className="w-3.5 h-3.5 text-accent-amber-400" />
+                <Palette className="w-3.5 h-3.5 text-accent-rosegold-400" />
                 <span>{STUDIO_THEMES.length} Publishing Themes</span>
               </label>
               <span className="text-[10px] text-ink-muted font-mono">
@@ -401,7 +401,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 placeholder="Search themes (e.g. Vogue, Cyber, Academic)..."
                 value={themeSearchQuery}
                 onChange={(e) => setThemeSearchQuery(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 focus:border-accent-amber-400 rounded-lg pl-8 pr-3 py-1.5 text-xs text-ink-secondary placeholder-slate-500 outline-none transition-colors"
+                className="w-full bg-surface-0 border border-white/10 focus:border-accent-rosegold-400 rounded-lg pl-8 pr-3 py-1.5 text-xs text-ink-secondary placeholder-slate-500 outline-none transition-colors"
               />
               {themeSearchQuery && (
                 <button
@@ -421,7 +421,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   onClick={() => setSelectedThemeCategory(cat)}
                   className={`px-2 py-1 rounded-md whitespace-nowrap transition-colors ${
                     selectedThemeCategory === cat
-                      ? 'bg-accent-amber-500 text-slate-950 font-bold'
+                      ? 'bg-accent-rosegold-500 text-slate-950 font-bold'
                       : 'bg-surface-0 text-ink-muted hover:text-ink-secondary border border-white/10'
                   }`}
                 >
@@ -445,16 +445,16 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       onClick={() => onSelectTheme(theme)}
                       className={`p-3 rounded-xl border cursor-pointer transition-colors ${
                         isSelected
-                          ? 'bg-surface-2 border-accent-amber-400 shadow-lg shadow-amber-500/5 ring-1 ring-amber-400/50'
+                          ? 'bg-surface-2 border-accent-rosegold-400 shadow-lg shadow-rosegold-500/5 ring-1 ring-rosegold-400/50'
                           : 'bg-surface-0/70 border-white/10 hover:border-white/15 hover:bg-surface-2/50'
                       }`}
                     >
                       <div className="flex items-center justify-between mb-1">
                         <span className="text-xs font-bold text-white flex items-center space-x-1.5">
                           <span>{theme.name}</span>
-                          {isSelected && <Check className="w-3.5 h-3.5 text-accent-amber-400" />}
+                          {isSelected && <Check className="w-3.5 h-3.5 text-accent-rosegold-400" />}
                         </span>
-                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-surface-2 text-accent-amber-300 border border-white/15 font-mono">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded bg-surface-2 text-accent-rosegold-300 border border-white/15 font-mono">
                           {theme.tag}
                         </span>
                       </div>
@@ -588,7 +588,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   type="checkbox"
                   checked={!!settings.confidentialBadge}
                   onChange={(e) => onUpdateSettings({ confidentialBadge: e.target.checked })}
-                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                 />
               </label>
             </div>
@@ -600,10 +600,10 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-ink-secondary flex items-center space-x-1.5">
-                <ImageIcon className="w-3.5 h-3.5 text-accent-amber-400" />
+                <ImageIcon className="w-3.5 h-3.5 text-accent-rosegold-400" />
                 <span>Logo & Brand Crest Creator</span>
               </label>
-              <span className="text-[10px] text-accent-amber-400 font-mono">25 Formats • 25 Crests</span>
+              <span className="text-[10px] text-accent-rosegold-400 font-mono">25 Formats • 25 Crests</span>
             </div>
 
             {/* Logo Enable Toggle */}
@@ -613,7 +613,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 type="checkbox"
                 checked={logoSettings.showLogo}
                 onChange={(e) => handleUpdateLogo({ showLogo: e.target.checked })}
-                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
               />
             </label>
 
@@ -623,15 +623,15 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 {/* 1. UNIFIED IMAGE LOGO & PHOTO FILE STUDIO */}
                 <div className="space-y-3 p-3 bg-surface-1/80 rounded-xl border border-white/10">
                   <div className="flex items-center justify-between">
-                    <label className="block text-[11px] font-bold text-accent-amber-300 flex items-center space-x-1.5">
-                      <Upload className="w-3.5 h-3.5 text-accent-amber-400" />
+                    <label className="block text-[11px] font-bold text-accent-rosegold-300 flex items-center space-x-1.5">
+                      <Upload className="w-3.5 h-3.5 text-accent-rosegold-400" />
                       <span>Image Logo & Brand Photo File Studio</span>
                     </label>
                     <span className="text-[9px] text-ink-muted font-mono">Upload / URL / Crests</span>
                   </div>
 
                   {/* Direct Image File Drag & Drop Upload Zone */}
-                  <div className="border-2 border-dashed border-white/15 hover:border-accent-amber-400 rounded-xl p-3 bg-surface-0/80 text-center transition-colors relative group">
+                  <div className="border-2 border-dashed border-white/15 hover:border-accent-rosegold-400 rounded-xl p-3 bg-surface-0/80 text-center transition-colors relative group">
                     <input
                       type="file"
                       accept="image/*"
@@ -659,10 +659,10 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           <img
                             src={logoSettings.logoImageUrl}
                             alt="Logo Preview"
-                            className="w-10 h-10 object-contain rounded bg-white/10 p-1 border border-accent-amber-400/50 shadow-md"
+                            className="w-10 h-10 object-contain rounded bg-white/10 p-1 border border-accent-rosegold-400/50 shadow-md"
                           />
                           <div className="text-left">
-                            <p className="text-[11px] font-bold text-accent-amber-300 truncate">Logo Photo File Active</p>
+                            <p className="text-[11px] font-bold text-accent-rosegold-300 truncate">Logo Photo File Active</p>
                             <p className="text-[9px] text-ink-muted">Rendering on Covers & Running Headers</p>
                           </div>
                         </div>
@@ -680,7 +680,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center space-y-1 py-1.5">
-                        <Upload className="w-5 h-5 text-accent-amber-400 group-hover:scale-110 transition-transform" />
+                        <Upload className="w-5 h-5 text-accent-rosegold-400 group-hover:scale-110 transition-transform" />
                         <p className="text-[11px] font-bold text-ink-secondary">Click or Drag Logo Image File Here</p>
                         <p className="text-[9px] text-ink-muted">PNG, JPG, SVG, WEBP high-res supported</p>
                       </div>
@@ -700,7 +700,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         })
                       }
                       placeholder="https://example.com/brand-logo.png"
-                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-[10px] text-white focus:outline-none focus:border-accent-amber-400 font-mono"
+                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-[10px] text-white focus:outline-none focus:border-accent-rosegold-400 font-mono"
                     />
                   </div>
 
@@ -708,7 +708,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   <div className="space-y-1.5 border-t border-white/10 pt-2.5">
                     <div className="flex items-center justify-between">
                       <label className="block text-[10px] font-bold text-ink-secondary flex items-center space-x-1">
-                        <Crown className="w-3 h-3 text-accent-amber-400" />
+                        <Crown className="w-3 h-3 text-accent-rosegold-400" />
                         <span>Pick Preset Brand Crest (25 Options)</span>
                       </label>
                       <span className="text-[9px] text-slate-500 font-mono">1-Click Apply</span>
@@ -856,11 +856,11 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                             }}
                             className={`p-1.5 rounded-lg border text-center flex flex-col items-center justify-center space-y-1 transition-colors ${
                               isSelected
-                                ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 ring-1 ring-amber-400/50'
+                                ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 ring-1 ring-rosegold-400/50'
                                 : 'bg-surface-0 border-white/10 text-ink-muted hover:border-white/15 hover:text-ink-secondary'
                             }`}
                           >
-                            <Icon className="w-3.5 h-3.5 text-accent-amber-400" />
+                            <Icon className="w-3.5 h-3.5 text-accent-rosegold-400" />
                             <span className="text-[8px] font-bold truncate w-full">
                               {preset.name}
                             </span>
@@ -875,10 +875,10 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 <div className="space-y-2 border-t border-white/10 pt-3">
                   <div className="flex items-center justify-between">
                     <label className="block text-[11px] font-bold text-ink-secondary flex items-center space-x-1.5">
-                      <Layout className="w-3.5 h-3.5 text-accent-amber-400" />
+                      <Layout className="w-3.5 h-3.5 text-accent-rosegold-400" />
                       <span>25 Profitable Logo Format Modes</span>
                     </label>
-                    <span className="text-[9px] text-accent-amber-400 font-mono">Select Badge Layout</span>
+                    <span className="text-[9px] text-accent-rosegold-400 font-mono">Select Badge Layout</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-1.5 max-h-[220px] overflow-y-auto pr-1">
@@ -917,13 +917,13 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => handleUpdateLogo({ logoType: mode.id as any })}
                           className={`p-2 rounded-xl text-left border transition-colors ${
                             isActive
-                              ? 'bg-accent-amber-500/20 border-accent-amber-400 text-amber-200 ring-1 ring-amber-400/50 shadow-md'
+                              ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-rosegold-200 ring-1 ring-rosegold-400/50 shadow-md'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary hover:border-white/15'
                           }`}
                         >
                           <div className="flex items-center justify-between mb-0.5">
                             <span className="text-[11px] font-bold text-white">{mode.label}</span>
-                            {isActive && <Check className="w-3 h-3 text-accent-amber-400" />}
+                            {isActive && <Check className="w-3 h-3 text-accent-rosegold-400" />}
                           </div>
                           <p className="text-[9px] text-ink-muted leading-tight truncate">{mode.desc}</p>
                         </button>
@@ -942,7 +942,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={logoSettings.logoText}
                         onChange={(e) => handleUpdateLogo({ logoText: e.target.value })}
                         placeholder="e.g. SOLOPRENEUR LABS"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-bold"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-bold"
                       />
                     </div>
                     <div>
@@ -952,7 +952,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={logoSettings.logoSubtext || ''}
                         onChange={(e) => handleUpdateLogo({ logoSubtext: e.target.value })}
                         placeholder="e.g. DIGITAL PRESS EDITION"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     </div>
                   </div>
@@ -965,7 +965,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     <select
                       value={logoSettings.logoPlacement}
                       onChange={(e) => handleUpdateLogo({ logoPlacement: e.target.value as any })}
-                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-medium"
+                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-medium"
                     >
                       <option value="cover-only">Cover Header Only</option>
                       <option value="header-all">Running Header on All Pages</option>
@@ -984,7 +984,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => handleUpdateLogo({ logoAlignment: align })}
                           className={`py-1 rounded-lg text-[10px] capitalize border transition-colors ${
                             logoSettings.logoAlignment === align
-                              ? 'bg-accent-amber-500/30 border-accent-amber-400 text-accent-amber-300 font-bold'
+                              ? 'bg-accent-rosegold-500/30 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -999,7 +999,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 <div className="border-t border-white/10 pt-3">
                   <div className="flex justify-between text-[11px] text-ink-muted mb-1">
                     <span>Logo Scale / Height</span>
-                    <span className="font-mono text-accent-amber-300 font-bold">{logoSettings.logoHeight || 28}px</span>
+                    <span className="font-mono text-accent-rosegold-300 font-bold">{logoSettings.logoHeight || 28}px</span>
                   </div>
                   <input
                     type="range"
@@ -1007,7 +1007,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     max="80"
                     value={logoSettings.logoHeight || 28}
                     onChange={(e) => handleUpdateLogo({ logoHeight: parseInt(e.target.value) })}
-                    className="w-full accent-amber-400 cursor-pointer"
+                    className="w-full accent-rosegold-400 cursor-pointer"
                   />
                 </div>
               </div>
@@ -1023,7 +1023,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 <Type className="w-3.5 h-3.5 text-indigo-400" />
                 <span>108 Font Pairings & Type Controls</span>
               </label>
-              <span className="text-[10px] text-accent-amber-400 font-mono font-bold">
+              <span className="text-[10px] text-accent-rosegold-400 font-mono font-bold">
                 {filteredFontPairings.length} Pairs
               </span>
             </div>
@@ -1140,10 +1140,10 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
             <div className="space-y-3 border-t border-white/10 pt-3">
               <div className="flex items-center justify-between">
                 <label className="block text-[11px] font-bold text-ink-secondary flex items-center space-x-1.5">
-                  <Edit3 className="w-3.5 h-3.5 text-accent-amber-400" />
+                  <Edit3 className="w-3.5 h-3.5 text-accent-rosegold-400" />
                   <span>Select Individual Fonts</span>
                 </label>
-                <span className="text-[9px] text-accent-amber-400 font-mono">Custom Override</span>
+                <span className="text-[9px] text-accent-rosegold-400 font-mono">Custom Override</span>
               </div>
               <p className="text-[10px] text-ink-muted leading-tight">
                 Don't like a preset pairing? Customize your Header font or Body font one at a time.
@@ -1160,7 +1160,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     const val = e.target.value;
                     onUpdateSettings({ customHeaderFont: val ? val : undefined });
                   }}
-                  className="w-full bg-surface-0 border border-white/15 focus:border-accent-amber-400 rounded-lg p-2 text-xs text-white outline-none font-medium"
+                  className="w-full bg-surface-0 border border-white/15 focus:border-accent-rosegold-400 rounded-lg p-2 text-xs text-white outline-none font-medium"
                 >
                   <option value="">-- Use Preset Pairing Header Font --</option>
                   {INDIVIDUAL_HEADER_FONTS.map((f) => (
@@ -1182,7 +1182,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     const val = e.target.value;
                     onUpdateSettings({ customBodyFont: val ? val : undefined });
                   }}
-                  className="w-full bg-surface-0 border border-white/15 focus:border-accent-amber-400 rounded-lg p-2 text-xs text-white outline-none font-medium"
+                  className="w-full bg-surface-0 border border-white/15 focus:border-accent-rosegold-400 rounded-lg p-2 text-xs text-white outline-none font-medium"
                 >
                   <option value="">-- Use Preset Pairing Body Font --</option>
                   {INDIVIDUAL_BODY_FONTS.map((f) => (
@@ -1253,14 +1253,14 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 type="checkbox"
                 checked={!!settings.dropCap}
                 onChange={(e) => onUpdateSettings({ dropCap: e.target.checked })}
-                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
               />
             </label>
 
             {/* TEXT, LETTERS & WORDS COLOR CUSTOMIZER */}
             <div className="bg-surface-0/90 p-3.5 rounded-xl border border-white/10 space-y-3.5 text-xs">
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="font-bold text-accent-amber-400 text-xs flex items-center space-x-1.5">
+                <span className="font-bold text-accent-rosegold-400 text-xs flex items-center space-x-1.5">
                   <Palette className="w-3.5 h-3.5" />
                   <span>Text, Letters & Words Color Studio</span>
                 </span>
@@ -1296,7 +1296,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     value={settings.customTextColorPrimary || currentTheme.colors.textPrimary || ''}
                     onChange={(e) => onUpdateSettings({ customTextColorPrimary: e.target.value })}
                     placeholder="Theme Default"
-                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-mono"
+                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-mono"
                   />
                 </div>
               </div>
@@ -1318,7 +1318,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     value={settings.customHeadingColor || currentTheme.colors.primary || ''}
                     onChange={(e) => onUpdateSettings({ customHeadingColor: e.target.value })}
                     placeholder="Theme Default"
-                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-mono"
+                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-mono"
                   />
                 </div>
               </div>
@@ -1340,7 +1340,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     value={settings.customTextColorSecondary || currentTheme.colors.textSecondary || ''}
                     onChange={(e) => onUpdateSettings({ customTextColorSecondary: e.target.value })}
                     placeholder="Theme Default"
-                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-mono"
+                    className="flex-1 bg-surface-1 border border-white/15 rounded-lg p-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-mono"
                   />
                 </div>
               </div>
@@ -1452,7 +1452,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       onClick={() => onUpdateSettings({ paperBgStyle: tone.id })}
                       className={`p-2 rounded-xl border flex flex-col items-center justify-center space-y-1 text-[10px] transition-colors ${
                         active
-                          ? 'border-accent-amber-400 bg-surface-2 text-accent-amber-300 font-bold shadow-xs'
+                          ? 'border-accent-rosegold-400 bg-surface-2 text-accent-rosegold-300 font-bold shadow-xs'
                           : 'border-white/10 bg-surface-1/60 text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                       }`}
                     >
@@ -1475,7 +1475,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
           <div className="space-y-5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-ink-secondary flex items-center space-x-1.5">
-                <AlignCenter className="w-3.5 h-3.5 text-accent-amber-400" />
+                <AlignCenter className="w-3.5 h-3.5 text-accent-rosegold-400" />
                 <span>Header, Footer & Page Number Studio</span>
               </label>
             </div>
@@ -1490,7 +1490,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 type="checkbox"
                 checked={settings.showHeadersFooters}
                 onChange={(e) => onUpdateSettings({ showHeadersFooters: e.target.checked })}
-                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
               />
             </label>
 
@@ -1499,7 +1499,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 {/* --- CARD 1: HEADER LAYOUT & TYPOGRAPHY --- */}
                 <div className="bg-surface-0/90 p-3.5 rounded-xl border border-white/10 space-y-3.5 text-xs">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                    <span className="font-bold text-accent-amber-400 text-xs flex items-center space-x-1.5">
+                    <span className="font-bold text-accent-rosegold-400 text-xs flex items-center space-x-1.5">
                       <span>1. Running Header Style & Layout</span>
                     </span>
                   </div>
@@ -1523,7 +1523,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => onUpdateSettings({ headerStyle: preset.id as any })}
                           className={`p-2 rounded-lg text-left border transition-colors ${
                             (settings.headerStyle || 'classic-minimal') === preset.id
-                              ? 'bg-accent-amber-500/20 border-accent-amber-400 text-amber-200 font-bold shadow-xs'
+                              ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-rosegold-200 font-bold shadow-xs'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -1543,7 +1543,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.runningHeaderText || ''}
                         onChange={(e) => onUpdateSettings({ runningHeaderText: e.target.value })}
                         placeholder="Default: Document Title"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     </div>
                     <div>
@@ -1553,7 +1553,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.runningHeaderSubtext || ''}
                         onChange={(e) => onUpdateSettings({ runningHeaderSubtext: e.target.value })}
                         placeholder="e.g. CONFIDENTIAL / v2.0"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     </div>
                   </div>
@@ -1565,7 +1565,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       <select
                         value={settings.headerTextTransform || 'uppercase'}
                         onChange={(e) => onUpdateSettings({ headerTextTransform: e.target.value as any })}
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       >
                         <option value="uppercase">UPPERCASE</option>
                         <option value="capitalize">Capitalize</option>
@@ -1578,7 +1578,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       <select
                         value={settings.headerFontSize || 'xs'}
                         onChange={(e) => onUpdateSettings({ headerFontSize: e.target.value as any })}
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       >
                         <option value="xs">Small (10px)</option>
                         <option value="sm">Medium (12px)</option>
@@ -1591,7 +1591,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       <select
                         value={settings.headerColorOption || 'muted'}
                         onChange={(e) => onUpdateSettings({ headerColorOption: e.target.value as any })}
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-1.5 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       >
                         <option value="muted">Muted Secondary</option>
                         <option value="primary">Theme Primary</option>
@@ -1616,7 +1616,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => onUpdateSettings({ headerAlignment: align.id as any })}
                           className={`py-1.5 rounded-lg text-[10px] font-bold border transition-colors ${
                             (settings.headerAlignment || 'between') === align.id
-                              ? 'bg-accent-amber-500 text-slate-950 border-accent-amber-400'
+                              ? 'bg-accent-rosegold-500 text-slate-950 border-accent-rosegold-400'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -1632,7 +1632,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     <select
                       value={settings.headerDividerStyle || 'solid'}
                       onChange={(e) => onUpdateSettings({ headerDividerStyle: e.target.value as any })}
-                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     >
                       <option value="solid">Solid Hairline Line</option>
                       <option value="double">Double Rule Line</option>
@@ -1649,7 +1649,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       type="checkbox"
                       checked={!!settings.showHeaderLogo}
                       onChange={(e) => onUpdateSettings({ showHeaderLogo: e.target.checked })}
-                      className="w-4 h-4 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                      className="w-4 h-4 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                     />
                   </label>
                 </div>
@@ -1657,7 +1657,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 {/* --- CARD 2: FOOTER LAYOUT & COPYRIGHT --- */}
                 <div className="bg-surface-0/90 p-3.5 rounded-xl border border-white/10 space-y-3.5 text-xs">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                    <span className="font-bold text-accent-amber-400 text-xs flex items-center space-x-1.5">
+                    <span className="font-bold text-accent-rosegold-400 text-xs flex items-center space-x-1.5">
                       <span>2. Running Footer Style & Options</span>
                     </span>
                   </div>
@@ -1680,7 +1680,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => onUpdateSettings({ footerStyle: preset.id as any })}
                           className={`p-2 rounded-lg text-left border transition-colors ${
                             (settings.footerStyle || 'classic-split') === preset.id
-                              ? 'bg-accent-amber-500/20 border-accent-amber-400 text-amber-200 font-bold shadow-xs'
+                              ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-rosegold-200 font-bold shadow-xs'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -1700,7 +1700,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.runningFooterText || ''}
                         onChange={(e) => onUpdateSettings({ runningFooterText: e.target.value })}
                         placeholder="Default: Author Name"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     </div>
                     <div>
@@ -1710,7 +1710,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.runningFooterSubtext || ''}
                         onChange={(e) => onUpdateSettings({ runningFooterSubtext: e.target.value })}
                         placeholder="e.g. ALL RIGHTS RESERVED"
-                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     </div>
                   </div>
@@ -1722,7 +1722,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={!!settings.footerShowDate}
                         onChange={(e) => onUpdateSettings({ footerShowDate: e.target.checked })}
-                        className="w-3.5 h-3.5 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-3.5 h-3.5 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                       <span>Show Date</span>
                     </label>
@@ -1733,7 +1733,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.footerCustomDate || ''}
                         onChange={(e) => onUpdateSettings({ footerCustomDate: e.target.value })}
                         placeholder="e.g. August 2026"
-                        className="w-full bg-surface-0 border border-white/15 rounded p-1 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-0 border border-white/15 rounded p-1 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     )}
                   </div>
@@ -1745,7 +1745,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={!!settings.footerShowDocId}
                         onChange={(e) => onUpdateSettings({ footerShowDocId: e.target.checked })}
-                        className="w-3.5 h-3.5 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-3.5 h-3.5 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                       <span>Show Document ID</span>
                     </label>
@@ -1756,7 +1756,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         value={settings.footerDocIdText || ''}
                         onChange={(e) => onUpdateSettings({ footerDocIdText: e.target.value })}
                         placeholder="e.g. REF: #2026-X09"
-                        className="w-full bg-surface-0 border border-white/15 rounded p-1 text-[11px] text-white focus:outline-none focus:border-accent-amber-400"
+                        className="w-full bg-surface-0 border border-white/15 rounded p-1 text-[11px] text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                     )}
                   </div>
@@ -1767,7 +1767,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     <select
                       value={settings.footerDividerStyle || 'solid'}
                       onChange={(e) => onUpdateSettings({ footerDividerStyle: e.target.value as any })}
-                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     >
                       <option value="solid">Solid Hairline Line</option>
                       <option value="double">Double Rule Line</option>
@@ -1781,7 +1781,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 {/* --- CARD 3: PAGE NUMBERING & FORMATTING --- */}
                 <div className="bg-surface-0/90 p-3.5 rounded-xl border border-white/10 space-y-3.5 text-xs">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                    <span className="font-bold text-accent-amber-400 text-xs flex items-center space-x-1.5">
+                    <span className="font-bold text-accent-rosegold-400 text-xs flex items-center space-x-1.5">
                       <span>3. Page Number Formatting & Position</span>
                     </span>
                   </div>
@@ -1805,7 +1805,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => onUpdateSettings({ pageNumberStyle: style.id as any })}
                           className={`p-1.5 rounded-lg text-xs font-medium border text-center transition-colors ${
                             settings.pageNumberStyle === style.id
-                              ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                              ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -1859,7 +1859,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                           onClick={() => onUpdateSettings({ pageNumberPosition: pos.id as any })}
                           className={`p-1.5 rounded-lg text-[11px] font-medium border text-center transition-colors ${
                             (settings.pageNumberPosition || 'bottom-right') === pos.id
-                              ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                              ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                               : 'bg-surface-1 border-white/10 text-ink-muted hover:text-ink-secondary'
                           }`}
                         >
@@ -1872,7 +1872,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
 
                 {/* --- CARD 4: PAGE SUPPRESSION RULES --- */}
                 <div className="bg-surface-0/90 p-3.5 rounded-xl border border-white/10 space-y-2.5 text-xs">
-                  <span className="font-bold text-accent-amber-400 text-xs block border-b border-white/10 pb-1.5">
+                  <span className="font-bold text-accent-rosegold-400 text-xs block border-b border-white/10 pb-1.5">
                     4. Page Visibility & Suppression Rules
                   </span>
 
@@ -1883,7 +1883,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={settings.suppressHeaderOnCover ?? true}
                         onChange={(e) => onUpdateSettings({ suppressHeaderOnCover: e.target.checked })}
-                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                     </label>
 
@@ -1893,7 +1893,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={settings.suppressFooterOnCover ?? true}
                         onChange={(e) => onUpdateSettings({ suppressFooterOnCover: e.target.checked })}
-                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                     </label>
 
@@ -1903,7 +1903,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={!!settings.suppressHeaderOnToc}
                         onChange={(e) => onUpdateSettings({ suppressHeaderOnToc: e.target.checked })}
-                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                     </label>
 
@@ -1913,7 +1913,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                         type="checkbox"
                         checked={!!settings.suppressFooterOnToc}
                         onChange={(e) => onUpdateSettings({ suppressFooterOnToc: e.target.checked })}
-                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                        className="w-4 h-4 rounded bg-surface-0 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                       />
                     </label>
                   </div>
@@ -1928,7 +1928,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-ink-secondary flex items-center space-x-1.5">
-                <Layers className="w-3.5 h-3.5 text-accent-amber-400" />
+                <Layers className="w-3.5 h-3.5 text-accent-rosegold-400" />
                 <span>Document Elements & Layout</span>
               </label>
             </div>
@@ -1941,7 +1941,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   type="checkbox"
                   checked={settings.showTableOfContents}
                   onChange={(e) => onUpdateSettings({ showTableOfContents: e.target.checked })}
-                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                 />
               </label>
 
@@ -1958,7 +1958,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       onClick={() => onUpdateSettings({ tocStyle: toc.id as any })}
                       className={`p-1.5 rounded-lg text-xs font-medium border text-left transition-colors ${
                         (settings.tocStyle || 'classic-list') === toc.id
-                          ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                          ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                           : 'bg-surface-0 border-white/10 text-ink-muted'
                       }`}
                     >
@@ -1986,7 +1986,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     onClick={() => onUpdateSettings({ chapterBadgeStyle: ch.id as any })}
                     className={`p-1.5 rounded-lg text-[11px] font-medium border text-center transition-colors ${
                       (settings.chapterBadgeStyle || 'number') === ch.id
-                        ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                        ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                         : 'bg-surface-0 border-white/10 text-ink-muted'
                     }`}
                   >
@@ -2011,7 +2011,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     onClick={() => onUpdateSettings({ calloutBorderStyle: c.id as any })}
                     className={`p-1.5 rounded-lg text-xs font-medium border text-left transition-colors ${
                       (settings.calloutBorderStyle || 'left-accent') === c.id
-                        ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                        ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                         : 'bg-surface-0 border-white/10 text-ink-muted'
                     }`}
                   >
@@ -2029,7 +2029,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                   type="checkbox"
                   checked={settings.showCallToActionPage}
                   onChange={(e) => onUpdateSettings({ showCallToActionPage: e.target.checked })}
-                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-amber-500 focus:ring-amber-500/20"
+                  className="w-4 h-4 rounded bg-surface-1 border-white/15 text-rosegold-500 focus:ring-rosegold-500/20"
                 />
               </label>
 
@@ -2046,7 +2046,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                       onClick={() => onUpdateSettings({ ctaStyle: cta.id as any })}
                       className={`p-1.5 rounded-lg text-xs font-medium border text-left transition-colors ${
                         (settings.ctaStyle || 'banner') === cta.id
-                          ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 font-bold'
+                          ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 font-bold'
                           : 'bg-surface-0 border-white/10 text-ink-muted'
                       }`}
                     >
@@ -2064,7 +2064,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <label className="text-xs font-bold text-ink-secondary flex items-center space-x-1.5">
-                <Droplet className="w-3.5 h-3.5 text-accent-amber-400" />
+                <Droplet className="w-3.5 h-3.5 text-accent-rosegold-400" />
                 <span>Custom Palette & Watermark</span>
               </label>
             </div>
@@ -2158,14 +2158,14 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                 value={settings.watermarkText || ''}
                 onChange={(e) => onUpdateSettings({ watermarkText: e.target.value })}
                 placeholder="e.g. DRAFT / CONFIDENTIAL / GUMROAD EDITION"
-                className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                className="w-full bg-surface-1 border border-white/15 rounded-lg p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
               />
 
               {settings.watermarkText && (
                 <div>
                   <div className="flex justify-between text-[11px] text-ink-muted mb-1">
                     <span>Watermark Opacity</span>
-                    <span className="font-mono text-accent-amber-300 font-bold">{settings.watermarkOpacity ?? 10}%</span>
+                    <span className="font-mono text-accent-rosegold-300 font-bold">{settings.watermarkOpacity ?? 10}%</span>
                   </div>
                   <input
                     type="range"
@@ -2173,7 +2173,7 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
                     max="40"
                     value={settings.watermarkOpacity ?? 10}
                     onChange={(e) => onUpdateSettings({ watermarkOpacity: parseInt(e.target.value) })}
-                    className="w-full accent-amber-400 cursor-pointer"
+                    className="w-full accent-rosegold-400 cursor-pointer"
                   />
                 </div>
               )}

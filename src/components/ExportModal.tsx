@@ -12,7 +12,7 @@ interface ExportModalProps {
   onOpenMockupStudio?: () => void;
 }
 
-const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400';
+const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400';
 
 export const ExportModal: React.FC<ExportModalProps> = ({
   isOpen,
@@ -81,7 +81,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
       {/* Modal Header */}
       <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-accent-amber-500/20 text-accent-amber-400 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-accent-rosegold-500/20 text-accent-rosegold-400 flex items-center justify-center">
             <Download className="w-4 h-4" />
           </div>
           <div>
@@ -103,7 +103,7 @@ export const ExportModal: React.FC<ExportModalProps> = ({
         <button
           onClick={handleDownloadPdf}
           disabled={isExportingPdf}
-          className={`w-full p-4 bg-gradient-to-r from-accent-amber-500 to-accent-amber-400 hover:brightness-105 text-slate-950 rounded-xl font-bold text-xs shadow-[var(--shadow-glow-amber)] flex items-center justify-between transition-[transform,opacity,filter] active:scale-[0.98] group disabled:opacity-50 ${FOCUS_RING}`}
+          className={`w-full p-4 bg-gradient-to-r from-accent-rosegold-500 to-accent-rosegold-400 hover:brightness-105 text-slate-950 rounded-xl font-bold text-xs shadow-[var(--shadow-glow-rosegold)] flex items-center justify-between transition-[transform,opacity,filter] active:scale-[0.98] group disabled:opacity-50 ${FOCUS_RING}`}
         >
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-lg bg-slate-950/20 flex items-center justify-center">
@@ -131,20 +131,20 @@ export const ExportModal: React.FC<ExportModalProps> = ({
               onOpenMockupStudio();
             }}
             disabled={isExportingPdf}
-            className={`w-full p-4 bg-gradient-to-r from-surface-1 via-surface-0 to-surface-1 border-2 border-accent-amber-500/40 hover:border-accent-amber-400 rounded-2xl text-ink-secondary text-xs font-semibold flex items-center justify-between transition-colors shadow-[var(--shadow-elevated)] active:translate-y-0.5 cursor-pointer ${FOCUS_RING}`}
+            className={`w-full p-4 bg-gradient-to-r from-surface-1 via-surface-0 to-surface-1 border-2 border-accent-rosegold-500/40 hover:border-accent-rosegold-400 rounded-2xl text-ink-secondary text-xs font-semibold flex items-center justify-between transition-colors shadow-[var(--shadow-elevated)] active:translate-y-0.5 cursor-pointer ${FOCUS_RING}`}
           >
             <div className="flex items-center space-x-3">
-              <div className="w-9 h-9 rounded-lg bg-surface-1 border border-accent-amber-500/50 flex items-center justify-center text-accent-amber-400">
+              <div className="w-9 h-9 rounded-lg bg-surface-1 border border-accent-rosegold-500/50 flex items-center justify-center text-accent-rosegold-400">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div className="text-left">
                 <div className="flex items-center space-x-2">
                   <p className="text-sm font-bold text-white">Pinterest & 3D Cover Mockups</p>
-                  <span className="text-[9px] bg-accent-amber-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold uppercase">
+                  <span className="text-[9px] bg-accent-rosegold-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold uppercase">
                     Social
                   </span>
                 </div>
-                <p className="text-[11px] text-accent-amber-200/80">Generate Pinterest Pin graphics & Gumroad 3D book covers</p>
+                <p className="text-[11px] text-accent-rosegold-200/80">Generate Pinterest Pin graphics & Gumroad 3D book covers</p>
               </div>
             </div>
           </button>

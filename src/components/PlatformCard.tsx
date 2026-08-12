@@ -62,7 +62,7 @@ export const PlatformCard: React.FC<PlatformCardProps> = ({ content, onUpdateCon
   };
 
   return (
-    <MotionPanel3D tiltX={10} delay={0.1}>
+    <MotionPanel3D tiltX={10} delay={0.1} hoverTilt={false}>
       <div className="bg-surface-1/90 rounded-2xl border border-white/10 p-5 sm:p-6 shadow-xl space-y-5">
       {/* Platform Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
