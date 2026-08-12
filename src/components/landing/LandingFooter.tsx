@@ -14,7 +14,7 @@ export const LandingFooter: React.FC = () => {
             </div>
           </div>
           <span className="text-sm font-black bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
-            Viral PDF Creator
+            LogFlowAI
           </span>
         </div>
         <p className="text-xs text-slate-500 text-center sm:text-right">

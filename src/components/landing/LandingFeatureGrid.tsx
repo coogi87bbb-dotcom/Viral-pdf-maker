@@ -3,9 +3,12 @@ import {
   Flame,
   BarChart3,
   Share2,
-  Bookmark,
   Image as ImageIcon,
-  Video,
+  FileText,
+  Layers,
+  Briefcase,
+  Handshake,
+  Bot,
   type LucideIcon
 } from 'lucide-react';
 import { MotionPanel3D } from '../MotionPanel3D';
@@ -19,45 +22,67 @@ interface Feature {
 
 const FEATURES: Feature[] = [
   {
+    icon: Share2,
+    title: 'Omni-Campaign Factory',
+    description:
+      'One topic, seven platforms — algorithm-native posts for every network at once, backed by 40 remixable campaign blueprints. What takes 3+ hours by hand takes about 30 seconds here.',
+    accent: 'violet'
+  },
+  {
     icon: Flame,
     title: 'Psychological Hook Studio',
     description:
-      'AI-generated hooks scored for virality, tunable across Mild, Spicy, and Nuclear Viral spice levels.',
+      'AI hooks scored for virality across Mild, Spicy, and Nuclear spice levels — skip the hour of rewrites most creators burn on their first three seconds.',
     accent: 'amber'
   },
   {
     icon: BarChart3,
     title: 'Virality Score Auditor',
     description:
-      'Real-Time Algorithm Simulator & Virality Diagnostics — retention curve simulation, algorithm compliance checks, and 10x rewrites.',
+      'Every draft audited against real algorithm behavior before you post, with instant rewrites — catch a dead post before it costs you the afternoon.',
     accent: 'cyan'
   },
   {
-    icon: Share2,
-    title: 'Multi-Platform Campaign Generator',
-    description:
-      'One topic, seven platforms. Algorithm-native content tailored to the character limits and tone of every major network, simultaneously.',
-    accent: 'violet'
-  },
-  {
-    icon: Bookmark,
-    title: '40 Master Blueprints + Teardown Vault',
-    description:
-      '40 master blueprints and 12 real case-study teardowns, ready to remix for your niche.',
-    accent: 'emerald'
-  },
-  {
     icon: ImageIcon,
-    title: 'AI Visual & Thumbnail Studio',
-    description: 'On-brand thumbnails and visuals generated to stop the scroll, in seconds.',
+    title: 'AI Visual & Video Studio',
+    description:
+      'On-brand thumbnails, carousels, Pinterest pins, plus an in-browser teleprompter and recorder — skip the evening you’d lose to a design tool and a separate camera app.',
     accent: 'rose'
   },
   {
-    icon: Video,
-    title: 'Teleprompter Studio Pro',
+    icon: FileText,
+    title: 'PDF Publishing Studio',
     description:
-      'In-browser teleprompter and recording, tuned for maximum FYP distribution and completion rate.',
-    accent: 'amber'
+      'Drop in a raw doc or Google Doc link and walk away with a designed, high-DPI PDF and 3D mockup in minutes, not a weekend.',
+    accent: 'sky'
+  },
+  {
+    icon: Layers,
+    title: 'Digital Kit Studio',
+    description:
+      '50+ ready-to-sell template bundles across 6 categories — most creators spend 10+ hours a week building these from scratch.',
+    accent: 'emerald'
+  },
+  {
+    icon: Briefcase,
+    title: 'GigScale Freelance Engine',
+    description:
+      'Pricing tiers, pitch proposals, and cold-email sequences generated instantly — the admin work that normally eats a freelancer’s week.',
+    accent: 'orange'
+  },
+  {
+    icon: Handshake,
+    title: 'Deal Closer',
+    description:
+      '7 real-estate tools — commission math, negotiation scripts, MLS listings, contract timelines — turn hours of paperwork into minutes.',
+    accent: 'teal'
+  },
+  {
+    icon: Bot,
+    title: 'Agent Ops Self-Healing Hub',
+    description:
+      '10 specialist AI agents on tap, plus a self-healing runtime that catches and fixes errors automatically — so nothing eats your night debugging.',
+    accent: 'fuchsia'
   }
 ];
 
@@ -66,7 +91,11 @@ const ACCENT_CLASSES: Record<string, { badge: string; icon: string }> = {
   cyan: { badge: 'from-cyan-300 via-cyan-400 to-blue-500', icon: 'text-cyan-400' },
   violet: { badge: 'from-violet-300 via-violet-400 to-fuchsia-500', icon: 'text-violet-400' },
   emerald: { badge: 'from-emerald-300 via-emerald-400 to-teal-500', icon: 'text-emerald-400' },
-  rose: { badge: 'from-rose-300 via-rose-400 to-pink-500', icon: 'text-rose-400' }
+  rose: { badge: 'from-rose-300 via-rose-400 to-pink-500', icon: 'text-rose-400' },
+  sky: { badge: 'from-sky-300 via-sky-400 to-blue-500', icon: 'text-sky-400' },
+  orange: { badge: 'from-orange-300 via-orange-400 to-amber-600', icon: 'text-orange-400' },
+  teal: { badge: 'from-teal-300 via-teal-400 to-emerald-600', icon: 'text-teal-400' },
+  fuchsia: { badge: 'from-fuchsia-300 via-fuchsia-400 to-violet-600', icon: 'text-fuchsia-400' }
 };
 
 export const LandingFeatureGrid: React.FC = () => {
@@ -75,11 +104,11 @@ export const LandingFeatureGrid: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center space-y-4 mb-14">
           <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
-            Everything You Need to Go Viral
+            Everything You Need — Built to Save You Hours
           </h2>
           <p className="text-slate-400 text-sm sm:text-base">
-            A full production studio for high-DPI documents and omni-channel campaigns —
-            not a single-purpose tool.
+            Content, publishing, freelance ops, real estate, and reliability — nine
+            production-grade tools, each one replacing hours of manual work with minutes.
           </p>
         </div>
 
