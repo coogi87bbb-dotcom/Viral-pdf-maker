@@ -617,7 +617,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             className="px-3 py-1.5 rounded-lg bg-surface-1 border-2 border-black text-ink-secondary hover:text-white font-extrabold text-xs uppercase flex items-center gap-1.5 shadow-[2px_2px_0px_0px_#000000] cursor-pointer"
           >
             <Lock className="h-3.5 w-3.5 text-[#D4735A]" />
-            <span>OWNER PORTAL</span>
+            <span>ARCHIVE LICENSE</span>
           </button>
 
           <button
@@ -1604,7 +1604,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
         </div>
       )}
 
-      {/* MODAL 2: OWNER PORTAL MODAL */}
+      {/* MODAL 2: ARCHIVE LICENSE MODAL */}
       {isOwnerPortalOpen && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="bg-[#13171d] border-4 border-black rounded-2xl max-w-md w-full p-6 shadow-[10px_10px_0px_0px_#000000] space-y-4 text-center">
@@ -1613,8 +1613,8 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             </div>
 
             <div>
-              <h3 className="text-xl font-black text-white uppercase font-serif">MASTER OWNER PORTAL</h3>
-              <p className="text-xs font-mono text-[#E38A72] mt-1">GOLD TRIM ARCHIVE ADMIN RIGHTS ACTIVE</p>
+              <h3 className="text-xl font-black text-white uppercase font-serif">ARCHIVE LICENSE & ASSET INFO</h3>
+              <p className="text-xs font-mono text-[#E38A72] mt-1">GOLD TRIM COMMERCIAL LICENSE DETAILS</p>
             </div>
 
             <div className="p-4 bg-black border-2 border-black rounded-xl space-y-2 text-left font-mono text-xs">

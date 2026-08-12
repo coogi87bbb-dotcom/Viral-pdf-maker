@@ -14,7 +14,6 @@ import {
   Video,
   Briefcase,
   Radio,
-  ShieldCheck,
   LogOut,
   User,
   Bookmark,
@@ -41,18 +40,18 @@ export type ActiveTab =
   | 'gigscale'
   | 'agency'
   | 'matrix'
-  | 'roi'
-  | 'admin';
+  | 'roi';
 
 interface HeaderProps {
   activeTab: ActiveTab;
   setActiveTab: (tab: ActiveTab) => void;
   onQuickStart: () => void;
+  onOpenMasterAdmin: () => void;
 }
 
 const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400';
 
-export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuickStart }) => {
+export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuickStart, onOpenMasterAdmin }) => {
   const { user, userProfile, isOwner, logout } = useAuth();
 
   const baseTabs = [
@@ -71,13 +70,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
     { id: 'roi' as ActiveTab, label: 'ROI & Savings', icon: DollarSign, badge: 'Calculator' },
   ];
 
-  // Only show Admin tab to verified Owner
-  const tabs = isOwner
-    ? [
-        { id: 'admin' as ActiveTab, label: 'Owner Control Center', icon: ShieldCheck, badge: 'Master Admin' },
-        ...baseTabs,
-      ]
-    : baseTabs;
+  const tabs = baseTabs;
 
   return (
     <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 text-ink-primary shadow-[var(--shadow-elevated)]">
@@ -98,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                 e.preventDefault();
                 e.stopPropagation();
                 if (isOwner) {
-                  setActiveTab('admin');
+                  onOpenMasterAdmin();
                 }
               }}
               className={`text-ink-secondary hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer group p-1 rounded-md hover:bg-surface-0/60 ${FOCUS_RING}`}
@@ -204,29 +197,22 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
-            const isAdminTab = tab.id === 'admin';
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors active:scale-[0.98] cursor-pointer ${FOCUS_RING} ${
                   isActive
-                    ? isAdminTab
-                      ? 'bg-rose-600 text-white shadow-[0_10px_30px_rgba(225,29,72,0.3)] font-bold'
-                      : 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)] font-bold'
-                    : isAdminTab
-                    ? 'text-accent-rosegold-400 bg-accent-rosegold-500/10 hover:bg-accent-rosegold-500/20 border border-accent-rosegold-500/30'
+                    ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)] font-bold'
                     : 'text-ink-muted hover:text-ink-primary hover:bg-surface-0/60'
                 }`}
               >
-                <Icon className={`h-4 w-4 ${isActive ? (isAdminTab ? 'text-white' : 'text-slate-950') : isAdminTab ? 'text-accent-rosegold-400' : 'text-ink-muted'}`} />
+                <Icon className={`h-4 w-4 ${isActive ? 'text-slate-950' : 'text-ink-muted'}`} />
                 <span>{tab.label}</span>
                 <span
                   className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                     isActive
                       ? 'bg-slate-950/20 text-slate-950 font-bold'
-                      : isAdminTab
-                      ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300'
                       : 'bg-surface-2 text-ink-muted border border-white/10'
                   }`}
                 >

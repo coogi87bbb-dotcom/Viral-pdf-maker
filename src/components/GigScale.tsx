@@ -421,7 +421,7 @@ GigScale VIP Creator`);
               }`}
             >
               <Crown className="h-4 w-4 text-accent-rosegold-400" />
-              <span>Owner Admin</span>
+              <span>Launch Roadmap</span>
             </button>
           )}
 

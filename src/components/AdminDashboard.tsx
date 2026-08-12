@@ -84,6 +84,7 @@ export const AdminDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
+  const [syncError, setSyncError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'appA' | 'appB' | 'appC' | 'dealCloser' | 'users' | 'logs'>('overview');
   const [dealCloserUsage, setDealCloserUsage] = useState<Record<string, DealCloserUsageDoc>>({});
 
@@ -111,6 +112,7 @@ export const AdminDashboard: React.FC = () => {
     const unsubscribeUsers = onSnapshot(
       collection(db, 'users'),
       (snapshot) => {
+        setSyncError(null);
         const usersData: UserProfile[] = [];
         snapshot.forEach((docSnap) => {
           usersData.push(docSnap.data() as UserProfile);
@@ -133,6 +135,11 @@ export const AdminDashboard: React.FC = () => {
       },
       (err) => {
         console.warn('Users listener notice:', err);
+        setSyncError(
+          err?.code === 'permission-denied'
+            ? 'Live sync blocked: your account is not yet verified as Owner in Firestore (check email verification). Showing placeholder data below.'
+            : `Live sync error: ${err?.message || 'unknown error'}. Showing placeholder data below.`
+        );
         setLoading(false);
       }
     );
@@ -141,6 +148,7 @@ export const AdminDashboard: React.FC = () => {
     const unsubscribeLogs = onSnapshot(
       collection(db, 'activity_logs'),
       (snapshot) => {
+        setSyncError(null);
         const logsData: ActivityLog[] = [];
         snapshot.forEach((docSnap) => {
           logsData.push({ id: docSnap.id, ...docSnap.data() } as ActivityLog);
@@ -160,6 +168,11 @@ export const AdminDashboard: React.FC = () => {
       },
       (err) => {
         console.warn('Logs listener notice:', err);
+        setSyncError(
+          err?.code === 'permission-denied'
+            ? 'Live sync blocked: your account is not yet verified as Owner in Firestore (check email verification). Showing placeholder data below.'
+            : `Live sync error: ${err?.message || 'unknown error'}. Showing placeholder data below.`
+        );
       }
     );
 
@@ -169,6 +182,7 @@ export const AdminDashboard: React.FC = () => {
     const unsubscribeDealCloserUsage = onSnapshot(
       collection(db, 'dealCloserUsage'),
       (snapshot) => {
+        setSyncError(null);
         const usage: Record<string, DealCloserUsageDoc> = {};
         snapshot.forEach((docSnap) => {
           usage[docSnap.id] = docSnap.data() as DealCloserUsageDoc;
@@ -177,6 +191,11 @@ export const AdminDashboard: React.FC = () => {
       },
       (err) => {
         console.warn('Deal Closer usage listener notice:', err);
+        setSyncError(
+          err?.code === 'permission-denied'
+            ? 'Live sync blocked: your account is not yet verified as Owner in Firestore (check email verification). Showing placeholder data below.'
+            : `Live sync error: ${err?.message || 'unknown error'}. Showing placeholder data below.`
+        );
       }
     );
 
@@ -286,6 +305,16 @@ export const AdminDashboard: React.FC = () => {
           <div className="p-3 rounded-xl bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-300 text-xs flex items-center justify-between">
             <span className="font-mono">{actionMessage}</span>
             <button onClick={() => setActionMessage(null)} className="text-ink-muted hover:text-white font-bold">✕</button>
+          </div>
+        )}
+
+        {syncError && (
+          <div className="p-3 rounded-xl bg-red-950/40 border border-red-800 text-red-200 text-xs flex items-center justify-between gap-3">
+            <span className="flex items-center gap-2">
+              <ShieldAlert className="h-4 w-4 text-red-500 shrink-0" />
+              <span>{syncError}</span>
+            </span>
+            <button onClick={() => setSyncError(null)} className="text-red-300/70 hover:text-white font-bold shrink-0">✕</button>
           </div>
         )}
 

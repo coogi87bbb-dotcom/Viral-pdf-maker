@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AuthModal } from './components/AuthModal';
 import { Header } from './components/Header';
@@ -48,6 +48,17 @@ function MainWorkspace() {
   const { user, userProfile, logout, loading, authError } = useAuth();
   const [appMode, setAppMode] = useState<AppMode>('pdf-studio');
   const [showLanding, setShowLanding] = useState(true);
+
+  // Self-heal stale 'owner-admin' state if the auth session drops/changes out
+  // from under it (e.g. a Firebase token refresh momentarily nulling `user`
+  // while the owner is sitting on the Master Admin screen). Without this, the
+  // final fallback branch below would otherwise be the only thing standing
+  // between that state and a broken render.
+  useEffect(() => {
+    if (appMode === 'owner-admin' && user?.email?.toLowerCase() !== OWNER_EMAIL.toLowerCase()) {
+      setAppMode('pdf-studio');
+    }
+  }, [appMode, user]);
 
   // Document State - defaults to the Creator Monetization Playbook sample
   const [document, setDocument] = useState<DocumentData>(SAMPLE_DOCUMENTS[0].doc);
@@ -454,12 +465,12 @@ function MainWorkspace() {
             activeTab={viralTab}
             setActiveTab={setViralTab}
             onQuickStart={handleViralQuickStart}
+            onOpenMasterAdmin={() => setAppMode('owner-admin')}
           />
 
           {/* Viral OS Workspace Container */}
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
             <MotionPanel3D key={viralTab} delay={0.1} tiltX={10} hoverTilt={false}>
-              {viralTab === 'admin' && (user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() ? <AdminDashboard /> : <CampaignGenerator initialTopic={viralTrendTopic} />)}
               {viralTab === 'campaign' && <CampaignGenerator initialTopic={viralTrendTopic} />}
               {viralTab === 'gigscale' && <GigScale />}
               {viralTab === 'pulse' && <TrendingPulse onSelectTrendForCampaign={handleSelectTrendForCampaign} />}
@@ -531,10 +542,13 @@ function MainWorkspace() {
           </MotionPanel3D>
         </div>
       ) : (
-        /* FALLBACK DEFAULT WORKSPACE FOR CLIENTS */
+        /* DEFENSIVE FALLBACK — unreachable in steady state once the appMode
+           guard above resets stale 'owner-admin' state; must never reference
+           MainWorkspace itself (that previously caused an infinite recursive
+           self-mount / crash). */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
-            <MainWorkspace />
+            <div className="text-center text-ink-secondary text-sm py-16">Redirecting…</div>
           </MotionPanel3D>
         </div>
       )}
