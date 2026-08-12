@@ -216,13 +216,13 @@ export const CompetitorDominationMatrix: React.FC = () => {
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-amber-500/10 border border-amber-500/20 text-xs font-semibold text-accent-amber-300 mb-2">
-              <Trophy className="h-3.5 w-3.5 text-accent-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-rosegold-500/10 border border-rosegold-500/20 text-xs font-semibold text-accent-rosegold-300 mb-2">
+              <Trophy className="h-3.5 w-3.5 text-accent-rosegold-400" />
               <span>Competitive Parity & Market Domination Benchmark 2026</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-3">
               <span>ViralOS v10.0 vs. The Competition</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-amber-500 to-emerald-500 text-slate-950 font-black uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-rosegold-500 to-emerald-500 text-slate-950 font-black uppercase">
                 10x Advantage
               </span>
             </h2>
@@ -231,11 +231,11 @@ export const CompetitorDominationMatrix: React.FC = () => {
             </p>
           </div>
 
-          <div className="px-4 py-3 rounded-2xl bg-accent-amber-500/10 border border-amber-500/30 text-accent-amber-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-lg">
-            <Flame className="h-6 w-6 text-accent-amber-400 fill-amber-400 animate-pulse" />
+          <div className="px-4 py-3 rounded-2xl bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-lg">
+            <Flame className="h-6 w-6 text-accent-rosegold-400 fill-rosegold-400 animate-pulse" />
             <div>
               <div className="text-sm font-black text-white">98/100 Parity Index</div>
-              <div className="text-[10px] text-amber-200/80">Replaces $500/mo tool stack</div>
+              <div className="text-[10px] text-rosegold-200/80">Replaces $500/mo tool stack</div>
             </div>
           </div>
         </div>
@@ -243,7 +243,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
         {/* AI Custom Competitor Teardown Search Bar */}
         <div className="bg-surface-0 p-5 rounded-2xl border border-white/10 space-y-3">
           <label className="text-xs font-black uppercase tracking-wider text-ink-secondary flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-accent-amber-400 fill-amber-400" />
+            <Sparkles className="h-4 w-4 text-accent-rosegold-400 fill-rosegold-400" />
             <span>Generate Live AI Teardown for ANY Competitor or Tool Stack:</span>
           </label>
 
@@ -255,14 +255,14 @@ export const CompetitorDominationMatrix: React.FC = () => {
                 value={targetCompetitor}
                 onChange={(e) => setTargetCompetitor(e.target.value)}
                 placeholder="e.g. Sprout Social, Metricool, Later, or 'ChatGPT + Canva Pro'"
-                className="w-full bg-surface-1 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-white text-xs focus:outline-none focus:border-amber-500 font-medium"
+                className="w-full bg-surface-1 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-white text-xs focus:outline-none focus:border-rosegold-500 font-medium"
               />
             </div>
 
             <button
               type="submit"
               disabled={customAnalysisLoading || !targetCompetitor.trim()}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-b from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 text-slate-950 font-black text-xs shrink-0 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(212,175,55,0.4)] border-b-4 border-amber-700 disabled:opacity-50 active:translate-y-0.5 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-b from-rosegold-300 via-rosegold-400 to-rosegold-500 hover:from-rosegold-200 hover:to-rosegold-400 text-slate-950 font-black text-xs shrink-0 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-rosegold-700 disabled:opacity-50 active:translate-y-0.5 cursor-pointer"
             >
               {customAnalysisLoading ? (
                 <>
@@ -294,7 +294,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                   setTargetCompetitor(preset);
                   handleCustomTeardown(undefined, preset);
                 }}
-                className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-surface-1 border border-white/10 text-ink-secondary hover:border-amber-500/50 hover:text-accent-amber-300 transition-colors"
+                className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-surface-1 border border-white/10 text-ink-secondary hover:border-rosegold-500/50 hover:text-accent-rosegold-300 transition-colors"
               >
                 {preset}
               </button>
@@ -311,10 +311,10 @@ export const CompetitorDominationMatrix: React.FC = () => {
 
         {/* CUSTOM AI TEARDOWN RESULT DRAWER */}
         {customAnalysis && (
-          <div className="p-6 rounded-2xl bg-surface-0 border border-amber-500/40 space-y-6 shadow-2xl animate-fade-in">
+          <div className="p-6 rounded-2xl bg-surface-0 border border-rosegold-500/40 space-y-6 shadow-2xl animate-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase text-accent-amber-400 tracking-widest block">
+                <span className="text-[10px] font-black uppercase text-accent-rosegold-400 tracking-widest block">
                   AI COMPETITIVE TEARDOWN REPORT
                 </span>
                 <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
@@ -350,7 +350,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                     <div key={idx} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-extrabold text-white">{row.featureName}</span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-accent-amber-500/10 text-accent-amber-300 border border-amber-500/20">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-accent-rosegold-500/10 text-accent-rosegold-300 border border-rosegold-500/20">
                           {row.impactMultiplier}
                         </span>
                       </div>
@@ -380,7 +380,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {customAnalysis.rebuttalBattlecards.map((card, idx) => (
                     <div key={idx} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2 text-xs">
-                      <div className="font-extrabold text-accent-amber-300">❓ Objection: "{card.objection}"</div>
+                      <div className="font-extrabold text-accent-rosegold-300">❓ Objection: "{card.objection}"</div>
                       <div className="text-ink-secondary leading-relaxed bg-surface-0 p-3 rounded-lg border border-white/10">
                         <strong className="text-emerald-400 block mb-0.5">💡 Winning Rebuttal:</strong>
                         {card.winningRebuttal}
@@ -404,8 +404,8 @@ export const CompetitorDominationMatrix: React.FC = () => {
             <p className="text-xs text-ink-muted">Generate 7-channel campaigns in 30 seconds vs 3+ hours manually.</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-surface-0 border border-amber-500/30 space-y-2">
-            <div className="text-xs font-bold text-accent-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-surface-0 border border-rosegold-500/30 space-y-2">
+            <div className="text-xs font-bold text-accent-rosegold-400 uppercase tracking-wider flex items-center gap-1.5">
               <Cpu className="h-4 w-4" />
               <span>Multi-Model AI Synergy</span>
             </div>
@@ -413,8 +413,8 @@ export const CompetitorDominationMatrix: React.FC = () => {
             <p className="text-xs text-ink-muted">Combines text, visual banners, video teleprompters, and viral scoring.</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-surface-0 border border-amber-500/30 space-y-2">
-            <div className="text-xs font-bold text-accent-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+          <div className="p-4 rounded-2xl bg-surface-0 border border-rosegold-500/30 space-y-2">
+            <div className="text-xs font-bold text-accent-rosegold-400 uppercase tracking-wider flex items-center gap-1.5">
               <DollarSign className="h-4 w-4" />
               <span>Software Stack Consolidation</span>
             </div>
@@ -475,7 +475,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
         </div>
 
         {/* Savings Metric Box */}
-        <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-950 to-amber-950/40 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-950 to-rosegold-950/40 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
             <span className="text-xs font-black uppercase text-emerald-400 tracking-wider">
               YOUR POTENTIAL ANNUAL MARGIN BOOST WITH VIRALOS:
@@ -514,7 +514,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                 onClick={() => setSelectedCategory(tab.id as any)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-colors ${
                   selectedCategory === tab.id
-                    ? 'bg-accent-amber-500 text-slate-950 shadow-md'
+                    ? 'bg-accent-rosegold-500 text-slate-950 shadow-md'
                     : 'bg-surface-0 text-ink-muted hover:text-white'
                 }`}
               >
@@ -531,7 +531,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Filter feature capability..."
-              className="w-full bg-surface-0 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-white text-xs focus:outline-none focus:border-amber-500"
+              className="w-full bg-surface-0 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-white text-xs focus:outline-none focus:border-rosegold-500"
             />
           </div>
         </div>
@@ -542,7 +542,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
             <thead>
               <tr className="border-b border-white/10 text-ink-muted uppercase text-[10px] tracking-wider">
                 <th className="py-3 px-4 font-bold">Core Feature / Capability</th>
-                <th className="py-3 px-4 font-black text-accent-amber-400 bg-accent-amber-500/10 border-x border-amber-500/20 text-center">
+                <th className="py-3 px-4 font-black text-accent-rosegold-400 bg-accent-rosegold-500/10 border-x border-rosegold-500/20 text-center">
                   🚀 ViralOS v10.0 (Winner)
                 </th>
                 <th className="py-3 px-4 font-bold text-ink-secondary">Jasper / Copy.ai</th>
@@ -562,13 +562,13 @@ export const CompetitorDominationMatrix: React.FC = () => {
                       <td className="py-4 px-4 text-ink-secondary font-bold max-w-xs">
                         <div className="flex items-center justify-between gap-2">
                           <span>{row.feature}</span>
-                          <span className="text-slate-500 group-hover:text-accent-amber-400 transition-colors">
+                          <span className="text-slate-500 group-hover:text-accent-rosegold-400 transition-colors">
                             {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                           </span>
                         </div>
                       </td>
 
-                      <td className="py-4 px-4 font-bold text-accent-amber-300 bg-accent-amber-500/5 border-x border-amber-500/20">
+                      <td className="py-4 px-4 font-bold text-accent-rosegold-300 bg-accent-rosegold-500/5 border-x border-rosegold-500/20">
                         <div className="flex items-start gap-1.5">
                           <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                           <span>{row.viralOS}</span>
@@ -580,7 +580,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                           {row.jasperCopyAI.startsWith('❌') ? (
                             <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-amber-500">⚠️</span>
+                            <span className="text-rosegold-500">⚠️</span>
                           )}
                           <span>{row.jasperCopyAI}</span>
                         </div>
@@ -591,7 +591,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                           {row.taplioHypefury.startsWith('❌') ? (
                             <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-amber-500">⚠️</span>
+                            <span className="text-rosegold-500">⚠️</span>
                           )}
                           <span>{row.taplioHypefury}</span>
                         </div>
@@ -602,7 +602,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                           {row.bufferHootsuite.startsWith('❌') ? (
                             <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-amber-500">⚠️</span>
+                            <span className="text-rosegold-500">⚠️</span>
                           )}
                           <span>{row.bufferHootsuite}</span>
                         </div>
@@ -612,9 +612,9 @@ export const CompetitorDominationMatrix: React.FC = () => {
                     {/* Expanded Drawer */}
                     {isExpanded && row.description && (
                       <tr className="bg-surface-0/80">
-                        <td colSpan={5} className="p-4 text-xs text-ink-secondary border-y border-amber-500/30">
+                        <td colSpan={5} className="p-4 text-xs text-ink-secondary border-y border-rosegold-500/30">
                           <div className="flex items-start gap-3 bg-surface-1 p-3.5 rounded-xl border border-white/10">
-                            <Sparkles className="h-5 w-5 text-accent-amber-400 shrink-0 mt-0.5" />
+                            <Sparkles className="h-5 w-5 text-accent-rosegold-400 shrink-0 mt-0.5" />
                             <div>
                               <strong className="text-white block font-bold mb-1">Deep-Dive Workflow Advantage:</strong>
                               <p className="text-ink-secondary leading-relaxed">{row.description}</p>

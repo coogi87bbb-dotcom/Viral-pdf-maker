@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { Sparkles } from 'lucide-react';
 import { LandingHero } from './LandingHero';
 import { ScrollFrameStage } from './ScrollFrameStage';
 import { LandingFeatureGrid } from './LandingFeatureGrid';
@@ -34,27 +33,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
       <ScrollFrameStage scrollContainerRef={pageRef} />
 
       <div className="relative z-10">
-        <header className="sticky top-0 z-20 bg-surface-1/35 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 shadow-2xl">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-xl bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-700 p-0.5 flex items-center justify-center">
-                <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
-                  <Sparkles className="h-4 w-4 text-accent-amber-400" />
-                </div>
-              </div>
-              <span className="text-base font-black bg-gradient-to-r from-amber-300 via-slate-100 to-amber-200 bg-clip-text text-transparent">
-                Viral PDF Creator
-              </span>
-            </div>
-            <button
-              onClick={onGetStarted}
-              className="px-4 py-2 rounded-xl bg-accent-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 hover:bg-amber-300 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-amber-400"
-            >
-              Sign In
-            </button>
-          </div>
-        </header>
-
+        {/* No top nav bar by design — the hero and CTA sections carry their
+            own "Get Started Free" buttons (both call onGetStarted), so
+            removing the sticky header/logo/"Sign In" bar doesn't remove any
+            way to reach the auth flow. */}
         <main>
           <LandingHero onGetStarted={onGetStarted} />
           <LandingFeatureGrid />

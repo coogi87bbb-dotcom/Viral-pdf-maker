@@ -265,15 +265,15 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
       scrollable
     >
         {/* Header Bar */}
-        <div className="px-5 py-3 border-b border-white/10 flex items-center justify-between bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/30">
+        <div className="px-5 py-3 border-b border-white/10 flex items-center justify-between bg-gradient-to-r from-slate-900 via-slate-900 to-rosegold-950/30">
           <div className="flex items-center space-x-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-purple-600 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-amber-900/30">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rosegold-500 to-purple-600 text-slate-950 flex items-center justify-center font-bold shadow-md shadow-rosegold-900/30">
               <Edit3 className="w-5 h-5 text-slate-950" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="text-base font-extrabold text-white">Pro Quick Content Editor</h3>
-                <span className="text-[10px] font-bold bg-accent-amber-500/20 text-accent-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] font-bold bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-rosegold-500/30 px-2 py-0.5 rounded-full">
                   Real-Time Split Mode
                 </span>
               </div>
@@ -291,10 +291,10 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                 const formattedDoc = parseTextIntoDocument(fullText, doc.title);
                 setDoc(formattedDoc);
               }}
-              className="px-3 py-1.5 bg-gradient-to-r from-amber-500/20 to-purple-500/20 text-accent-amber-300 border border-amber-500/40 hover:border-accent-amber-400 rounded-xl text-xs font-bold transition-colors flex items-center space-x-1.5 shadow-sm"
+              className="px-3 py-1.5 bg-gradient-to-r from-rosegold-500/20 to-purple-500/20 text-accent-rosegold-300 border border-rosegold-500/40 hover:border-accent-rosegold-400 rounded-xl text-xs font-bold transition-colors flex items-center space-x-1.5 shadow-sm"
               title="Automatically strip metadata junk, format bullet lists, split steps, and re-structure into clean chapters"
             >
-              <Sparkles className="w-3.5 h-3.5 text-accent-amber-400" />
+              <Sparkles className="w-3.5 h-3.5 text-accent-rosegold-400" />
               <span>✨ Auto-Clean & Format</span>
             </button>
 
@@ -316,12 +316,12 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
               }}
               className={`px-3 py-1.5 text-xs font-bold rounded-xl border transition-colors flex items-center space-x-1.5 ${
                 showLivePreview
-                  ? 'bg-accent-amber-500/20 text-accent-amber-300 border-accent-amber-400/60 shadow-md shadow-amber-950/40 ring-1 ring-amber-400/30'
+                  ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border-accent-rosegold-400/60 shadow-md shadow-rosegold-950/40 ring-1 ring-rosegold-400/30'
                   : 'bg-surface-2 border-white/15 text-ink-secondary hover:text-white'
               }`}
               title="Toggle Side-by-Side Split Screen Real-Time Preview"
             >
-              <Columns className="w-4 h-4 text-accent-amber-400" />
+              <Columns className="w-4 h-4 text-accent-rosegold-400" />
               <span>Split Screen ({showLivePreview ? 'ON' : 'OFF'})</span>
             </button>
 
@@ -340,11 +340,11 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             onClick={() => setActiveTab('sections')}
             className={`py-3 font-bold border-b-2 flex items-center space-x-2 transition-colors whitespace-nowrap px-2 ${
               activeTab === 'sections'
-                ? 'border-accent-amber-400 text-accent-amber-300'
+                ? 'border-accent-rosegold-400 text-accent-rosegold-300'
                 : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
-            <BookOpen className="w-4 h-4 text-accent-amber-400" />
+            <BookOpen className="w-4 h-4 text-accent-rosegold-400" />
             <span>Chapters ({doc.sections.length})</span>
           </button>
 
@@ -352,7 +352,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             onClick={() => setActiveTab('general')}
             className={`py-3 font-bold border-b-2 flex items-center space-x-2 transition-colors whitespace-nowrap px-2 ${
               activeTab === 'general'
-                ? 'border-accent-amber-400 text-accent-amber-300'
+                ? 'border-accent-rosegold-400 text-accent-rosegold-300'
                 : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -364,7 +364,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             onClick={() => setActiveTab('matrix')}
             className={`py-3 font-bold border-b-2 flex items-center space-x-2 transition-colors whitespace-nowrap px-2 ${
               activeTab === 'matrix'
-                ? 'border-accent-amber-400 text-accent-amber-300'
+                ? 'border-accent-rosegold-400 text-accent-rosegold-300'
                 : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -376,7 +376,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             onClick={() => setActiveTab('cta')}
             className={`py-3 font-bold border-b-2 flex items-center space-x-2 transition-colors whitespace-nowrap px-2 ${
               activeTab === 'cta'
-                ? 'border-accent-amber-400 text-accent-amber-300'
+                ? 'border-accent-rosegold-400 text-accent-rosegold-300'
                 : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -388,7 +388,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             onClick={() => setActiveTab('marketing')}
             className={`py-3 font-bold border-b-2 flex items-center space-x-2 transition-colors whitespace-nowrap px-2 ${
               activeTab === 'marketing'
-                ? 'border-accent-amber-400 text-accent-amber-300'
+                ? 'border-accent-rosegold-400 text-accent-rosegold-300'
                 : 'border-transparent text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -413,7 +413,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       placeholder="Search chapter title or content..."
-                      className="w-full bg-surface-1 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/10 rounded-lg pl-9 pr-3 py-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     />
                   </div>
 
@@ -422,7 +422,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       <button
                         onClick={() => setSectionViewMode('cards')}
                         className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                          sectionViewMode === 'cards' ? 'bg-accent-amber-500 text-slate-950 font-bold' : 'text-ink-muted hover:text-white'
+                          sectionViewMode === 'cards' ? 'bg-accent-rosegold-500 text-slate-950 font-bold' : 'text-ink-muted hover:text-white'
                         }`}
                       >
                         Block Editor
@@ -430,7 +430,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       <button
                         onClick={() => setSectionViewMode('raw')}
                         className={`px-2.5 py-1 rounded font-medium transition-colors ${
-                          sectionViewMode === 'raw' ? 'bg-accent-amber-500 text-slate-950 font-bold' : 'text-ink-muted hover:text-white'
+                          sectionViewMode === 'raw' ? 'bg-accent-rosegold-500 text-slate-950 font-bold' : 'text-ink-muted hover:text-white'
                         }`}
                       >
                         Markdown Text
@@ -439,7 +439,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
 
                     <button
                       onClick={handleAddSection}
-                      className="px-3 py-1.5 bg-accent-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-lg flex items-center space-x-1.5 shadow-sm"
+                      className="px-3 py-1.5 bg-accent-rosegold-500 hover:bg-rosegold-400 text-slate-950 font-bold text-xs rounded-lg flex items-center space-x-1.5 shadow-sm"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Chapter</span>
@@ -455,7 +455,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       onClick={() => setSelectedSectionIndex(idx)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors whitespace-nowrap shrink-0 flex items-center space-x-1.5 ${
                         selectedSectionIndex === idx
-                          ? 'bg-accent-amber-500/20 border-accent-amber-400 text-accent-amber-300 ring-1 ring-amber-400/40'
+                          ? 'bg-accent-rosegold-500/20 border-accent-rosegold-400 text-accent-rosegold-300 ring-1 ring-rosegold-400/40'
                           : 'bg-surface-0 border-white/10 text-ink-muted hover:text-white'
                       }`}
                     >
@@ -469,11 +469,11 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
 
                 {/* Selected Active Chapter Card */}
                 {activeSection && (
-                  <div className="bg-surface-0 border border-amber-500/30 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
+                  <div className="bg-surface-0 border border-rosegold-500/30 rounded-2xl p-4 sm:p-5 space-y-4 shadow-xl">
                     {/* Chapter Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
                       <div className="flex items-center space-x-2">
-                        <span className="text-xs font-black bg-accent-amber-500 text-slate-950 px-2.5 py-1 rounded-lg uppercase tracking-wider">
+                        <span className="text-xs font-black bg-accent-rosegold-500 text-slate-950 px-2.5 py-1 rounded-lg uppercase tracking-wider">
                           Chapter {activeSection.chapterNumber || selectedSectionIndex + 1}
                         </span>
                         <input
@@ -482,7 +482,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           onChange={(e) =>
                             handleUpdateSection(selectedSectionIndex, { ...activeSection, title: e.target.value })
                           }
-                          className="bg-surface-1 border border-white/15 rounded-xl px-3 py-1.5 text-sm font-extrabold text-white focus:outline-none focus:border-accent-amber-400 flex-1"
+                          className="bg-surface-1 border border-white/15 rounded-xl px-3 py-1.5 text-sm font-extrabold text-white focus:outline-none focus:border-accent-rosegold-400 flex-1"
                           placeholder="Chapter Title..."
                         />
                       </div>
@@ -530,7 +530,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     <div className="p-3 bg-gradient-to-r from-purple-950/50 via-slate-900 to-indigo-950/40 rounded-xl border border-purple-500/30 space-y-2">
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-bold text-purple-300 flex items-center space-x-1.5">
-                          <Wand2 className="w-4 h-4 text-accent-amber-400" />
+                          <Wand2 className="w-4 h-4 text-accent-rosegold-400" />
                           <span>AI Chapter Magic Writer</span>
                         </span>
                         <span className="text-[10px] text-purple-400">1-Click Instant Transform</span>
@@ -546,7 +546,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           {aiLoadingMap[`sec-${selectedSectionIndex}-polish`] ? (
                             <RefreshCw className="w-3 h-3 animate-spin" />
                           ) : (
-                            <Sparkles className="w-3 h-3 text-accent-amber-400" />
+                            <Sparkles className="w-3 h-3 text-accent-rosegold-400" />
                           )}
                           <span>🪄 Polish Prose</span>
                         </button>
@@ -574,7 +574,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           {aiLoadingMap[`sec-${selectedSectionIndex}-add_callout`] ? (
                             <RefreshCw className="w-3 h-3 animate-spin" />
                           ) : (
-                            <AlertCircle className="w-3 h-3 text-accent-amber-400" />
+                            <AlertCircle className="w-3 h-3 text-accent-rosegold-400" />
                           )}
                           <span>💡 Add Callout Box</span>
                         </button>
@@ -617,7 +617,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           <button
                             type="button"
                             onClick={() => handleAddParagraph(selectedSectionIndex)}
-                            className="text-accent-amber-400 hover:text-accent-amber-300 flex items-center space-x-1 text-[11px]"
+                            className="text-accent-rosegold-400 hover:text-accent-rosegold-300 flex items-center space-x-1 text-[11px]"
                           >
                             <Plus className="w-3.5 h-3.5" />
                             <span>Add Paragraph</span>
@@ -627,7 +627,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                         {(activeSection.paragraphs || []).map((para, pIdx) => (
                           <div key={pIdx} className="bg-surface-1 border border-white/10 rounded-xl p-3 space-y-2">
                             <div className="flex items-center justify-between text-[11px] text-ink-muted">
-                              <span className="font-mono font-bold text-accent-amber-400/80">Paragraph {pIdx + 1}</span>
+                              <span className="font-mono font-bold text-accent-rosegold-400/80">Paragraph {pIdx + 1}</span>
                               <div className="flex items-center space-x-1">
                                 <button
                                   type="button"
@@ -659,7 +659,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                               rows={3}
                               value={para}
                               onChange={(e) => handleUpdateParagraph(selectedSectionIndex, pIdx, e.target.value)}
-                              className="w-full bg-surface-0 border border-white/10 rounded-lg p-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-amber-400 font-sans leading-relaxed resize-y"
+                              className="w-full bg-surface-0 border border-white/10 rounded-lg p-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-rosegold-400 font-sans leading-relaxed resize-y"
                             />
                           </div>
                         ))}
@@ -680,7 +680,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                               paragraphs: newParagraphs.length > 0 ? newParagraphs : ['']
                             });
                           }}
-                          className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-accent-amber-400 resize-y leading-relaxed"
+                          className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-accent-rosegold-400 resize-y leading-relaxed"
                         />
                       </div>
                     )}
@@ -688,8 +688,8 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     {/* Chapter Callout Box Controls */}
                     <div className="pt-3 border-t border-white/10 space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-accent-amber-300 flex items-center space-x-1.5">
-                          <AlertCircle className="w-4 h-4 text-accent-amber-400" />
+                        <span className="text-xs font-bold text-accent-rosegold-300 flex items-center space-x-1.5">
+                          <AlertCircle className="w-4 h-4 text-accent-rosegold-400" />
                           <span>Chapter Callout Graphic Box</span>
                         </span>
 
@@ -716,7 +716,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                                 }
                               })
                             }
-                            className="text-[11px] text-accent-amber-400 hover:text-accent-amber-300 font-medium flex items-center space-x-1"
+                            className="text-[11px] text-accent-rosegold-400 hover:text-accent-rosegold-300 font-medium flex items-center space-x-1"
                           >
                             <Plus className="w-3.5 h-3.5" />
                             <span>Add Callout Box</span>
@@ -725,7 +725,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       </div>
 
                       {activeSection.callout && (
-                        <div className="p-3 bg-surface-1 border border-amber-500/30 rounded-xl space-y-3">
+                        <div className="p-3 bg-surface-1 border border-rosegold-500/30 rounded-xl space-y-3">
                           <div className="grid grid-cols-2 gap-2">
                             <div>
                               <label className="block text-[10px] font-bold text-ink-muted mb-1">Type & Icon</label>
@@ -737,7 +737,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                                     callout: { ...activeSection.callout!, type: e.target.value as any }
                                   })
                                 }
-                                className="w-full bg-surface-0 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                                className="w-full bg-surface-0 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                               >
                                 <option value="tip">💡 Tip / Hack</option>
                                 <option value="warning">⚠️ Warning / Risk</option>
@@ -759,7 +759,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                                     callout: { ...activeSection.callout!, title: e.target.value }
                                   })
                                 }
-                                className="w-full bg-surface-0 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white font-bold focus:outline-none focus:border-accent-amber-400"
+                                className="w-full bg-surface-0 border border-white/10 rounded-lg px-2.5 py-1.5 text-xs text-white font-bold focus:outline-none focus:border-accent-rosegold-400"
                               />
                             </div>
                           </div>
@@ -775,7 +775,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                                   callout: { ...activeSection.callout!, content: e.target.value }
                                 })
                               }
-                              className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-xs text-ink-secondary focus:outline-none focus:border-accent-amber-400 resize-y"
+                              className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-xs text-ink-secondary focus:outline-none focus:border-accent-rosegold-400 resize-y"
                             />
                           </div>
                         </div>
@@ -800,7 +800,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     type="text"
                     value={doc.title}
                     onChange={(e) => handleUpdateGeneral('title', e.target.value)}
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-base text-white font-extrabold focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-base text-white font-extrabold focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
 
@@ -810,7 +810,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     type="text"
                     value={doc.subtitle}
                     onChange={(e) => handleUpdateGeneral('subtitle', e.target.value)}
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
 
@@ -821,7 +821,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       type="text"
                       value={doc.author}
                       onChange={(e) => handleUpdateGeneral('author', e.target.value)}
-                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     />
                   </div>
 
@@ -831,7 +831,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       type="text"
                       value={doc.category || ''}
                       onChange={(e) => handleUpdateGeneral('category', e.target.value)}
-                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     />
                   </div>
 
@@ -841,7 +841,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       <button
                         type="button"
                         onClick={handleAutoCalculateReadTime}
-                        className="text-[10px] text-accent-amber-400 hover:underline"
+                        className="text-[10px] text-accent-rosegold-400 hover:underline"
                       >
                         ⚡ Auto-Calculate
                       </button>
@@ -850,7 +850,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                       type="text"
                       value={doc.estimatedReadTime || ''}
                       onChange={(e) => handleUpdateGeneral('estimatedReadTime', e.target.value)}
-                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                     />
                   </div>
                 </div>
@@ -862,7 +862,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                     <button
                       type="button"
                       onClick={handleAddTakeaway}
-                      className="text-xs text-accent-amber-400 hover:text-accent-amber-300 flex items-center space-x-1 font-semibold"
+                      className="text-xs text-accent-rosegold-400 hover:text-accent-rosegold-300 flex items-center space-x-1 font-semibold"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Bullet</span>
@@ -871,14 +871,14 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
 
                   {(doc.keyTakeaways || []).map((kt, i) => (
                     <div key={i} className="flex items-center space-x-2">
-                      <span className="w-5 h-5 rounded-full bg-surface-2 text-accent-amber-400 text-[10px] flex items-center justify-center font-bold">
+                      <span className="w-5 h-5 rounded-full bg-surface-2 text-accent-rosegold-400 text-[10px] flex items-center justify-center font-bold">
                         {i + 1}
                       </span>
                       <input
                         type="text"
                         value={kt}
                         onChange={(e) => handleUpdateTakeaway(i, e.target.value)}
-                        className="flex-1 bg-surface-1 border border-white/10 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                        className="flex-1 bg-surface-1 border border-white/10 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                       />
                       <button
                         type="button"
@@ -910,12 +910,12 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                   {doc.sections.map((sec, secIdx) => (
                     <div key={sec.id || secIdx} className="bg-surface-1 border border-white/10 rounded-xl p-4 space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-extrabold text-accent-amber-400">
+                        <span className="text-xs font-extrabold text-accent-rosegold-400">
                           Chapter {sec.chapterNumber}: {sec.title}
                         </span>
                         <div className="flex items-center space-x-2 text-[11px]">
                           {sec.callout && (
-                            <span className="bg-accent-amber-500/20 text-accent-amber-300 px-2 py-0.5 rounded border border-amber-500/30 font-bold">
+                            <span className="bg-accent-rosegold-500/20 text-accent-rosegold-300 px-2 py-0.5 rounded border border-rosegold-500/30 font-bold">
                               Callout Active ({sec.callout.type})
                             </span>
                           )}
@@ -967,7 +967,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                                   handleUpdateSection(secIdx, { ...sec, bulletCards: cards });
                                 }}
                                 placeholder="Badge e.g. STEP 1"
-                                className="bg-surface-1 border border-white/10 rounded px-2 py-1 text-xs text-accent-amber-300 font-bold"
+                                className="bg-surface-1 border border-white/10 rounded px-2 py-1 text-xs text-accent-rosegold-300 font-bold"
                               />
                             </div>
                             <div className="flex items-center space-x-2">
@@ -1026,7 +1026,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                         callToAction: { ...prev.callToAction, headline: e.target.value } as CallToAction
                       }))
                     }
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-sm font-bold text-white focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-sm font-bold text-white focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
 
@@ -1041,7 +1041,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                         callToAction: { ...prev.callToAction, subhead: e.target.value } as CallToAction
                       }))
                     }
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-xs text-ink-secondary focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-3 text-xs text-ink-secondary focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
 
@@ -1057,7 +1057,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           callToAction: { ...prev.callToAction, buttonText: e.target.value } as CallToAction
                         }))
                       }
-                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-bold"
+                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-bold"
                     />
                   </div>
 
@@ -1072,7 +1072,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                           callToAction: { ...prev.callToAction, websiteOrHandle: e.target.value } as CallToAction
                         }))
                       }
-                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400 font-mono"
+                      className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400 font-mono"
                     />
                   </div>
                 </div>
@@ -1110,7 +1110,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                         }
                       }))
                     }
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white font-bold focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
 
@@ -1130,7 +1130,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
                         }
                       }))
                     }
-                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                    className="w-full bg-surface-1 border border-white/15 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
                   />
                 </div>
               </div>
@@ -1166,7 +1166,7 @@ export const DocEditorModal: React.FC<DocEditorModalProps> = ({
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-2.5 bg-gradient-to-r from-amber-500 to-amber-400 hover:opacity-95 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg shadow-amber-950/40 flex items-center space-x-2 transition-colors"
+              className="px-6 py-2.5 bg-gradient-to-r from-rosegold-500 to-rosegold-400 hover:opacity-95 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg shadow-rosegold-950/40 flex items-center space-x-2 transition-colors"
             >
               <Check className="w-4 h-4 text-slate-950" />
               <span>Apply Changes to PDF Canvas</span>

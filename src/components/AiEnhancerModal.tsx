@@ -303,14 +303,14 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
   return (
     <ModalShell id="ai-enhancer-modal" maxWidthClassName="max-w-xl" scrollable>
         {/* Header */}
-        <div className="px-6 py-4 border-b border-amber-500/20 flex items-center justify-between bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950">
+        <div className="px-6 py-4 border-b border-rosegold-500/20 flex items-center justify-between bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950">
           <div className="flex items-center space-x-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center shadow-lg shadow-amber-500/20">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-rosegold-500 to-rosegold-300 flex items-center justify-center shadow-lg shadow-rosegold-500/20">
               <Sparkles className="w-4 h-4 text-slate-950" />
             </div>
             <div>
               <h3 className="text-base font-bold text-white">AI Publishing Studio Generator</h3>
-              <p className="text-xs text-accent-amber-300">Convert Google Drive/Docs & Prompts into Genius PDF Publications</p>
+              <p className="text-xs text-accent-rosegold-300">Convert Google Drive/Docs & Prompts into Genius PDF Publications</p>
             </div>
           </div>
           <button
@@ -334,7 +334,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                   PDF Publication Successfully Generated & Downloaded!
                 </h4>
                 <p className="text-xs text-purple-200">
-                  "<span className="font-semibold text-accent-amber-300">{generatedDocTitle}</span>" is saved to your computer.
+                  "<span className="font-semibold text-accent-rosegold-300">{generatedDocTitle}</span>" is saved to your computer.
                 </p>
               </div>
             </div>
@@ -347,7 +347,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                   type="button"
                   onClick={handleReDownloadPdf}
                   disabled={isDownloadingPdfNow}
-                  className="p-3 bg-accent-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center space-x-2 shadow-md transition-colors disabled:opacity-50"
+                  className="p-3 bg-accent-rosegold-500 hover:bg-rosegold-400 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center space-x-2 shadow-md transition-colors disabled:opacity-50"
                 >
                   <Download className="w-4 h-4" />
                   <span>{isDownloadingPdfNow ? `Downloading (${downloadProgress}%)...` : 'Download PDF Again (.pdf)'}</span>
@@ -386,7 +386,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
               <button
                 type="button"
                 onClick={() => setIsSuccessState(false)}
-                className="text-accent-amber-400 hover:text-accent-amber-300 font-semibold flex items-center space-x-1"
+                className="text-accent-rosegold-400 hover:text-accent-rosegold-300 font-semibold flex items-center space-x-1"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Create Another Genius PDF with AI</span>
@@ -411,7 +411,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                     <p className="font-semibold">{errorMsg}</p>
                     {errorMsg.includes('restricted') && (
                       <div className="mt-2 p-2.5 bg-surface-1/90 rounded-lg border border-white/10 text-[11px] text-ink-secondary space-y-1">
-                        <p className="font-bold text-accent-amber-300">How to fix Google Drive link access:</p>
+                        <p className="font-bold text-accent-rosegold-300">How to fix Google Drive link access:</p>
                         <p>1. Open document in Google Docs or Drive.</p>
                         <p>2. Click <span className="font-semibold text-white">Share</span> at top right &rarr; under General access select <span className="font-semibold text-white">Anyone with link</span>.</p>
                         <p>3. Or paste document text directly into the raw text box below!</p>
@@ -433,15 +433,15 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 value={topicTitle}
                 onChange={(e) => setTopicTitle(e.target.value)}
                 placeholder="e.g. Masterclass Monetization Strategy for Digital Creators"
-                className="w-full bg-surface-0 border border-white/10 focus:border-accent-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
+                className="w-full bg-surface-0 border border-white/10 focus:border-accent-rosegold-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors"
               />
             </div>
 
             {/* Google Drive / Google Document Link Input (Main Input) */}
-            <div className="p-4 bg-surface-0 border border-amber-500/30 rounded-xl space-y-2.5 shadow-md">
+            <div className="p-4 bg-surface-0 border border-rosegold-500/30 rounded-xl space-y-2.5 shadow-md">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-accent-amber-300 flex items-center space-x-1.5">
-                  <LinkIcon className="w-4 h-4 text-accent-amber-400" />
+                <label className="text-xs font-bold text-accent-rosegold-300 flex items-center space-x-1.5">
+                  <LinkIcon className="w-4 h-4 text-accent-rosegold-400" />
                   <span>Insert Google Drive or Google Document Link</span>
                 </label>
                 <button
@@ -450,7 +450,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                     setGdocLink('https://docs.google.com/document/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit');
                     setTopicTitle('Creator Digital Publishing Masterclass Guide');
                   }}
-                  className="text-[10px] bg-accent-amber-500/20 text-accent-amber-300 hover:bg-accent-amber-500/30 px-2.5 py-1 rounded-full border border-amber-500/30 font-bold transition-colors"
+                  className="text-[10px] bg-accent-rosegold-500/20 text-accent-rosegold-300 hover:bg-accent-rosegold-500/30 px-2.5 py-1 rounded-full border border-rosegold-500/30 font-bold transition-colors"
                 >
                   ⚡ Try Sample Link
                 </button>
@@ -462,7 +462,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                   value={gdocLink}
                   onChange={(e) => setGdocLink(e.target.value)}
                   placeholder="Paste Google Doc or Drive link (e.g. https://docs.google.com/document/d/123...)"
-                  className="w-full bg-surface-1 border border-white/15 focus:border-accent-amber-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors pr-8"
+                  className="w-full bg-surface-1 border border-white/15 focus:border-accent-rosegold-400 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors pr-8"
                 />
                 {gdocLink && (
                   <button
@@ -514,7 +514,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 <label className="block text-xs font-bold text-ink-secondary">
                   Target Digital Product Format ({TARGET_DIGITAL_PRODUCT_FORMATS.length} Formats)
                 </label>
-                <span className="text-[10px] text-accent-amber-400 font-semibold bg-accent-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] text-accent-rosegold-400 font-semibold bg-accent-rosegold-500/10 border border-rosegold-500/20 px-2 py-0.5 rounded-full">
                   Tailored AI Engine Active
                 </span>
               </div>
@@ -524,7 +524,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 value={searchFormat}
                 onChange={(e) => setSearchFormat(e.target.value)}
                 placeholder="Search formats (e.g. Masterclass, Whitepaper, Prompt Library)..."
-                className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-amber-400"
+                className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-rosegold-400"
               />
 
               <div className="max-h-40 overflow-y-auto pr-1 grid grid-cols-2 gap-1.5 rounded-xl border border-white/10 bg-surface-0 p-2">
@@ -555,7 +555,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
               <select
                 value={styleVibe}
                 onChange={(e) => setStyleVibe(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-accent-amber-400"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-accent-rosegold-400"
               >
                 {PUBLISHING_VIBES_AND_STYLES.map((vibe) => (
                   <option key={vibe} value={vibe}>
@@ -575,7 +575,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
                 placeholder="e.g. Alex Vance | Studio Publishing"
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-amber-400"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-rosegold-400"
               />
             </div>
 
@@ -590,7 +590,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
                 value={customPrompt}
                 onChange={(e) => setCustomPrompt(e.target.value)}
                 placeholder="e.g. Focus heavily on actionable 5-minute wins, include a worksheet exercise in Chapter 2..."
-                className="w-full bg-surface-0 border border-white/10 focus:border-accent-amber-400 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors resize-y"
+                className="w-full bg-surface-0 border border-white/10 focus:border-accent-rosegold-400 rounded-xl p-2.5 text-xs text-white placeholder-slate-500 focus:outline-none transition-colors resize-y"
               />
             </div>
           </div>
@@ -610,7 +610,7 @@ export const AiEnhancerModal: React.FC<AiEnhancerModalProps> = ({
               type="button"
               onClick={handleRunAiEnhance}
               disabled={isLoading}
-              className="px-6 py-2.5 bg-gradient-to-r from-amber-500 via-purple-600 to-indigo-600 hover:opacity-95 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-purple-950/50 flex items-center space-x-2 disabled:opacity-50"
+              className="px-6 py-2.5 bg-gradient-to-r from-rosegold-500 via-purple-600 to-indigo-600 hover:opacity-95 text-slate-950 font-bold text-xs rounded-xl shadow-lg shadow-purple-950/50 flex items-center space-x-2 disabled:opacity-50"
             >
               {isLoading ? (
                 <>

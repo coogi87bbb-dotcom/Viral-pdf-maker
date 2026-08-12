@@ -9,7 +9,7 @@ interface LandingHeroProps {
 
 export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
   return (
-    <section className="relative h-[100vh] min-h-[640px] overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Legibility scrim, between the fixed video backdrop and the
           headline. On desktop the "contain"-fit frame naturally
           letterboxes and leaves the left side clear, but on narrow
@@ -32,7 +32,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
       {/* Center-left, vertically-centered headline column, overlaid on the
           page-wide scroll-driven video backdrop (mounted once at
           LandingPage level, not owned by this section). */}
-      <div className="relative z-10 flex h-full items-center">
+      <div className="relative z-10 flex min-h-screen items-center py-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

@@ -151,15 +151,15 @@ export const VoiceInputButton: React.FC<VoiceInputButtonProps> = ({
           </>
         ) : (
           <>
-            <Mic className="h-4 w-4 text-accent-amber-300" />
+            <Mic className="h-4 w-4 text-accent-rosegold-300" />
             <span>{label}</span>
           </>
         )}
       </button>
 
       {isListening && transcriptPreview && (
-        <div className="flex items-center gap-1.5 text-[11px] text-accent-amber-300 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg mt-1 animate-fade-in">
-          <Volume2 className="h-3.5 w-3.5 animate-pulse text-accent-amber-400 shrink-0" />
+        <div className="flex items-center gap-1.5 text-[11px] text-accent-rosegold-300 bg-rosegold-950/60 border border-rosegold-500/30 px-2.5 py-1 rounded-lg mt-1 animate-fade-in">
+          <Volume2 className="h-3.5 w-3.5 animate-pulse text-accent-rosegold-400 shrink-0" />
           <span className="truncate max-w-xs font-mono">&quot;{transcriptPreview}&quot;</span>
         </div>
       )}

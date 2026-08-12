@@ -453,12 +453,12 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               >
                 {loading ? (
                   <>
-                    <RefreshCw className="h-5 w-5 animate-spin text-accent-amber-300" />
+                    <RefreshCw className="h-5 w-5 animate-spin text-accent-rosegold-300" />
                     <span>{loadingMessage}</span>
                   </>
                 ) : (
                   <>
-                    <Zap className="h-5 w-5 text-accent-amber-300 fill-amber-300" />
+                    <Zap className="h-5 w-5 text-accent-rosegold-300 fill-rosegold-300" />
                     <span>Generate Omni-Platform Campaign Across All 7 Networks</span>
                   </>
                 )}

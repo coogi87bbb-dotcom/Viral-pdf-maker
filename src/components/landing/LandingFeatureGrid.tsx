@@ -98,11 +98,14 @@ export const LandingFeatureGrid: React.FC = () => {
                   frosted={false}
                   whileHover={{ scale: 1.03, rotateY: 3, y: -4, transition: { duration: 0.5, ease: 'easeOut' } }}
                 >
-                  {/* Single translucent layer (MotionPanel3D's own frosted
-                      background is disabled above) so the page-wide video
-                      backdrop stays visible through the card instead of
-                      compounding two dark layers into something opaque. */}
-                  <div className="bg-surface-1/30 backdrop-blur-xl backdrop-saturate-150 rounded-2xl border border-white/10 p-5 sm:p-6 shadow-xl space-y-4 h-full">
+                  {/* Fully transparent layer (MotionPanel3D's own frosted
+                      background is disabled above): zero fill, zero blur —
+                      the page-wide video shows straight through the card
+                      with nothing softening it. Only a hairline border
+                      marks the box outline. Text stays legible via
+                      .text-legible's drop shadow instead of an opaque
+                      backing. */}
+                  <div className="bg-transparent rounded-2xl border border-white/15 p-5 sm:p-6 shadow-xl space-y-4 h-full">
                     <div
                       className={`h-11 w-11 rounded-xl bg-gradient-to-tr ${accent.badge} p-0.5 flex items-center justify-center`}
                     >
@@ -110,8 +113,8 @@ export const LandingFeatureGrid: React.FC = () => {
                         <Icon className={`h-5 w-5 ${accent.icon}`} strokeWidth={2.5} />
                       </div>
                     </div>
-                    <h3 className="text-base font-bold text-white">{feature.title}</h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{feature.description}</p>
+                    <h3 className="text-base font-bold text-white text-legible">{feature.title}</h3>
+                    <p className="text-sm text-slate-300 leading-relaxed text-legible">{feature.description}</p>
                   </div>
                 </MotionPanel3D>
               </div>

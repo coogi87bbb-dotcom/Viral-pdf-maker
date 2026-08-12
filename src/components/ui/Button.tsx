@@ -22,6 +22,13 @@ const BASE =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0';
 
 const VARIANTS: Record<ButtonVariant, string> = {
+  // Note: primary intentionally stays amber, not the Studio OS "rosegold"
+  // rebrand — this component's only two consumers (LandingHero.tsx,
+  // AuthModal.tsx) are the pre-login marketing/auth surfaces, which keep
+  // their own amber/gold identity by design (see CLAUDE.md Design System).
+  // The authenticated Studio OS app shell doesn't use this shared
+  // primitive for its primary actions; its chrome was rebranded to rosegold
+  // directly (StudioControls.tsx, App.tsx, etc.) without touching this file.
   primary:
     'bg-gradient-to-r from-accent-amber-500 via-accent-amber-400 to-accent-amber-500 text-slate-950 ' +
     'shadow-[var(--shadow-glow-amber)] hover:shadow-[0_14px_50px_rgba(245,158,11,0.45)] hover:brightness-105 ' +
