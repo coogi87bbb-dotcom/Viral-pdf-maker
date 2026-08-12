@@ -41,7 +41,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
         >
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-gradient-to-r from-amber-500/10 to-violet-500/10 text-amber-300 text-[10px] font-mono font-bold border border-amber-500/20 uppercase tracking-widest">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Professional PDF Studio &amp; Viral Content Engine</span>
+            <span>LogFlowAI &middot; Professional PDF Studio &amp; Viral Content Engine</span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05] bg-gradient-to-r from-amber-300 via-slate-100 to-violet-300 bg-clip-text text-transparent">
