@@ -33,15 +33,16 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { GigScale } from './components/GigScale';
 import { DigitalKitStudio } from './components/DigitalKitStudio';
 import { AgentOpsStudio } from './components/AgentOpsStudio';
+import { DealCloserStudio } from './components/DealCloser/DealCloserStudio';
 
 import { DocumentData, DocSection, StudioSettings, StudioTheme } from './types';
 import { parseTextIntoDocument, cleanRawText } from './utils/textCleaner';
 import { SAMPLE_DOCUMENTS } from './data/sampleDocs';
 import { STUDIO_THEMES } from './data/themes';
-import { FileText, Flame, Sparkles, Layers, ArrowRight, Zap, ShieldCheck, LogOut, User, Crown, Package, Bot } from 'lucide-react';
+import { FileText, Flame, Sparkles, Layers, ArrowRight, Zap, ShieldCheck, LogOut, User, Crown, Package, Bot, Handshake } from 'lucide-react';
 import { OWNER_EMAIL } from './lib/firebase';
 
-type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'owner-admin';
+type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'deal-closer' | 'owner-admin';
 
 function MainWorkspace() {
   const { user, userProfile, logout, loading, authError } = useAuth();
@@ -316,6 +317,23 @@ function MainWorkspace() {
               </span>
             </button>
 
+            <button
+              onClick={() => setAppMode('deal-closer')}
+              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
+                appMode === 'deal-closer'
+                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
+                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
+              }`}
+            >
+              <Handshake className={`h-3.5 w-3.5 ${appMode === 'deal-closer' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
+              <span>Deal Closer</span>
+              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
+                appMode === 'deal-closer' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-surface-1 text-ink-muted border border-white/10'
+              }`}>
+                7 RE Tools
+              </span>
+            </button>
+
             {user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() && (
               <button
                 onClick={() => setAppMode('owner-admin')}
@@ -496,6 +514,13 @@ function MainWorkspace() {
               onUpdateSettings={handleUpdateSettings}
               onUpdateDocument={(doc) => setDocument(doc)}
             />
+          </MotionPanel3D>
+        </div>
+      ) : appMode === 'deal-closer' ? (
+        /* APP F: DEAL CLOSER — REAL ESTATE TOOLKIT (7 AI TOOLS) */
+        <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
+            <DealCloserStudio />
           </MotionPanel3D>
         </div>
       ) : appMode === 'owner-admin' && user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() ? (

@@ -26,10 +26,11 @@ import {
   where, 
   orderBy, 
   limit,
-  addDoc, 
-  updateDoc, 
+  addDoc,
+  updateDoc,
   serverTimestamp,
-  onSnapshot
+  onSnapshot,
+  increment
 } from 'firebase/firestore';
 import firebaseConfigJson from '../../firebase-applet-config.json';
 
@@ -101,9 +102,10 @@ export {
   where, 
   orderBy, 
   limit,
-  addDoc, 
-  updateDoc, 
+  addDoc,
+  updateDoc,
   serverTimestamp,
-  onSnapshot
+  onSnapshot,
+  increment
 };
 export type { FirebaseUser };

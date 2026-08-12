@@ -14,16 +14,16 @@ import {
   EmailAuthProvider,
   reauthenticateWithCredential
 } from '../lib/firebase';
-import { 
+import {
   ShieldAlert,
   Users,
   Activity,
-  Search, 
-  RefreshCw, 
-  DollarSign, 
-  Sparkles, 
-  CheckCircle2, 
-  Database, 
+  Search,
+  RefreshCw,
+  DollarSign,
+  Sparkles,
+  CheckCircle2,
+  Database,
   Award,
   ShieldCheck,
   Zap,
@@ -45,8 +45,29 @@ import {
   Wifi,
   Eye,
   Sliders,
-  BellRing
+  BellRing,
+  Handshake
 } from 'lucide-react';
+import { Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Tooltip,
+  Legend
+} from 'chart.js';
+import { DEAL_CLOSER_TOOL_IDS, DEAL_CLOSER_TOOL_LABELS } from './DealCloser/types';
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Tooltip, Legend);
+
+interface DealCloserUsageDoc {
+  toolId: string;
+  count?: number;
+  residentialCount?: number;
+  commercialCount?: number;
+}
 
 interface ActivityLog {
   id: string;
@@ -63,7 +84,8 @@ export const AdminDashboard: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'appA' | 'appB' | 'appC' | 'users' | 'logs'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'revenue' | 'appA' | 'appB' | 'appC' | 'dealCloser' | 'users' | 'logs'>('overview');
+  const [dealCloserUsage, setDealCloserUsage] = useState<Record<string, DealCloserUsageDoc>>({});
 
   // Broadcast System Banner State
   const [showBroadcastModal, setShowBroadcastModal] = useState(false);
@@ -141,9 +163,27 @@ export const AdminDashboard: React.FC = () => {
       }
     );
 
+    // 3. Deal Closer per-tool usage analytics (repurposed from the source
+    // app's admin.html — its VIP/revenue-specific metrics don't apply here
+    // since there's no separate paywall inside Studio OS).
+    const unsubscribeDealCloserUsage = onSnapshot(
+      collection(db, 'dealCloserUsage'),
+      (snapshot) => {
+        const usage: Record<string, DealCloserUsageDoc> = {};
+        snapshot.forEach((docSnap) => {
+          usage[docSnap.id] = docSnap.data() as DealCloserUsageDoc;
+        });
+        setDealCloserUsage(usage);
+      },
+      (err) => {
+        console.warn('Deal Closer usage listener notice:', err);
+      }
+    );
+
     return () => {
       unsubscribeUsers();
       unsubscribeLogs();
+      unsubscribeDealCloserUsage();
     };
   }, [isAuthorizedOwner, user?.uid, userProfile?.displayName]);
 
@@ -325,6 +365,7 @@ export const AdminDashboard: React.FC = () => {
             { id: 'appA', label: 'App A: PDF Studio', icon: FileText },
             { id: 'appB', label: 'App B: Viral OS Engine', icon: Flame },
             { id: 'appC', label: 'App C: GigScale Engine', icon: Zap },
+            { id: 'dealCloser', label: 'App F: Deal Closer', icon: Handshake },
             { id: 'users', label: 'Users', icon: Users },
             { id: 'logs', label: 'Audit Logs', icon: Radio }
           ].map((tab) => {
@@ -638,6 +679,109 @@ export const AdminDashboard: React.FC = () => {
           </div>
         </div>
       )}
+
+      {/* TAB F: DEAL CLOSER USAGE ANALYTICS (repurposed from the source
+          app's admin.html — VIP/revenue metrics dropped since this tool
+          has no separate paywall inside Studio OS; just per-tool usage). */}
+      {activeTab === 'dealCloser' && (() => {
+        const toolCounts = DEAL_CLOSER_TOOL_IDS.map((id) => dealCloserUsage[id]?.count || 0);
+        const totalRuns = toolCounts.reduce((sum, n) => sum + n, 0);
+        const residentialTotal = DEAL_CLOSER_TOOL_IDS.reduce((sum, id) => sum + (dealCloserUsage[id]?.residentialCount || 0), 0);
+        const commercialTotal = DEAL_CLOSER_TOOL_IDS.reduce((sum, id) => sum + (dealCloserUsage[id]?.commercialCount || 0), 0);
+        const mostUsedIdx = toolCounts.indexOf(Math.max(...toolCounts, 0));
+        const mostUsedLabel = totalRuns > 0 ? DEAL_CLOSER_TOOL_LABELS[DEAL_CLOSER_TOOL_IDS[mostUsedIdx]] : '—';
+
+        return (
+          <div className="bg-surface-1 p-6 rounded-3xl border border-accent-rosegold-500/30 space-y-6 shadow-xl">
+            <div className="flex items-center gap-3">
+              <div className="p-3 rounded-2xl bg-accent-rosegold-500/10 border border-accent-rosegold-500/30 text-accent-rosegold-400">
+                <Handshake className="h-6 w-6" />
+              </div>
+              <div>
+                <h2 className="text-lg font-black text-white">App F: Deal Closer — Real Estate Toolkit (7 AI Tools)</h2>
+                <p className="text-xs text-ink-muted">Per-tool usage analytics, ported &amp; repurposed from thedealcloserai's admin dashboard</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Total Tool Runs</span>
+                <div className="text-2xl font-black text-white">{totalRuns.toLocaleString()}</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Most-Used Tool</span>
+                <div className="text-lg font-black text-accent-rosegold-400 truncate">{mostUsedLabel}</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-white/10 space-y-1">
+                <span className="text-xs text-ink-muted">Residential vs Commercial</span>
+                <div className="text-lg font-black text-white">
+                  {residentialTotal}<span className="text-ink-muted text-sm"> / </span>{commercialTotal}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3">
+                <h3 className="text-xs font-bold text-ink-secondary uppercase tracking-wider">Tool Usage Breakdown</h3>
+                {totalRuns > 0 ? (
+                  <Bar
+                    data={{
+                      labels: DEAL_CLOSER_TOOL_IDS.map((id) => DEAL_CLOSER_TOOL_LABELS[id]),
+                      datasets: [
+                        {
+                          label: 'Runs',
+                          data: toolCounts,
+                          backgroundColor: 'rgba(226, 168, 116, 0.7)',
+                          borderColor: 'rgb(226, 168, 116)',
+                          borderWidth: 1,
+                          borderRadius: 6
+                        }
+                      ]
+                    }}
+                    options={{
+                      responsive: true,
+                      plugins: { legend: { display: false } },
+                      scales: {
+                        x: { ticks: { color: '#7c869b', font: { size: 9 } }, grid: { display: false } },
+                        y: { ticks: { color: '#7c869b', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.06)' }, beginAtZero: true }
+                      }
+                    }}
+                  />
+                ) : (
+                  <p className="text-xs text-ink-muted py-8 text-center">No tool usage recorded yet.</p>
+                )}
+              </div>
+
+              <div className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3">
+                <h3 className="text-xs font-bold text-ink-secondary uppercase tracking-wider">🏡 Residential vs 🏢 Commercial Split</h3>
+                {residentialTotal + commercialTotal > 0 ? (
+                  <div className="max-w-[260px] mx-auto">
+                    <Pie
+                      data={{
+                        labels: ['Residential', 'Commercial'],
+                        datasets: [
+                          {
+                            data: [residentialTotal, commercialTotal],
+                            backgroundColor: ['rgba(226, 168, 116, 0.8)', 'rgba(139, 92, 246, 0.8)'],
+                            borderColor: ['rgb(226, 168, 116)', 'rgb(139, 92, 246)'],
+                            borderWidth: 1
+                          }
+                        ]
+                      }}
+                      options={{
+                        responsive: true,
+                        plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } } }
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <p className="text-xs text-ink-muted py-8 text-center">No mode data recorded yet.</p>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* TAB 6: VIP USERS MANAGEMENT TABLE */}
       {activeTab === 'users' && (
