@@ -88,6 +88,38 @@
   --shadow-glow-amber: 0 10px 40px rgba(245, 158, 11, 0.35);
   --shadow-glow-rosegold: 0 10px 40px rgba(212, 115, 90, 0.35);
   --shadow-glow-violet: 0 10px 40px rgba(139, 92, 246, 0.35);
+
+  /* ── LogFlow AI landing page: "Editorial Luxury" zone palette ──────────
+   * Scoped to src/components/landing/** only. The landing has always been
+   * allowed to diverge from the Studio OS app chrome (see CLAUDE.md Design
+   * System); this replaces its former amber/gold marketing palette.
+   *
+   * The page alternates background ZONES rather than sitting on one flat
+   * surface: bone (light) -> ink (dark) -> copper (accent) -> bone ...
+   * Text colour inverts per zone via the -on- tokens below.
+   *
+   * Copper is deliberately adjacent to accent-rosegold-500 (#d4735a) so the
+   * marketing page still reads as the same brand family as the app, rather
+   * than an unrelated third palette. Hex only, never oklch()/color-mix() -
+   * see the html2canvas colour-safety rule in CLAUDE.md. */
+  --color-lf-bone: #f2eee6;
+  --color-lf-bone-dim: #e6e0d4;
+  --color-lf-ink: #0a0b0d;
+  --color-lf-ink-soft: #14161a;
+  --color-lf-copper: #c0754a;
+  --color-lf-copper-deep: #8a4f30;
+  --color-lf-copper-light: #dda17a;
+  /* Foreground pairs — "-on-bone" reads on light zones, "-on-ink" on dark */
+  --color-lf-on-bone: #16181c;
+  --color-lf-on-bone-muted: #6b6558;
+  --color-lf-on-ink: #f2eee6;
+  --color-lf-on-ink-muted: #8d8779;
+
+  /* Display face for the landing only. Cormorant Garamond is a high-contrast
+   * old-style serif — the luxury/editorial register the app's Newsreader
+   * doesn't reach. Already loaded by the @import at the top of this file, so
+   * this costs no additional font request. */
+  --font-editorial: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 }
 
 @layer base {
@@ -158,6 +190,102 @@
   opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * LogFlow AI landing — "Editorial Luxury" primitives
+ * Scoped to src/components/landing/**. Type scales fluidly with clamp() so
+ * it shrinks on phones instead of only growing at sm:/lg: (the previous
+ * landing set a mobile base and only ever scaled UP, which left the hero
+ * oversized at 375px).
+ * ────────────────────────────────────────────────────────────────────────── */
+
+/* Oversized hero display type. Floor is deliberately low so a 320px phone
+   still fits the longest word on one line. */
+.lf-display {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  /* Capped at 6rem rather than 8rem: the hero headline sits below the PERA
+     INC wordmark burned into the video plate, so the whole title card has a
+     hard height budget on a 900px-tall desktop viewport. */
+  font-size: clamp(2.75rem, 7.4vw, 6rem);
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+}
+
+.lf-heading {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  font-size: clamp(2rem, 5.2vw, 3.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+/* Small uppercase mono index labels — "001 / THE COST". Structure comes from
+   these + type scale, not from cards or borders. */
+.lf-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.1vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Body copy: generous leading, measure capped for readability. */
+.lf-body {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.5vw, 1.125rem);
+  line-height: 1.7;
+  max-width: 46ch;
+}
+
+/* Stat figures — must clear 4rem on desktop per the design brief. */
+.lf-figure {
+  font-family: var(--font-editorial);
+  font-weight: 700;
+  font-size: clamp(3.25rem, 8.5vw, 6.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hairline rule used to separate editorial blocks instead of card borders. */
+.lf-rule {
+  height: 1px;
+  border: 0;
+  background: currentColor;
+  opacity: 0.22;
+}
+
+/* Marquee track. Horizontal offset is driven by GSAP on scroll, not by a CSS
+   animation, so it stays in sync with scroll position and costs nothing when
+   off-screen. */
+.lf-marquee {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  font-size: clamp(3.5rem, 13vw, 13rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+/* Entrance animations are applied by <Reveal>. The pre-animation resting
+   state lives here so content can't flash at full opacity before GSAP takes
+   over on first paint. .lf-reveal-ready is set once the observer is wired;
+   if JS never runs, content stays visible (no permanently hidden copy). */
+.lf-reveal-ready[data-reveal] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lf-reveal-ready[data-reveal] {
+    opacity: 1;
+  }
+  .lf-marquee {
+    will-change: auto;
+  }
 }
 
 /* Custom sleek scrollbar for enterprise UI */

@@ -1,25 +1,26 @@
 import React from 'react';
-import { Sparkles } from 'lucide-react';
 
 export const LandingFooter: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative border-t border-slate-800/80 py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2.5">
-          <div className="h-7 w-7 rounded-lg bg-gradient-to-tr from-amber-400 via-amber-500 to-amber-700 p-0.5 flex items-center justify-center">
-            <div className="h-full w-full bg-slate-950 rounded-[8px] flex items-center justify-center">
-              <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-            </div>
+    <footer className="relative bg-lf-ink px-5 py-14 sm:px-8 sm:py-16 lg:px-12">
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="flex flex-col gap-8 border-t border-lf-on-ink/15 pt-10 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <span className="font-editorial text-3xl font-semibold tracking-[-0.01em] text-lf-on-ink sm:text-4xl">
+              LogFlow<span className="text-lf-copper"> AI</span>
+            </span>
+            <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-lf-on-ink-muted">
+              Nine production tools in one workspace. Built to give you the week back.
+            </p>
           </div>
-          <span className="text-sm font-black bg-gradient-to-r from-white via-slate-100 to-amber-200 bg-clip-text text-transparent">
-            LogFlowAI
-          </span>
+
+          <div className="sm:text-right">
+            <p className="lf-label text-lf-on-ink-muted">A PERA INC product</p>
+            <p className="mt-3 font-sans text-xs text-lf-on-ink-muted">© {year}</p>
+          </div>
         </div>
-        <p className="text-xs text-slate-500 text-center sm:text-right">
-          Professional PDF Studio &amp; Viral Content Engine &middot; &copy; {year}
-        </p>
       </div>
     </footer>
   );

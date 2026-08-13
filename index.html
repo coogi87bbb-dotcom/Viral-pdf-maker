@@ -3,16 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LogFlowAI | Professional PDF Studio & Viral Content Engine</title>
-    <meta name="description" content="Professional PDF Studio & Viral Content Engine for creating, publishing, and monetizing high-DPI documents, books, and omni-channel campaigns." />
-    <meta property="og:title" content="LogFlowAI" />
-    <meta property="og:description" content="Professional PDF Studio & Viral Content Engine for creating, publishing, and monetizing high-DPI documents, books, and omni-channel campaigns." />
+    <title>LogFlow AI — Get your week back</title>
+    <meta name="description" content="Nine production tools in one workspace: campaigns, publishing, proposals and real estate. Replaces $418/mo of subscriptions and around nine hours a week of manual work." />
+    <meta name="theme-color" content="#0a0b0d" />
+    <meta property="og:title" content="LogFlow AI — Get your week back" />
+    <meta property="og:description" content="Nine production tools in one workspace. The work that eats your evenings takes minutes here." />
     <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
     <!-- Fonts are loaded once via the @import at the top of src/index.css —
          do not add a second <link> here, it would duplicate the request. -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='32' y2='32'%3E%3Cstop offset='0' stop-color='%23f59e0b'/%3E%3Cstop offset='1' stop-color='%238b5cf6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%230d1017'/%3E%3Cpath d='M16 5 L18.8 13.2 L27 16 L18.8 18.8 L16 27 L13.2 18.8 L5 16 L13.2 13.2 Z' fill='url(%23g)'/%3E%3C/svg%3E" />
+    <!-- Copper "L" mark on ink, matching the landing page's zone palette. -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0b0d'/%3E%3Cpath d='M11 7 v14 h10' stroke='%23c0754a' stroke-width='3.2' stroke-linecap='square' fill='none'/%3E%3Ccircle cx='23.5' cy='9.5' r='2.4' fill='%23dda17a'/%3E%3C/svg%3E" />
   </head>
-  <body class="bg-surface-0 text-ink-primary min-h-screen relative overflow-x-hidden antialiased">
+  <!-- overflow-x uses `clip` rather than `hidden` so it never turns an
+       ancestor into a scroll container, which would break `position: sticky`
+       on the landing page. -->
+  <body style="background-color:#0a0b0d;overflow-x:clip" class="bg-surface-0 text-ink-primary min-h-screen relative antialiased">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
