@@ -1327,6 +1327,84 @@ app.post('/api/ai/deal-closer-generate', async (req, res) => {
   }
 });
 
+// Underwriting comp/valuation-input verification for the Deal Closer
+// "Underwriting & Deal Verification" tool. Ported from the standalone
+// underwrittingdealoop/run-loop.sh CLI tool's research step — there, a
+// single `claude -p` call did live web research via Claude Code's own
+// WebFetch tool. No equivalent agentic tool-loop exists server-side here, so
+// this uses Gemini + Google Search grounding instead (same `tools: [{
+// googleSearch: {} }]` pattern already proven at /api/viral/trending-pulse
+// above), which is jurisdiction-agnostic rather than locked to the source
+// tool's Norfolk-specific open-data recipe.
+//
+// This endpoint NEVER computes or states a dollar figure — per CLAUDE.md
+// rule #1, it only researches/sanity-checks the comp, cap-rate, or exit-comp
+// inputs the user already entered and reports a verification confidence.
+// All arithmetic lives exclusively in src/components/DealCloser/underwritingMath.ts.
+app.post('/api/deal-closer/verify-underwriting', async (req, res) => {
+  const { address, propertyType, dealType, inputSummary } = req.body || {};
+
+  const fallback = () =>
+    res.json({
+      confidence: 'unverified',
+      notes:
+        'Live comp research is unavailable right now. Treat all comp/valuation inputs as unverified per the Verification Gap convention — confirm them manually against CoStar/LoopNet/Crexi, a broker BOV, or actual T-12 financials before relying on this deal’s APPROVED/CONDITIONALLY APPROVED status.',
+      flags: ['AI research step unavailable — manual verification required.'],
+    });
+
+  try {
+    if (!address || String(address).trim().length < 3) {
+      return res.status(400).json({ error: 'A property address is required.' });
+    }
+
+    const ai = getGenAI();
+
+    const prompt = `Perform a Google Search to independently research and sanity-check the underwriting inputs below for a real-estate acquisition at "${address}" (property type: ${propertyType || 'residential'}${dealType ? `, deal type: ${dealType}` : ''}).
+
+Inputs supplied by the investor, to verify against public sources (comps, county assessor/tax records, recent sales, market cap rate reports — whatever is findable for this specific address):
+${inputSummary || '(no inputs supplied)'}
+
+Your job is ONLY to research and sanity-check these inputs — do NOT compute or state any MAO, ARV, NOI, or offer price yourself; that math is handled separately.
+
+Return STRICTLY a valid JSON object, no markdown fences, no extra text, in this exact shape:
+{
+  "confidence": "verified" | "partial" | "unverified",
+  "notes": "2-4 sentence summary of what you found and how it compares to the supplied inputs.",
+  "flags": ["short specific concern or gap, if any — empty array if none"]
+}
+
+Use "verified" only if you found a specific, current, address-relevant source (recent comparable sale, assessor record, or published cap-rate/market report) that reasonably corroborates the supplied numbers. Use "unverified" if you found nothing specific to this address or the numbers look inconsistent with what you found. Use "partial" for anything in between.`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-3.6-flash',
+      contents: prompt,
+      config: {
+        tools: [{ googleSearch: {} }],
+      },
+    });
+
+    let rawText = response.text || '';
+    rawText = rawText.replace(/```json/gi, '').replace(/```/g, '').trim();
+    const startBrace = rawText.indexOf('{');
+    const endBrace = rawText.lastIndexOf('}');
+
+    if (startBrace !== -1 && endBrace !== -1 && endBrace > startBrace) {
+      const parsed = JSON.parse(rawText.substring(startBrace, endBrace + 1));
+      if (parsed && typeof parsed.confidence === 'string') {
+        return res.json({
+          confidence: parsed.confidence,
+          notes: parsed.notes || '',
+          flags: Array.isArray(parsed.flags) ? parsed.flags : [],
+        });
+      }
+    }
+    throw new Error('Unable to parse structured verification JSON from search response.');
+  } catch (error: any) {
+    console.warn('Underwriting verification research notice:', error?.message || error);
+    return fallback();
+  }
+});
+
 // AI Quick Action Endpoint for Section & Paragraph Editing
 app.post('/api/ai/quick-edit-action', async (req, res) => {
   try {

@@ -7,7 +7,7 @@
 // exposed client-side API key). See the plan this was built from for the
 // full per-tool field inventory this is checked against.
 import React, { useState } from 'react';
-import { Crown, Megaphone, Handshake, Mail, Home, Key, CalendarClock } from 'lucide-react';
+import { Crown, Megaphone, Handshake, Mail, Home, Key, CalendarClock, ClipboardCheck } from 'lucide-react';
 import { PropertyModeProvider } from './shared';
 import type { DealCloserToolId } from './types';
 import { CommissionCalculator } from './CommissionCalculator';
@@ -17,6 +17,7 @@ import { EmailSequenceGenerator } from './EmailSequenceGenerator';
 import { ListingDescriptionGenerator } from './ListingDescriptionGenerator';
 import { EventPlanner } from './EventPlanner';
 import { TransactionTimeline } from './TransactionTimeline';
+import { UnderwritingVerifier } from './UnderwritingVerifier';
 
 const TOOLS: { id: DealCloserToolId; label: string; icon: React.ElementType }[] = [
   { id: 'commission', label: 'Commission Calculator', icon: Crown },
@@ -26,6 +27,7 @@ const TOOLS: { id: DealCloserToolId; label: string; icon: React.ElementType }[] 
   { id: 'listingDescription', label: 'Listing Description', icon: Home },
   { id: 'eventPlanner', label: 'Open House / Tour', icon: Key },
   { id: 'timeline', label: 'Deadline Tracker', icon: CalendarClock },
+  { id: 'underwriting', label: 'Underwriting & Verification', icon: ClipboardCheck },
 ];
 
 const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400';
@@ -48,7 +50,7 @@ export const DealCloserStudio: React.FC = () => {
             <h1 className="text-xl font-semibold tracking-[-0.02em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent">
               Deal Closer
             </h1>
-            <p className="text-xs text-ink-muted">7 AI-powered real-estate tools — commission, marketing, negotiation, listings & more.</p>
+            <p className="text-xs text-ink-muted">8 AI-powered real-estate tools — commission, marketing, negotiation, listings, underwriting & more.</p>
           </div>
         </div>
 
@@ -108,6 +110,7 @@ export const DealCloserStudio: React.FC = () => {
           {activeTool === 'listingDescription' && <ListingDescriptionGenerator />}
           {activeTool === 'eventPlanner' && <EventPlanner />}
           {activeTool === 'timeline' && <TransactionTimeline />}
+          {activeTool === 'underwriting' && <UnderwritingVerifier />}
         </div>
       </PropertyModeProvider>
     </div>

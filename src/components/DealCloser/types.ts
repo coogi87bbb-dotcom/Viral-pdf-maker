@@ -13,6 +13,7 @@ export const DEAL_CLOSER_TOOL_IDS = [
   'listingDescription',
   'eventPlanner',
   'timeline',
+  'underwriting',
 ] as const;
 
 export type DealCloserToolId = (typeof DEAL_CLOSER_TOOL_IDS)[number];
@@ -25,4 +26,5 @@ export const DEAL_CLOSER_TOOL_LABELS: Record<DealCloserToolId, string> = {
   listingDescription: 'Listing Description',
   eventPlanner: 'Open House / Tour Playbook',
   timeline: 'Deadline Tracker',
+  underwriting: 'Underwriting & Deal Verification',
 };
