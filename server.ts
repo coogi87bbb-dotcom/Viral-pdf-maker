@@ -3439,4 +3439,18 @@ async function startServer() {
   });
 }
 
-startServer();
+// This file doubles as the Vercel serverless function's request handler
+// (see api/[...path].ts) — Vercel's zero-config Vite detection only ever
+// built and served the static `dist/` output, so every `/api/*` route
+// 404'd against Vercel's own platform 404 page in production regardless of
+// env vars, since server.ts (the Express app defined above) was never
+// actually being executed there. `process.env.VERCEL` is set automatically
+// by Vercel's runtime, so skip the standalone dev-server bootstrap (Vite
+// middleware / static-file fallback / app.listen) there — Vercel's CDN
+// already serves the static build for every non-/api path, and the
+// serverless wrapper just calls `app(req, res)` directly per request.
+if (!process.env.VERCEL) {
+  startServer();
+}
+
+export default app;
