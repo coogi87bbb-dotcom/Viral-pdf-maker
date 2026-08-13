@@ -322,13 +322,13 @@ GigScale VIP Creator`);
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* Left Branding */}
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-gradient-to-br from-accent-rosegold-500 to-accent-rosegold-600 text-slate-950 shadow-[var(--shadow-glow-rosegold)] flex items-center justify-center">
+            <div className="p-2.5 rounded-2xl bg-gradient-to-br from-accent-brass-500 to-accent-brass-600 text-slate-950 shadow-[var(--shadow-glow-brass)] flex items-center justify-center">
               <Zap className="h-6 w-6 text-slate-950 fill-slate-950" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl sm:text-2xl font-display font-semibold text-white tracking-[-0.01em]">GigScale</h1>
-                <span className="px-2.5 py-0.5 rounded-full bg-accent-rosegold-500/10 border border-rosegold-500/40 text-accent-rosegold-400 font-extrabold text-[10px] tracking-wider uppercase flex items-center gap-1 shadow-sm">
+                <span className="px-2.5 py-0.5 rounded-full bg-accent-brass-500/10 border border-brass-500/40 text-accent-brass-400 font-extrabold text-[10px] tracking-wider uppercase flex items-center gap-1 shadow-sm">
                   👑 VERIFIED SUITE
                 </span>
               </div>
@@ -346,7 +346,7 @@ GigScale VIP Creator`);
               }}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 suiteMode === 'full-os'
-                  ? 'bg-rosegold-400 text-slate-950 shadow-md font-black'
+                  ? 'bg-brass-400 text-slate-950 shadow-md font-black'
                   : 'text-ink-muted hover:text-white'
               }`}
             >
@@ -389,7 +389,7 @@ GigScale VIP Creator`);
 
           {/* User Account Pill */}
           <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-1 border border-hairline text-xs text-ink-secondary font-mono">
-            <span className="text-accent-rosegold-400 font-bold">{isOwner ? '👑' : '👤'}</span>
+            <span className="text-accent-brass-400 font-bold">{isOwner ? '👑' : '👤'}</span>
             <span className="truncate max-w-[150px]">{user?.email || 'Guest Client'}</span>
             <button onClick={() => logout()} title="Sign Out">
               <LogOut className="h-3.5 w-3.5 text-slate-500 hover:text-ink-secondary cursor-pointer ml-1" />
@@ -403,11 +403,11 @@ GigScale VIP Creator`);
             onClick={() => setActiveSubTab('overview')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
               activeSubTab === 'overview'
-                ? 'bg-accent-rosegold-500/10 border-2 border-rosegold-500 text-accent-rosegold-300 shadow-md shadow-rosegold-500/10'
+                ? 'bg-accent-brass-500/10 border-2 border-brass-500 text-accent-brass-300 shadow-md shadow-brass-500/10'
                 : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
-            <BarChart className="h-4 w-4 text-accent-rosegold-400" />
+            <BarChart className="h-4 w-4 text-accent-brass-400" />
             <span>{suiteMode === 'buyer' ? 'Buyer Dashboard' : suiteMode === 'seller' ? 'Seller Launchpad' : 'Full Dashboard'}</span>
           </button>
 
@@ -416,11 +416,11 @@ GigScale VIP Creator`);
               onClick={() => setActiveSubTab('roadmap')}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                 activeSubTab === 'roadmap'
-                  ? 'bg-accent-rosegold-500/10 border-2 border-rosegold-500 text-accent-rosegold-300 shadow-md'
+                  ? 'bg-accent-brass-500/10 border-2 border-brass-500 text-accent-brass-300 shadow-md'
                   : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
               }`}
             >
-              <Crown className="h-4 w-4 text-accent-rosegold-400" />
+              <Crown className="h-4 w-4 text-accent-brass-400" />
               <span>Launch Roadmap</span>
             </button>
           )}
@@ -516,11 +516,11 @@ GigScale VIP Creator`);
       </div>
 
       {/* MAIN COMMAND CENTER HERO CARD (RESPONDS TO BUYER VS SELLER VS FULL OS) */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-surface-0 border border-rosegold-500/20 shadow-2xl relative overflow-hidden space-y-5">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-accent-rosegold-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-6 sm:p-8 rounded-3xl bg-surface-0 border border-brass-500/20 shadow-2xl relative overflow-hidden space-y-5">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-accent-brass-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-400 text-xs font-extrabold uppercase font-mono">
-          <Crown className="h-3.5 w-3.5 text-accent-rosegold-400" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-400 text-xs font-extrabold uppercase font-mono">
+          <Crown className="h-3.5 w-3.5 text-accent-brass-400" />
           <span>
             {suiteMode === 'buyer'
               ? 'GIGSCALE • CLIENT MARKETPLACE MODE'
@@ -622,8 +622,8 @@ GigScale VIP Creator`);
             <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Active Client Orders</span>
               <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-black text-accent-rosegold-400">{activeOrdersCount}</span>
-                <span className="text-xs font-bold text-rosegold-500 bg-accent-rosegold-500/10 px-2 py-0.5 rounded">In Pipeline</span>
+                <span className="text-2xl font-black text-accent-brass-400">{activeOrdersCount}</span>
+                <span className="text-xs font-bold text-brass-500 bg-accent-brass-500/10 px-2 py-0.5 rounded">In Pipeline</span>
               </div>
             </div>
 
@@ -673,8 +673,8 @@ GigScale VIP Creator`);
                     </div>
                     <div className="text-right shrink-0">
                       <span className="text-xs font-extrabold text-emerald-400">${gig.basicPrice} – ${gig.premiumPrice}</span>
-                      <div className="text-[10px] text-accent-rosegold-400 flex items-center justify-end gap-0.5">
-                        <Star className="h-2.5 w-2.5 fill-rosegold-400" />
+                      <div className="text-[10px] text-accent-brass-400 flex items-center justify-end gap-0.5">
+                        <Star className="h-2.5 w-2.5 fill-brass-400" />
                         <span>{gig.rating}</span>
                       </div>
                     </div>
@@ -686,12 +686,12 @@ GigScale VIP Creator`);
             <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-accent-rosegold-400" />
+                  <Clock className="h-4 w-4 text-accent-brass-400" />
                   <span>Recent Client Orders</span>
                 </h3>
                 <button 
                   onClick={() => setActiveSubTab('pipeline')}
-                  className="text-xs text-accent-rosegold-400 hover:underline flex items-center gap-1"
+                  className="text-xs text-accent-brass-400 hover:underline flex items-center gap-1"
                 >
                   <span>View Pipeline</span>
                   <ChevronRight className="h-3 w-3" />
@@ -706,7 +706,7 @@ GigScale VIP Creator`);
                         <span className="text-xs font-bold text-ink-secondary">{order.clientName}</span>
                         <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded border ${
                           order.status === 'Paid' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' :
-                          order.status === 'In Progress' ? 'bg-accent-rosegold-500/10 text-accent-rosegold-400 border-rosegold-500/30' :
+                          order.status === 'In Progress' ? 'bg-accent-brass-500/10 text-accent-brass-400 border-brass-500/30' :
                           'bg-indigo-500/10 text-indigo-400 border-indigo-500/30'
                         }`}>
                           {order.status}
@@ -768,9 +768,9 @@ GigScale VIP Creator`);
                       <span className="text-[9px] text-ink-muted block">{gig.standardDeliveryDays}d delivery</span>
                     </div>
 
-                    <div className="p-2 rounded-lg bg-surface-0 border border-rosegold-500/40 bg-accent-rosegold-500/5">
-                      <span className="text-[9px] font-mono text-accent-rosegold-400 block font-bold">VIP PREMIUM</span>
-                      <span className="text-xs font-black text-accent-rosegold-400">${gig.premiumPrice}</span>
+                    <div className="p-2 rounded-lg bg-surface-0 border border-brass-500/40 bg-accent-brass-500/5">
+                      <span className="text-[9px] font-mono text-accent-brass-400 block font-bold">VIP PREMIUM</span>
+                      <span className="text-xs font-black text-accent-brass-400">${gig.premiumPrice}</span>
                       <span className="text-[9px] text-ink-muted block">{gig.premiumDeliveryDays}d delivery</span>
                     </div>
                   </div>
@@ -802,7 +802,7 @@ GigScale VIP Creator`);
                         title="Generate pitch proposal for this gig"
                       >
                         <span>Pitch</span>
-                        <Sparkles className="h-3 w-3 text-accent-rosegold-400" />
+                        <Sparkles className="h-3 w-3 text-accent-brass-400" />
                       </button>
                     )}
 
@@ -906,7 +906,7 @@ GigScale VIP Creator`);
           <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
             <div className="space-y-1">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
-                <Sparkles className="h-4 w-4 text-accent-rosegold-400" />
+                <Sparkles className="h-4 w-4 text-accent-brass-400" />
                 <span>AI Proposal & Client Pitch Engine</span>
               </h2>
               <p className="text-xs text-ink-muted">Generate high-converting proposal messages for Upwork, Fiverr, or direct cold emails</p>
@@ -1309,16 +1309,16 @@ GigScale VIP Creator`);
               <span className="text-xs font-mono text-emerald-400 block font-bold">$10,000 / Month Target</span>
               <div className="space-y-1">
                 <span className="text-2xl font-black text-emerald-400">8 Orders / mo</span>
-                <p className="text-[11px] text-accent-rosegold-400">at $1,250 Agency Retainer Package</p>
+                <p className="text-[11px] text-accent-brass-400">at $1,250 Agency Retainer Package</p>
               </div>
               <p className="text-[10px] text-ink-muted">Requires ~2 retainer clients per week. Estimated working time: 15 hrs/wk ($166/hr effective rate).</p>
             </div>
 
-            <div className="p-5 rounded-xl bg-surface-0 border border-rosegold-500/30 bg-accent-rosegold-500/5 space-y-3">
-              <span className="text-xs font-mono text-accent-rosegold-400 block font-bold">$20,000 / Month Target</span>
+            <div className="p-5 rounded-xl bg-surface-0 border border-brass-500/30 bg-accent-brass-500/5 space-y-3">
+              <span className="text-xs font-mono text-accent-brass-400 block font-bold">$20,000 / Month Target</span>
               <div className="space-y-1">
-                <span className="text-2xl font-black text-accent-rosegold-400">8 VIP Retainers</span>
-                <p className="text-[11px] text-accent-rosegold-300">at $2,500 Full Suite Package</p>
+                <span className="text-2xl font-black text-accent-brass-400">8 VIP Retainers</span>
+                <p className="text-[11px] text-accent-brass-300">at $2,500 Full Suite Package</p>
               </div>
               <p className="text-[10px] text-ink-muted">Scale into a full white-label agency. Estimated working time: 20 hrs/wk ($250/hr effective rate).</p>
             </div>
@@ -1389,7 +1389,7 @@ GigScale VIP Creator`);
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-[10px] font-mono text-accent-rosegold-400">Premium ($):</label>
+                  <label className="text-[10px] font-mono text-accent-brass-400">Premium ($):</label>
                   <input
                     type="number"
                     value={newGigPremium}
@@ -1513,7 +1513,7 @@ GigScale VIP Creator`);
           <div className="bg-surface-1 border border-hairline rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 rounded-2xl bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-400">
+                <div className="p-2.5 rounded-2xl bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-400">
                   <Sparkles className="h-6 w-6" />
                 </div>
                 <div>
@@ -1536,7 +1536,7 @@ GigScale VIP Creator`);
                   type="number"
                   value={auditTargetRevenue}
                   onChange={(e) => setAuditTargetRevenue(e.target.value)}
-                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-brass-500"
                 />
               </div>
 
@@ -1546,15 +1546,15 @@ GigScale VIP Creator`);
                   type="number"
                   value={auditCurrentRate}
                   onChange={(e) => setAuditCurrentRate(e.target.value)}
-                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-brass-500"
                 />
               </div>
 
-              <div className="p-4 rounded-2xl bg-surface-0 border border-rosegold-500/30 space-y-3 font-mono">
-                <div className="text-accent-rosegold-400 font-bold uppercase text-[11px]">AUDIT RECOMMENDATION:</div>
+              <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30 space-y-3 font-mono">
+                <div className="text-accent-brass-400 font-bold uppercase text-[11px]">AUDIT RECOMMENDATION:</div>
                 <div className="text-ink-secondary text-xs leading-relaxed space-y-2">
                   <p>• To hit <strong className="text-emerald-400">${Number(auditTargetRevenue).toLocaleString()}/mo</strong> at standard rates, you need <strong>{Math.ceil(Number(auditTargetRevenue) / (Number(auditCurrentRate) || 1))} client deliverables</strong> per month.</p>
-                  <p>• By bundling high-DPI PDF creation, 3D hardcover mockups, and a 7-network viral campaign into a single VIP Package ($1,250), you only need <strong className="text-accent-rosegold-300">{Math.ceil(Number(auditTargetRevenue) / 1250)} retainer clients</strong>!</p>
+                  <p>• By bundling high-DPI PDF creation, 3D hardcover mockups, and a 7-network viral campaign into a single VIP Package ($1,250), you only need <strong className="text-accent-brass-300">{Math.ceil(Number(auditTargetRevenue) / 1250)} retainer clients</strong>!</p>
                 </div>
               </div>
 
@@ -1564,7 +1564,7 @@ GigScale VIP Creator`);
                   setShowProfitAuditModal(false);
                   setActiveSubTab('calculator');
                 }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-rosegold-500 to-orange-500 hover:from-rosegold-400 hover:to-orange-400 text-slate-950 font-black text-xs transition-colors cursor-pointer shadow-lg shadow-rosegold-500/20"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-brass-500 to-brass-300 hover:from-brass-400 hover:to-brass-200 text-slate-950 font-black text-xs transition-colors cursor-pointer shadow-lg shadow-brass-500/20"
               >
                 Apply 10x Packaging Blueprint
               </button>

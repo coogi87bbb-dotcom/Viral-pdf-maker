@@ -356,7 +356,7 @@ Structure your response cleanly using Markdown:
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-2xl bg-gradient-to-b from-rosegold-300 via-rosegold-400 to-rosegold-500 hover:from-rosegold-200 hover:to-rosegold-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(20, 168, 126,0.3)] border-b-4 border-rosegold-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+            className="w-full py-4 rounded-2xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(20, 168, 126,0.3)] border-b-4 border-brass-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
           >
             {loading ? (
               <>
@@ -402,7 +402,7 @@ Structure your response cleanly using Markdown:
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="px-4 py-2 rounded-xl bg-rosegold-400 hover:bg-rosegold-300 text-slate-950 text-xs font-black flex items-center gap-2 shadow-lg shadow-rosegold-500/20 transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-brass-400 hover:bg-brass-300 text-slate-950 text-xs font-black flex items-center gap-2 shadow-lg shadow-brass-500/20 transition-colors cursor-pointer"
               >
                 {copied ? <Check className="h-4 w-4 text-slate-950" /> : <Copy className="h-4 w-4 text-slate-950" />}
                 <span>{copied ? 'Copied Master Prompt!' : 'Copy System Instruction'}</span>
@@ -412,7 +412,7 @@ Structure your response cleanly using Markdown:
                 onClick={handleDownloadTxt}
                 className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
               >
-                <Download className="h-4 w-4 text-accent-rosegold-400" />
+                <Download className="h-4 w-4 text-accent-brass-400" />
                 <span>Export .TXT</span>
               </button>
             </div>
@@ -423,7 +423,7 @@ Structure your response cleanly using Markdown:
             <button
               onClick={() => setActiveTab('prompt')}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'prompt' ? 'bg-rosegold-400 text-slate-950 shadow-lg shadow-rosegold-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+                activeTab === 'prompt' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <FileCode2 className="h-4 w-4" />
@@ -433,17 +433,17 @@ Structure your response cleanly using Markdown:
             <button
               onClick={() => setActiveTab('architecture')}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'architecture' ? 'bg-rosegold-400 text-slate-950 shadow-lg shadow-rosegold-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+                activeTab === 'architecture' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
-              <Layers className="h-4 w-4 text-accent-rosegold-400" />
+              <Layers className="h-4 w-4 text-accent-brass-400" />
               <span>Modular Architecture</span>
             </button>
 
             <button
               onClick={() => setActiveTab('cot')}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'cot' ? 'bg-rosegold-400 text-slate-950 shadow-lg shadow-rosegold-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+                activeTab === 'cot' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
@@ -453,7 +453,7 @@ Structure your response cleanly using Markdown:
             <button
               onClick={() => setActiveTab('constraints')}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'constraints' ? 'bg-rosegold-400 text-slate-950 shadow-lg shadow-rosegold-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+                activeTab === 'constraints' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <ShieldAlert className="h-4 w-4 text-rose-400" />
@@ -463,7 +463,7 @@ Structure your response cleanly using Markdown:
             <button
               onClick={() => setActiveTab('simulator')}
               className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'simulator' ? 'bg-rosegold-400 text-slate-950 shadow-lg shadow-rosegold-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+                activeTab === 'simulator' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
               }`}
             >
               <Play className="h-4 w-4 text-slate-950 fill-slate-950" />
@@ -480,9 +480,9 @@ Structure your response cleanly using Markdown:
                 </label>
                 {blueprint.variablePlaceholders && (
                   <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-muted">
-                    <span className="text-accent-rosegold-400">Placeholders:</span>
+                    <span className="text-accent-brass-400">Placeholders:</span>
                     {blueprint.variablePlaceholders.map((ph, idx) => (
-                      <span key={idx} className="bg-surface-0 px-1.5 py-0.5 rounded border border-white/10 text-accent-rosegold-300">
+                      <span key={idx} className="bg-surface-0 px-1.5 py-0.5 rounded border border-white/10 text-accent-brass-300">
                         {ph}
                       </span>
                     ))}
@@ -490,7 +490,7 @@ Structure your response cleanly using Markdown:
                 )}
               </div>
 
-              <div className="bg-surface-0 rounded-2xl border border-white/10 p-5 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto shadow-inner border-l-4 border-l-rosegold-500">
+              <div className="bg-surface-0 rounded-2xl border border-white/10 p-5 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto shadow-inner border-l-4 border-l-brass-500">
                 {blueprint.systemPrompt}
               </div>
             </div>
@@ -500,7 +500,7 @@ Structure your response cleanly using Markdown:
           {activeTab === 'architecture' && (
             <div className="space-y-4">
               <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <Layers className="h-4 w-4 text-accent-rosegold-400" />
+                <Layers className="h-4 w-4 text-accent-brass-400" />
                 <span>Core System Architecture Modules</span>
               </h4>
 
@@ -509,7 +509,7 @@ Structure your response cleanly using Markdown:
                   blueprint.architectureModules.map((mod, idx) => (
                     <div key={idx} className="bg-surface-0 p-5 rounded-2xl border border-white/10 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-accent-rosegold-400 uppercase tracking-wider">
+                        <span className="text-xs font-black text-accent-brass-400 uppercase tracking-wider">
                           Module 0{idx + 1}: {mod.moduleName}
                         </span>
                         <span className="text-[10px] font-mono bg-surface-2 text-ink-secondary px-2 py-0.5 rounded">
@@ -588,7 +588,7 @@ Structure your response cleanly using Markdown:
             <div className="space-y-5 bg-surface-0 p-6 rounded-2xl border border-white/10">
               <div>
                 <h4 className="text-sm font-extrabold text-white flex items-center gap-2 mb-1">
-                  <Play className="h-4 w-4 text-accent-rosegold-300 fill-rosegold-300" />
+                  <Play className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
                   <span>Live Gemini Execution Playground</span>
                 </h4>
                 <p className="text-xs text-ink-muted">
@@ -612,7 +612,7 @@ Structure your response cleanly using Markdown:
               <button
                 onClick={handleRunSimulator}
                 disabled={simulating || !testInputPrompt.trim()}
-                className="px-6 py-3 rounded-xl bg-gradient-to-b from-rosegold-300 via-rosegold-400 to-rosegold-500 hover:from-rosegold-200 hover:to-rosegold-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-rosegold-700 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+                className="px-6 py-3 rounded-xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
               >
                 {simulating ? (
                   <>

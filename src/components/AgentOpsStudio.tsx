@@ -237,17 +237,17 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
   return (
     <div className="w-full max-w-7xl mx-auto p-4 sm:p-6 space-y-6 text-slate-100">
       {/* Top Hero Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-rosegold-500/30 p-6 sm:p-8 shadow-2xl">
-        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-accent-rosegold-500/10 blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-80 h-80 rounded-full bg-rosegold-400/5 blur-3xl pointer-events-none" />
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-brass-500/30 p-6 sm:p-8 shadow-2xl">
+        <div className="absolute top-0 right-0 -mr-16 -mt-16 w-80 h-80 rounded-full bg-accent-brass-500/10 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-16 -mb-16 w-80 h-80 rounded-full bg-brass-400/5 blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-300 text-xs font-mono font-semibold">
-              <ShieldCheck className="w-4 h-4 text-accent-rosegold-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-300 text-xs font-mono font-semibold">
+              <ShieldCheck className="w-4 h-4 text-accent-brass-400 animate-pulse" />
               <span>Self-Healing Runtime & Multi-Agent Ops Center</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-display font-semibold bg-gradient-to-r from-rosegold-200 via-white to-rosegold-400 bg-clip-text text-transparent tracking-[-0.01em]">
+            <h1 className="text-2xl sm:text-3xl font-display font-semibold bg-gradient-to-r from-brass-200 via-white to-brass-400 bg-clip-text text-transparent tracking-[-0.01em]">
               Self-Correcting Web Architecture & Agent Suite
             </h1>
             <p className="text-sm text-ink-secondary leading-relaxed font-sans">
@@ -259,7 +259,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             <button
               onClick={runDiagnosticSelfCorrection}
               disabled={isTesting}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-rosegold-500 to-rosegold-400 hover:from-rosegold-400 hover:to-rosegold-300 text-slate-950 font-bold text-xs shadow-lg shadow-rosegold-500/20 transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-gradient-to-r from-brass-500 to-brass-400 hover:from-brass-400 hover:to-brass-300 text-slate-950 font-bold text-xs shadow-lg shadow-brass-500/20 transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 ${isTesting ? 'animate-spin' : ''}`} />
               <span>{isTesting ? 'Simulating Repair...' : 'Test Self-Correction Engine'}</span>
@@ -282,12 +282,12 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
           </div>
 
           <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-accent-rosegold-500/10 border border-rosegold-500/30 flex items-center justify-center">
-              <Zap className="w-5 h-5 text-accent-rosegold-400" />
+            <div className="w-10 h-10 rounded-lg bg-accent-brass-500/10 border border-brass-500/30 flex items-center justify-center">
+              <Zap className="w-5 h-5 text-accent-brass-400" />
             </div>
             <div>
               <span className="text-[10px] text-ink-muted font-mono uppercase block">Auto-Corrections</span>
-              <span className="text-base font-extrabold text-accent-rosegold-300">
+              <span className="text-base font-extrabold text-accent-brass-300">
                 {telemetry ? `${telemetry.totalSelfCorrectionsHandled} Server Handled` : `${totalCorrected} Handled`}
               </span>
             </div>
@@ -321,34 +321,34 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
         {/* Quick Self-Healing Actions Bar */}
         <div className="mt-4 pt-4 border-t border-hairline flex items-center justify-between gap-2 flex-wrap">
           <span className="text-[11px] font-mono text-ink-muted flex items-center gap-1.5 font-bold uppercase">
-            <Wrench className="w-3.5 h-3.5 text-accent-rosegold-400" /> Quick Self-Correction Triggers:
+            <Wrench className="w-3.5 h-3.5 text-accent-brass-400" /> Quick Self-Correction Triggers:
           </span>
           <div className="flex items-center gap-2 flex-wrap">
             <button
               onClick={() => runSelfHealingAction('reclaim_memory')}
               disabled={isTesting}
-              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-rosegold-300 transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-brass-300 transition-colors cursor-pointer"
             >
               🧹 Reclaim V8 Heap
             </button>
             <button
               onClick={() => runSelfHealingAction('reset_circuit_breaker')}
               disabled={isTesting}
-              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-rosegold-300 transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-brass-300 transition-colors cursor-pointer"
             >
               ⚡ Reset API Circuit Breaker
             </button>
             <button
               onClick={() => runSelfHealingAction('sanitize_color_rules')}
               disabled={isTesting}
-              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-rosegold-300 transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-brass-300 transition-colors cursor-pointer"
             >
               🎨 Sanitize OKLCH Color Rules
             </button>
             <button
               onClick={() => runSelfHealingAction('purge_buffers')}
               disabled={isTesting}
-              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-rosegold-300 transition-colors cursor-pointer"
+              className="px-2.5 py-1 rounded-lg bg-surface-1 hover:bg-surface-2 text-ink-secondary border border-white/15 text-[11px] font-mono hover:text-accent-brass-300 transition-colors cursor-pointer"
             >
               📦 Purge PDF Stream Buffers
             </button>
@@ -370,7 +370,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             onClick={() => setActiveTab('self-healing')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-colors ${
               activeTab === 'self-healing'
-                ? 'bg-accent-rosegold-500 text-slate-950 shadow-md shadow-rosegold-500/20'
+                ? 'bg-accent-brass-500 text-slate-950 shadow-md shadow-brass-500/20'
                 : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
             }`}
           >
@@ -382,20 +382,20 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             onClick={() => setActiveTab('agents')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-colors ${
               activeTab === 'agents'
-                ? 'bg-accent-rosegold-500 text-slate-950 shadow-md shadow-rosegold-500/20'
+                ? 'bg-accent-brass-500 text-slate-950 shadow-md shadow-brass-500/20'
                 : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
             }`}
           >
             <Bot className="w-4 h-4" />
             <span>Multi-Agent Orchestrator</span>
-            <span className="text-[9px] bg-rosegold-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold">10 AGENTS</span>
+            <span className="text-[9px] bg-brass-400 text-slate-950 px-1.5 py-0.2 rounded font-extrabold">10 AGENTS</span>
           </button>
 
           <button
             onClick={() => setActiveTab('learned-rules')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-colors ${
               activeTab === 'learned-rules'
-                ? 'bg-accent-rosegold-500 text-slate-950 shadow-md shadow-rosegold-500/20'
+                ? 'bg-accent-brass-500 text-slate-950 shadow-md shadow-brass-500/20'
                 : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
             }`}
           >
@@ -429,7 +429,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                   onClick={() => setFilterCategory(cat)}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-colors ${
                     filterCategory === cat
-                      ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-rosegold-500/40'
+                      ? 'bg-accent-brass-500/20 text-accent-brass-300 border border-brass-500/40'
                       : 'bg-surface-1 text-ink-muted hover:text-ink-secondary border border-hairline'
                   }`}
                 >
@@ -460,7 +460,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                       <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
                         evt.category === 'EXPORT' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
                         evt.category === 'SETTINGS' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
-                        evt.category === 'CANVAS' ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-rosegold-500/30' :
+                        evt.category === 'CANVAS' ? 'bg-accent-brass-500/20 text-accent-brass-300 border border-brass-500/30' :
                         evt.category === 'API' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
                         'bg-surface-2 text-ink-secondary border border-white/15'
                       }`}>
@@ -497,7 +497,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                   </div>
 
                   {evt.ruleLearned && (
-                    <div className="text-[11px] font-mono text-accent-rosegold-300/90 bg-accent-rosegold-500/5 px-2.5 py-1.5 rounded border border-rosegold-500/20">
+                    <div className="text-[11px] font-mono text-accent-brass-300/90 bg-accent-brass-500/5 px-2.5 py-1.5 rounded border border-brass-500/20">
                       💡 {evt.ruleLearned}
                     </div>
                   )}
@@ -534,19 +534,19 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 onClick={() => setSelectedAgent(agent.id)}
                 className={`w-full text-left p-3 rounded-xl border transition-colors cursor-pointer flex items-start gap-3 ${
                   selectedAgent === agent.id
-                    ? 'bg-accent-rosegold-500/10 border-rosegold-500/50 text-slate-100 shadow-md ring-1 ring-rosegold-500/30'
+                    ? 'bg-accent-brass-500/10 border-brass-500/50 text-slate-100 shadow-md ring-1 ring-brass-500/30'
                     : 'bg-surface-0/60 border-hairline text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                 }`}
               >
                 <div className={`p-2 rounded-lg shrink-0 ${
-                  selectedAgent === agent.id ? 'bg-accent-rosegold-500 text-slate-950' : 'bg-surface-1 text-ink-secondary'
+                  selectedAgent === agent.id ? 'bg-accent-brass-500 text-slate-950' : 'bg-surface-1 text-ink-secondary'
                 }`}>
                   <agent.icon className="w-4 h-4" />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-bold truncate text-slate-100">{agent.title}</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rosegold-400/20 text-accent-rosegold-300 border border-accent-rosegold-400/30 shrink-0">
+                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-brass-400/20 text-accent-brass-300 border border-accent-brass-400/30 shrink-0">
                       {agent.badge}
                     </span>
                   </div>
@@ -560,8 +560,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
           <div className="lg:col-span-8 bg-surface-0 rounded-2xl border border-hairline p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-accent-rosegold-500/20 border border-rosegold-500/40 flex items-center justify-center">
-                  <Bot className="w-4 h-4 text-accent-rosegold-400" />
+                <div className="w-8 h-8 rounded-lg bg-accent-brass-500/20 border border-brass-500/40 flex items-center justify-center">
+                  <Bot className="w-4 h-4 text-accent-brass-400" />
                 </div>
                 <div>
                   <h2 className="text-sm font-bold text-slate-100">
@@ -574,7 +574,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               <button
                 onClick={runAgent}
                 disabled={isAgentRunning}
-                className="px-4 py-2 rounded-xl bg-accent-rosegold-500 hover:bg-rosegold-400 text-slate-950 font-bold text-xs shadow-md transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 rounded-xl bg-accent-brass-500 hover:bg-brass-400 text-slate-950 font-bold text-xs shadow-md transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <Play className={`w-3.5 h-3.5 ${isAgentRunning ? 'animate-spin' : ''}`} />
                 <span>{isAgentRunning ? 'Agent Processing...' : 'Execute Agent'}</span>
@@ -590,7 +590,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 value={agentInput}
                 onChange={(e) => setAgentInput(e.target.value)}
                 rows={4}
-                className="w-full bg-surface-1 border border-hairline rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-rosegold-500 transition-colors"
+                className="w-full bg-surface-1 border border-hairline rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-brass-500 transition-colors"
                 placeholder="Enter parameters or custom instruction for this agent..."
               />
             </div>
@@ -613,7 +613,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                     </button>
                     <button
                       onClick={() => handleCopy(agentOutput, 'agent-out')}
-                      className="text-xs text-accent-rosegold-400 hover:text-accent-rosegold-300 flex items-center gap-1 font-mono cursor-pointer"
+                      className="text-xs text-accent-brass-400 hover:text-accent-brass-300 flex items-center gap-1 font-mono cursor-pointer"
                     >
                       {copiedId === 'agent-out' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copiedId === 'agent-out' ? 'Copied!' : 'Copy Result'}</span>
@@ -624,8 +624,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
 
               {isAgentRunning ? (
                 <div className="bg-surface-1 rounded-xl border border-hairline p-8 text-center space-y-3">
-                  <RefreshCw className="w-8 h-8 text-accent-rosegold-400 animate-spin mx-auto" />
-                  <p className="text-xs text-accent-rosegold-300 font-mono">Agent analyzing parameters and executing reasoning pathway...</p>
+                  <RefreshCw className="w-8 h-8 text-accent-brass-400 animate-spin mx-auto" />
+                  <p className="text-xs text-accent-brass-300 font-mono">Agent analyzing parameters and executing reasoning pathway...</p>
                 </div>
               ) : agentOutput ? (
                 <div className="bg-surface-1 rounded-xl border border-hairline p-4 text-xs font-mono text-ink-secondary whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
@@ -646,7 +646,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
         <div className="space-y-4">
           <div className="bg-surface-0 rounded-2xl border border-hairline p-6 space-y-4">
             <div className="flex items-center gap-3">
-              <Terminal className="w-6 h-6 text-accent-rosegold-400" />
+              <Terminal className="w-6 h-6 text-accent-brass-400" />
               <div>
                 <h2 className="text-base font-bold text-slate-100">Self-Correction Rules Ledger</h2>
                 <p className="text-xs text-ink-muted">Rules permanently enforced across the applet to eliminate recurring errors.</p>
@@ -663,7 +663,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               ].map((rule, idx) => (
                 <div key={idx} className="bg-surface-1/80 rounded-xl border border-hairline p-4 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-accent-rosegold-300">{rule.title}</span>
+                    <span className="text-xs font-bold text-accent-brass-300">{rule.title}</span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Active</span>
                   </div>
                   <div className="bg-surface-0 p-2 rounded text-[11px] font-mono text-ink-secondary border border-hairline">

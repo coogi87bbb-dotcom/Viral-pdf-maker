@@ -49,7 +49,7 @@ interface HeaderProps {
   onOpenMasterAdmin: () => void;
 }
 
-const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400';
+const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400';
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuickStart, onOpenMasterAdmin }) => {
   const { user, userProfile, isOwner, logout } = useAuth();
@@ -75,11 +75,11 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
   return (
     <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary shadow-[var(--shadow-elevated)]">
       {/* Top Banner */}
-      <div className="bg-gradient-to-r from-surface-0 via-surface-1 to-surface-0 border-b border-accent-rosegold-500/20 px-4 py-1.5 text-xs font-medium text-accent-rosegold-200 text-center flex items-center justify-between">
+      <div className="bg-gradient-to-r from-surface-0 via-surface-1 to-surface-0 border-b border-accent-brass-500/20 px-4 py-1.5 text-xs font-medium text-accent-brass-200 text-center flex items-center justify-between">
         <div className="flex items-center gap-2 mx-auto sm:mx-0">
-          <span className="flex h-2 w-2 rounded-full bg-accent-rosegold-400 animate-pulse" />
-          <span className="font-mono text-accent-rosegold-300">ViralOS v10.0 Active — 3D Liquid Gold Engine</span>
-          <span className="hidden sm:inline-block text-accent-rosegold-500/50">•</span>
+          <span className="flex h-2 w-2 rounded-full bg-accent-brass-400 animate-pulse" />
+          <span className="font-mono text-accent-brass-300">ViralOS v10.0 Active — 3D Liquid Gold Engine</span>
+          <span className="hidden sm:inline-block text-accent-brass-500/50">•</span>
           <span className="hidden sm:inline-block text-ink-secondary font-mono text-[11px]">X • Instagram • TikTok • Facebook • Threads • Pinterest • LinkedIn</span>
         </div>
 
@@ -102,7 +102,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                 {userProfile?.displayName || user.email}
               </span>
               {isOwner && (
-                <span className="px-1.5 py-0.2 rounded bg-accent-rosegold-500/20 text-accent-rosegold-300 font-mono text-[9px] border border-accent-rosegold-500/30">
+                <span className="px-1.5 py-0.2 rounded bg-accent-brass-500/20 text-accent-brass-300 font-mono text-[9px] border border-accent-brass-500/30">
                   OWNER
                 </span>
               )}
@@ -131,17 +131,17 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
           {/* Logo & Brand */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-accent-rosegold-500 via-accent-rosegold-400 to-accent-rosegold-600 p-0.5 shadow-[var(--shadow-glow-rosegold)] flex items-center justify-center border border-accent-rosegold-400/30">
+              <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-accent-brass-500 via-accent-brass-400 to-accent-brass-600 p-0.5 shadow-[var(--shadow-glow-brass)] flex items-center justify-center border border-accent-brass-400/30">
                 <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
-                  <Flame className="h-5 w-5 text-accent-rosegold-400 animate-pulse" />
+                  <Flame className="h-5 w-5 text-accent-brass-400 animate-pulse" />
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-semibold tracking-[-0.02em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent">
+                  <h1 className="text-xl font-semibold tracking-[-0.02em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-brass-200 bg-clip-text text-transparent">
                     ViralOS
                   </h1>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-accent-rosegold-500/30">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-brass-500/20 text-accent-brass-300 border border-accent-brass-500/30">
                     ENTERPRISE
                   </span>
                 </div>
@@ -154,10 +154,10 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
             {/* Platform Badges */}
             <div className="hidden xl:flex items-center gap-1.5 bg-surface-0/80 p-1.5 rounded-lg border border-hairline">
               <span title="X / Twitter" className="p-1.5 rounded bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"><Twitter className="h-3.5 w-3.5" /></span>
-              <span title="Instagram" className="p-1.5 rounded bg-accent-rosegold-500/10 text-accent-rosegold-400 hover:bg-accent-rosegold-500/20 transition-colors"><Instagram className="h-3.5 w-3.5" /></span>
+              <span title="Instagram" className="p-1.5 rounded bg-accent-brass-500/10 text-accent-brass-400 hover:bg-accent-brass-500/20 transition-colors"><Instagram className="h-3.5 w-3.5" /></span>
               <span title="TikTok" className="p-1.5 rounded bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"><Video className="h-3.5 w-3.5" /></span>
               <span title="Facebook" className="p-1.5 rounded bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 transition-colors"><Facebook className="h-3.5 w-3.5" /></span>
-              <span title="Threads" className="p-1.5 rounded bg-accent-rosegold-500/10 text-accent-rosegold-400 hover:bg-accent-rosegold-500/20 transition-colors"><AtSign className="h-3.5 w-3.5" /></span>
+              <span title="Threads" className="p-1.5 rounded bg-accent-brass-500/10 text-accent-brass-400 hover:bg-accent-brass-500/20 transition-colors"><AtSign className="h-3.5 w-3.5" /></span>
               <span title="Pinterest" className="p-1.5 rounded bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors"><Pin className="h-3.5 w-3.5" /></span>
               <span title="LinkedIn" className="p-1.5 rounded bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 transition-colors"><Linkedin className="h-3.5 w-3.5" /></span>
             </div>
@@ -184,7 +184,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
 
             <button
               onClick={onQuickStart}
-              className={`w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-accent-rosegold-400 hover:brightness-105 text-slate-950 text-xs font-bold shadow-[var(--shadow-glow-rosegold)] transition-[transform,opacity,filter] active:scale-[0.98] cursor-pointer ${FOCUS_RING}`}
+              className={`w-full md:w-auto inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl bg-accent-brass-400 hover:brightness-105 text-slate-950 text-xs font-bold shadow-[var(--shadow-glow-brass)] transition-[transform,opacity,filter] active:scale-[0.98] cursor-pointer ${FOCUS_RING}`}
             >
               <Zap className="h-4 w-4 text-slate-950 fill-slate-950" />
               <span>Generate Viral Campaign</span>
@@ -203,7 +203,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors active:scale-[0.98] cursor-pointer ${FOCUS_RING} ${
                   isActive
-                    ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)] font-bold'
+                    ? 'bg-accent-brass-400 text-slate-950 shadow-[var(--shadow-glow-brass)] font-bold'
                     : 'text-ink-muted hover:text-ink-primary hover:bg-surface-0/60'
                 }`}
               >

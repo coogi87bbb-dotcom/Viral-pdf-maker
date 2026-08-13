@@ -13,18 +13,28 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
  * the visitor reads.
  *
  * Source: .claude/Change_words_to_PERAINC_1080p_202608122058.mp4 — 10s,
- * 1920x1080, 24fps. Extracted with ffmpeg into two opaque webp sequences:
+ * 1920x1080, 24fps. Extracted via `scripts/extract-hero-frames.sh` (wraps
+ * ffmpeg) into two opaque webp sequences:
  *   desktop  fps=10, scale=1280  -> 100 frames, ~3.2MB
  *   mobile   fps=6,  scale=540   ->  60 frames, ~560KB
+ * The extraction pipeline first delogos the burned-in "PERA INC" wordmark
+ * out of the source footage (blended into its gradient backdrop, not
+ * visible in any shipped frame) and applies a horizontal-only crop for a
+ * tighter, closer framing, before the fps/scale pass. Re-run that script
+ * (see its own header comment) if the frames ever need regenerating.
  *
- * The plate renders at reduced opacity under a dark wash: at full strength
- * the footage (and the PERA INC wordmark burned into its left-centre) fights
- * the body copy that now sits over every part of it. Dimmed, the wordmark
- * ghosts through as intended brand texture and text stays legible anywhere
- * on the page.
+ * The plate renders at reduced opacity under a dark wash purely for text
+ * legibility against the body copy that sits over every part of it — the
+ * footage is already dark (averages ~rgb(48,54,57)) so it supplies most of
+ * its own contrast; an aggressive scrim on top of a low canvas opacity
+ * crushed it to near-black and threw the video away.
  *
- * Fit is always "contain", never "cover" — cover would crop the PERA INC
- * wordmark out on portrait viewports, and that mark is deliberate content.
+ * Fit is "contain" (`fitContain`, with a tunable anchor point) — the whole
+ * figure (head to feet, and the full explosion spread mid-clip) must always
+ * be fully visible at any viewport, never cropped. The closer framing comes
+ * from the tighter source crop baked in at extraction time, not from
+ * cropping at render time; all 4 edges are feathered into the page ink so
+ * whatever letterbox gap remains doesn't read as a hard "video plate" edge.
  *
  * Both globs are eager, but eager glob only materialises URL *strings*; no
  * image bytes are fetched until a URL is assigned to `new Image().src`. So
@@ -81,12 +91,23 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
-/** Centred, aspect-preserving ("contain") fit geometry. */
-function fitContain(imgW: number, imgH: number, cw: number, ch: number) {
+/**
+ * "Contain" fit geometry with an adjustable anchor (0-1 per axis, 0.5 =
+ * centred) for where the fully-visible frame sits within any letterbox gap.
+ * Deliberately never crops — the whole subject (head to feet, and the full
+ * explosion spread mid-clip) must always be on screen at any viewport, so
+ * this is the tightest zoom possible without ever cutting anything off.
+ * `focalY` biases up (0.35) so on a shorter/wider viewport the extra empty
+ * space collects below the figure's feet rather than splitting evenly above
+ * its head, which otherwise reads as more "floating" than intentional.
+ * The closer framing itself comes from the source crop baked in at
+ * extraction time (scripts/extract-hero-frames.sh), not from this fit mode.
+ */
+function fitContain(imgW: number, imgH: number, cw: number, ch: number, focalX = 0.5, focalY = 0.35) {
   const scale = Math.min(cw / imgW, ch / imgH);
   const dw = imgW * scale;
   const dh = imgH * scale;
-  return { dx: (cw - dw) / 2, dy: (ch - dh) / 2, dw, dh };
+  return { dx: (cw - dw) * focalX, dy: (ch - dh) * focalY, dw, dh };
 }
 
 export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContainerRef }) => {
@@ -117,25 +138,45 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContai
     const geom = fitContain(frame.naturalWidth, frame.naturalHeight, cw, ch);
     ctx.drawImage(frame, geom.dx, geom.dy, geom.dw, geom.dh);
 
-    // Feather the plate's top and bottom edges into the page. The footage's
-    // studio backdrop is mid-grey, so a "contain" fit otherwise leaves two
-    // hard horizontal seams — most obvious on mobile, where letterboxing is
-    // deep. Done on the canvas so the fade tracks the drawn rect at any
-    // viewport rather than a fixed percentage of the screen.
-    const fade = Math.min(geom.dh * 0.18, 150);
-    if (fade > 2) {
-      const top = ctx.createLinearGradient(0, geom.dy, 0, geom.dy + fade);
+    // Feather all four edges of the drawn rect into the page background so
+    // the plate dissolves into the surrounding ink rather than reading as a
+    // hard-edged "video box". With "cover" fit the drawn rect normally
+    // overflows the canvas on at least one axis (that's the point of cover —
+    // no letterbox), so top/bottom or left/right feathering only becomes
+    // visible on viewports whose aspect ratio pulls an edge inside the
+    // canvas bounds (e.g. very tall mobile portrait). Done on the canvas so
+    // the fade always tracks the drawn rect rather than a fixed percentage
+    // of the screen.
+    const fadeY = Math.min(geom.dh * 0.18, 150);
+    if (fadeY > 2) {
+      const top = ctx.createLinearGradient(0, geom.dy, 0, geom.dy + fadeY);
       top.addColorStop(0, '#0a0b0d');
       top.addColorStop(1, 'rgba(10,11,13,0)');
       ctx.fillStyle = top;
-      ctx.fillRect(geom.dx, geom.dy, geom.dw, fade);
+      ctx.fillRect(geom.dx, geom.dy, geom.dw, fadeY);
 
-      const bottomStart = geom.dy + geom.dh - fade;
+      const bottomStart = geom.dy + geom.dh - fadeY;
       const bottom = ctx.createLinearGradient(0, bottomStart, 0, geom.dy + geom.dh);
       bottom.addColorStop(0, 'rgba(10,11,13,0)');
       bottom.addColorStop(1, '#0a0b0d');
       ctx.fillStyle = bottom;
-      ctx.fillRect(geom.dx, bottomStart, geom.dw, fade);
+      ctx.fillRect(geom.dx, bottomStart, geom.dw, fadeY);
+    }
+
+    const fadeX = Math.min(geom.dw * 0.12, 140);
+    if (fadeX > 2) {
+      const left = ctx.createLinearGradient(geom.dx, 0, geom.dx + fadeX, 0);
+      left.addColorStop(0, '#0a0b0d');
+      left.addColorStop(1, 'rgba(10,11,13,0)');
+      ctx.fillStyle = left;
+      ctx.fillRect(geom.dx, geom.dy, fadeX, geom.dh);
+
+      const rightStart = geom.dx + geom.dw - fadeX;
+      const right = ctx.createLinearGradient(rightStart, 0, geom.dx + geom.dw, 0);
+      right.addColorStop(0, 'rgba(10,11,13,0)');
+      right.addColorStop(1, '#0a0b0d');
+      ctx.fillStyle = right;
+      ctx.fillRect(rightStart, geom.dy, fadeX, geom.dh);
     }
   };
 
@@ -256,6 +297,12 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContai
     // background instead, hiding it entirely — which is also why the page
     // root must stay transparent and the ink base colour lives HERE.
     <div className="fixed inset-0 z-0 pointer-events-none bg-lf-ink" aria-hidden="true">
+      {/* NOTE: don't add `.grain-overlay` here — it sets `position: relative`
+          in unlayered CSS, which (per Tailwind v4's cascade-layer rules)
+          overrides this element's `fixed` utility and collapses it to zero
+          height, hiding the whole video plate. If grain texture is wanted
+          here later, apply it via a plain absolutely-positioned sibling div
+          instead of this utility class. */}
       <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-[0.72]" />
 
       {/* Wash over the plate, kept deliberately light. The footage is already

@@ -68,6 +68,57 @@
   --color-rosegold-900: #4f2d1c;
   --color-rosegold-950: #331d12;
 
+  /* ── "Modern Grand Hotel" — Studio OS app-chrome identity ───────────────
+   * Replaces rose-gold/violet as the primary accent across the 5 main tool
+   * surfaces (PDF Mockup Studio, Viral OS + its 13 tabs, GigScale,
+   * DigitalKitStudio, AI Agent Ops) per a deliberate rebrand decision — warm
+   * ink base (shared with --color-surface-* below, unchanged) + brass
+   * linework + marble-texture accent panels, restrained/architectural
+   * rather than glow-heavy, a five-star-hospitality register rather than a
+   * neon "AI tool" one. Net-new, additive: --color-accent-rosegold-100..950
+   * and --color-rosegold-100..950 above are KEPT, not deleted or renamed —
+   * Button.tsx's
+   * primary variant and AuthModal.tsx (both pre-login, out of scope for this
+   * rebrand) still depend on them. Also distinct from the landing page's own
+   * --color-lf-* "Editorial Luxury" system below, which stays untouched.
+   * Hex only — html2canvas colour-safety rule (see CLAUDE.md). */
+  --color-accent-brass-100: #f4ead2;
+  --color-accent-brass-200: #e8d3a3;
+  --color-accent-brass-300: #d8b876;
+  --color-accent-brass-400: #c6a15a;
+  --color-accent-brass-500: #ab8544;
+  --color-accent-brass-600: #8c6a35;
+  --color-accent-brass-700: #6f5329;
+  --color-accent-brass-800: #4f3b1e;
+  --color-accent-brass-900: #362813;
+
+  /* Bare (non "accent-"-prefixed) mirror — MUST stay byte-identical to the
+   * ramp above, same drift-risk rule as --color-rosegold-* above: some
+   * Studio OS chrome is written against bare Tailwind-shade-style classes
+   * (e.g. `brass-500`, `border-brass-400/30`) rather than the `accent-`
+   * prefixed token classes. Tailwind has no built-in "brass" swatch, so
+   * those classes only resolve if this bare ramp exists too — skip it, or
+   * let the two drift apart, and half the new accents silently vanish. */
+  --color-brass-100: #f4ead2;
+  --color-brass-200: #e8d3a3;
+  --color-brass-300: #d8b876;
+  --color-brass-400: #c6a15a;
+  --color-brass-500: #ab8544;
+  --color-brass-600: #8c6a35;
+  --color-brass-700: #6f5329;
+  --color-brass-800: #4f3b1e;
+  --color-brass-900: #362813;
+
+  /* Marble panel accent — a warm off-white "stone" surface used sparingly
+   * for header bands / section dividers / callouts on Studio OS surfaces,
+   * NOT as a full page or card background (this is a dark-mode app; marble
+   * is a deliberate inlaid-plaque accent material, not the base surface).
+   * Deliberately a small 3-value set rather than a full ramp, so it reads
+   * as an intentional accent instead of a second competing palette. */
+  --color-marble-base: #ece6d8;
+  --color-marble-vein: #c9bfa8;
+  --color-marble-shadow: #3a3226;
+
   --color-accent-amber-300: #fcd34d;
   --color-accent-amber-400: #fbbf24;
   --color-accent-amber-500: #f59e0b;
@@ -124,6 +175,17 @@
   --shadow-glow-amber: 0 10px 40px rgba(245, 158, 11, 0.35);
   --shadow-glow-rosegold: 0 10px 40px rgba(192, 117, 74, 0.35);
   --shadow-glow-violet: 0 10px 40px rgba(139, 92, 246, 0.35);
+
+  /* "Modern Grand Hotel" shadow ladder — retuned from rosegold/copper tint
+   * to a duller, warmer brass tint, and lower-saturation than
+   * --shadow-glow-rosegold so it reads as restrained architectural lighting
+   * (a picked-out edge) rather than a product glow. */
+  --shadow-panel-brass: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 50px -20px rgba(0, 0, 0, 0.7),
+    0 8px 24px -8px rgba(171, 133, 68, 0.12);
+  --shadow-glow-brass: 0 10px 36px rgba(171, 133, 68, 0.28);
+  --shadow-inset-brass: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 0 0 1px rgba(171, 133, 68, 0.18) inset;
 
   /* ── LogFlow AI landing page: "Editorial Luxury" zone palette ──────────
    * Scoped to src/components/landing/** only. The landing has always been
@@ -231,6 +293,21 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Marble-veined panel accent for "Modern Grand Hotel" Studio OS surfaces —
+ * used on header bands / callouts, not full-page backgrounds. Deliberately
+ * sets ONLY background-* properties, nothing else (no `position`): unlayered
+ * plain CSS classes here beat Tailwind's own layered utilities in the
+ * cascade, so a class that also touched `position` could silently override
+ * a `fixed`/`absolute` utility on whatever element it's applied to — that
+ * exact bug already happened once with .grain-overlay above. Hex/rgba only,
+ * per the html2canvas colour-safety rule. */
+.marble-panel {
+  background-color: var(--color-marble-base);
+  background-image:
+    radial-gradient(120% 80% at 15% 0%, rgba(201, 191, 168, 0.5) 0%, transparent 55%),
+    radial-gradient(90% 60% at 85% 100%, rgba(58, 50, 38, 0.12) 0%, transparent 60%);
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
  * LogFlow AI landing — "Editorial Luxury" primitives
  * Scoped to src/components/landing/**. Type scales fluidly with clamp() so
@@ -244,10 +321,10 @@
 .lf-display {
   font-family: var(--font-editorial);
   font-weight: 600;
-  /* Capped at 6rem rather than 8rem: the hero headline sits below the PERA
-     INC wordmark burned into the video plate, so the whole title card has a
-     hard height budget on a 900px-tall desktop viewport. */
-  font-size: clamp(2.75rem, 7.4vw, 6rem);
+  /* Ceiling raised from 6rem now that the hero video's burned-in wordmark
+     (which used to force a hard height budget on the title card) is cropped
+     out at extraction time — see ScrollFrameStage.tsx. */
+  font-size: clamp(2.75rem, 7.4vw, 7.5rem);
   line-height: 0.94;
   letter-spacing: -0.02em;
 }

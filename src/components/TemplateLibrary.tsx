@@ -408,7 +408,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
               onClick={() => setIsAiModalOpen(true)}
               className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 text-white font-bold text-xs shadow-lg shadow-fuchsia-500/20 transition-colors cursor-pointer border border-fuchsia-400/30"
             >
-              <Wand2 className="h-4 w-4 text-accent-amber-300" />
+              <Wand2 className="h-4 w-4 text-accent-brass-300" />
               <span>AI Generate Template</span>
             </button>
 
@@ -451,7 +451,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                   : 'text-ink-muted hover:text-white hover:bg-surface-1'
               }`}
             >
-              <BookOpen className="h-3.5 w-3.5 text-accent-amber-400" />
+              <BookOpen className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>Study 12 Viral Case Studies (12)</span>
             </button>
           </div>
@@ -487,7 +487,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                           : 'bg-surface-0 text-ink-muted hover:text-white border border-white/10'
                       }`}
                     >
-                      {cat === 'Favorites' && <Star className="inline h-3 w-3 mr-1 text-accent-amber-400 fill-amber-400" />}
+                      {cat === 'Favorites' && <Star className="inline h-3 w-3 mr-1 text-accent-brass-400 fill-brass-400" />}
                       {cat}
                     </button>
                   );
@@ -497,12 +497,12 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
               <div className="flex items-center gap-3">
                 {/* Virality Threshold */}
                 <div className="flex items-center gap-1.5 bg-surface-0 border border-white/10 px-2.5 py-1 rounded-lg">
-                  <Flame className="h-3.5 w-3.5 text-accent-amber-400" />
+                  <Flame className="h-3.5 w-3.5 text-accent-brass-400" />
                   <span className="text-ink-muted text-[11px]">Virality:</span>
                   <select
                     value={minVirality}
                     onChange={(e) => setMinVirality(Number(e.target.value))}
-                    className="bg-transparent text-accent-amber-300 font-mono font-bold focus:outline-none text-xs cursor-pointer"
+                    className="bg-transparent text-accent-brass-300 font-mono font-bold focus:outline-none text-xs cursor-pointer"
                   >
                     <option value={70} className="bg-surface-1 text-ink-secondary">70%+</option>
                     <option value={80} className="bg-surface-1 text-ink-secondary">80%+</option>
@@ -589,10 +589,10 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                           <div className="flex items-center gap-1">
                             <button
                               onClick={(e) => toggleFavorite(template.id, e)}
-                              className="p-1.5 rounded-lg bg-surface-0/60 hover:bg-surface-2 text-ink-muted hover:text-accent-amber-400 transition-colors cursor-pointer"
+                              className="p-1.5 rounded-lg bg-surface-0/60 hover:bg-surface-2 text-ink-muted hover:text-accent-brass-400 transition-colors cursor-pointer"
                               title={isFav ? "Remove from Favorites" : "Add to Favorites"}
                             >
-                              <Star className={`h-3.5 w-3.5 ${isFav ? 'text-accent-amber-400 fill-amber-400' : ''}`} />
+                              <Star className={`h-3.5 w-3.5 ${isFav ? 'text-accent-brass-400 fill-brass-400' : ''}`} />
                             </button>
 
                             {template.isCustom && (
@@ -690,7 +690,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                   <div className="p-4 bg-surface-0 rounded-xl border border-violet-500/30 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-violet-400 flex items-center gap-1.5">
-                        <Zap className="h-3.5 w-3.5 text-accent-amber-300" />
+                        <Zap className="h-3.5 w-3.5 text-accent-brass-300" />
                         <span>Live Interactive Variable Substitution</span>
                       </span>
                       <span className="text-[10px] text-ink-muted font-mono">Fill & Preview Below</span>
@@ -820,7 +820,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
           {/* 12 Study Case Cards Grid */}
           <div className={`space-y-4 ${selectedStudy ? 'lg:col-span-7' : 'lg:col-span-12'}`}>
             <div className="flex items-center justify-between text-xs text-ink-muted px-1">
-              <span>Showing <strong className="text-accent-amber-400 font-bold">{filteredStudies.length}</strong> real-world viral campaign teardowns</span>
+              <span>Showing <strong className="text-accent-brass-400 font-bold">{filteredStudies.length}</strong> real-world viral campaign teardowns</span>
               <span className="text-violet-400 font-medium">⚡ "Study 12" Verified Datasets</span>
             </div>
 
@@ -833,14 +833,14 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                     onClick={() => setSelectedStudy(study)}
                     className={`group bg-surface-1/90 rounded-2xl p-5 border transition-colors cursor-pointer flex flex-col justify-between space-y-4 relative ${
                       isSelected
-                        ? 'border-accent-amber-400 shadow-xl shadow-amber-500/10 ring-1 ring-amber-400/50'
+                        ? 'border-accent-brass-400 shadow-xl shadow-brass-500/10 ring-1 ring-brass-400/50'
                         : 'border-white/10 hover:border-white/15 hover:bg-surface-1'
                     }`}
                   >
                     <div>
                       {/* Top Header */}
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="px-2.5 py-0.5 rounded-md bg-accent-amber-500/10 text-accent-amber-300 border border-amber-500/20 text-[10px] font-bold">
+                        <span className="px-2.5 py-0.5 rounded-md bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20 text-[10px] font-bold">
                           {study.niche}
                         </span>
                         <span className="text-[10px] font-mono text-ink-muted bg-surface-0 px-2 py-0.5 rounded border border-white/10">
@@ -848,7 +848,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                         </span>
                       </div>
 
-                      <h3 className="text-sm font-bold text-white group-hover:text-accent-amber-300 transition-colors line-clamp-2">
+                      <h3 className="text-sm font-bold text-white group-hover:text-accent-brass-300 transition-colors line-clamp-2">
                         {study.title}
                       </h3>
 
@@ -871,7 +871,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
 
                     {/* Footer */}
                     <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-                      <span className="text-accent-amber-300 font-mono text-[10px] font-semibold flex items-center gap-1">
+                      <span className="text-accent-brass-300 font-mono text-[10px] font-semibold flex items-center gap-1">
                         <Flame className="h-3 w-3" />
                         <span>{study.keyMetric}</span>
                       </span>
@@ -890,13 +890,13 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
           {/* Selected Case Breakdown Detail Drawer */}
           {selectedStudy && (
             <div className="lg:col-span-5 space-y-6">
-              <div className="sticky top-24 bg-surface-1 rounded-2xl p-6 border border-amber-500/30 shadow-2xl space-y-6">
+              <div className="sticky top-24 bg-surface-1 rounded-2xl p-6 border border-brass-500/30 shadow-2xl space-y-6">
                 
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2.5 py-0.5 rounded-md bg-accent-amber-500/20 text-accent-amber-300 border border-amber-500/30 text-[10px] font-bold">
+                      <span className="px-2.5 py-0.5 rounded-md bg-accent-brass-500/20 text-accent-brass-300 border border-brass-500/30 text-[10px] font-bold">
                         {selectedStudy.niche}
                       </span>
                       <span className="px-2 py-0.5 rounded bg-violet-500/20 text-violet-300 font-mono text-[9px] border border-violet-500/30">
@@ -930,20 +930,20 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                   </div>
                   <div>
                     <div className="text-[9px] text-slate-500 font-bold uppercase">Primary Result</div>
-                    <div className="text-[10px] font-mono font-bold text-accent-amber-300 mt-0.5 truncate">{selectedStudy.keyMetric}</div>
+                    <div className="text-[10px] font-mono font-bold text-accent-brass-300 mt-0.5 truncate">{selectedStudy.keyMetric}</div>
                   </div>
                 </div>
 
                 {/* Original Winning Hook */}
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="text-[11px] font-bold uppercase tracking-wider text-accent-amber-400 flex items-center gap-1.5">
-                      <Zap className="h-3.5 w-3.5 text-accent-amber-300" />
+                    <label className="text-[11px] font-bold uppercase tracking-wider text-accent-brass-400 flex items-center gap-1.5">
+                      <Zap className="h-3.5 w-3.5 text-accent-brass-300" />
                       <span>Original Winning Hook</span>
                     </label>
                     <button
                       onClick={() => handleCopySection(selectedStudy.originalHook, 'study-hook')}
-                      className="text-[10px] text-accent-amber-300 hover:text-white flex items-center gap-1 font-semibold transition-colors cursor-pointer"
+                      className="text-[10px] text-accent-brass-300 hover:text-white flex items-center gap-1 font-semibold transition-colors cursor-pointer"
                     >
                       {copiedId === 'study-hook' ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
                       <span>Copy Hook</span>
@@ -957,7 +957,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                 {/* Winning Angle Analysis */}
                 <div className="p-3.5 bg-surface-0 rounded-xl border border-violet-500/20 space-y-1">
                   <div className="text-[11px] font-bold text-violet-400 flex items-center gap-1.5">
-                    <Lightbulb className="h-3.5 w-3.5 text-accent-amber-300" />
+                    <Lightbulb className="h-3.5 w-3.5 text-accent-brass-300" />
                     <span>Winning Core Angle</span>
                   </div>
                   <p className="text-xs text-ink-secondary leading-relaxed">
@@ -1068,7 +1068,7 @@ export const TemplateLibrary: React.FC<TemplateLibraryProps> = ({ onSelectTempla
                 disabled={isAiGenerating}
                 className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 text-white font-bold text-xs shadow-lg shadow-fuchsia-500/25 transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                {isAiGenerating ? <RefreshCw className="h-4 w-4 animate-spin text-accent-amber-300" /> : <Sparkles className="h-4 w-4 text-accent-amber-300" />}
+                {isAiGenerating ? <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" /> : <Sparkles className="h-4 w-4 text-accent-brass-300" />}
                 <span>{isAiGenerating ? 'Architecting Template...' : 'Generate AI Template'}</span>
               </button>
             </div>

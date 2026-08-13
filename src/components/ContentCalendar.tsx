@@ -471,7 +471,7 @@ export const ContentCalendar: React.FC = () => {
               onClick={() => setShowGeneratorBar(!showGeneratorBar)}
               className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black shadow-lg shadow-emerald-600/25 transition-colors flex items-center gap-2"
             >
-              <Wand2 className="h-4 w-4 text-accent-rosegold-300" />
+              <Wand2 className="h-4 w-4 text-accent-brass-300" />
               <span>1-Click AI 2x/Day Generator</span>
             </button>
 
@@ -552,12 +552,12 @@ export const ContentCalendar: React.FC = () => {
             >
               {generatingCalendar ? (
                 <>
-                  <RefreshCw className="h-4 w-4 animate-spin text-accent-rosegold-300" />
+                  <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" />
                   <span>Synthesizing 14 Platform-Optimized Posts (2x / Day)...</span>
                 </>
               ) : (
                 <>
-                  <Zap className="h-4 w-4 text-accent-rosegold-300 fill-rosegold-300" />
+                  <Zap className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
                   <span>Generate Complete 14-Post Weekly Matrix Now</span>
                 </>
               )}
@@ -621,9 +621,9 @@ export const ContentCalendar: React.FC = () => {
 
               {/* MORNING PEAK SLOT CONTAINER */}
               <div className="space-y-2 flex-1">
-                <div className="flex items-center justify-between text-[10px] font-mono font-extrabold text-accent-rosegold-400 bg-accent-rosegold-500/10 px-2 py-1 rounded border border-rosegold-500/20">
+                <div className="flex items-center justify-between text-[10px] font-mono font-extrabold text-accent-brass-400 bg-accent-brass-500/10 px-2 py-1 rounded border border-brass-500/20">
                   <span className="flex items-center gap-1">
-                    <Sun className="h-3 w-3 text-accent-rosegold-400" />
+                    <Sun className="h-3 w-3 text-accent-brass-400" />
                     <span>MORNING SLOT 1</span>
                   </span>
                   <span>7:30 - 9:00 AM</span>
@@ -660,7 +660,7 @@ export const ContentCalendar: React.FC = () => {
 
                         <div className="flex items-center justify-between text-[9px] text-ink-muted pt-1 border-t border-white/10 font-mono">
                           <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3 text-accent-rosegold-400" />
+                            <Clock className="h-3 w-3 text-accent-brass-400" />
                             {evt.time}
                           </span>
                           <span className="text-ink-secondary font-bold">{evt.mediaType || 'Post'}</span>
@@ -671,7 +671,7 @@ export const ContentCalendar: React.FC = () => {
                 ) : (
                   <button
                     onClick={() => handleAddSlotPost(day, 'Morning Peak')}
-                    className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-rosegold-500/50 text-[10px] font-bold text-slate-500 hover:text-accent-rosegold-400 transition-colors flex items-center justify-center gap-1"
+                    className="w-full py-3 rounded-xl border border-dashed border-white/10 hover:border-brass-500/50 text-[10px] font-bold text-slate-500 hover:text-accent-brass-400 transition-colors flex items-center justify-center gap-1"
                   >
                     <Plus className="h-3 w-3" />
                     <span>Add Morning Post</span>
@@ -770,9 +770,9 @@ export const ContentCalendar: React.FC = () => {
                     type="button"
                     onClick={handleEnhanceActivePost}
                     disabled={generatingCopy}
-                    className="text-xs text-accent-rosegold-300 font-bold hover:text-rosegold-200 flex items-center gap-1 bg-accent-rosegold-500/10 px-2.5 py-1 rounded-lg border border-rosegold-500/20"
+                    className="text-xs text-accent-brass-300 font-bold hover:text-brass-200 flex items-center gap-1 bg-accent-brass-500/10 px-2.5 py-1 rounded-lg border border-brass-500/20"
                   >
-                    {generatingCopy ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 text-accent-rosegold-400" />}
+                    {generatingCopy ? <RefreshCw className="h-3.5 w-3.5 animate-spin" /> : <Wand2 className="h-3.5 w-3.5 text-accent-brass-400" />}
                     <span>✨ AI Sparkle Write Caption</span>
                   </button>
                 </div>

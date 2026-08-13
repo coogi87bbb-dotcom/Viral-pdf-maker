@@ -310,7 +310,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       title: '90-Day Implementation Roadmap',
       subtitle: '3-Phase Growth & Conversion Timeline',
       roadmap: proposal.roadmap90Days,
-      icon: <Calendar className="h-8 w-8 text-accent-rosegold-400" />
+      icon: <Calendar className="h-8 w-8 text-accent-brass-400" />
     },
     {
       title: 'Financial ROI & Growth Projection',
@@ -349,7 +349,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         {/* 1-Click High-Ticket Proposal Presets */}
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
-            <Zap className="h-4 w-4 text-accent-rosegold-400 fill-rosegold-400" />
+            <Zap className="h-4 w-4 text-accent-brass-400 fill-brass-400" />
             <span>Select High-Ticket Client Industry Preset:</span>
           </label>
 
@@ -444,12 +444,12 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           >
             {loading ? (
               <>
-                <RefreshCw className="h-4 w-4 animate-spin text-accent-rosegold-300" />
+                <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" />
                 <span>Generating White-Label Proposal Deck...</span>
               </>
             ) : (
               <>
-                <Sparkles className="h-4 w-4 text-accent-rosegold-300 fill-rosegold-300" />
+                <Sparkles className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
                 <span>Generate Enterprise Client Proposal Deck</span>
               </>
             )}
@@ -541,7 +541,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               viewMode === 'presentation' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
-            <Maximize2 className="h-4 w-4 text-accent-rosegold-300" />
+            <Maximize2 className="h-4 w-4 text-accent-brass-300" />
             <span>Live Pitch Deck Mode (Zoom / Meet)</span>
           </button>
 
@@ -561,7 +561,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               viewMode === 'roadmap' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
-            <Calendar className="h-4 w-4 text-accent-rosegold-400" />
+            <Calendar className="h-4 w-4 text-accent-brass-400" />
             <span>90-Day Implementation Roadmap</span>
           </button>
 
@@ -701,7 +701,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {slides[currentSlideIndex].roadmap?.map((r, i) => (
                     <div key={i} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2 text-xs">
-                      <span className="text-xs font-black text-accent-rosegold-400">{r.month}</span>
+                      <span className="text-xs font-black text-accent-brass-400">{r.month}</span>
                       <p className="text-ink-secondary font-bold">{r.focus}</p>
                       <ul className="space-y-1 text-ink-muted text-[11px] list-disc list-inside">
                         {r.keyMilestones.map((m, j) => <li key={j}>{m}</li>)}
@@ -830,7 +830,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         {viewMode === 'roadmap' && (
           <div className="space-y-4">
             <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-accent-rosegold-400" />
+              <Calendar className="h-4 w-4 text-accent-brass-400" />
               <span>90-Day Execution Roadmap & Growth Milestones</span>
             </h4>
 
@@ -838,7 +838,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               {(proposal.roadmap90Days || []).map((step, idx) => (
                 <div key={idx} className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
-                    <span className="text-xs font-black text-accent-rosegold-400 uppercase tracking-wider">
+                    <span className="text-xs font-black text-accent-brass-400 uppercase tracking-wider">
                       {step.month}
                     </span>
                     <span className="text-xs font-bold text-violet-300 bg-violet-500/10 px-2.5 py-0.5 rounded border border-violet-500/20">
@@ -936,7 +936,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
               <div className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-1">
                 <span className="text-[10px] text-ink-muted font-bold uppercase block">Projected Retainer Net ROI</span>
-                <span className="text-2xl font-black text-accent-rosegold-300 font-mono">{netROI}x Net ROI</span>
+                <span className="text-2xl font-black text-accent-brass-300 font-mono">{netROI}x Net ROI</span>
               </div>
             </div>
           </div>

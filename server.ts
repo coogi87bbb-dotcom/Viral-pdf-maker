@@ -144,13 +144,20 @@ async function parseBufferToText(buffer: Buffer, mimeType: string = 'application
   }
 
   // 3. Fallback to Gemini 2.5 Flash API (if available)
+  // Track *why* this step failed, not just whether it did — a missing
+  // GEMINI_API_KEY (getGenAI() throws synchronously for that case) is a
+  // server configuration problem, not evidence the file itself is
+  // unreadable, and the caller needs to be able to tell those apart instead
+  // of both silently collapsing into the same generic "couldn't parse this
+  // file" message.
+  let noAiKeyConfigured = false;
   try {
     const ai = getGenAI();
     const base64Data = buffer.toString('base64');
     const prompt = `Extract all written document text, headings, chapter titles, bullet points, and main body paragraphs from this file into clean, readable document text. Keep the structure, headings, and paragraph breaks intact. Return ONLY the extracted text content. Do not add conversational intro/outro text, and do not output raw PDF or binary code like endobj or stream.`;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: [
         {
           role: 'user',
@@ -172,6 +179,7 @@ async function parseBufferToText(buffer: Buffer, mimeType: string = 'application
       return text;
     }
   } catch (err: any) {
+    noAiKeyConfigured = typeof err?.message === 'string' && err.message.includes('GEMINI_API_KEY');
     console.warn('Gemini API extraction notice (quota/network):', err?.message || err);
   }
 
@@ -184,6 +192,13 @@ async function parseBufferToText(buffer: Buffer, mimeType: string = 'application
     }
   } catch (e) {}
 
+  // Every extraction path failed. If the Gemini OCR fallback specifically
+  // never got to run because no key is configured, say so distinctly —
+  // otherwise a fixable server config problem looks identical to "this file
+  // is genuinely unreadable" to whoever hits this in the UI.
+  if (noAiKeyConfigured) {
+    throw new Error('DOCPARSE_NO_AI_KEY: local extraction failed and the AI OCR fallback is unavailable (GEMINI_API_KEY not configured).');
+  }
   return null;
 }
 
@@ -592,7 +607,7 @@ app.post('/api/agents/execute', async (req, res) => {
       const prompt = agentPrompts[agentId] || `You are an Autonomous AI Specialist Agent (${agentId}). Task: "${taskInput}". Provide structured execution steps and actionable recommendations.`;
 
       const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.6-flash',
         contents: prompt
       });
 
@@ -1049,6 +1064,16 @@ app.post('/api/docs/parse-file', async (req, res) => {
         });
       }
     } catch (aiErr: any) {
+      if (typeof aiErr?.message === 'string' && aiErr.message.startsWith('DOCPARSE_NO_AI_KEY')) {
+        // Re-throw as a distinct, user-facing error so the outer catch below
+        // reports this as a server configuration gap (503) instead of
+        // lumping it into the generic "file unreadable" 422 further down —
+        // the file may well have parsed fine with a working AI key.
+        throw Object.assign(
+          new Error('This server isn\'t configured with an AI document-reading key yet, so files that need OCR (scanned PDFs, unusual layouts) can\'t be processed right now. Try "Paste Text" instead, or contact the site owner.'),
+          { statusCode: 503 }
+        );
+      }
       console.warn('Gemini file parsing fallback notice:', aiErr.message || aiErr);
     }
 
@@ -1069,7 +1094,7 @@ app.post('/api/docs/parse-file', async (req, res) => {
     });
   } catch (err: any) {
     console.error('Error parsing uploaded file:', err);
-    res.status(500).json({ error: err.message || 'Failed to parse file.' });
+    res.status(err.statusCode || 500).json({ error: err.message || 'Failed to parse file.' });
   }
 });
 
@@ -1252,7 +1277,7 @@ Instructions:
 Return pure structured JSON matching the requested schema.`;
 
     const modelResponse = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
@@ -1317,7 +1342,7 @@ app.post('/api/ai/deal-closer-generate', async (req, res) => {
     const clampedMaxTokens = Math.min(Math.max(Number(maxTokens) || 1800, 200), 4000);
 
     const modelResponse = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: `${systemPrompt}\n\n${userPrompt}`,
       config: {
         temperature: 0.7,
@@ -1469,7 +1494,7 @@ Return the updated section as JSON with fields:
 - bulletCards (array of objects with title, description, badgeText)`;
 
     const modelResponse = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: prompt,
       config: {
         responseMimeType: 'application/json',
@@ -1735,7 +1760,7 @@ Return an SVG object string with viewBox="0 0 600 800" containing gradients, sub
 Also return a color palette hex code object.`;
 
     const modelResponse = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: prompt,
       config: {
         responseMimeType: 'application/json',

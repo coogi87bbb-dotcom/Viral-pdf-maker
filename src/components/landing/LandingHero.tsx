@@ -11,10 +11,12 @@ interface LandingHeroProps {
  * page-wide video backdrop (mounted once at LandingPage level, not owned
  * here). The masthead pins to the top, the title card to the bottom.
  *
- * Bottom anchoring is deliberate, not stylistic drift: the footage has the
- * PERA INC wordmark burned into its left-centre, which stays by design.
- * Centre-left headline placement — the obvious default — would collide with
- * it. Sitting the copy in the lower third keeps both marks legible.
+ * Bottom anchoring is kept as a deliberate editorial composition choice —
+ * it originally existed to dodge the source footage's burned-in wordmark,
+ * which the extraction pipeline now removes entirely (see
+ * ScrollFrameStage.tsx / scripts/extract-hero-frames.sh), but the
+ * lower-third title-card layout reads well on its own and wasn't changed
+ * just because its original reason went away.
  */
 export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
   return (
@@ -38,10 +40,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
           <span className="lf-label text-lf-copper-light text-legible">001 / The workspace</span>
         </Reveal>
 
-        {/* Wraps on a phone; stays on ONE line from lg up so the block is
-            short enough to clear the PERA INC wordmark above it. */}
+        {/* Wraps on a phone; stays on ONE line from lg up. */}
         <Reveal kind="clip" delay={0.14} immediate className="mt-4 block">
-          <h1 className="lf-display max-w-[11ch] text-lf-on-ink text-legible lg:max-w-none">
+          <h1 className="lf-display max-w-[14ch] text-lf-on-ink text-legible lg:max-w-none">
             Get your week back.
           </h1>
         </Reveal>

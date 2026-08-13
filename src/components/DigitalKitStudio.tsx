@@ -590,14 +590,14 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
       <div className="bg-surface-1/90 border border-hairline-strong rounded-xl p-3 sm:p-4 shadow-[var(--shadow-panel)] flex flex-col md:flex-row items-center justify-between gap-4">
         {/* LOGO BADGE */}
         <div className="flex items-center gap-3">
-          <div className="bg-accent-rosegold-500 border border-hairline-strong px-3 py-1.5 rounded-lg text-black font-black uppercase text-xs tracking-wider shadow-[var(--shadow-panel)] flex items-center gap-1.5">
+          <div className="bg-accent-brass-500 border border-hairline-strong px-3 py-1.5 rounded-lg text-black font-black uppercase text-xs tracking-wider shadow-[var(--shadow-panel)] flex items-center gap-1.5">
             <Crown className="h-4 w-4 fill-black" />
             <span>GOLD</span>
           </div>
 
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-extrabold uppercase bg-accent-rosegold-700/20 text-accent-rosegold-300 px-2 py-0.5 rounded border border-accent-rosegold-500/40 font-mono">
+              <span className="text-[10px] font-extrabold uppercase bg-accent-brass-700/20 text-accent-brass-300 px-2 py-0.5 rounded border border-accent-brass-500/40 font-mono">
                 VIRAL CREATOR ASSETS
               </span>
               <span className="text-[10px] font-mono text-ink-muted font-bold uppercase hidden sm:inline">
@@ -616,13 +616,13 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setIsOwnerPortalOpen(true)}
             className="px-3 py-1.5 rounded-lg bg-surface-1 border border-hairline-strong text-ink-secondary hover:text-white font-extrabold text-xs uppercase flex items-center gap-1.5 shadow-[var(--shadow-panel)] cursor-pointer"
           >
-            <Lock className="h-3.5 w-3.5 text-accent-rosegold-400" />
+            <Lock className="h-3.5 w-3.5 text-accent-brass-400" />
             <span>ARCHIVE LICENSE</span>
           </button>
 
           <button
             onClick={() => setIsVaultOpen(true)}
-            className="px-3 py-1.5 rounded-lg bg-accent-rosegold-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1.5 cursor-pointer"
+            className="px-3 py-1.5 rounded-lg bg-accent-brass-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1.5 cursor-pointer"
           >
             <Bookmark className="h-3.5 w-3.5 fill-black" />
             <span>PERSONAL VAULT ({personalVault.length})</span>
@@ -632,7 +632,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setThemeMode(themeMode === 'solid-gold' ? 'artistic-flair' : 'solid-gold')}
             className="px-3 py-1.5 rounded-lg bg-surface-1 border border-hairline-strong text-xs font-bold text-ink-secondary hover:text-white uppercase flex items-center gap-1.5 shadow-[var(--shadow-panel)] cursor-pointer"
           >
-            <Palette className="h-3.5 w-3.5 text-accent-rosegold-400" />
+            <Palette className="h-3.5 w-3.5 text-accent-brass-400" />
             <span>{themeMode === 'solid-gold' ? 'ARTISTIC FLAIR & SOLID GOLD' : 'HIGH CONTRAST MODE'}</span>
           </button>
 
@@ -663,7 +663,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('canva-social')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'canva-social'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -675,7 +675,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('brand-media')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'brand-media'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -687,7 +687,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('resume-cv')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'resume-cv'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -699,7 +699,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('email-copy')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'email-copy'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -711,7 +711,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('digital-planners')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'digital-planners'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -723,7 +723,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             onClick={() => setActiveBundle('master-prompts')}
             className={`px-4 py-2 rounded-lg font-black text-xs uppercase border border-hairline-strong transition-colors flex items-center gap-2 cursor-pointer shadow-[var(--shadow-panel)] ${
               activeBundle === 'master-prompts'
-                ? 'bg-accent-rosegold-500 text-black'
+                ? 'bg-accent-brass-500 text-black'
                 : 'bg-surface-1 text-ink-secondary hover:bg-surface-2'
             }`}
           >
@@ -741,9 +741,9 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
         {/* LOCALIZATION BOX */}
         <div className="lg:col-span-4 bg-surface-1/90 border border-hairline-strong rounded-xl p-3 shadow-[var(--shadow-panel)] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <Globe className="h-4 w-4 text-accent-rosegold-400" />
+            <Globe className="h-4 w-4 text-accent-brass-400" />
             <div className="text-left">
-              <div className="text-[9px] font-mono font-bold text-accent-rosegold-300 uppercase">
+              <div className="text-[9px] font-mono font-bold text-accent-brass-300 uppercase">
                 1-CLICK AI LOCALIZATION
               </div>
               <div className="text-xs font-black text-white uppercase">
@@ -772,11 +772,11 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               CANVAS STUDIO CONTROLS
             </span>
             <div className="flex items-center gap-2 bg-black px-2 py-1 rounded-lg border border-hairline">
-              <button onClick={() => setScale(Math.max(50, scale - 10))} className="p-1 hover:text-accent-rosegold-400 cursor-pointer">
+              <button onClick={() => setScale(Math.max(50, scale - 10))} className="p-1 hover:text-accent-brass-400 cursor-pointer">
                 <ZoomOut className="h-3.5 w-3.5" />
               </button>
-              <span className="text-xs font-mono font-bold text-accent-rosegold-300">{scale}%</span>
-              <button onClick={() => setScale(Math.min(150, scale + 10))} className="p-1 hover:text-accent-rosegold-400 cursor-pointer">
+              <span className="text-xs font-mono font-bold text-accent-brass-300">{scale}%</span>
+              <button onClick={() => setScale(Math.min(150, scale + 10))} className="p-1 hover:text-accent-brass-400 cursor-pointer">
                 <ZoomIn className="h-3.5 w-3.5" />
               </button>
             </div>
@@ -785,7 +785,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
           <div className="flex items-center gap-2">
             <button
               onClick={handleSaveToVault}
-              className="px-3 py-1.5 rounded-lg bg-accent-rosegold-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1 cursor-pointer"
+              className="px-3 py-1.5 rounded-lg bg-accent-brass-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1 cursor-pointer"
             >
               <Bookmark className="h-3.5 w-3.5 fill-black" />
               <span>SAVE VAULT</span>
@@ -795,7 +795,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               onClick={handleExportPng}
               className="px-3 py-1.5 rounded-lg bg-surface-1 border border-hairline-strong text-ink-secondary hover:text-white font-bold text-xs uppercase shadow-[var(--shadow-panel)] flex items-center gap-1 cursor-pointer"
             >
-              <Download className="h-3.5 w-3.5 text-accent-rosegold-400" />
+              <Download className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>PNG</span>
             </button>
 
@@ -803,7 +803,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               onClick={handleExportPdf}
               className="px-3 py-1.5 rounded-lg bg-surface-1 border border-hairline-strong text-ink-secondary hover:text-white font-bold text-xs uppercase shadow-[var(--shadow-panel)] flex items-center gap-1 cursor-pointer"
             >
-              <Printer className="h-3.5 w-3.5 text-accent-rosegold-400" />
+              <Printer className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>PDF</span>
             </button>
 
@@ -831,7 +831,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => handleSwitchResumeSubTab('pm-exec')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] ${
-                  resumeSubTab === 'pm-exec' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  resumeSubTab === 'pm-exec' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 SENIOR PRODUCT MANAGER - TECH EXECUTIVE
@@ -839,7 +839,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => handleSwitchResumeSubTab('brand-designer')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] ${
-                  resumeSubTab === 'brand-designer' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  resumeSubTab === 'brand-designer' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 CREATIVE BRAND DIRECTOR & DESIGNER
@@ -850,7 +850,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setResumeViewMode('resume')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase border border-hairline-strong cursor-pointer ${
-                  resumeViewMode === 'resume' ? 'bg-rosegold-400 text-black' : 'bg-black text-ink-secondary'
+                  resumeViewMode === 'resume' ? 'bg-brass-400 text-black' : 'bg-black text-ink-secondary'
                 }`}
               >
                 RESUME LAYOUT
@@ -858,7 +858,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setResumeViewMode('cover-letter')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-extrabold uppercase border border-hairline-strong cursor-pointer ${
-                  resumeViewMode === 'cover-letter' ? 'bg-rosegold-400 text-black' : 'bg-black text-ink-secondary'
+                  resumeViewMode === 'cover-letter' ? 'bg-brass-400 text-black' : 'bg-black text-ink-secondary'
                 }`}
               >
                 COVER LETTER
@@ -870,7 +870,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* LEFT: LIVE RESUME / COVER LETTER DOCUMENT PREVIEW */}
             <div className="lg:col-span-7 bg-[#FEFCE8] text-slate-900 border-4 border-black rounded-2xl p-6 sm:p-8 shadow-[var(--shadow-panel)] space-y-6 font-sans relative">
-              <div className="absolute top-4 right-4 bg-accent-rosegold-500 text-black font-black text-[10px] px-2 py-0.5 rounded border border-black uppercase">
+              <div className="absolute top-4 right-4 bg-accent-brass-500 text-black font-black text-[10px] px-2 py-0.5 rounded border border-black uppercase">
                 LIVE RESUME PREVIEW
               </div>
 
@@ -881,7 +881,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                     <h2 className="text-2xl sm:text-3xl font-black uppercase font-serif tracking-tight text-slate-950">
                       {resumeData.fullName}
                     </h2>
-                    <p className="text-xs sm:text-sm font-bold text-accent-rosegold-700 uppercase font-mono tracking-wider">
+                    <p className="text-xs sm:text-sm font-bold text-accent-brass-700 uppercase font-mono tracking-wider">
                       {resumeData.jobTitle}
                     </p>
                     <div className="flex flex-wrap items-center gap-3 text-xs font-medium text-slate-600 pt-1">
@@ -891,7 +891,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                       <span>•</span>
                       <span>{resumeData.location}</span>
                       <span>•</span>
-                      <span className="text-rosegold-800 underline font-mono">{resumeData.linkedin}</span>
+                      <span className="text-brass-800 underline font-mono">{resumeData.linkedin}</span>
                     </div>
                   </div>
 
@@ -942,7 +942,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 <div className="space-y-4">
                   <div className="border-b-2 border-slate-900 pb-3">
                     <h2 className="text-2xl font-black uppercase font-serif text-slate-950">{resumeData.fullName}</h2>
-                    <p className="text-xs font-bold text-accent-rosegold-700 uppercase font-mono">{resumeData.coverLetterSubject}</p>
+                    <p className="text-xs font-bold text-accent-brass-700 uppercase font-mono">{resumeData.coverLetterSubject}</p>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-800 leading-relaxed whitespace-pre-line font-medium">
                     {resumeData.coverLetterBody}
@@ -955,7 +955,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             <div className="lg:col-span-5 bg-surface-1/90 border border-hairline-strong rounded-2xl p-4 sm:p-6 shadow-[var(--shadow-panel)] space-y-4">
               <div className="flex items-center justify-between border-b-2 border-hairline pb-3">
                 <div className="flex items-center gap-2">
-                  <Edit3 className="h-4 w-4 text-accent-rosegold-400" />
+                  <Edit3 className="h-4 w-4 text-accent-brass-400" />
                   <h3 className="text-sm font-black text-white uppercase tracking-wider">EDIT RESUME DETAILS</h3>
                 </div>
               </div>
@@ -963,19 +963,19 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <div className="space-y-3 text-left">
                 {/* PERSONAL INFO */}
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">PERSONAL INFO</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">PERSONAL INFO</span>
                   <input
                     type="text"
                     value={resumeData.fullName}
                     onChange={e => setResumeData({ ...resumeData, fullName: e.target.value })}
-                    className="w-full bg-black border border-hairline text-white text-xs font-bold p-2.5 rounded-xl focus:border-accent-rosegold-500 outline-none"
+                    className="w-full bg-black border border-hairline text-white text-xs font-bold p-2.5 rounded-xl focus:border-accent-brass-500 outline-none"
                     placeholder="Full Name"
                   />
                   <input
                     type="text"
                     value={resumeData.jobTitle}
                     onChange={e => setResumeData({ ...resumeData, jobTitle: e.target.value })}
-                    className="w-full bg-black border border-hairline text-white text-xs font-bold p-2.5 rounded-xl focus:border-accent-rosegold-500 outline-none"
+                    className="w-full bg-black border border-hairline text-white text-xs font-bold p-2.5 rounded-xl focus:border-accent-brass-500 outline-none"
                     placeholder="Job Title"
                   />
                   <div className="grid grid-cols-2 gap-2">
@@ -998,22 +998,22 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
                 {/* EXECUTIVE SUMMARY */}
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">EXECUTIVE SUMMARY</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">EXECUTIVE SUMMARY</span>
                   <textarea
                     rows={3}
                     value={resumeData.summary}
                     onChange={e => setResumeData({ ...resumeData, summary: e.target.value })}
-                    className="w-full bg-black border border-hairline text-white text-xs font-medium p-2.5 rounded-xl focus:border-accent-rosegold-500 outline-none"
+                    className="w-full bg-black border border-hairline text-white text-xs font-medium p-2.5 rounded-xl focus:border-accent-brass-500 outline-none"
                   />
                 </div>
 
                 {/* WORK EXPERIENCE */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">WORK EXPERIENCE</span>
+                    <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">WORK EXPERIENCE</span>
                     <button
                       onClick={handleAddResumeJob}
-                      className="px-2 py-1 bg-accent-rosegold-500 text-black font-black text-[10px] rounded uppercase border border-black flex items-center gap-1 cursor-pointer"
+                      className="px-2 py-1 bg-accent-brass-500 text-black font-black text-[10px] rounded uppercase border border-black flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="h-3 w-3" /> ADD JOB
                     </button>
@@ -1056,7 +1056,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setEmailSubTab('pas-onboarding')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] ${
-                  emailSubTab === 'pas-onboarding' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  emailSubTab === 'pas-onboarding' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 PAS - 5-PART ONBOARDING & WELCOME EMAIL SEQUENCE
@@ -1064,7 +1064,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setEmailSubTab('asia-lead-magnet')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] ${
-                  emailSubTab === 'asia-lead-magnet' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  emailSubTab === 'asia-lead-magnet' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 ASIA - HIGH-TICKET LEAD MAGNET & SALES EMAIL FRAMEWORK
@@ -1078,7 +1078,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                   key={sIdx}
                   onClick={() => setEmailStepIndex(sIdx)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-black border border-hairline-strong cursor-pointer ${
-                    emailStepIndex === sIdx ? 'bg-accent-rosegold-500 text-black' : 'bg-black text-ink-secondary'
+                    emailStepIndex === sIdx ? 'bg-accent-brass-500 text-black' : 'bg-black text-ink-secondary'
                   }`}
                 >
                   STEP {sIdx + 1}
@@ -1094,7 +1094,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 <div className="text-xs font-mono font-bold text-slate-600">
                   From: <span className="font-extrabold text-slate-900">Elena &lt;newsletter@creatorstudio.com&gt;</span>
                 </div>
-                <div className="text-[10px] font-mono bg-accent-rosegold-500 text-black px-2 py-0.5 rounded font-black">
+                <div className="text-[10px] font-mono bg-accent-brass-500 text-black px-2 py-0.5 rounded font-black">
                   JUST NOW
                 </div>
               </div>
@@ -1115,7 +1115,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                   href={currentEmailStep.ctaUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-5 py-2.5 bg-accent-rosegold-500 border border-hairline-strong text-black font-black text-xs uppercase rounded-xl shadow-[var(--shadow-panel)] inline-block hover:bg-[#E38A72]"
+                  className="px-5 py-2.5 bg-accent-brass-500 border border-hairline-strong text-black font-black text-xs uppercase rounded-xl shadow-[var(--shadow-panel)] inline-block hover:bg-[#E38A72]"
                 >
                   {currentEmailStep.ctaText}
                 </a>
@@ -1129,7 +1129,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 <h3 className="text-sm font-black text-white uppercase tracking-wider">
                   EDIT EMAIL STEP {emailStepIndex + 1}
                 </h3>
-                <span className="text-[10px] font-mono text-accent-rosegold-300">TOKENS SUPPORTED</span>
+                <span className="text-[10px] font-mono text-accent-brass-300">TOKENS SUPPORTED</span>
               </div>
 
               {/* DYNAMIC TOKENS */}
@@ -1140,7 +1140,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                     <button
                       key={token}
                       onClick={() => handleInsertToken(token)}
-                      className="px-2 py-1 bg-black border border-white/15 text-[10px] font-mono text-accent-rosegold-300 hover:border-accent-rosegold-500 rounded cursor-pointer"
+                      className="px-2 py-1 bg-black border border-white/15 text-[10px] font-mono text-accent-brass-300 hover:border-accent-brass-500 rounded cursor-pointer"
                     >
                       + {token}
                     </button>
@@ -1150,7 +1150,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
               {/* STEP NAME */}
               <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">STEP NAME / LABEL</span>
+                <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">STEP NAME / LABEL</span>
                 <input
                   type="text"
                   value={currentEmailStep.stepName}
@@ -1161,7 +1161,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
               {/* SUBJECT LINE */}
               <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">SUBJECT LINE</span>
+                <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">SUBJECT LINE</span>
                 <input
                   type="text"
                   value={currentEmailStep.subject}
@@ -1172,7 +1172,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
               {/* BODY TEXT */}
               <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">EMAIL BODY TEXT</span>
+                <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">EMAIL BODY TEXT</span>
                 <textarea
                   rows={6}
                   value={currentEmailStep.body}
@@ -1184,7 +1184,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               {/* CTA TEXT & URL */}
               <div className="grid grid-cols-2 gap-2">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">CTA BUTTON TEXT</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">CTA BUTTON TEXT</span>
                   <input
                     type="text"
                     value={currentEmailStep.ctaText}
@@ -1193,7 +1193,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                   />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">CTA URL</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">CTA URL</span>
                   <input
                     type="text"
                     value={currentEmailStep.ctaUrl}
@@ -1217,7 +1217,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setPlannerSubTab('daily-high-performance')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer ${
-                  plannerSubTab === 'daily-high-performance' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  plannerSubTab === 'daily-high-performance' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 DAILY HIGH PERFORMANCE & TIME-BLOCK PLANNER
@@ -1225,14 +1225,14 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => setPlannerSubTab('30-day-habit')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer ${
-                  plannerSubTab === '30-day-habit' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  plannerSubTab === '30-day-habit' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 30-DAY CREATOR HABIT & GOAL TRACKER WORKBOOK
               </button>
             </div>
 
-            <div className="bg-black px-3 py-1.5 rounded-lg border border-hairline text-xs font-mono text-accent-rosegold-300 flex items-center gap-2">
+            <div className="bg-black px-3 py-1.5 rounded-lg border border-hairline text-xs font-mono text-accent-brass-300 flex items-center gap-2">
               <Calendar className="h-4 w-4" />
               <span>Sun, Aug 9</span>
             </div>
@@ -1243,7 +1243,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             <div className="lg:col-span-7 bg-[#FEFCE8] text-slate-900 border-4 border-black rounded-2xl p-6 shadow-[var(--shadow-panel)] space-y-6 font-sans">
               <div className="border-b-2 border-slate-900 pb-3">
                 <h2 className="text-xl sm:text-2xl font-black uppercase font-serif text-slate-950">{plannerTitle}</h2>
-                <p className="text-xs font-bold text-accent-rosegold-700 uppercase font-mono">Interactive Daily Focus & Habit Matrix</p>
+                <p className="text-xs font-bold text-accent-brass-700 uppercase font-mono">Interactive Daily Focus & Habit Matrix</p>
               </div>
 
               {/* OBJECTIVES & TIME BLOCKS GRID */}
@@ -1252,7 +1252,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 <div className="bg-white border border-hairline-strong rounded-xl p-3 shadow-[var(--shadow-panel)] space-y-2">
                   <div className="flex items-center justify-between border-b border-slate-300 pb-1">
                     <span className="text-xs font-black uppercase font-mono">1. TOP OBJECTIVE TARGETS</span>
-                    <button onClick={handleAddObjective} className="text-[10px] bg-accent-rosegold-500 text-black font-bold px-1.5 py-0.5 rounded border border-black cursor-pointer">
+                    <button onClick={handleAddObjective} className="text-[10px] bg-accent-brass-500 text-black font-bold px-1.5 py-0.5 rounded border border-black cursor-pointer">
                       + ADD
                     </button>
                   </div>
@@ -1279,7 +1279,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                   <div className="space-y-1.5 text-[11px] font-mono">
                     {timeBlocks.map((tb, idx) => (
                       <div key={idx} className="bg-slate-50 p-1.5 rounded border border-slate-200">
-                        <span className="font-bold text-accent-rosegold-700">{tb.time}:</span> <span className="text-slate-800 font-sans">{tb.task}</span>
+                        <span className="font-bold text-accent-brass-700">{tb.time}:</span> <span className="text-slate-800 font-sans">{tb.task}</span>
                       </div>
                     ))}
                   </div>
@@ -1290,7 +1290,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <div className="bg-white border border-hairline-strong rounded-xl p-4 shadow-[var(--shadow-panel)] space-y-3">
                 <div className="flex items-center justify-between border-b border-slate-300 pb-2">
                   <span className="text-xs font-black uppercase font-mono">7-DAY HABIT STREAK TRACKER</span>
-                  <button onClick={handleAddHabit} className="text-[10px] bg-accent-rosegold-500 text-black font-bold px-2 py-0.5 rounded border border-black cursor-pointer">
+                  <button onClick={handleAddHabit} className="text-[10px] bg-accent-brass-500 text-black font-bold px-2 py-0.5 rounded border border-black cursor-pointer">
                     + ADD HABIT
                   </button>
                 </div>
@@ -1332,8 +1332,8 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               </div>
 
               {/* MINDSET ANCHOR */}
-              <div className="bg-[#FBE4E0] border-2 border-accent-rosegold-500 rounded-xl p-3 text-xs font-medium text-rosegold-950">
-                <span className="font-mono font-bold uppercase text-accent-rosegold-700 block mb-0.5">MINDSET ANCHOR</span>
+              <div className="bg-[#FBE4E0] border-2 border-accent-brass-500 rounded-xl p-3 text-xs font-medium text-brass-950">
+                <span className="font-mono font-bold uppercase text-accent-brass-700 block mb-0.5">MINDSET ANCHOR</span>
                 "{plannerAffirmation}"
               </div>
             </div>
@@ -1346,7 +1346,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
               <div className="space-y-3">
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">PLANNER TITLE</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">PLANNER TITLE</span>
                   <input
                     type="text"
                     value={plannerTitle}
@@ -1356,7 +1356,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">MINDSET NOTE / AFFIRMATION</span>
+                  <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">MINDSET NOTE / AFFIRMATION</span>
                   <textarea
                     rows={3}
                     value={plannerAffirmation}
@@ -1380,7 +1380,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => handleSwitchPromptTab('canva-batch')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] shrink-0 ${
-                  promptSubTab === 'canva-batch' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  promptSubTab === 'canva-batch' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 CANVA SOCIAL MEDIA BATCH GENERATOR AGENT
@@ -1389,7 +1389,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => handleSwitchPromptTab('resume-ai')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] shrink-0 ${
-                  promptSubTab === 'resume-ai' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  promptSubTab === 'resume-ai' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 EXECUTIVE RESUME & COVER LETTER AI ARCHITECT
@@ -1398,7 +1398,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               <button
                 onClick={() => handleSwitchPromptTab('sales-copy')}
                 className={`px-3.5 py-2 rounded-lg text-xs font-black uppercase border border-hairline-strong cursor-pointer shadow-[var(--shadow-panel)] shrink-0 ${
-                  promptSubTab === 'sales-copy' ? 'bg-accent-rosegold-500 text-black' : 'bg-surface-1 text-ink-secondary'
+                  promptSubTab === 'sales-copy' ? 'bg-accent-brass-500 text-black' : 'bg-surface-1 text-ink-secondary'
                 }`}
               >
                 HIGH-CONVERTING SALES EMAIL & COPY SWIPE ENGINE
@@ -1408,7 +1408,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             <div className="flex items-center gap-2">
               <button
                 onClick={() => triggerCopy(getPromptOutputText(), 'master-prompt')}
-                className="px-3.5 py-2 rounded-lg bg-accent-rosegold-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-accent-brass-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] flex items-center gap-1.5 cursor-pointer"
               >
                 {copiedKey === 'master-prompt' ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 <span>{copiedKey === 'master-prompt' ? 'COPIED!' : 'COPY MASTER PROMPT'}</span>
@@ -1420,7 +1420,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             {/* LEFT: MASTER SYSTEM INSTRUCTION PROMPT CARD */}
             <div className="lg:col-span-7 bg-[#FEFCE8] text-slate-950 border-4 border-black rounded-2xl p-6 shadow-[var(--shadow-panel)] space-y-4 font-sans relative">
               <div className="flex items-center justify-between border-b-2 border-slate-300 pb-3">
-                <span className="text-xs font-mono font-black text-accent-rosegold-700 bg-[#FBE4E0] px-2.5 py-1 rounded border border-accent-rosegold-500 uppercase">
+                <span className="text-xs font-mono font-black text-accent-brass-700 bg-[#FBE4E0] px-2.5 py-1 rounded border border-accent-brass-500 uppercase">
                   TARGET: GEMINI 3.6 FLASH
                 </span>
                 <span className="text-xs font-mono font-extrabold text-slate-500">META-ARCHITECT v10.0</span>
@@ -1434,7 +1434,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             {/* RIGHT: COMMERCIAL LEVERAGE & DYNAMIC VARIABLE ANCHORS */}
             <div className="lg:col-span-5 bg-surface-1/90 border border-hairline-strong rounded-2xl p-4 sm:p-6 shadow-[var(--shadow-panel)] space-y-4">
               <div className="border-b-2 border-hairline pb-3 space-y-1">
-                <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase">COMMERCIAL LEVERAGE</span>
+                <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase">COMMERCIAL LEVERAGE</span>
                 <h3 className="text-sm font-black text-white uppercase tracking-wider">SAAS MONETIZATION STRATEGY</h3>
                 <p className="text-xs text-ink-muted">
                   Sell as a custom AI Content SaaS, embedding system prompts directly into Canva or Notion client workflows.
@@ -1442,7 +1442,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               </div>
 
               <div className="space-y-3">
-                <span className="text-[10px] font-mono font-bold text-accent-rosegold-300 uppercase block border-b border-hairline pb-1">
+                <span className="text-[10px] font-mono font-bold text-accent-brass-300 uppercase block border-b border-hairline pb-1">
                   DYNAMIC VARIABLE ANCHORS
                 </span>
 
@@ -1541,7 +1541,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
           <div className="bg-surface-1 border border-hairline-strong rounded-2xl max-w-2xl w-full p-6 shadow-[var(--shadow-panel)] space-y-4">
             <div className="flex items-center justify-between border-b-2 border-hairline pb-3">
               <div className="flex items-center gap-2">
-                <Bookmark className="h-5 w-5 text-accent-rosegold-400 fill-accent-rosegold-400" />
+                <Bookmark className="h-5 w-5 text-accent-brass-400 fill-accent-brass-400" />
                 <h3 className="text-lg font-display font-semibold text-white">
                   Personal Vault ({personalVault.length})
                 </h3>
@@ -1562,7 +1562,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
                 {personalVault.map(item => (
                   <div key={item.id} className="p-3 bg-black border border-hairline-strong rounded-xl flex items-center justify-between gap-3 shadow-[var(--shadow-panel)]">
                     <div>
-                      <div className="text-[10px] font-mono text-accent-rosegold-300 uppercase font-bold">{item.bundleTitle} · {item.savedAt}</div>
+                      <div className="text-[10px] font-mono text-accent-brass-300 uppercase font-bold">{item.bundleTitle} · {item.savedAt}</div>
                       <h4 className="text-sm font-black text-white uppercase">{item.templateTitle}</h4>
                       <p className="text-[11px] text-ink-muted font-mono">{item.slides.length} slides archived</p>
                     </div>
@@ -1595,7 +1595,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
             <div className="pt-2 flex justify-end">
               <button
                 onClick={() => setIsVaultOpen(false)}
-                className="px-4 py-2 bg-accent-rosegold-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] rounded-xl cursor-pointer"
+                className="px-4 py-2 bg-accent-brass-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] rounded-xl cursor-pointer"
               >
                 CLOSE VAULT
               </button>
@@ -1608,13 +1608,13 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
       {isOwnerPortalOpen && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="bg-surface-1 border border-hairline-strong rounded-2xl max-w-md w-full p-6 shadow-[var(--shadow-panel)] space-y-4 text-center">
-            <div className="w-12 h-12 bg-accent-rosegold-500 border border-hairline-strong rounded-2xl flex items-center justify-center mx-auto shadow-[var(--shadow-panel)]">
+            <div className="w-12 h-12 bg-accent-brass-500 border border-hairline-strong rounded-2xl flex items-center justify-center mx-auto shadow-[var(--shadow-panel)]">
               <Crown className="h-6 w-6 text-black" />
             </div>
 
             <div>
               <h3 className="text-xl font-display font-semibold text-white">Archive License & Asset Info</h3>
-              <p className="text-xs font-mono text-accent-rosegold-300 mt-1">GOLD TRIM COMMERCIAL LICENSE DETAILS</p>
+              <p className="text-xs font-mono text-accent-brass-300 mt-1">GOLD TRIM COMMERCIAL LICENSE DETAILS</p>
             </div>
 
             <div className="p-4 bg-black border border-hairline-strong rounded-xl space-y-2 text-left font-mono text-xs">
@@ -1634,7 +1634,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
 
             <button
               onClick={() => setIsOwnerPortalOpen(false)}
-              className="w-full py-2.5 bg-accent-rosegold-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] rounded-xl cursor-pointer"
+              className="w-full py-2.5 bg-accent-brass-500 text-black font-black text-xs uppercase border border-hairline-strong shadow-[var(--shadow-panel)] rounded-xl cursor-pointer"
             >
               RETURN TO STUDIO
             </button>

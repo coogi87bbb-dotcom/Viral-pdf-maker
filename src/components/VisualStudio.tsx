@@ -323,9 +323,9 @@ export const VisualStudio: React.FC = () => {
               <button
                 type="button"
                 onClick={handleEnhancePrompt}
-                className="text-xs text-accent-amber-300 font-bold hover:text-amber-200 flex items-center gap-1 bg-accent-amber-500/10 px-2.5 py-1 rounded-lg border border-amber-500/20"
+                className="text-xs text-accent-brass-300 font-bold hover:text-brass-200 flex items-center gap-1 bg-accent-brass-500/10 px-2.5 py-1 rounded-lg border border-brass-500/20"
               >
-                <Wand2 className="h-3.5 w-3.5 text-accent-amber-400" />
+                <Wand2 className="h-3.5 w-3.5 text-accent-brass-400" />
                 <span>Magic Prompt Engineer (10x)</span>
               </button>
             </div>
@@ -394,12 +394,12 @@ export const VisualStudio: React.FC = () => {
           >
             {loading ? (
               <>
-                <RefreshCw className="h-5 w-5 animate-spin text-accent-amber-300" />
+                <RefreshCw className="h-5 w-5 animate-spin text-accent-brass-300" />
                 <span>Rendering 4K AI Visual Asset & Applying Overlays...</span>
               </>
             ) : (
               <>
-                <Zap className="h-5 w-5 text-accent-amber-300 fill-amber-300" />
+                <Zap className="h-5 w-5 text-accent-brass-300 fill-brass-300" />
                 <span>
                   {studioMode === 'carousel'
                     ? 'Generate 5-Slide AI Carousel Deck'
@@ -441,10 +441,10 @@ export const VisualStudio: React.FC = () => {
                 <button
                   onClick={() => setShowSafeZone(!showSafeZone)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 border transition-colors ${
-                    showSafeZone ? 'bg-accent-amber-500/20 text-accent-amber-300 border-amber-500/30' : 'bg-surface-2 border-white/15 text-ink-muted'
+                    showSafeZone ? 'bg-accent-brass-500/20 text-accent-brass-300 border-brass-500/30' : 'bg-surface-2 border-white/15 text-ink-muted'
                   }`}
                 >
-                  {showSafeZone ? <Eye className="h-4 w-4 text-accent-amber-400" /> : <EyeOff className="h-4 w-4 text-ink-muted" />}
+                  {showSafeZone ? <Eye className="h-4 w-4 text-accent-brass-400" /> : <EyeOff className="h-4 w-4 text-ink-muted" />}
                   <span>App Safe-Zone Overlay</span>
                 </button>
 
@@ -459,7 +459,7 @@ export const VisualStudio: React.FC = () => {
                 <a
                   href={selectedAsset.imageUrl}
                   download="viral-graphic.png"
-                  className="px-4 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-lg shadow-amber-500/20 cursor-pointer"
+                  className="px-4 py-1.5 rounded-xl bg-brass-400 hover:bg-brass-300 text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-lg shadow-brass-500/20 cursor-pointer"
                 >
                   <Download className="h-4 w-4 text-slate-950" />
                   <span>Download 4K Graphic</span>
@@ -507,8 +507,8 @@ export const VisualStudio: React.FC = () => {
 
               {/* SOCIAL APP SAFE-ZONE UI OVERLAYS (TikTok / Reel / YouTube) */}
               {showSafeZone && (
-                <div className="absolute inset-0 pointer-events-none border-2 border-dashed border-accent-amber-400/40 rounded-xl p-4 flex flex-col justify-between">
-                  <div className="flex justify-between items-center text-[9px] font-mono text-accent-amber-300 font-bold bg-black/70 px-2 py-1 rounded border border-accent-amber-400/30">
+                <div className="absolute inset-0 pointer-events-none border-2 border-dashed border-accent-brass-400/40 rounded-xl p-4 flex flex-col justify-between">
+                  <div className="flex justify-between items-center text-[9px] font-mono text-accent-brass-300 font-bold bg-black/70 px-2 py-1 rounded border border-accent-brass-400/30">
                     <span>⚠️ SOCIAL APP UI SAFE ZONE</span>
                     <span>SAFE HEADER TOP (80px)</span>
                   </div>
@@ -521,7 +521,7 @@ export const VisualStudio: React.FC = () => {
                   </div>
 
                   {/* Bottom Caption Box Overlay */}
-                  <div className="bg-black/80 p-2 rounded border border-accent-amber-400/30 text-[9px] font-mono text-accent-amber-300 max-w-xs">
+                  <div className="bg-black/80 p-2 rounded border border-accent-brass-400/30 text-[9px] font-mono text-accent-brass-300 max-w-xs">
                     📱 CAPTION & USERNAME ZONE (Keep clear of critical text)
                   </div>
                 </div>

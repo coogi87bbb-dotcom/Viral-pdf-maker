@@ -207,7 +207,7 @@ SOFTWARE CONSOLIDATION:
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-3">
               <span>Agency Cost & ROI Savings Studio</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-emerald-500 to-rosegold-500 text-slate-950 font-black uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-emerald-500 to-brass-500 text-slate-950 font-black uppercase">
                 10x Precision
               </span>
             </h2>
@@ -229,7 +229,7 @@ SOFTWARE CONSOLIDATION:
         {/* 1-Click Scenario Presets */}
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
-            <Zap className="h-4 w-4 text-accent-rosegold-400 fill-rosegold-400" />
+            <Zap className="h-4 w-4 text-accent-brass-400 fill-brass-400" />
             <span>Select 1-Click Business Scale Preset:</span>
           </label>
 
@@ -250,7 +250,7 @@ SOFTWARE CONSOLIDATION:
                   {preset.desc}
                 </p>
                 <div className="flex items-center justify-between text-[10px] font-mono font-bold pt-1">
-                  <span className="text-accent-rosegold-400">{preset.postsPerWeek} posts/wk</span>
+                  <span className="text-accent-brass-400">{preset.postsPerWeek} posts/wk</span>
                   <span className="text-emerald-400">${preset.agencyCost.toLocaleString()}/mo</span>
                 </div>
               </button>
@@ -292,7 +292,7 @@ SOFTWARE CONSOLIDATION:
                 : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
-            <DollarSign className="h-4 w-4 text-accent-rosegold-300" />
+            <DollarSign className="h-4 w-4 text-accent-brass-300" />
             <span>Inbound Lead & Deal ROI Multiplier</span>
           </button>
 
@@ -318,7 +318,7 @@ SOFTWARE CONSOLIDATION:
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-bold text-ink-secondary">
                 <span>Posts Published / Week:</span>
-                <span className="text-accent-rosegold-400 font-mono text-sm">{postsPerWeek} posts</span>
+                <span className="text-accent-brass-400 font-mono text-sm">{postsPerWeek} posts</span>
               </div>
               <input
                 type="range"
@@ -385,7 +385,7 @@ SOFTWARE CONSOLIDATION:
           {/* Core Results Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-6 bg-surface-1/90 rounded-2xl border border-white/10 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-accent-rosegold-400 uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-xs font-bold text-accent-brass-400 uppercase tracking-wider">
                 <DollarSign className="h-4 w-4" />
                 <span>Monthly Direct Savings</span>
               </div>
@@ -503,7 +503,7 @@ SOFTWARE CONSOLIDATION:
         <div className="bg-surface-1/90 p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6 shadow-xl">
           <div className="border-b border-white/10 pb-4">
             <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
-              <DollarSign className="h-5 w-5 text-accent-rosegold-400" />
+              <DollarSign className="h-5 w-5 text-accent-brass-400" />
               <span>Inbound Lead & Customer Revenue ROI Projection</span>
             </h3>
             <p className="text-xs text-ink-muted mt-1">
@@ -515,7 +515,7 @@ SOFTWARE CONSOLIDATION:
             <div className="space-y-2 bg-surface-0 p-4 rounded-2xl border border-white/10">
               <label className="text-xs font-bold text-ink-secondary flex justify-between">
                 <span>Est. Monthly Inbound Leads:</span>
-                <strong className="text-accent-rosegold-400 font-mono">{monthlyInboundLeads} Leads</strong>
+                <strong className="text-accent-brass-400 font-mono">{monthlyInboundLeads} Leads</strong>
               </label>
               <input
                 type="range"
@@ -524,7 +524,7 @@ SOFTWARE CONSOLIDATION:
                 step="10"
                 value={monthlyInboundLeads}
                 onChange={(e) => setMonthlyInboundLeads(parseInt(e.target.value))}
-                className="w-full accent-rosegold-500"
+                className="w-full accent-brass-500"
               />
             </div>
 
@@ -572,9 +572,9 @@ SOFTWARE CONSOLIDATION:
               <span className="text-2xl font-black text-emerald-400 font-mono">${grossMonthlyNewRevenue.toLocaleString()} / mo</span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-surface-0 border border-rosegold-500/40 space-y-1">
-              <span className="text-[10px] text-accent-rosegold-400 font-bold uppercase block">Projected ROI Multiplier</span>
-              <span className="text-2xl font-black text-accent-rosegold-300 font-mono">{roiMultiplier}x Net ROI</span>
+            <div className="p-5 rounded-2xl bg-surface-0 border border-brass-500/40 space-y-1">
+              <span className="text-[10px] text-accent-brass-400 font-bold uppercase block">Projected ROI Multiplier</span>
+              <span className="text-2xl font-black text-accent-brass-300 font-mono">{roiMultiplier}x Net ROI</span>
             </div>
           </div>
         </div>
@@ -647,7 +647,7 @@ SOFTWARE CONSOLIDATION:
               onClick={handleCopySummary}
               className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
             >
-              {copiedSummary ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-rosegold-400" />}
+              {copiedSummary ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedSummary ? 'Copied Report' : 'Copy Executive Summary'}</span>
             </button>
 
@@ -710,7 +710,7 @@ SOFTWARE CONSOLIDATION:
             
             <div className="font-extrabold text-emerald-400 text-xs uppercase tracking-wider flex items-center justify-between">
               <span className="flex items-center gap-1.5">
-                <Sparkles className="h-4 w-4 text-accent-rosegold-300 fill-rosegold-300" />
+                <Sparkles className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
                 <span>ViralOS Autonomous Operating System</span>
               </span>
               <span className="font-mono text-xs text-white bg-emerald-600 px-2 py-0.5 rounded">All-in-One</span>

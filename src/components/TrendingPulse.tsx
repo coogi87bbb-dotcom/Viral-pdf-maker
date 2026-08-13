@@ -233,7 +233,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
               disabled={loading}
               className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 via-pink-600 to-violet-600 hover:from-rose-500 hover:to-violet-500 text-white font-bold text-xs shadow-lg shadow-rose-600/20 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer"
             >
-              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-accent-rosegold-300" /> : <Globe className="h-4 w-4 text-accent-rosegold-300" />}
+              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" /> : <Globe className="h-4 w-4 text-accent-brass-300" />}
               <span>{loading ? 'Grounding 10 Live Web Trends...' : 'Scan Live Web Pulse (10 Topics)'}</span>
             </button>
           </div>
@@ -353,7 +353,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                   </div>
                   <div className="h-1.5 w-full bg-surface-0 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-rosegold-400 rounded-full"
+                      className="h-full bg-gradient-to-r from-rose-500 via-pink-500 to-brass-400 rounded-full"
                       style={{ width: `${trend.viralityScore}%` }}
                     />
                   </div>
@@ -408,7 +408,7 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
                   onClick={() => onSelectTrendForCampaign(trend.topic)}
                   className="w-full py-2.5 rounded-xl bg-surface-2 hover:bg-rose-600 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 group-hover:shadow-lg group-hover:shadow-rose-600/20 cursor-pointer mt-3"
                 >
-                  <Zap className="h-3.5 w-3.5 text-accent-rosegold-300" />
+                  <Zap className="h-3.5 w-3.5 text-accent-brass-300" />
                   <span>Generate Campaign for this Trend</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
