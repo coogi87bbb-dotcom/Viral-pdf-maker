@@ -17,8 +17,7 @@ export const LandingFooter: React.FC = () => {
           </div>
 
           <div className="sm:text-right">
-            <p className="lf-label text-lf-on-ink-muted">A PERA INC product</p>
-            <p className="mt-3 font-sans text-xs text-lf-on-ink-muted">© {year}</p>
+            <p className="lf-label text-lf-on-ink-muted">PERAINC PRODUCT {year}</p>
           </div>
         </div>
       </div>
