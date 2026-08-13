@@ -115,7 +115,17 @@ export const AdminDashboard: React.FC = () => {
         setSyncError(null);
         const usersData: UserProfile[] = [];
         snapshot.forEach((docSnap) => {
-          usersData.push(docSnap.data() as UserProfile);
+          const raw = docSnap.data() as UserProfile;
+          // Some legacy/partial user docs are missing email or displayName
+          // (e.g. created before those fields were required, or via a
+          // signup path that skipped them). Normalize here so every
+          // downstream .toLowerCase()/search call has a safe string instead
+          // of throwing "undefined is not an object".
+          usersData.push({
+            ...raw,
+            email: raw.email || '',
+            displayName: raw.displayName || ''
+          });
         });
 
         if (usersData.length === 0) {
@@ -233,8 +243,8 @@ export const AdminDashboard: React.FC = () => {
 
   const filteredUsers = usersList.filter(
     (u) =>
-      u.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      u.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+      (u.email || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (u.displayName || '').toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalCampaignsGenerated = usersList.reduce((acc, curr) => acc + (curr.campaignsCount || 0), 0) || 142;
@@ -856,7 +866,7 @@ export const AdminDashboard: React.FC = () => {
                     </tr>
                   ) : (
                     filteredUsers.map((u) => {
-                      const isUserOwner = u.email.toLowerCase() === OWNER_EMAIL.toLowerCase();
+                      const isUserOwner = (u.email || '').toLowerCase() === OWNER_EMAIL.toLowerCase();
                       return (
                         <tr key={u.uid} className="hover:bg-surface-2/50 transition-colors">
                           <td className="p-3.5">
