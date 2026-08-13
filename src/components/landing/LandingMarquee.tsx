@@ -48,7 +48,7 @@ export const LandingMarquee: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-lf-ink py-16 sm:py-24"
+      className="relative overflow-hidden py-16 sm:py-24"
       aria-label="LogFlow AI in four words"
     >
       <div ref={trackRef} className="lf-marquee flex w-max items-center gap-10 sm:gap-16">

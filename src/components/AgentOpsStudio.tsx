@@ -247,7 +247,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               <ShieldCheck className="w-4 h-4 text-accent-rosegold-400 animate-pulse" />
               <span>Self-Healing Runtime & Multi-Agent Ops Center</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-rosegold-200 via-white to-rosegold-400 bg-clip-text text-transparent tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-display font-semibold bg-gradient-to-r from-rosegold-200 via-white to-rosegold-400 bg-clip-text text-transparent tracking-[-0.01em]">
               Self-Correcting Web Architecture & Agent Suite
             </h1>
             <p className="text-sm text-ink-secondary leading-relaxed font-sans">
@@ -268,8 +268,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
         </div>
 
         {/* System Telemetry Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-white/10">
-          <div className="bg-surface-1/60 rounded-xl p-3 border border-white/10 flex items-center gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-6 border-t border-hairline">
+          <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
               <Server className="w-5 h-5 text-emerald-400" />
             </div>
@@ -281,7 +281,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             </div>
           </div>
 
-          <div className="bg-surface-1/60 rounded-xl p-3 border border-white/10 flex items-center gap-3">
+          <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-accent-rosegold-500/10 border border-rosegold-500/30 flex items-center justify-center">
               <Zap className="w-5 h-5 text-accent-rosegold-400" />
             </div>
@@ -293,7 +293,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             </div>
           </div>
 
-          <div className="bg-surface-1/60 rounded-xl p-3 border border-white/10 flex items-center gap-3">
+          <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center">
               <Cpu className="w-5 h-5 text-blue-400" />
             </div>
@@ -305,7 +305,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
             </div>
           </div>
 
-          <div className="bg-surface-1/60 rounded-xl p-3 border border-white/10 flex items-center gap-3">
+          <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
             <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center">
               <Bot className="w-5 h-5 text-purple-400" />
             </div>
@@ -319,7 +319,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
         </div>
 
         {/* Quick Self-Healing Actions Bar */}
-        <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between gap-2 flex-wrap">
+        <div className="mt-4 pt-4 border-t border-hairline flex items-center justify-between gap-2 flex-wrap">
           <span className="text-[11px] font-mono text-ink-muted flex items-center gap-1.5 font-bold uppercase">
             <Wrench className="w-3.5 h-3.5 text-accent-rosegold-400" /> Quick Self-Correction Triggers:
           </span>
@@ -364,8 +364,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
       </div>
 
       {/* Main Mode Navigation Tabs */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3">
-        <div className="flex items-center gap-2 bg-surface-0 p-1 rounded-xl border border-white/10 flex-wrap">
+      <div className="flex items-center justify-between border-b border-hairline pb-3">
+        <div className="flex items-center gap-2 bg-surface-0 p-1 rounded-xl border border-hairline flex-wrap">
           <button
             onClick={() => setActiveTab('self-healing')}
             className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-colors ${
@@ -419,7 +419,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
       {activeTab === 'self-healing' && (
         <div className="space-y-4">
           {/* Category Filter Bar */}
-          <div className="flex items-center justify-between gap-4 flex-wrap bg-surface-0 p-3 rounded-xl border border-white/10">
+          <div className="flex items-center justify-between gap-4 flex-wrap bg-surface-0 p-3 rounded-xl border border-hairline">
             <div className="flex items-center gap-2">
               <Filter className="w-4 h-4 text-ink-muted" />
               <span className="text-xs font-semibold text-ink-secondary">Filter Category:</span>
@@ -430,7 +430,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-medium transition-colors ${
                     filterCategory === cat
                       ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-rosegold-500/40'
-                      : 'bg-surface-1 text-ink-muted hover:text-ink-secondary border border-white/10'
+                      : 'bg-surface-1 text-ink-muted hover:text-ink-secondary border border-hairline'
                   }`}
                 >
                   {cat}
@@ -445,7 +445,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
           {/* Event Cards */}
           <div className="space-y-3">
             {filteredEvents.length === 0 ? (
-              <div className="text-center py-12 bg-surface-0/60 rounded-2xl border border-white/10">
+              <div className="text-center py-12 bg-surface-0/60 rounded-2xl border border-hairline">
                 <ShieldCheck className="w-12 h-12 text-slate-600 mx-auto mb-3" />
                 <p className="text-sm text-ink-muted">No events found in this category.</p>
               </div>
@@ -453,7 +453,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               filteredEvents.map((evt) => (
                 <div 
                   key={evt.id}
-                  className="bg-surface-0/80 rounded-xl border border-white/10 hover:border-white/15 p-4 space-y-3 transition-colors"
+                  className="bg-surface-0/80 rounded-xl border border-hairline hover:border-white/15 p-4 space-y-3 transition-colors"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-2.5">
@@ -482,7 +482,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                   </p>
 
                   {evt.originalError && (
-                    <div className="bg-surface-1/90 rounded-lg p-2.5 border border-white/10 text-[11px] font-mono text-rose-300/90 overflow-x-auto">
+                    <div className="bg-surface-1/90 rounded-lg p-2.5 border border-hairline text-[11px] font-mono text-rose-300/90 overflow-x-auto">
                       <span className="text-slate-500 block text-[10px]">CAPTURED ERROR:</span>
                       {evt.originalError}
                     </div>
@@ -535,7 +535,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 className={`w-full text-left p-3 rounded-xl border transition-colors cursor-pointer flex items-start gap-3 ${
                   selectedAgent === agent.id
                     ? 'bg-accent-rosegold-500/10 border-rosegold-500/50 text-slate-100 shadow-md ring-1 ring-rosegold-500/30'
-                    : 'bg-surface-0/60 border-white/10 text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
+                    : 'bg-surface-0/60 border-hairline text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                 }`}
               >
                 <div className={`p-2 rounded-lg shrink-0 ${
@@ -557,8 +557,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
           </div>
 
           {/* Active Agent Interface */}
-          <div className="lg:col-span-8 bg-surface-0 rounded-2xl border border-white/10 p-5 space-y-4 shadow-xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="lg:col-span-8 bg-surface-0 rounded-2xl border border-hairline p-5 space-y-4 shadow-xl">
+            <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-accent-rosegold-500/20 border border-rosegold-500/40 flex items-center justify-center">
                   <Bot className="w-4 h-4 text-accent-rosegold-400" />
@@ -590,7 +590,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 value={agentInput}
                 onChange={(e) => setAgentInput(e.target.value)}
                 rows={4}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-rosegold-500 transition-colors"
+                className="w-full bg-surface-1 border border-hairline rounded-xl p-3 text-xs text-ink-secondary font-mono focus:outline-none focus:border-rosegold-500 transition-colors"
                 placeholder="Enter parameters or custom instruction for this agent..."
               />
             </div>
@@ -623,16 +623,16 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               </div>
 
               {isAgentRunning ? (
-                <div className="bg-surface-1 rounded-xl border border-white/10 p-8 text-center space-y-3">
+                <div className="bg-surface-1 rounded-xl border border-hairline p-8 text-center space-y-3">
                   <RefreshCw className="w-8 h-8 text-accent-rosegold-400 animate-spin mx-auto" />
                   <p className="text-xs text-accent-rosegold-300 font-mono">Agent analyzing parameters and executing reasoning pathway...</p>
                 </div>
               ) : agentOutput ? (
-                <div className="bg-surface-1 rounded-xl border border-white/10 p-4 text-xs font-mono text-ink-secondary whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
+                <div className="bg-surface-1 rounded-xl border border-hairline p-4 text-xs font-mono text-ink-secondary whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
                   {agentOutput}
                 </div>
               ) : (
-                <div className="bg-surface-1/50 rounded-xl border border-white/10 p-8 text-center text-slate-500 text-xs font-mono">
+                <div className="bg-surface-1/50 rounded-xl border border-hairline p-8 text-center text-slate-500 text-xs font-mono">
                   Click "Execute Agent" above to run this agent task.
                 </div>
               )}
@@ -644,7 +644,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
       {/* TAB 3: LEARNED OPERATIONAL RULES */}
       {activeTab === 'learned-rules' && (
         <div className="space-y-4">
-          <div className="bg-surface-0 rounded-2xl border border-white/10 p-6 space-y-4">
+          <div className="bg-surface-0 rounded-2xl border border-hairline p-6 space-y-4">
             <div className="flex items-center gap-3">
               <Terminal className="w-6 h-6 text-accent-rosegold-400" />
               <div>
@@ -661,12 +661,12 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 { title: 'Rule #4: Exponential Jitter Backoff', code: 'retryWithBackoff(3, 1500)', desc: 'Automatically retries transient API failures without crashing user interaction.' },
                 { title: 'Rule #5: Defensive Color Fallbacks', code: 'oklchToRgb() || "rgb(30,41,59)"', desc: 'Provides absolute safe color fallbacks if color evaluation fails.' }
               ].map((rule, idx) => (
-                <div key={idx} className="bg-surface-1/80 rounded-xl border border-white/10 p-4 space-y-2">
+                <div key={idx} className="bg-surface-1/80 rounded-xl border border-hairline p-4 space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-accent-rosegold-300">{rule.title}</span>
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Active</span>
                   </div>
-                  <div className="bg-surface-0 p-2 rounded text-[11px] font-mono text-ink-secondary border border-white/10">
+                  <div className="bg-surface-0 p-2 rounded text-[11px] font-mono text-ink-secondary border border-hairline">
                     {rule.code}
                   </div>
                   <p className="text-xs text-ink-muted">{rule.desc}</p>

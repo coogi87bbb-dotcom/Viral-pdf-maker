@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { LandingHero } from './LandingHero';
+import { ScrollFrameStage } from './ScrollFrameStage';
 import { LandingCost } from './LandingCost';
 import { LandingMarquee } from './LandingMarquee';
 import { LandingStats } from './LandingStats';
@@ -14,38 +15,46 @@ interface LandingPageProps {
 }
 
 /**
- * LogFlow AI landing page — "Editorial Luxury".
+ * LogFlow AI landing page — "Editorial Luxury" over a page-wide video.
  *
- * The page reads as alternating colour ZONES rather than one continuous
- * surface: ink hero -> bone -> ink marquee -> copper -> bone -> ink -> bone ->
- * ink footer. Each section also changes its alignment (left / right / split /
- * centred / full-bleed) and its entrance animation, so no two consecutive
- * sections are composed the same way.
+ * The video plays once across the entire page scroll (ScrollFrameStage,
+ * `position: fixed`), and EVERY section is transparent over it. There are no
+ * solid section backgrounds: rhythm comes from alignment, entrance
+ * animation, type scale and per-section scrim density instead of colour
+ * blocks.
  *
- * Unlike the previous implementation there is no page-wide fixed video
- * backdrop — the frame sequence is scoped to the hero (ScrollFrameStage),
- * which is what allows the solid bone/copper zones below it to exist at all.
+ * Two layout constraints that are load-bearing, not cosmetic:
+ * - This root must stay TRANSPARENT (no bg-*). The ink base colour lives on
+ *   ScrollFrameStage's own fixed wrapper. An opaque background here would
+ *   paint over the fixed canvas rendered behind it.
+ * - overflow-x must be CLIP, not HIDDEN. `hidden` computes overflow-y to
+ *   `auto`, making this a scroll container, which silently breaks every
+ *   `position: sticky` descendant (it previously took out the capabilities
+ *   thesis column).
  */
 export const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
+  const pageRef = useRef<HTMLDivElement>(null);
   useLandingScroll();
 
-  // Root uses overflow-x-CLIP, not -hidden. `hidden` computes overflow-y to
-  // `auto`, which makes this element a scroll container and silently breaks
-  // every `position: sticky` descendant — it took out both the hero's pinned
-  // video plate and the capabilities thesis column, which simply scrolled
-  // away. `clip` contains horizontal overflow without creating a scrollport.
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-lf-ink font-sans text-lf-on-ink selection:bg-lf-copper selection:text-lf-ink">
-      <main>
-        <LandingHero onGetStarted={onGetStarted} />
-        <LandingCost />
-        <LandingMarquee />
-        <LandingStats />
-        <LandingCapabilities />
-        <LandingMath />
-        <LandingCTA onGetStarted={onGetStarted} />
-      </main>
-      <LandingFooter />
+    <div
+      ref={pageRef}
+      className="relative min-h-screen overflow-x-clip font-sans text-lf-on-ink selection:bg-lf-copper selection:text-lf-ink"
+    >
+      <ScrollFrameStage scrollContainerRef={pageRef} />
+
+      <div className="relative z-10">
+        <main>
+          <LandingHero onGetStarted={onGetStarted} />
+          <LandingCost />
+          <LandingMarquee />
+          <LandingStats />
+          <LandingCapabilities />
+          <LandingMath />
+          <LandingCTA onGetStarted={onGetStarted} />
+        </main>
+        <LandingFooter />
+      </div>
     </div>
   );
 };

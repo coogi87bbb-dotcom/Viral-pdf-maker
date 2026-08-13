@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -22,17 +22,14 @@ const BASE =
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0';
 
 const VARIANTS: Record<ButtonVariant, string> = {
-  // Note: primary intentionally stays amber, not the Studio OS "rosegold"
-  // rebrand — this component's only two consumers (LandingHero.tsx,
-  // AuthModal.tsx) are the pre-login marketing/auth surfaces, which keep
-  // their own amber/gold identity by design (see CLAUDE.md Design System).
-  // The authenticated Studio OS app shell doesn't use this shared
-  // primitive for its primary actions; its chrome was rebranded to rosegold
-  // directly (StudioControls.tsx, App.tsx, etc.) without touching this file.
+  // Copper/rosegold primary — this is now its only real consumer
+  // (AuthModal.tsx; the landing page renders its own raw buttons rather
+  // than this primitive), so there's no pre-login amber surface left that
+  // depends on this staying amber. Matches the app shell's primary accent.
   primary:
-    'bg-gradient-to-r from-accent-amber-500 via-accent-amber-400 to-accent-amber-500 text-slate-950 ' +
-    'shadow-[var(--shadow-glow-amber)] hover:shadow-[0_14px_50px_rgba(245,158,11,0.45)] hover:brightness-105 ' +
-    'focus-visible:ring-accent-amber-400',
+    'bg-gradient-to-r from-accent-rosegold-500 via-accent-rosegold-400 to-accent-rosegold-500 text-slate-950 ' +
+    'shadow-[var(--shadow-glow-rosegold)] hover:shadow-[0_14px_50px_rgba(192,117,74,0.45)] hover:brightness-105 ' +
+    'focus-visible:ring-accent-rosegold-400',
   secondary:
     'bg-surface-2 text-ink-primary border border-accent-violet-500/30 ' +
     'shadow-[var(--shadow-elevated)] hover:border-accent-violet-500/60 hover:bg-surface-3 ' +
@@ -49,6 +46,9 @@ const SIZES: Record<ButtonSize, string> = {
   sm: 'text-xs px-3.5 py-2',
   md: 'text-xs px-5 py-3',
   lg: 'text-sm px-7 py-3.5',
+  // Clears the 44px touch-target minimum the smaller sizes don't quite
+  // reach; for a hero-scale primary action.
+  xl: 'text-sm px-9 py-4 min-h-[52px]',
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

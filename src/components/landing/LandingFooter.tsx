@@ -4,7 +4,7 @@ export const LandingFooter: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-lf-ink px-5 py-14 sm:px-8 sm:py-16 lg:px-12">
+    <footer className="relative px-5 py-14 sm:px-8 sm:py-16 lg:px-12">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col gap-8 border-t border-lf-on-ink/15 pt-10 sm:flex-row sm:items-end sm:justify-between">
           <div>

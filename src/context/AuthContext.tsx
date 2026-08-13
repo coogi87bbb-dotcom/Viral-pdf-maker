@@ -31,6 +31,11 @@ interface AuthContextType {
    * so AuthModal can show it instead of the failure silently dumping the
    * visitor back on the signed-out landing page with no explanation. */
   authError: string | null;
+  /** Dismisses a stale authError without signing anything in/out — lets the
+   * AuthModal "Back" control return to the landing page even when the
+   * modal was reached via a failed redirect (App.tsx's `showLanding &&
+   * !authError` guard would otherwise keep re-showing this modal). */
+  clearAuthError: () => void;
   signUp: (email: string, pass: string, displayName?: string) => Promise<void>;
   login: (email: string, pass: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
@@ -271,6 +276,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await signOut(auth);
     setUser(null);
     setUserProfile(null);
+    // Clear any stale redirect-sign-in error too. App.tsx gates the landing
+    // page on `showLanding && !authError`, so an error left over from an
+    // earlier failed Google redirect would pin the signed-out visitor to
+    // AuthModal forever, even after a clean sign-out.
+    setAuthError(null);
   };
 
   return (
@@ -281,6 +291,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loading,
         isOwner,
         authError,
+        clearAuthError: () => setAuthError(null),
         signUp,
         login,
         signInWithGoogle,

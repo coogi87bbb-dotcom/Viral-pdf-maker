@@ -47,7 +47,10 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
       size: Math.random() * 2.8 + 1.2,
       // Color type: Rose Gold vs Champagne
       type: i % 2 === 0 ? ('rosegold' as const) : ('champagne' as const),
-      rosegoldColor: i % 3 === 0 ? '#e38a72' : i % 3 === 1 ? '#d4735a' : '#efa898',
+      // Matches the current --color-accent-rosegold-{400,500,300} tokens
+      // (index.css) — kept as literals since this is a canvas 2D draw call,
+      // not a className, so it can't reference a CSS custom property.
+      rosegoldColor: i % 3 === 0 ? '#dda17a' : i % 3 === 1 ? '#c0754a' : '#eeb28f',
       champagneColor: i % 3 === 0 ? '#f3e6d3' : i % 3 === 1 ? '#e8d5b7' : '#f6ece0'
     }));
 
@@ -85,7 +88,7 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
       // 1. Ambient Liquid Rose Gold Spotlight Radial Gradient
       const spotlightRadius = 340;
       const spotGrad = ctx.createRadialGradient(mx, my, 10, mx, my, spotlightRadius);
-      spotGrad.addColorStop(0, 'rgba(212, 115, 90, 0.13)'); // Liquid Rose Gold Core
+      spotGrad.addColorStop(0, 'rgba(192, 117, 74, 0.13)'); // Liquid Rose Gold Core
       spotGrad.addColorStop(0.4, 'rgba(232, 213, 183, 0.06)'); // Champagne Rim
       spotGrad.addColorStop(1, 'rgba(5, 5, 7, 0)');
 
@@ -114,7 +117,7 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
         const distToFocusY = Math.abs(y - my);
         const influence = Math.max(0, 1 - distToFocusY / 250);
 
-        ctx.strokeStyle = `rgba(212, 115, 90, ${0.03 + influence * 0.07})`;
+        ctx.strokeStyle = `rgba(192, 117, 74, ${0.03 + influence * 0.07})`;
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(width, y);
@@ -130,7 +133,7 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
         const x2 = mx + Math.cos(angle) * width * 1.2;
         const y2 = my + Math.sin(angle) * height * 1.2;
 
-        ctx.strokeStyle = i % 2 === 0 ? 'rgba(212, 115, 90, 0.03)' : 'rgba(232, 213, 183, 0.025)';
+        ctx.strokeStyle = i % 2 === 0 ? 'rgba(192, 117, 74, 0.03)' : 'rgba(232, 213, 183, 0.025)';
         ctx.beginPath();
         ctx.moveTo(mx, my);
         ctx.lineTo(x2, y2);
@@ -165,7 +168,7 @@ export const Studio3DBackground: React.FC<Studio3DBackgroundProps> = ({
 
           if (pDist < 120) {
             const lineAlpha = (1 - pDist / 120) * 0.12 * alpha;
-            ctx.strokeStyle = p.type === 'rosegold' ? `rgba(212, 115, 90, ${lineAlpha})` : `rgba(232, 213, 183, ${lineAlpha})`;
+            ctx.strokeStyle = p.type === 'rosegold' ? `rgba(192, 117, 74, ${lineAlpha})` : `rgba(232, 213, 183, ${lineAlpha})`;
             ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(projX, projY);

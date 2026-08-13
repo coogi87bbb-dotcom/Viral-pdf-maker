@@ -13,52 +13,60 @@
  * CLAUDE.md's "html2canvas / OKLCH color-safety rule".
  */
 @theme {
-  /* Depth ladder: base page -> base card -> elevated -> floating/modal */
-  --color-surface-0: #080b11;
-  --color-surface-1: #0d1017;
-  --color-surface-2: #11141c;
-  --color-surface-3: #161a24;
+  /* Depth ladder: base page -> base card -> elevated -> floating/modal.
+   * Retuned toward the landing page's neutral near-black ink (#0a0b0d) —
+   * previously these carried a slightly blue-navy cast; now warm-neutral so
+   * signing in doesn't feel like switching products. Same relative lightness
+   * steps as before. */
+  --color-surface-0: #0a0b0d;
+  --color-surface-1: #0f1012;
+  --color-surface-2: #141519;
+  --color-surface-3: #1a1b20;
 
   /* Brand accents.
-   * Studio OS chrome primary is "rose gold" (a custom warm blush-copper
-   * metallic, distinct from Tailwind's stock rose/pink swatches) rather
-   * than amber/gold: a softer, boutique-luxury metallic instead of a flat
-   * gold accent. Amber tokens are kept for genuine semantic use
-   * (warning/caution states, and product features where the user selects
-   * "amber" as a document/teleprompter/mockup theme option) — those are
-   * deliberately NOT rose gold, see CLAUDE.md Design System. Violet stays
-   * reserved for AI-context panels, unchanged.
+   * Studio OS chrome primary is "rose gold" / "copper" (a custom warm
+   * blush-copper metallic, distinct from Tailwind's stock rose/pink
+   * swatches) rather than amber/gold — a boutique-luxury metallic instead of
+   * a flat gold accent. This ramp is now tied directly to the landing page's
+   * copper tokens (400=lf-copper-light, 500=lf-copper, 700=lf-copper-deep)
+   * so the app and the marketing site share one accent family top to bottom.
+   * Amber tokens are kept for genuine semantic use (warning/caution states,
+   * and product features where the user selects "amber" as a
+   * document/teleprompter/mockup theme option) — those are deliberately NOT
+   * rosegold, see CLAUDE.md Design System. Violet stays reserved for
+   * AI-context panels, unchanged.
    */
   --color-accent-rosegold-100: #fbe4e0;
   --color-accent-rosegold-200: #f6c9bf;
-  --color-accent-rosegold-300: #efa898;
-  --color-accent-rosegold-400: #e38a72;
-  --color-accent-rosegold-500: #d4735a;
-  --color-accent-rosegold-600: #b85c46;
-  --color-accent-rosegold-700: #954935;
-  --color-accent-rosegold-800: #73392a;
-  --color-accent-rosegold-900: #572b20;
-  --color-accent-rosegold-950: #351a13;
+  --color-accent-rosegold-300: #eeb28f;
+  --color-accent-rosegold-400: #dda17a;
+  --color-accent-rosegold-500: #c0754a;
+  --color-accent-rosegold-600: #a35f3c;
+  --color-accent-rosegold-700: #8a4f30;
+  --color-accent-rosegold-800: #6b3d26;
+  --color-accent-rosegold-900: #4f2d1c;
+  --color-accent-rosegold-950: #331d12;
 
-  /* Bare (non "accent-"-prefixed) mirror of the ramp above, same hex
-   * values. Studio OS chrome was originally written against Tailwind's
-   * built-in `amber-400`/`amber-500/20`/etc. shade classes (not the
-   * `accent-amber-*` token classes) in many places — those got mechanically
-   * renamed to `rosegold-400` etc. during the rebrand. Tailwind has no
-   * built-in "rosegold" swatch, so those classes only resolve if a bare
-   * `--color-rosegold-*` token exists here too; without this block they
-   * silently produce no CSS at all (invisible border/bg/shadow), which is
-   * exactly the breakage the first pass of this rebrand caused. */
+  /* Bare (non "accent-"-prefixed) mirror of the ramp above — MUST stay
+   * byte-identical to --color-accent-rosegold-* above. Studio OS chrome was
+   * originally written against Tailwind's built-in `amber-400`/`amber-500/20`
+   * etc. shade classes (not the `accent-amber-*` token classes) in many
+   * places — those got mechanically renamed to `rosegold-400` etc. during
+   * the rebrand. Tailwind has no built-in "rosegold" swatch, so those
+   * classes only resolve if a bare `--color-rosegold-*` token exists here
+   * too; without this block, or if the two ramps drift apart, roughly half
+   * the brand accents in the app silently vanish (no CSS emitted at all) —
+   * this has broken before. If you change one ramp, change both. */
   --color-rosegold-100: #fbe4e0;
   --color-rosegold-200: #f6c9bf;
-  --color-rosegold-300: #efa898;
-  --color-rosegold-400: #e38a72;
-  --color-rosegold-500: #d4735a;
-  --color-rosegold-600: #b85c46;
-  --color-rosegold-700: #954935;
-  --color-rosegold-800: #73392a;
-  --color-rosegold-900: #572b20;
-  --color-rosegold-950: #351a13;
+  --color-rosegold-300: #eeb28f;
+  --color-rosegold-400: #dda17a;
+  --color-rosegold-500: #c0754a;
+  --color-rosegold-600: #a35f3c;
+  --color-rosegold-700: #8a4f30;
+  --color-rosegold-800: #6b3d26;
+  --color-rosegold-900: #4f2d1c;
+  --color-rosegold-950: #331d12;
 
   --color-accent-amber-300: #fcd34d;
   --color-accent-amber-400: #fbbf24;
@@ -68,25 +76,53 @@
   --color-accent-violet-500: #8b5cf6;
   --color-accent-violet-600: #7c3aed;
 
+  /* Semantic status tokens — previously these three states were raw
+   * Tailwind `emerald-*`/`rose-*`/`red-*` classes with no token behind them
+   * (550+ raw emerald uses alone), so a palette change couldn't reach them.
+   * New usages should reach for these; existing raw usages migrate
+   * file-by-file rather than in one mechanical sweep, since "success green"
+   * meaning has to be verified per call site. */
+  --color-status-positive: #34d399;
+  --color-status-positive-dim: #0f2e22;
+  --color-status-danger: #f0576b;
+  --color-status-danger-dim: #2e1216;
+  --color-status-warning: var(--color-accent-amber-400);
+
+  /* Hairline edges. 849 uses of ad hoc `border-white/10`-style opacity
+   * borders had no token behind them; this is that value as an 8-digit hex
+   * (alpha-in-hex, not color-mix()) so it stays within the html2canvas
+   * colour-safety rule. */
+  --color-hairline: #ffffff1f;
+  --color-hairline-strong: #ffffff33;
+
   /* Text scale, derived from the existing #f1f5f9 base */
   --color-ink-primary: #f1f5f9;
   --color-ink-secondary: #cbd5e1;
   --color-ink-muted: #7c869b;
 
-  /* Typography pairing: display/serif for headings, sans for body/UI */
-  --font-display: 'Newsreader', 'Playfair Display', serif;
+  /* Typography pairing: display/serif for headings, sans for body/UI.
+   * Cormorant Garamond now leads — the same high-contrast editorial serif
+   * as the landing page's --font-editorial — so headings read as one
+   * typographic system across the marketing site and the signed-in app. */
+  --font-display: 'Cormorant Garamond', 'Playfair Display', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Layered, color-tinted shadows — replace flat shadow-md/shadow-2xl */
+  /* Layered, color-tinted shadows — replace flat shadow-md/shadow-2xl.
+   * Elevated/floating retuned from amber/violet tints to copper, matching
+   * the new primary accent; --shadow-panel is new, for the editorial panel
+   * treatment (MotionPanel3D and similar large surfaces). */
   --shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.4),
-    0 12px 32px -8px rgba(245, 158, 11, 0.12),
+    0 12px 32px -8px rgba(192, 117, 74, 0.14),
     0 24px 64px -16px rgba(0, 0, 0, 0.55);
   --shadow-floating: 0 2px 4px rgba(0, 0, 0, 0.45),
-    0 20px 48px -12px rgba(139, 92, 246, 0.16),
+    0 20px 48px -12px rgba(192, 117, 74, 0.16),
     0 32px 80px -20px rgba(0, 0, 0, 0.6);
+  --shadow-panel: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 50px -20px rgba(0, 0, 0, 0.65),
+    0 8px 24px -8px rgba(192, 117, 74, 0.1);
   --shadow-glow-amber: 0 10px 40px rgba(245, 158, 11, 0.35);
-  --shadow-glow-rosegold: 0 10px 40px rgba(212, 115, 90, 0.35);
+  --shadow-glow-rosegold: 0 10px 40px rgba(192, 117, 74, 0.35);
   --shadow-glow-violet: 0 10px 40px rgba(139, 92, 246, 0.35);
 
   /* ── LogFlow AI landing page: "Editorial Luxury" zone palette ──────────
@@ -247,6 +283,37 @@
   line-height: 0.9;
   letter-spacing: -0.03em;
   font-variant-numeric: tabular-nums;
+}
+
+/* Localised legibility pool for dense/small copy sitting directly on the
+   page-wide video. Every landing section is transparent, and .text-legible's
+   glyph shadow alone is not enough for small text crossing a high-contrast
+   part of the footage (the PERA INC wordmark and the skeleton in particular).
+   This lays a heavily-feathered radial of shade BEHIND the block — it has no
+   edge, no border and no fill boundary, so it reads as the video simply
+   being darker there rather than as a card. */
+.lf-scrim {
+  position: relative;
+  isolation: isolate;
+}
+.lf-scrim::before {
+  content: '';
+  position: absolute;
+  inset: -1.5rem -2.25rem;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 11, 13, 0.9) 0%,
+    rgba(10, 11, 13, 0.76) 48%,
+    rgba(10, 11, 13, 0.34) 70%,
+    rgba(10, 11, 13, 0) 84%
+  );
+  /* The gradient alone still resolved to a faintly visible band on wide,
+     short blocks. Blurring the pseudo-element (it holds no content, only
+     the gradient) removes any perceptible boundary, so the result reads as
+     the footage being darker there rather than as a panel. */
+  filter: blur(24px);
 }
 
 /* Hairline rule used to separate editorial blocks instead of card borders. */

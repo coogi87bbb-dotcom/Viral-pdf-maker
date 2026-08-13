@@ -13,6 +13,7 @@ import { GuidedStepper } from './components/GuidedStepper';
 import { DocEditorModal } from './components/DocEditorModal';
 import { Studio3DBackground } from './components/Studio3DBackground';
 import { MotionPanel3D } from './components/MotionPanel3D';
+import { ModeTab } from './components/ModeTab';
 import { LandingPage } from './components/landing/LandingPage';
 
 // Viral OS Components
@@ -59,6 +60,21 @@ function MainWorkspace() {
       setAppMode('pdf-studio');
     }
   }, [appMode, user]);
+
+  // Signing out returns to the marketing landing page rather than dumping the
+  // visitor on the bare auth modal. `showLanding` is only ever flipped false
+  // by the landing CTA, so without this it stayed false for the rest of the
+  // session and every sign-out landed on AuthModal.
+  //
+  // Deliberately a separate effect keyed on [user, loading], and `showLanding`
+  // is NOT in the dependency array — adding it would fight the landing CTA and
+  // loop. Gated on `!loading` so a transient null during a token refresh or a
+  // signInWithRedirect round-trip doesn't re-arm the landing mid-flight.
+  useEffect(() => {
+    if (!user && !loading) {
+      setShowLanding(true);
+    }
+  }, [user, loading]);
 
   // Document State - defaults to the Creator Monetization Playbook sample
   const [document, setDocument] = useState<DocumentData>(SAMPLE_DOCUMENTS[0].doc);
@@ -217,7 +233,7 @@ function MainWorkspace() {
     if (showLanding && !authError) {
       return <LandingPage onGetStarted={() => setShowLanding(false)} />;
     }
-    return <AuthModal />;
+    return <AuthModal onBack={() => setShowLanding(true)} />;
   }
 
   return (
@@ -226,7 +242,7 @@ function MainWorkspace() {
       <Studio3DBackground intensity="medium" className="fixed inset-0 z-0 opacity-90" />
 
       {/* GLOBAL TOP NAVIGATION BAR */}
-      <header className="sticky top-0 z-50 bg-surface-1/90 backdrop-blur-xl border-b border-white/10 px-4 py-2.5 shadow-[var(--shadow-elevated)]">
+      <header className="sticky top-0 z-50 bg-surface-1/90 backdrop-blur-xl border-b border-hairline px-4 py-2.5 shadow-[var(--shadow-elevated)]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
           {/* Logo & Platform Title */}
           <div className="flex items-center gap-3">
@@ -237,126 +253,67 @@ function MainWorkspace() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-sm tracking-wider text-white uppercase font-display">VIRAL STUDIO OS</span>
+                <span className="font-display font-semibold text-base tracking-[-0.01em] text-white">LogFlow<span className="text-accent-rosegold-400"> AI</span></span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-accent-rosegold-500/10 text-accent-rosegold-300 font-bold border border-accent-rosegold-500/20">
-                  3D EXECUTIVE
+                  STUDIO
                 </span>
               </div>
               <p className="text-[10px] text-ink-muted font-normal">High-DPI Publishing, 3D Book Mockups & Creator Workspaces</p>
             </div>
           </div>
 
-          {/* MAIN APP MODE SWITCHER TABS - EXECUTIVE STYLING */}
-          <div className="flex flex-wrap items-center justify-center bg-surface-0/90 border border-white/10 p-1 rounded-xl gap-1 shadow-inner">
-            <button
+          {/* MAIN APP MODE SWITCHER TABS */}
+          <div className="flex flex-wrap items-center justify-center bg-surface-0/90 border border-hairline p-1 rounded-xl gap-1 shadow-inner">
+            <ModeTab
+              icon={FileText}
+              label="PDF & Mockup Studio"
+              active={appMode === 'pdf-studio'}
               onClick={() => setAppMode('pdf-studio')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'pdf-studio'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <FileText className={`h-3.5 w-3.5 ${appMode === 'pdf-studio' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>PDF & Mockup Studio</span>
-            </button>
-
-            <button
+            />
+            <ModeTab
+              icon={Flame}
+              label="Viral OS Engine"
+              badge="13 AI Tools"
+              active={appMode === 'viral-os'}
               onClick={() => setAppMode('viral-os')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'viral-os'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <Flame className={`h-3.5 w-3.5 ${appMode === 'viral-os' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>Viral OS Engine</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'viral-os' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-surface-1 text-accent-rosegold-400 border border-white/10'
-              }`}>
-                13 AI Tools
-              </span>
-            </button>
-
-            <button
+            />
+            <ModeTab
+              icon={Zap}
+              label="GigScale Engine"
+              badge="Agency OS"
+              active={appMode === 'gig-scale'}
               onClick={() => setAppMode('gig-scale')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'gig-scale'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <Zap className={`h-3.5 w-3.5 ${appMode === 'gig-scale' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>GigScale Engine</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'gig-scale' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-surface-1 text-ink-muted border border-white/10'
-              }`}>
-                Agency OS
-              </span>
-            </button>
-
-            <button
+            />
+            <ModeTab
+              icon={Package}
+              label="Digital Kit Studio"
+              badge="Kit Builder"
+              active={appMode === 'digital-kit'}
               onClick={() => setAppMode('digital-kit')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'digital-kit'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <Package className={`h-3.5 w-3.5 ${appMode === 'digital-kit' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>Digital Kit Studio</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'digital-kit' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-surface-1 text-ink-muted border border-white/10'
-              }`}>
-                Kit Builder
-              </span>
-            </button>
-
-            <button
+            />
+            <ModeTab
+              icon={Bot}
+              label="AI Agent Ops"
+              badge="Self-Healing"
+              badgeVariant="positive"
+              active={appMode === 'agent-ops'}
               onClick={() => setAppMode('agent-ops')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'agent-ops'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <Bot className={`h-3.5 w-3.5 ${appMode === 'agent-ops' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>AI Agent Ops</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'agent-ops' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
-              }`}>
-                Self-Healing
-              </span>
-            </button>
-
-            <button
+            />
+            <ModeTab
+              icon={Handshake}
+              label="Deal Closer"
+              badge="7 RE Tools"
+              active={appMode === 'deal-closer'}
               onClick={() => setAppMode('deal-closer')}
-              className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                appMode === 'deal-closer'
-                  ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                  : 'text-ink-muted hover:text-ink-primary hover:bg-surface-2'
-              }`}
-            >
-              <Handshake className={`h-3.5 w-3.5 ${appMode === 'deal-closer' ? 'text-slate-950' : 'text-accent-rosegold-400'}`} />
-              <span>Deal Closer</span>
-              <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded font-bold hidden sm:inline ${
-                appMode === 'deal-closer' ? 'bg-slate-950 text-accent-rosegold-300' : 'bg-surface-1 text-ink-muted border border-white/10'
-              }`}>
-                7 RE Tools
-              </span>
-            </button>
-
+            />
             {user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() && (
-              <button
+              <ModeTab
+                icon={Crown}
+                label="Master Admin"
+                emphasized
+                active={appMode === 'owner-admin'}
                 onClick={() => setAppMode('owner-admin')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 ${
-                  appMode === 'owner-admin'
-                    ? 'bg-accent-rosegold-400 text-slate-950 shadow-[var(--shadow-glow-rosegold)]'
-                    : 'bg-surface-1 text-accent-rosegold-300 border border-accent-rosegold-500/30 hover:bg-surface-2'
-                }`}
-              >
-                <Crown className="h-3.5 w-3.5 text-accent-rosegold-400" />
-                <span>Master Admin</span>
-              </button>
+              />
             )}
           </div>
 
@@ -367,15 +324,15 @@ function MainWorkspace() {
                 {userProfile?.displayName || user.displayName || user.email?.split('@')[0] || 'VIP Member'}
               </span>
               <span className="text-[10px] text-accent-rosegold-400/90 font-mono flex items-center justify-end gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-status-positive animate-pulse" />
                 <span>Connected</span>
               </span>
             </div>
 
             <button
-              onClick={logout}
+              onClick={() => logout()}
               title="Sign Out of Creator Platform"
-              className="px-3 py-1.5 rounded-lg bg-surface-1/80 hover:bg-surface-2 border border-white/10 text-ink-secondary hover:text-white transition-colors active:scale-[0.98] flex items-center gap-1.5 text-xs font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
+              className="px-3 py-1.5 rounded-lg bg-surface-1/80 hover:bg-surface-2 border border-hairline text-ink-secondary hover:text-white transition-colors active:scale-[0.98] flex items-center gap-1.5 text-xs font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
             >
               <LogOut className="h-3.5 w-3.5 text-ink-muted" />
               <span className="hidden md:inline font-sans text-xs">Sign Out</span>

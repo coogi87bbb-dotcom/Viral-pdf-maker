@@ -70,7 +70,7 @@ export const MotionPanel3D: React.FC<MotionPanel3DProps> = ({
         }}
         className={`${
           frosted
-            ? 'bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border border-slate-800/80 shadow-[var(--shadow-floating)] ring-1 ring-white/5 rounded-2xl p-1.5 sm:p-2.5'
+            ? 'bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border border-hairline shadow-[var(--shadow-panel)] ring-1 ring-white/5 rounded-2xl p-1.5 sm:p-2.5'
             : ''
         } ${className}`}
         style={{ transformStyle: 'preserve-3d' }}

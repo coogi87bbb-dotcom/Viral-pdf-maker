@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
   const tabs = baseTabs;
 
   return (
-    <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 text-ink-primary shadow-[var(--shadow-elevated)]">
+    <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary shadow-[var(--shadow-elevated)]">
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-surface-0 via-surface-1 to-surface-0 border-b border-accent-rosegold-500/20 px-4 py-1.5 text-xs font-medium text-accent-rosegold-200 text-center flex items-center justify-between">
         <div className="flex items-center gap-2 mx-auto sm:mx-0">
@@ -116,7 +116,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                   logout();
                 }
               }}
-              className={`px-2 py-0.5 rounded bg-surface-0 hover:bg-rose-600 text-ink-secondary hover:text-white transition-colors flex items-center gap-1 border border-white/10 ${FOCUS_RING}`}
+              className={`px-2 py-0.5 rounded bg-surface-0 hover:bg-rose-600 text-ink-secondary hover:text-white transition-colors flex items-center gap-1 border border-hairline ${FOCUS_RING}`}
             >
               <LogOut className="h-3 w-3" />
               <span>Sign Out</span>
@@ -138,7 +138,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-xl font-extrabold tracking-[-0.03em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent">
+                  <h1 className="text-xl font-semibold tracking-[-0.02em] font-display bg-gradient-to-r from-white via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent">
                     ViralOS
                   </h1>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent-rosegold-500/20 text-accent-rosegold-300 border border-accent-rosegold-500/30">
@@ -152,7 +152,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
             </div>
 
             {/* Platform Badges */}
-            <div className="hidden xl:flex items-center gap-1.5 bg-surface-0/80 p-1.5 rounded-lg border border-white/10">
+            <div className="hidden xl:flex items-center gap-1.5 bg-surface-0/80 p-1.5 rounded-lg border border-hairline">
               <span title="X / Twitter" className="p-1.5 rounded bg-sky-500/10 text-sky-400 hover:bg-sky-500/20 transition-colors"><Twitter className="h-3.5 w-3.5" /></span>
               <span title="Instagram" className="p-1.5 rounded bg-accent-rosegold-500/10 text-accent-rosegold-400 hover:bg-accent-rosegold-500/20 transition-colors"><Instagram className="h-3.5 w-3.5" /></span>
               <span title="TikTok" className="p-1.5 rounded bg-cyan-500/10 text-cyan-400 hover:bg-cyan-500/20 transition-colors"><Video className="h-3.5 w-3.5" /></span>
@@ -175,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                     logout();
                   }
                 }}
-                className={`sm:hidden px-3 py-2 rounded-xl bg-surface-0 border border-white/10 text-xs font-bold text-ink-secondary flex items-center gap-1 cursor-pointer active:scale-[0.98] ${FOCUS_RING}`}
+                className={`sm:hidden px-3 py-2 rounded-xl bg-surface-0 border border-hairline text-xs font-bold text-ink-secondary flex items-center gap-1 cursor-pointer active:scale-[0.98] ${FOCUS_RING}`}
               >
                 <LogOut className="h-3.5 w-3.5 text-accent-violet-400" />
                 <span>Exit</span>
@@ -193,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="mt-4 flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none border-t border-white/10 pt-3">
+        <nav className="mt-4 flex items-center gap-1 overflow-x-auto pb-1 scrollbar-none border-t border-hairline pt-3">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -213,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
                   className={`text-[10px] px-1.5 py-0.5 rounded-full ${
                     isActive
                       ? 'bg-slate-950/20 text-slate-950 font-bold'
-                      : 'bg-surface-2 text-ink-muted border border-white/10'
+                      : 'bg-surface-2 text-ink-muted border border-hairline'
                   }`}
                 >
                   {tab.badge}

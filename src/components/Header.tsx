@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSplitScreen
 }) => {
   return (
-    <header id="app-header" className="bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-white/10 text-ink-primary sticky top-0 z-30 shadow-[var(--shadow-elevated)]">
+    <header id="app-header" className="bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary sticky top-0 z-30 shadow-[var(--shadow-elevated)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand & Document Name */}
         <div className="flex items-center space-x-3 min-w-0">
@@ -40,13 +40,13 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div className="min-w-0">
             <div className="flex items-center space-x-2">
-              <span className="font-extrabold text-base sm:text-lg bg-gradient-to-r from-accent-rosegold-300 via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent tracking-tight">
+              <span className="font-display font-semibold text-lg sm:text-xl bg-gradient-to-r from-accent-rosegold-300 via-slate-100 to-accent-rosegold-200 bg-clip-text text-transparent tracking-tight">
                 DocCraft
               </span>
               <span className="text-xs px-2 py-0.5 rounded-full bg-surface-0 text-accent-rosegold-300 border border-accent-rosegold-500/30 font-semibold font-mono">
                 Studio PDF
               </span>
-              <span className="hidden md:inline-flex items-center text-[10px] px-2 py-0.5 rounded-full bg-surface-0 text-ink-secondary border border-white/10 font-mono">
+              <span className="hidden md:inline-flex items-center text-[10px] px-2 py-0.5 rounded-full bg-surface-0 text-ink-secondary border border-hairline font-mono">
                 <CheckCircle className="w-3 h-3 mr-1 text-accent-rosegold-400" />
                 Drive Synced
               </span>
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Center Tabs: Studio Canvas vs Gumroad / Pinterest Mockup */}
-        <div className="flex items-center bg-surface-0 p-1 rounded-xl border border-white/10 space-x-1 shadow-inner">
+        <div className="flex items-center bg-surface-0 p-1 rounded-xl border border-hairline space-x-1 shadow-inner">
           <button
             id="tab-canvas-btn"
             onClick={() => setActiveTab('canvas')}
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({
             className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-colors active:scale-[0.98] ${FOCUS_RING} ${
               isSplitScreen
                 ? 'bg-accent-rosegold-500/20 text-accent-rosegold-300 border-accent-rosegold-400/60 shadow-[var(--shadow-elevated)] ring-1 ring-accent-rosegold-400/30'
-                : 'bg-surface-1 hover:bg-surface-2 border-white/10 text-ink-secondary'
+                : 'bg-surface-1 hover:bg-surface-2 border-hairline text-ink-secondary'
             }`}
             title="Toggle Side-by-Side Split Screen View"
           >
@@ -118,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="import-doc-btn"
             onClick={onOpenImporter}
-            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-surface-1 hover:bg-surface-2 border border-white/10 text-xs text-ink-secondary font-medium transition-colors active:scale-[0.98] ${FOCUS_RING}`}
+            className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-surface-1 hover:bg-surface-2 border border-hairline text-xs text-ink-secondary font-medium transition-colors active:scale-[0.98] ${FOCUS_RING}`}
             title="Import from Google Docs, Google Drive, or plain text"
           >
             <FileText className="w-3.5 h-3.5 text-accent-rosegold-400" />

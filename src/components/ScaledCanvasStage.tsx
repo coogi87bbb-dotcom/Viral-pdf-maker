@@ -129,12 +129,12 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
   const effectiveScale = computeScale();
 
   return (
-    <div className={`flex-1 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-white/10 rounded-3xl shadow-2xl ${className}`}>
+    <div className={`flex-1 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-hairline rounded-3xl shadow-2xl ${className}`}>
       {/* Control Toolbar Header */}
-      <div className="px-3 py-2 bg-surface-1/90 border-b border-white/10 flex flex-wrap items-center justify-between gap-2 shrink-0 z-10 backdrop-blur-md">
+      <div className="px-3 py-2 bg-surface-1/90 border-b border-hairline flex flex-wrap items-center justify-between gap-2 shrink-0 z-10 backdrop-blur-md">
         {/* Device Viewport Mode Selector */}
         <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-1 bg-surface-0 border border-white/10 p-1 rounded-xl text-xs">
+          <div className="flex items-center space-x-1 bg-surface-0 border border-hairline p-1 rounded-xl text-xs">
             <button
               type="button"
               onClick={() => setDeviceMode('desktop')}
@@ -188,7 +188,7 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
         {/* Zoom & View Options */}
         <div className="flex items-center space-x-2">
           {deviceMode === 'desktop' && (
-            <div className="flex items-center space-x-1 bg-surface-0 border border-white/10 p-1 rounded-xl text-xs">
+            <div className="flex items-center space-x-1 bg-surface-0 border border-hairline p-1 rounded-xl text-xs">
               <button
                 type="button"
                 onClick={() => {
@@ -292,14 +292,14 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
         {deviceMode === 'mobile' ? (
           /* Real-time Smartphone Live Preview Mockup Frame */
           <div className="flex flex-col items-center my-2 space-y-3">
-            <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-white/10 text-xs text-ink-secondary">
+            <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-hairline text-xs text-ink-secondary">
               <Eye className="w-3.5 h-3.5 text-accent-rosegold-400 animate-pulse" />
               <span className="font-semibold text-[11px]">Smartphone Live Reader View</span>
               <span className="text-[10px] text-ink-muted">(Scroll inside screen)</span>
             </div>
 
             {/* Smartphone Device Shell */}
-            <div className="w-[375px] h-[720px] bg-surface-1 border-[8px] border-white/10 rounded-[44px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] relative flex flex-col overflow-hidden ring-1 ring-slate-700/50">
+            <div className="w-[375px] h-[720px] bg-surface-1 border-[8px] border-hairline rounded-[44px] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] relative flex flex-col overflow-hidden ring-1 ring-slate-700/50">
               {/* Top Speaker / Dynamic Island Notch */}
               <div className="bg-surface-1 pt-2 pb-1 px-6 flex items-center justify-between z-30 shrink-0 text-white select-none">
                 <span className="text-[11px] font-extrabold tracking-tight pl-2">9:41</span>
@@ -344,12 +344,12 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
         ) : deviceMode === 'tablet' ? (
           /* Tablet E-Reader Viewport */
           <div className="flex flex-col items-center my-2 space-y-3">
-            <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-white/10 text-xs text-ink-secondary">
+            <div className="text-center flex items-center space-x-2 bg-surface-1/80 px-3 py-1 rounded-full border border-hairline text-xs text-ink-secondary">
               <Tablet className="w-3.5 h-3.5 text-accent-rosegold-400" />
               <span className="font-semibold text-[11px]">Tablet & E-Reader Live View</span>
             </div>
 
-            <div className="w-[560px] min-h-[750px] bg-surface-1 border-[10px] border-white/10 rounded-[32px] shadow-2xl relative flex flex-col overflow-hidden ring-1 ring-slate-700/50 p-3">
+            <div className="w-[560px] min-h-[750px] bg-surface-1 border-[10px] border-hairline rounded-[32px] shadow-2xl relative flex flex-col overflow-hidden ring-1 ring-slate-700/50 p-3">
               <div className="w-2 h-2 bg-slate-700 rounded-full mx-auto mb-2 shrink-0" />
               <div className="flex-1 bg-surface-0 rounded-2xl overflow-y-auto overflow-x-hidden p-2 flex justify-center items-start">
                 <div

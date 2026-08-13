@@ -33,7 +33,17 @@ export function useLandingScroll(): void {
     if (!pointerQuery.matches) {
       import('lenis').then(({ default: Lenis }) => {
         if (cancelled) return;
-        lenis = new Lenis({ duration: 1.2, lerp: 0.1, smoothWheel: true, syncTouch: false });
+        // Longer duration + lower lerp = a heavier, more gliding scroll.
+        // The custom easing is a standard exponential ease-out: it kills the
+        // abrupt stop at the end of a wheel gesture, which is most of what
+        // reads as "jumpy" on a scroll-scrubbed page.
+        lenis = new Lenis({
+          duration: 1.5,
+          lerp: 0.075,
+          easing: (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          syncTouch: false,
+        });
         const raf = (time: number) => {
           lenis?.raf(time);
           rafId = requestAnimationFrame(raf);

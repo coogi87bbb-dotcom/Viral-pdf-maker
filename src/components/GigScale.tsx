@@ -318,16 +318,16 @@ GigScale VIP Creator`);
   return (
     <div className="space-y-6 text-slate-100">
       {/* TOP BRANDING & SUITE MODE CONTROL BAR */}
-      <div className="flex flex-col gap-4 bg-surface-0/90 p-4 sm:p-5 rounded-3xl border border-white/10 shadow-2xl">
+      <div className="flex flex-col gap-4 bg-surface-0/90 p-4 sm:p-5 rounded-3xl border border-hairline shadow-[var(--shadow-panel)]">
         <div className="flex flex-wrap items-center justify-between gap-4">
           {/* Left Branding */}
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-2xl bg-gradient-to-br from-rosegold-500 to-orange-600 text-slate-950 shadow-lg shadow-orange-500/30 flex items-center justify-center">
+            <div className="p-2.5 rounded-2xl bg-gradient-to-br from-accent-rosegold-500 to-accent-rosegold-600 text-slate-950 shadow-[var(--shadow-glow-rosegold)] flex items-center justify-center">
               <Zap className="h-6 w-6 text-slate-950 fill-slate-950" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-black text-white tracking-tight">GigScale</h1>
+                <h1 className="text-xl sm:text-2xl font-display font-semibold text-white tracking-[-0.01em]">GigScale</h1>
                 <span className="px-2.5 py-0.5 rounded-full bg-accent-rosegold-500/10 border border-rosegold-500/40 text-accent-rosegold-400 font-extrabold text-[10px] tracking-wider uppercase flex items-center gap-1 shadow-sm">
                   👑 VERIFIED SUITE
                 </span>
@@ -339,7 +339,7 @@ GigScale VIP Creator`);
           </div>
 
           {/* Center/Right Mode Pills */}
-          <div className="flex items-center bg-surface-1 border border-white/10 p-1 rounded-2xl gap-1">
+          <div className="flex items-center bg-surface-1 border border-hairline p-1 rounded-2xl gap-1">
             <button
               onClick={() => {
                 setSuiteMode('full-os');
@@ -388,23 +388,23 @@ GigScale VIP Creator`);
           </div>
 
           {/* User Account Pill */}
-          <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-1 border border-white/10 text-xs text-ink-secondary font-mono">
+          <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-surface-1 border border-hairline text-xs text-ink-secondary font-mono">
             <span className="text-accent-rosegold-400 font-bold">{isOwner ? '👑' : '👤'}</span>
             <span className="truncate max-w-[150px]">{user?.email || 'Guest Client'}</span>
-            <button onClick={logout} title="Sign Out">
+            <button onClick={() => logout()} title="Sign Out">
               <LogOut className="h-3.5 w-3.5 text-slate-500 hover:text-ink-secondary cursor-pointer ml-1" />
             </button>
           </div>
         </div>
 
         {/* SUB-NAV BUTTONS ROW */}
-        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-white/10">
+        <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-hairline">
           <button
             onClick={() => setActiveSubTab('overview')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
               activeSubTab === 'overview'
                 ? 'bg-accent-rosegold-500/10 border-2 border-rosegold-500 text-accent-rosegold-300 shadow-md shadow-rosegold-500/10'
-                : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
             <BarChart className="h-4 w-4 text-accent-rosegold-400" />
@@ -417,7 +417,7 @@ GigScale VIP Creator`);
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                 activeSubTab === 'roadmap'
                   ? 'bg-accent-rosegold-500/10 border-2 border-rosegold-500 text-accent-rosegold-300 shadow-md'
-                  : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                  : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
               }`}
             >
               <Crown className="h-4 w-4 text-accent-rosegold-400" />
@@ -428,7 +428,7 @@ GigScale VIP Creator`);
           {suiteMode !== 'buyer' && (
             <button
               onClick={() => setShowProfitAuditModal(true)}
-              className="px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 bg-surface-1 border border-white/10 text-ink-secondary hover:text-white hover:border-white/15 cursor-pointer transition-colors"
+              className="px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 bg-surface-1 border border-hairline text-ink-secondary hover:text-white hover:border-white/15 cursor-pointer transition-colors"
             >
               <Sparkles className="h-4 w-4 text-emerald-400" />
               <span>10x Profit Audit</span>
@@ -440,7 +440,7 @@ GigScale VIP Creator`);
             className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
               activeSubTab === 'packages'
                 ? 'bg-emerald-500/20 border border-emerald-500 text-emerald-300'
-                : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
             <Layers className="h-4 w-4" />
@@ -452,7 +452,7 @@ GigScale VIP Creator`);
             className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
               activeSubTab === 'pipeline'
                 ? 'bg-emerald-500/20 border border-emerald-500 text-emerald-300'
-                : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
             <Briefcase className="h-4 w-4" />
@@ -464,7 +464,7 @@ GigScale VIP Creator`);
             className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
               activeSubTab === 'ai-pitch'
                 ? 'bg-emerald-500/20 border border-emerald-500 text-emerald-300'
-                : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
             <Sparkles className="h-4 w-4 text-indigo-400" />
@@ -477,7 +477,7 @@ GigScale VIP Creator`);
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                 activeSubTab === 'audit-deck'
                   ? 'bg-indigo-500/20 border border-indigo-500 text-indigo-300'
-                  : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                  : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
               }`}
             >
               <FileSpreadsheet className="h-4 w-4 text-indigo-400" />
@@ -492,7 +492,7 @@ GigScale VIP Creator`);
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                   activeSubTab === 'outreach'
                     ? 'bg-emerald-500/20 border border-emerald-500 text-emerald-300'
-                    : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                    : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
                 }`}
               >
                 <Mail className="h-4 w-4" />
@@ -504,7 +504,7 @@ GigScale VIP Creator`);
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                   activeSubTab === 'calculator'
                     ? 'bg-emerald-500/20 border border-emerald-500 text-emerald-300'
-                    : 'bg-surface-1 text-ink-muted border border-white/10 hover:text-white'
+                    : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
                 }`}
               >
                 <TrendingUp className="h-4 w-4" />
@@ -611,7 +611,7 @@ GigScale VIP Creator`);
         <div className="space-y-6">
           {/* Key Metrics Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="p-5 rounded-2xl bg-surface-1/90 border border-white/10 space-y-1">
+            <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Total Gig Revenue</span>
               <div className="flex items-baseline justify-between">
                 <span className="text-2xl font-black text-emerald-400">${totalEarnings.toLocaleString()}</span>
@@ -619,7 +619,7 @@ GigScale VIP Creator`);
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-surface-1/90 border border-white/10 space-y-1">
+            <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Active Client Orders</span>
               <div className="flex items-baseline justify-between">
                 <span className="text-2xl font-black text-accent-rosegold-400">{activeOrdersCount}</span>
@@ -627,7 +627,7 @@ GigScale VIP Creator`);
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-surface-1/90 border border-white/10 space-y-1">
+            <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Avg. Order Value</span>
               <div className="flex items-baseline justify-between">
                 <span className="text-2xl font-black text-indigo-400">${avgOrderValue}</span>
@@ -635,7 +635,7 @@ GigScale VIP Creator`);
               </div>
             </div>
 
-            <div className="p-5 rounded-2xl bg-surface-1/90 border border-white/10 space-y-1">
+            <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Client Satisfaction</span>
               <div className="flex items-baseline justify-between">
                 <span className="text-2xl font-black text-rose-400">4.9 / 5.0</span>
@@ -649,7 +649,7 @@ GigScale VIP Creator`);
 
           {/* Quick Action Matrix */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+            <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Briefcase className="h-4 w-4 text-emerald-400" />
@@ -666,7 +666,7 @@ GigScale VIP Creator`);
 
               <div className="space-y-3">
                 {gigs.map(gig => (
-                  <div key={gig.id} className="p-3.5 rounded-xl bg-surface-0 border border-white/10 flex items-center justify-between gap-3">
+                  <div key={gig.id} className="p-3.5 rounded-xl bg-surface-0 border border-hairline flex items-center justify-between gap-3">
                     <div className="space-y-0.5">
                       <h4 className="text-xs font-bold text-ink-secondary line-clamp-1">{gig.title}</h4>
                       <p className="text-[10px] font-mono text-slate-500">{gig.category} • {gig.salesCount} Completed</p>
@@ -683,7 +683,7 @@ GigScale VIP Creator`);
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+            <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
                   <Clock className="h-4 w-4 text-accent-rosegold-400" />
@@ -700,7 +700,7 @@ GigScale VIP Creator`);
 
               <div className="space-y-3">
                 {orders.map(order => (
-                  <div key={order.id} className="p-3.5 rounded-xl bg-surface-0 border border-white/10 flex items-center justify-between gap-3">
+                  <div key={order.id} className="p-3.5 rounded-xl bg-surface-0 border border-hairline flex items-center justify-between gap-3">
                     <div className="space-y-0.5">
                       <div className="flex items-center gap-2">
                         <span className="text-xs font-bold text-ink-secondary">{order.clientName}</span>
@@ -745,7 +745,7 @@ GigScale VIP Creator`);
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {gigs.map(gig => (
-              <div key={gig.id} className="p-6 rounded-2xl bg-surface-1 border border-white/10 flex flex-col justify-between space-y-6 relative group hover:border-emerald-500/50 transition-colors">
+              <div key={gig.id} className="p-6 rounded-2xl bg-surface-1 border border-hairline flex flex-col justify-between space-y-6 relative group hover:border-emerald-500/50 transition-colors">
                 <div className="space-y-4">
                   <div className="space-y-1">
                     <span className="text-[10px] font-mono text-emerald-400 uppercase tracking-widest bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
@@ -755,8 +755,8 @@ GigScale VIP Creator`);
                   </div>
 
                   {/* Tiers Pricing Grid */}
-                  <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/10 text-center">
-                    <div className="p-2 rounded-lg bg-surface-0 border border-white/10">
+                  <div className="grid grid-cols-3 gap-2 pt-2 border-t border-hairline text-center">
+                    <div className="p-2 rounded-lg bg-surface-0 border border-hairline">
                       <span className="text-[9px] font-mono text-ink-muted block">BASIC</span>
                       <span className="text-xs font-black text-white">${gig.basicPrice}</span>
                       <span className="text-[9px] text-slate-500 block">{gig.basicDeliveryDays}d delivery</span>
@@ -789,7 +789,7 @@ GigScale VIP Creator`);
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs gap-2">
+                <div className="pt-4 border-t border-hairline flex items-center justify-between text-xs gap-2">
                   <span className="text-ink-muted font-mono text-[11px]">{gig.salesCount} Orders Completed</span>
                   <div className="flex items-center gap-1.5">
                     {suiteMode !== 'buyer' && (
@@ -835,9 +835,9 @@ GigScale VIP Creator`);
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-white/10 bg-surface-1">
+          <div className="overflow-x-auto rounded-2xl border border-hairline bg-surface-1">
             <table className="w-full text-left text-xs">
-              <thead className="bg-surface-0 text-ink-muted font-mono text-[11px] uppercase border-b border-white/10">
+              <thead className="bg-surface-0 text-ink-muted font-mono text-[11px] uppercase border-b border-hairline">
                 <tr>
                   <th className="py-3 px-4">Client / Company</th>
                   <th className="py-3 px-4">Service Gig</th>
@@ -903,7 +903,7 @@ GigScale VIP Creator`);
       {/* SUB-TAB 4: AI GIG PITCH GENERATOR */}
       {activeSubTab === 'ai-pitch' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+          <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
             <div className="space-y-1">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
                 <Sparkles className="h-4 w-4 text-accent-rosegold-400" />
@@ -920,7 +920,7 @@ GigScale VIP Creator`);
                   value={clientNiche}
                   onChange={(e) => setClientNiche(e.target.value)}
                   placeholder="e.g. B2B SaaS, Fitness Influencer, Real Estate Agency"
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -931,7 +931,7 @@ GigScale VIP Creator`);
                   value={clientPainPoint}
                   onChange={(e) => setClientPainPoint(e.target.value)}
                   placeholder="e.g. Needs a lead magnet e-book to double email list signups and launch 7-day social campaign"
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -942,7 +942,7 @@ GigScale VIP Creator`);
                   value={offerPrice}
                   onChange={(e) => setOfferPrice(e.target.value)}
                   placeholder="500"
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -966,7 +966,7 @@ GigScale VIP Creator`);
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 flex flex-col justify-between space-y-4">
+          <div className="p-6 rounded-2xl bg-surface-1 border border-hairline flex flex-col justify-between space-y-4">
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-bold text-white flex items-center gap-2">
@@ -993,7 +993,7 @@ GigScale VIP Creator`);
                 )}
               </div>
 
-              <div className="p-4 rounded-xl bg-surface-0 border border-white/10 min-h-[280px] font-sans text-xs text-ink-secondary whitespace-pre-wrap leading-relaxed">
+              <div className="p-4 rounded-xl bg-surface-0 border border-hairline min-h-[280px] font-sans text-xs text-ink-secondary whitespace-pre-wrap leading-relaxed">
                 {generatedPitch || (
                   <div className="h-full flex flex-col items-center justify-center text-center p-8 text-slate-500 space-y-2">
                     <Sparkles className="h-8 w-8 text-slate-600 animate-pulse" />
@@ -1014,7 +1014,7 @@ GigScale VIP Creator`);
       {/* SUB-TAB: CLIENT AUDIT DECK STUDIO */}
       {activeSubTab === 'audit-deck' && (
         <div className="space-y-6">
-          <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+          <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-base font-bold text-white flex items-center gap-2">
@@ -1032,7 +1032,7 @@ GigScale VIP Creator`);
                   type="text"
                   value={deckClientName}
                   onChange={(e) => setDeckClientName(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1042,7 +1042,7 @@ GigScale VIP Creator`);
                   type="number"
                   value={deckAuditScore}
                   onChange={(e) => setDeckAuditScore(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1073,7 +1073,7 @@ GigScale VIP Creator`);
             {/* Render Deck Preview */}
             {generatedDeck && (
               <div className="p-6 rounded-2xl bg-surface-0 border border-emerald-500/30 space-y-6 mt-4">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between border-b border-hairline pb-4">
                   <div className="flex items-center gap-3">
                     <div className="p-3 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-400 font-extrabold text-xl font-mono">
                       {generatedDeck.score}/100
@@ -1097,7 +1097,7 @@ GigScale VIP Creator`);
                     <h4 className="text-xs font-mono text-rose-400 uppercase tracking-wider font-bold">Identified Growth Bottlenecks:</h4>
                     <ul className="space-y-2">
                       {generatedDeck.flaws.map((flaw: string, i: number) => (
-                        <li key={i} className="text-xs text-ink-secondary bg-surface-1 p-3 rounded-xl border border-white/10 flex items-start gap-2">
+                        <li key={i} className="text-xs text-ink-secondary bg-surface-1 p-3 rounded-xl border border-hairline flex items-start gap-2">
                           <span className="text-rose-400 font-bold font-mono">✕</span>
                           <span>{flaw}</span>
                         </li>
@@ -1112,7 +1112,7 @@ GigScale VIP Creator`);
                       <p className="text-[11px] text-ink-muted leading-relaxed">
                         Complete redesign of lead magnets in 300+ DPI vector PDF, 3D hardcover mockup rendering, plus 30-day viral content pack for TikTok, Instagram, and X.
                       </p>
-                      <div className="pt-2 border-t border-white/10 flex items-center justify-between">
+                      <div className="pt-2 border-t border-hairline flex items-center justify-between">
                         <span className="text-xs font-mono text-ink-muted">Fixed Package Fee:</span>
                         <span className="text-sm font-black text-emerald-400">$1,250 USD</span>
                       </div>
@@ -1128,7 +1128,7 @@ GigScale VIP Creator`);
       {/* SUB-TAB: COLD EMAIL & DM OUTREACH */}
       {activeSubTab === 'outreach' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+          <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
             <div className="space-y-1">
               <h2 className="text-base font-bold text-white flex items-center gap-2">
                 <Mail className="h-4 w-4 text-emerald-400" />
@@ -1144,7 +1144,7 @@ GigScale VIP Creator`);
                   type="text"
                   value={outreachNiche}
                   onChange={(e) => setOutreachNiche(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1154,7 +1154,7 @@ GigScale VIP Creator`);
                   type="text"
                   value={outreachOffer}
                   onChange={(e) => setOutreachOffer(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1179,7 +1179,7 @@ GigScale VIP Creator`);
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-surface-1 border border-white/10 space-y-4">
+          <div className="p-6 rounded-2xl bg-surface-1 border border-hairline space-y-4">
             <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <Layers className="h-4 w-4 text-emerald-400" />
               <span>Outreach Sequence Preview</span>
@@ -1188,8 +1188,8 @@ GigScale VIP Creator`);
             <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
               {generatedSequence.length > 0 ? (
                 generatedSequence.map((email, idx) => (
-                  <div key={idx} className="p-4 rounded-xl bg-surface-0 border border-white/10 space-y-2">
-                    <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                  <div key={idx} className="p-4 rounded-xl bg-surface-0 border border-hairline space-y-2">
+                    <div className="flex items-center justify-between border-b border-hairline pb-2">
                       <span className="text-[10px] font-mono text-emerald-400 font-bold">TOUCHPOINT #{idx + 1}</span>
                       <button
                         onClick={() => {
@@ -1219,7 +1219,7 @@ GigScale VIP Creator`);
 
       {/* SUB-TAB: GIGLAUNCH ROADMAP & PLAYBOOK */}
       {activeSubTab === 'roadmap' && (
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-1 border border-white/10 space-y-6">
+        <div className="p-6 sm:p-8 rounded-2xl bg-surface-1 border border-hairline space-y-6">
           <div className="space-y-1">
             <h2 className="text-base font-bold text-white flex items-center gap-2">
               <Rocket className="h-4 w-4 text-emerald-400" />
@@ -1265,7 +1265,7 @@ GigScale VIP Creator`);
                   className={`p-5 rounded-2xl border transition-colors cursor-pointer flex items-start gap-4 ${
                     isChecked 
                       ? 'bg-emerald-500/10 border-emerald-500/40 text-white' 
-                      : 'bg-surface-0 border-white/10 text-ink-secondary hover:border-white/15'
+                      : 'bg-surface-0 border-hairline text-ink-secondary hover:border-white/15'
                   }`}
                 >
                   <div className={`p-1.5 rounded-lg border mt-0.5 shrink-0 ${
@@ -1286,7 +1286,7 @@ GigScale VIP Creator`);
 
       {/* SUB-TAB 5: HOURLY & RATE OPTIMIZER */}
       {activeSubTab === 'calculator' && (
-        <div className="p-6 sm:p-8 rounded-2xl bg-surface-1 border border-white/10 space-y-6">
+        <div className="p-6 sm:p-8 rounded-2xl bg-surface-1 border border-hairline space-y-6">
           <div className="space-y-1">
             <h2 className="text-base font-bold text-white flex items-center gap-2">
               <TrendingUp className="h-4 w-4 text-emerald-400" />
@@ -1296,7 +1296,7 @@ GigScale VIP Creator`);
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-            <div className="p-5 rounded-xl bg-surface-0 border border-white/10 space-y-3">
+            <div className="p-5 rounded-xl bg-surface-0 border border-hairline space-y-3">
               <span className="text-xs font-mono text-ink-muted block">$5,000 / Month Target</span>
               <div className="space-y-1">
                 <span className="text-2xl font-black text-white">10 Orders / mo</span>
@@ -1329,8 +1329,8 @@ GigScale VIP Creator`);
       {/* NEW GIG MODAL */}
       {showNewGigModal && (
         <div className="fixed inset-0 z-50 bg-surface-0/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="bg-surface-1 border border-hairline rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-hairline pb-3">
               <h3 className="text-sm font-bold text-white flex items-center gap-2">
                 <Plus className="h-4 w-4 text-emerald-400" />
                 <span>Create New Gig Offering</span>
@@ -1352,7 +1352,7 @@ GigScale VIP Creator`);
                   value={newGigTitle}
                   onChange={(e) => setNewGigTitle(e.target.value)}
                   placeholder="e.g. 3D E-Book Cover & PDF Layout Design"
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1361,7 +1361,7 @@ GigScale VIP Creator`);
                 <select
                   value={newGigCategory}
                   onChange={(e) => setNewGigCategory(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-emerald-500"
                 >
                   <option value="Document Design & Publishing">Document Design & Publishing</option>
                   <option value="Viral Marketing & Social Strategy">Viral Marketing & Social Strategy</option>
@@ -1376,7 +1376,7 @@ GigScale VIP Creator`);
                     type="number"
                     value={newGigBasic}
                     onChange={(e) => setNewGigBasic(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1385,7 +1385,7 @@ GigScale VIP Creator`);
                     type="number"
                     value={newGigStandard}
                     onChange={(e) => setNewGigStandard(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
                 <div className="space-y-1">
@@ -1394,7 +1394,7 @@ GigScale VIP Creator`);
                     type="number"
                     value={newGigPremium}
                     onChange={(e) => setNewGigPremium(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-2.5 py-1.5 text-xs text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
               </div>
@@ -1422,8 +1422,8 @@ GigScale VIP Creator`);
       {/* CLIENT CONTRACT & LEGAL BRIEF MODAL */}
       {activeContractOrder && (
         <div className="fixed inset-0 z-50 bg-surface-0/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-surface-1 border border-hairline rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                   <ShieldCheck className="h-5 w-5" />
@@ -1442,8 +1442,8 @@ GigScale VIP Creator`);
             </div>
 
             {/* Document Content Box */}
-            <div className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-4 font-mono text-xs text-ink-secondary leading-relaxed">
-              <div className="border-b border-white/10 pb-3 flex justify-between items-center text-[11px] text-ink-muted">
+            <div className="p-5 rounded-2xl bg-surface-0 border border-hairline space-y-4 font-mono text-xs text-ink-secondary leading-relaxed">
+              <div className="border-b border-hairline pb-3 flex justify-between items-center text-[11px] text-ink-muted">
                 <span>INDEPENDENT CONTRACTOR SERVICES AGREEMENT</span>
                 <span className="text-emerald-400 font-bold">CONFIDENTIAL</span>
               </div>
@@ -1456,13 +1456,13 @@ GigScale VIP Creator`);
                 <p><strong className="text-white">TARGET COMPLETION DATE:</strong> {activeContractOrder.dueDate}</p>
               </div>
 
-              <div className="pt-2 space-y-2 text-[11px] border-t border-white/10 text-ink-muted">
+              <div className="pt-2 space-y-2 text-[11px] border-t border-hairline text-ink-muted">
                 <p><strong className="text-ink-secondary">1. SCOPE & DELIVERABLES:</strong> Provider agrees to deliver high-DPI document layouts, custom graphics, source files, and marketing strategy packs as outlined in the selected {activeContractOrder.tier} package.</p>
                 <p><strong className="text-ink-secondary">2. COMMERCIAL INTELLECTUAL PROPERTY:</strong> Upon full settlement of ${activeContractOrder.amount}, Provider grants Client 100% full, unencumbered commercial license and ownership of all generated documents and media assets.</p>
                 <p><strong className="text-ink-secondary">3. NON-DISCLOSURE & CONFIDENTIALITY:</strong> Both parties agree to hold proprietary data, customer ICP lists, and strategy files in strict confidence.</p>
               </div>
 
-              <div className="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] text-slate-500">
+              <div className="pt-3 border-t border-hairline flex justify-between items-center text-[10px] text-slate-500">
                 <span>Signed electronically via GigScale Engine</span>
                 <span>Date: {new Date().toISOString().split('T')[0]}</span>
               </div>
@@ -1510,8 +1510,8 @@ GigScale VIP Creator`);
       {/* 10X PROFIT AUDIT MODAL */}
       {showProfitAuditModal && (
         <div className="fixed inset-0 z-50 bg-surface-0/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-surface-1 border border-hairline rounded-3xl max-w-xl w-full p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-accent-rosegold-500/10 border border-rosegold-500/30 text-accent-rosegold-400">
                   <Sparkles className="h-6 w-6" />
@@ -1536,7 +1536,7 @@ GigScale VIP Creator`);
                   type="number"
                   value={auditTargetRevenue}
                   onChange={(e) => setAuditTargetRevenue(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
                 />
               </div>
 
@@ -1546,7 +1546,7 @@ GigScale VIP Creator`);
                   type="number"
                   value={auditCurrentRate}
                   onChange={(e) => setAuditCurrentRate(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white font-mono focus:outline-none focus:border-rosegold-500"
                 />
               </div>
 
@@ -1576,8 +1576,8 @@ GigScale VIP Creator`);
       {/* LOG ORDER MODAL */}
       {showLogOrderModal && (
         <div className="fixed inset-0 z-50 bg-surface-0/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-surface-1 border border-hairline rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                   <Plus className="h-6 w-6" />
@@ -1626,7 +1626,7 @@ GigScale VIP Creator`);
                   placeholder="e.g. Apex Marketing LLC"
                   value={logClientName}
                   onChange={(e) => setLogClientName(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1637,7 +1637,7 @@ GigScale VIP Creator`);
                   placeholder="client@company.com"
                   value={logClientEmail}
                   onChange={(e) => setLogClientEmail(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                 />
               </div>
 
@@ -1648,7 +1648,7 @@ GigScale VIP Creator`);
                     type="number"
                     value={logAmount}
                     onChange={(e) => setLogAmount(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
 
@@ -1658,7 +1658,7 @@ GigScale VIP Creator`);
                     type="date"
                     value={logDueDate}
                     onChange={(e) => setLogDueDate(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
               </div>
@@ -1676,8 +1676,8 @@ GigScale VIP Creator`);
       {/* HIRE CREATOR / ORDER GIG MODAL (FOR BUYER MODE & GENERAL PURCHASES) */}
       {showHireModal && (
         <div className="fixed inset-0 z-50 bg-surface-0/85 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-surface-1 border border-hairline rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl">
+            <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
                   <Briefcase className="h-6 w-6" />
@@ -1772,7 +1772,7 @@ GigScale VIP Creator`);
                       const selected = gigs.find(g => g.id === e.target.value);
                       if (selected) setSelectedGigToHire(selected);
                     }}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   >
                     {gigs.map(g => (
                       <option key={g.id} value={g.id}>{g.title}</option>
@@ -1797,7 +1797,7 @@ GigScale VIP Creator`);
                           className={`p-2.5 rounded-xl border text-center transition-colors cursor-pointer ${
                             isSelected
                               ? 'bg-emerald-500/20 border-emerald-500 text-white'
-                              : 'bg-surface-0 border-white/10 text-ink-muted hover:border-white/15'
+                              : 'bg-surface-0 border-hairline text-ink-muted hover:border-white/15'
                           }`}
                         >
                           <span className="text-[10px] font-mono block uppercase font-bold text-emerald-400">{tier}</span>
@@ -1818,7 +1818,7 @@ GigScale VIP Creator`);
                     placeholder="e.g. Sarah Connor / Apex Ventures"
                     value={hireClientName}
                     onChange={(e) => setHireClientName(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
 
@@ -1830,7 +1830,7 @@ GigScale VIP Creator`);
                     placeholder="sarah@apexventures.com"
                     value={hireClientEmail}
                     onChange={(e) => setHireClientEmail(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
 
@@ -1841,7 +1841,7 @@ GigScale VIP Creator`);
                     placeholder="Provide topic, brand colors, or preferred lead magnet focus..."
                     value={hireRequirements}
                     onChange={(e) => setHireRequirements(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white focus:outline-none focus:border-emerald-500"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3.5 py-2 text-white focus:outline-none focus:border-emerald-500"
                   />
                 </div>
 

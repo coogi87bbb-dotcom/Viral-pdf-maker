@@ -60,7 +60,7 @@ const CAPABILITIES: Capability[] = [
   {
     name: 'Deal Closer',
     detail:
-      'Seven real-estate tools — commission maths, negotiation scripts, MLS listings, contract timelines.',
+      'Seven real-estate tools — commission maths, negotiation scripts, MLS listings, open house playbooks, contract timelines.',
     saving: 'Hours → minutes',
   },
   {
@@ -73,26 +73,26 @@ const CAPABILITIES: Capability[] = [
 
 export const LandingCapabilities: React.FC = () => {
   return (
-    <section id="capabilities" className="relative bg-lf-bone py-24 sm:py-32 lg:py-40">
+    <section id="capabilities" className="relative py-24 sm:py-32 lg:py-40">
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         {/* Split: sticky thesis on the left, the index scrolling on the right */}
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
               <Reveal kind="slide-left">
-                <span className="lf-label text-lf-copper-deep">005 / What's inside</span>
+                <span className="lf-label text-lf-copper-light text-legible">005 / What's inside</span>
               </Reveal>
               <Reveal kind="slide-left" delay={0.1} className="mt-6 block">
-                <h2 className="lf-heading text-lf-on-bone">
+                <h2 className="lf-heading text-lf-on-ink text-legible">
                   Nine tools that
                   <br />
                   used to be nine
                   <br />
-                  <em className="not-italic text-lf-copper">invoices</em>.
+                  <em className="not-italic text-lf-copper-light">invoices</em>.
                 </h2>
               </Reveal>
-              <Reveal kind="slide-left" delay={0.2} className="mt-7 block">
-                <p className="lf-body text-lf-on-bone-muted">
+              <Reveal kind="slide-left" delay={0.2} className="lf-scrim mt-7 block">
+                <p className="lf-body text-lf-on-ink-muted text-legible">
                   Each one replaces a task you're currently doing by hand, or a
                   subscription you're currently paying for. Usually both.
                 </p>
@@ -100,30 +100,30 @@ export const LandingCapabilities: React.FC = () => {
             </div>
           </div>
 
-          <ol className="lg:col-span-8">
+          <ol className="lf-scrim lg:col-span-8">
             {CAPABILITIES.map((cap, i) => (
               <Reveal as="li" key={cap.name} kind="slide-left" delay={0.05 * i}>
-                <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 border-t border-lf-on-bone/15 py-6 sm:gap-x-8 sm:py-7">
-                  <span className="lf-label pt-1 text-lf-on-bone-muted">
+                <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 border-t border-lf-on-ink/15 py-6 sm:gap-x-8 sm:py-7">
+                  <span className="lf-label pt-1 text-lf-on-ink-muted text-legible">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                      <h3 className="font-editorial text-2xl font-semibold leading-tight text-lf-on-bone sm:text-3xl">
+                      <h3 className="font-editorial text-2xl font-semibold leading-tight text-lf-on-ink text-legible sm:text-3xl">
                         {cap.name}
                       </h3>
-                      <span className="lf-label whitespace-nowrap text-lf-copper">
+                      <span className="lf-label whitespace-nowrap text-lf-copper-light text-legible">
                         {cap.saving}
                       </span>
                     </div>
-                    <p className="mt-2.5 max-w-xl font-sans text-sm leading-relaxed text-lf-on-bone-muted">
+                    <p className="mt-2.5 max-w-xl font-sans text-sm leading-relaxed text-lf-on-ink-muted text-legible">
                       {cap.detail}
                     </p>
                   </div>
                 </div>
               </Reveal>
             ))}
-            <li aria-hidden="true" className="border-t border-lf-on-bone/15" />
+            <li aria-hidden="true" className="border-t border-lf-on-ink/15" />
           </ol>
         </div>
       </div>

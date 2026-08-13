@@ -38,10 +38,20 @@ export const LandingStats: React.FC = () => {
   const withCommas = useCallback((v: number) => Math.round(v).toLocaleString('en-US'), []);
 
   return (
-    <section className="relative bg-lf-copper py-24 sm:py-28 lg:py-32">
-      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+    // The one section that keeps a tint: a translucent copper wash rather
+    // than the solid copper block it used to be, so the video still reads
+    // through while the figures get the page's only saturated surface.
+    <section className="relative py-24 sm:py-28 lg:py-32">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(192,117,74,0) 0%, rgba(192,117,74,0.20) 22%, rgba(192,117,74,0.20) 78%, rgba(192,117,74,0) 100%)',
+        }}
+      />
+      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <Reveal kind="scale-up">
-          <span className="lf-label text-lf-ink/70">004 / What that's worth</span>
+          <span className="lf-label text-lf-copper-light text-legible">004 / What that's worth</span>
         </Reveal>
 
         {/* Two columns even on the narrowest phone: the figures are short
@@ -50,15 +60,15 @@ export const LandingStats: React.FC = () => {
         <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-x-8 lg:grid-cols-4 lg:gap-y-0">
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} kind="scale-up" delay={0.08 * (i + 1)}>
-              <div className="border-t border-lf-ink/25 pt-6">
-                <dd className="lf-figure flex items-baseline gap-1.5 text-lf-ink">
+              <div className="border-t border-lf-on-ink/25 pt-6">
+                <dd className="lf-figure flex items-baseline gap-1.5 text-lf-on-ink text-legible">
                   {stat.prefix}
                   <CountUp to={stat.value} format={stat.value > 100 ? withCommas : undefined} />
                   <span className="font-sans text-sm font-semibold tracking-tight sm:text-base">
                     {stat.suffix}
                   </span>
                 </dd>
-                <dt className="mt-4 font-sans text-sm leading-relaxed text-lf-ink/75">
+                <dt className="mt-4 font-sans text-sm leading-relaxed text-lf-on-ink-muted text-legible">
                   {stat.label}
                 </dt>
               </div>
@@ -66,8 +76,8 @@ export const LandingStats: React.FC = () => {
           ))}
         </dl>
 
-        <Reveal kind="fade-up" delay={0.4} className="mt-14 block">
-          <p className="max-w-3xl font-sans text-xs leading-relaxed text-lf-ink/60">
+        <Reveal kind="fade-up" delay={0.4} className="lf-scrim mt-14 block">
+          <p className="max-w-3xl font-sans text-xs leading-relaxed text-lf-on-ink-muted text-legible">
             Estimates from LogFlow AI's built-in ROI model — 1.8 hours of manual
             work per multi-channel post; subscription figures are published list
             prices for the tools LogFlow AI replaces. Run your own numbers in the

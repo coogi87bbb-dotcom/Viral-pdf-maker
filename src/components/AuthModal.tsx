@@ -11,12 +11,23 @@ import {
   ShieldCheck,
   AlertCircle,
   ArrowRight,
+  ArrowLeft,
   Award,
   Zap
 } from 'lucide-react';
 
-export const AuthModal: React.FC = () => {
-  const { login, signUp, signInWithGoogle, authError } = useAuth();
+interface AuthModalProps {
+  /**
+   * Returns to the marketing landing page. Optional so the modal still
+   * renders standalone, but App.tsx always passes it — without an exit the
+   * signed-out visitor is trapped here (there is no backdrop dismiss, no
+   * close button and no Escape handler on this shell by design).
+   */
+  onBack?: () => void;
+}
+
+export const AuthModal: React.FC<AuthModalProps> = ({ onBack }) => {
+  const { login, signUp, signInWithGoogle, authError, clearAuthError } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -86,6 +97,22 @@ export const AuthModal: React.FC = () => {
       {/* Glow Effects */}
       <div className="absolute -top-24 -left-24 w-48 h-48 bg-accent-amber-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-accent-violet-500/20 rounded-full blur-3xl pointer-events-none" />
+
+      {onBack && (
+        <button
+          type="button"
+          onClick={() => {
+            // Clear a stale redirect error first — otherwise App.tsx's
+            // `showLanding && !authError` guard re-shows this same modal.
+            clearAuthError();
+            onBack();
+          }}
+          className="absolute left-4 top-4 z-20 inline-flex min-h-[36px] items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-ink-secondary transition-colors duration-200 hover:bg-white/5 hover:text-ink-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400 cursor-pointer"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          Back
+        </button>
+      )}
 
       {/* Header */}
       <div className="p-6 sm:p-8 bg-gradient-to-b from-surface-2 via-surface-2 to-surface-1 border-b border-white/10 text-center space-y-3 relative z-10">

@@ -4,16 +4,27 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 /**
- * Scroll-scrubbed video-frame stage for the LogFlow AI hero.
+ * Page-wide scroll-scrubbed video backdrop for the LogFlow AI landing page.
+ *
+ * This is a `position: fixed` full-viewport canvas that sits behind the
+ * ENTIRE page — every section scrolls over it and is itself transparent.
+ * Frame playback is driven by scroll progress through the whole page (0 at
+ * the top, 1 at the bottom), so the clip plays once from top to bottom as
+ * the visitor reads.
  *
  * Source: .claude/Change_words_to_PERAINC_1080p_202608122058.mp4 — 10s,
  * 1920x1080, 24fps. Extracted with ffmpeg into two opaque webp sequences:
  *   desktop  fps=10, scale=1280  -> 100 frames, ~3.2MB
  *   mobile   fps=6,  scale=540   ->  60 frames, ~560KB
- * No colour-key this time: unlike the previous clip's light studio backdrop,
- * this footage is already dark, and the PERA INC wordmark burned into the
- * left of the frame is intentional brand content that must stay visible — so
- * the plate is composited whole, "contain"-fit, never cropped.
+ *
+ * The plate renders at reduced opacity under a dark wash: at full strength
+ * the footage (and the PERA INC wordmark burned into its left-centre) fights
+ * the body copy that now sits over every part of it. Dimmed, the wordmark
+ * ghosts through as intended brand texture and text stays legible anywhere
+ * on the page.
+ *
+ * Fit is always "contain", never "cover" — cover would crop the PERA INC
+ * wordmark out on portrait viewports, and that mark is deliberate content.
  *
  * Both globs are eager, but eager glob only materialises URL *strings*; no
  * image bytes are fetched until a URL is assigned to `new Image().src`. So
@@ -40,9 +51,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const MOBILE_QUERY = '(max-width: 767px)';
 
+/**
+ * Frame playback runs 15% ahead of raw scroll progress, clamped at the end.
+ * The clip therefore finishes slightly before the reader reaches the footer,
+ * which keeps the disassembly feeling brisk rather than dragging out over the
+ * page's full length. Raise to speed the clip up further; 1.0 is 1:1.
+ */
+const PLAYBACK_SPEED = 1.15;
+
 interface ScrollFrameStageProps {
-  /** Hero content overlaid on the pinned plate. */
-  children?: React.ReactNode;
+  /**
+   * The scrollable page root whose full height drives playback (0 at its
+   * top, 1 at its bottom). NOT pinned and NOT a GSAP `pin`: the canvas is
+   * `position: fixed`, so it stays put on its own. A GSAP pin here would
+   * insert a spacer and put a transform on an ancestor, which changes the
+   * containing block for fixed descendants and can swallow clicks on the
+   * content rendered over it.
+   */
+  scrollContainerRef: React.RefObject<HTMLElement | null>;
 }
 
 function loadImage(src: string): Promise<HTMLImageElement> {
@@ -55,21 +81,15 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
-/**
- * "Contain" fit geometry. `yBias` places the plate vertically: 0.5 centres it
- * (desktop, where 16:9 nearly fills the viewport), lower values push it up so
- * a tall phone viewport keeps the lower half free for the headline instead of
- * stranding a letterboxed strip in the middle of the screen.
- */
-function fitContain(imgW: number, imgH: number, cw: number, ch: number, yBias: number) {
+/** Centred, aspect-preserving ("contain") fit geometry. */
+function fitContain(imgW: number, imgH: number, cw: number, ch: number) {
   const scale = Math.min(cw / imgW, ch / imgH);
   const dw = imgW * scale;
   const dh = imgH * scale;
-  return { dx: (cw - dw) / 2, dy: (ch - dh) * yBias, dw, dh };
+  return { dx: (cw - dw) / 2, dy: (ch - dh) / 2, dw, dh };
 }
 
-export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
+export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContainerRef }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
   const progressRef = useRef(0);
@@ -83,7 +103,10 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const index = Math.min(Math.floor(progress * (frames.length - 1)), frames.length - 1);
+    // Speed factor applied here (not at the ScrollTrigger) so resize redraws
+    // and the reduced-motion still frame map through the same curve.
+    const scaled = Math.min(progress * PLAYBACK_SPEED, 1);
+    const index = Math.min(Math.floor(scaled * (frames.length - 1)), frames.length - 1);
     const frame = frames[index];
     if (!frame) return;
 
@@ -91,17 +114,15 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) 
     const ch = canvas.clientHeight;
     ctx.clearRect(0, 0, cw, ch);
 
-    const isMobile = window.matchMedia(MOBILE_QUERY).matches;
-    const geom = fitContain(frame.naturalWidth, frame.naturalHeight, cw, ch, isMobile ? 0.24 : 0.34);
+    const geom = fitContain(frame.naturalWidth, frame.naturalHeight, cw, ch);
     ctx.drawImage(frame, geom.dx, geom.dy, geom.dw, geom.dh);
 
-    // Feather the plate's own top and bottom edges into the ink page. The
-    // footage's studio backdrop is mid-grey, so a "contain" fit otherwise
-    // leaves two hard horizontal seams where the plate meets the page —
-    // most obvious on mobile, where the letterboxing is deep. Done on the
-    // canvas rather than with a DOM overlay so the fade tracks the plate's
-    // actual drawn rect at any viewport or vertical bias.
-    const fade = Math.min(geom.dh * 0.16, 130);
+    // Feather the plate's top and bottom edges into the page. The footage's
+    // studio backdrop is mid-grey, so a "contain" fit otherwise leaves two
+    // hard horizontal seams — most obvious on mobile, where letterboxing is
+    // deep. Done on the canvas so the fade tracks the drawn rect at any
+    // viewport rather than a fixed percentage of the screen.
+    const fade = Math.min(geom.dh * 0.18, 150);
     if (fade > 2) {
       const top = ctx.createLinearGradient(0, geom.dy, 0, geom.dy + fade);
       top.addColorStop(0, '#0a0b0d');
@@ -119,7 +140,7 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) 
   };
 
   // Load the sequence sized for this viewport. Frame 0 is drawn as soon as it
-  // decodes rather than waiting on the whole sequence, so the hero shows a
+  // decodes rather than waiting on the whole sequence, so the page shows a
   // real image almost immediately instead of an empty box on slow connections.
   useEffect(() => {
     let cancelled = false;
@@ -203,25 +224,22 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready]);
 
-  // Scrub frames across this section only.
-  //
-  // Uses CSS `sticky` for the pin rather than ScrollTrigger's own `pin`:
-  // pinning inserts a spacer and puts a transform on an ancestor, which
-  // changes the containing block for descendants and previously swallowed
-  // clicks on content below the hero. Sticky has neither side effect.
+  // Scrub across the whole page's scroll range.
   useEffect(() => {
-    if (!ready || !sectionRef.current) return;
+    if (!ready || !scrollContainerRef.current) return;
 
     if (prefersReducedMotion) {
-      drawFrame(0.55);
+      drawFrame(0.5);
       return;
     }
 
     const st = ScrollTrigger.create({
-      trigger: sectionRef.current,
+      trigger: scrollContainerRef.current,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.8,
+      // Higher scrub = the frame index eases toward the scroll position
+      // instead of snapping to it, which smooths out wheel-notch stepping.
+      scrub: 1.2,
       onUpdate: (self) => {
         progressRef.current = self.progress;
         drawFrame(self.progress);
@@ -229,36 +247,31 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ children }) 
     });
 
     return () => st.kill();
-  }, [ready, prefersReducedMotion]);
+  }, [ready, prefersReducedMotion, scrollContainerRef]);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-lf-ink h-[210vh] md:h-[300vh]"
-      aria-label="LogFlow AI introduction"
-    >
-      <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
-        <canvas
-          ref={canvasRef}
-          className="absolute inset-0 h-full w-full"
-          aria-hidden="true"
-        />
+    // z-0 with DOM order, never a negative z-index: this is a fixed sibling
+    // rendered before the page's z-10 content wrapper, so DOM order already
+    // puts it behind. A negative z-index would drop it behind an ancestor's
+    // background instead, hiding it entirely — which is also why the page
+    // root must stay transparent and the ink base colour lives HERE.
+    <div className="fixed inset-0 z-0 pointer-events-none bg-lf-ink" aria-hidden="true">
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-[0.72]" />
 
-        {/* Bottom-up scrim for headline legibility. Kept deliberately short
-            (bottom ~42%) so it never washes over the PERA INC wordmark burned
-            into the footage at roughly 45-58% of frame height — that mark is
-            intentional brand content and has to stay legible. */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%]"
-          style={{
-            background:
-              'linear-gradient(to top, #0a0b0d 18%, rgba(10,11,13,0.9) 52%, rgba(10,11,13,0) 100%)',
-          }}
-        />
-
-        {children}
-      </div>
-    </section>
+      {/* Wash over the plate, kept deliberately light. The footage is already
+          dark (it averages ~rgb(48,54,57)), so it supplies most of its own
+          contrast against bone type — an aggressive scrim on top of a low
+          canvas opacity crushed it to near-black and threw the video away.
+          Heavier at the edges than the centre so the frame keeps depth and
+          the vignette carries the eye to the middle. */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(125% 85% at 50% 45%, rgba(10,11,13,0.05) 0%, rgba(10,11,13,0.34) 58%, rgba(10,11,13,0.66) 100%)',
+        }}
+      />
+    </div>
   );
 };
 
