@@ -10,7 +10,16 @@
 import 'dotenv/config';
 import express from 'express';
 import path from 'path';
-import { createServer as createViteServer } from 'vite';
+// NOTE: 'vite' is intentionally NOT statically imported here. A top-level
+// `import ... from 'vite'` gets evaluated the instant this module loads —
+// including when the Vercel serverless function (api/[...path].ts) loads
+// it — and vite's own module graph pulls in esbuild/rollup's native
+// platform binaries, which crashed the function on Vercel with a generic
+// FUNCTION_INVOCATION_FAILED (same class of "native binding" failure seen
+// locally with @tailwindcss/oxide). It's only needed for the dev-mode
+// branch of startServer() below, which never runs on Vercel — so it's
+// loaded there via a dynamic import() instead, meaning that code path
+// (and vite's native deps) never actually executes in production.
 import { google } from 'googleapis';
 import { GoogleGenAI, Type, Schema } from '@google/genai';
 import zlib from 'zlib';
@@ -3421,6 +3430,7 @@ Return JSON:
 // Setup Vite Development Middleware or Static Production File Serving
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa'
