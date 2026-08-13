@@ -1,3 +1,13 @@
+// Load .env into process.env before anything below reads it (getGenAI()'s
+// GEMINI_API_KEY check, APP_URL, etc.). `dotenv` was already a listed
+// dependency but was never actually invoked anywhere in this file — so
+// every Gemini-backed route silently fell back to its "API key missing"
+// path in any environment relying on a local .env file (a deployment
+// platform that injects real OS-level env vars was unaffected, which is
+// presumably why this went unnoticed). dotenv.config() never overrides a
+// variable that's already set in process.env, so this is a no-op wherever
+// the platform already provides these directly.
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
