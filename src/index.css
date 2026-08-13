@@ -288,35 +288,14 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Localised legibility pool for dense/small copy sitting directly on the
-   page-wide video. Every landing section is transparent, and .text-legible's
-   glyph shadow alone is not enough for small text crossing a high-contrast
-   part of the footage (the PERA INC wordmark and the skeleton in particular).
-   This lays a heavily-feathered radial of shade BEHIND the block — it has no
-   edge, no border and no fill boundary, so it reads as the video simply
-   being darker there rather than as a card. */
+/* Was a localised blurred-radial legibility pool behind dense/small copy
+   (a "shade the video is darker here" effect for text crossing busy parts
+   of the footage) — removed on request, since it read as a dark shadow/
+   smudge sitting behind those text blocks rather than a subtle aid. Kept
+   as a no-op class (like .text-legible above) rather than stripped from
+   every landing file that references it. */
 .lf-scrim {
   position: relative;
-  isolation: isolate;
-}
-.lf-scrim::before {
-  content: '';
-  position: absolute;
-  inset: -1.5rem -2.25rem;
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(10, 11, 13, 0.9) 0%,
-    rgba(10, 11, 13, 0.76) 48%,
-    rgba(10, 11, 13, 0.34) 70%,
-    rgba(10, 11, 13, 0) 84%
-  );
-  /* The gradient alone still resolved to a faintly visible band on wide,
-     short blocks. Blurring the pseudo-element (it holds no content, only
-     the gradient) removes any perceptible boundary, so the result reads as
-     the footage being darker there rather than as a panel. */
-  filter: blur(24px);
 }
 
 /* Hairline rule used to separate editorial blocks instead of card borders. */
