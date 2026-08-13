@@ -97,7 +97,7 @@ Generate a negotiation package with EXACTLY these 4 labeled sections:
 [OBJECTION RESPONSES]: 3 likely objections from the other side, each with a scripted response.
 [WALK-AWAY ANALYSIS]: Specific walk-away numbers and the reasoning behind them.`;
 
-      const text = await callDealCloserAI(systemPrompt, userPrompt, 1800);
+      const text = await callDealCloserAI(systemPrompt, userPrompt);
       setResult(text);
       trackDealCloserUsage('negotiation', mode);
     } catch (err: any) {

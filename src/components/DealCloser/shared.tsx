@@ -22,8 +22,17 @@ export const usePropertyMode = () => useContext(PropertyModeContext);
 // AI call helper — proxies to POST /api/ai/deal-closer-generate (server.ts),
 // which replaces the source app's hardcoded, browser-exposed manus.im key
 // with this app's existing server-side Gemini setup.
-// ---------------------------------------------------------------------------
-export async function callDealCloserAI(systemPrompt: string, userPrompt: string, maxTokens = 1800): Promise<string> {
+//
+// `maxTokens` here (and the various 1800/2000/2400 literals individual
+// tool components historically passed) is mostly vestigial: the server
+// route enforces its own 32000-token floor regardless of what's passed,
+// since those old per-tool numbers were tuned before gemini-3.6-flash's
+// reasoning-token overhead was understood and are too low to reliably fit
+// both the model's thinking and its final answer (see server.ts's
+// clampedMaxTokens comment). Left as a pass-through parameter — a caller
+// can still ask for MORE than the floor — rather than removed, so a future
+// tool needing a larger budget than the floor still has a path to request one.
+export async function callDealCloserAI(systemPrompt: string, userPrompt: string, maxTokens?: number): Promise<string> {
   const data = await apiPostJson<{ success: boolean; text?: string; error?: string }>('/api/ai/deal-closer-generate', {
     systemPrompt,
     userPrompt,

@@ -74,7 +74,7 @@ Generate listing copy with EXACTLY these 4 labeled sections:
 [HEADLINE OPTIONS]: 5 numbered headline options.
 [SEO STRENGTH SCORE]: A 1-10 SEO strength rating with the top 5 keywords.`;
 
-      const text = await callDealCloserAI(systemPrompt, userPrompt, 1800);
+      const text = await callDealCloserAI(systemPrompt, userPrompt);
       setResult(text);
       trackDealCloserUsage('listingDescription', mode);
     } catch (err: any) {

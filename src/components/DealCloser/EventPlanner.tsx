@@ -62,7 +62,7 @@ Generate a full ${eventNoun} playbook with EXACTLY these 4 labeled sections:
 [${questionsLabel}]: 6 numbered qualification questions to ask attendees, each with a short note on what the answer reveals.
 [FOLLOW-UP TEMPLATES]: 3 post-event follow-up templates (Template A: Serious Buyer, Template B: Undecided, Template C: Tire-Kicker/Referral), 80-100 words each.`;
 
-      const text = await callDealCloserAI(systemPrompt, userPrompt, 2000);
+      const text = await callDealCloserAI(systemPrompt, userPrompt);
       setResult(text);
       trackDealCloserUsage('eventPlanner', mode);
     } catch (err: any) {
