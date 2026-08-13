@@ -9,7 +9,12 @@
 // https://firebase.google.com/docs/auth/admin/verify-id-tokens#verify_id_tokens_using_a_third-party_jwt_library
 import type { NextFunction, Request, Response } from 'express';
 import { createRemoteJWKSet, jwtVerify } from 'jose';
-import firebaseConfig from './firebase-applet-config.json';
+// `with { type: 'json' }` is required, not stylistic, once this runs under
+// Node's native ESM loader (Vercel — see api/[...path].ts's comment):
+// unassisted default-imports of .json files throw
+// ERR_IMPORT_ASSERTION_TYPE_MISSING there, unlike bundler/tsx contexts
+// which tolerate a bare JSON import.
+import firebaseConfig from './firebase-applet-config.json' with { type: 'json' };
 
 const PROJECT_ID = firebaseConfig.projectId;
 

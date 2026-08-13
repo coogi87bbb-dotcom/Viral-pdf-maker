@@ -25,8 +25,12 @@ import { GoogleGenAI, Type, Schema } from '@google/genai';
 import zlib from 'zlib';
 import { PDFParse } from 'pdf-parse';
 import mammoth from 'mammoth';
-import { assertSafeExternalUrl, extractDocId } from './server-utils';
-import { requireAuth } from './auth-middleware';
+// .js extensions required on these two — see the comment in
+// api/[...path].ts on why: package.json's "type": "module" means Vercel's
+// deployed function runs under Node's native ESM loader, which needs the
+// real output extension on relative specifiers.
+import { assertSafeExternalUrl, extractDocId } from './server-utils.js';
+import { requireAuth } from './auth-middleware.js';
 
 // Safe resolver for pdf-parse v2 PDFParse class
 async function parsePdfBuffer(buffer: Buffer): Promise<{ text: string }> {
@@ -52,6 +56,84 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json({ limit: '10mb' }));
+
+// ---------------------------------------------------------------------------
+// Real Gemini call resilience: retry + exponential backoff + jitter, with
+// classification of which failures are actually worth retrying (rate
+// limits, transient 5xx, network resets) vs. ones that never will be
+// (bad request, invalid API key). This replaces the previous
+// BackendSelfHealingStore "circuit breaker" that was pure flavor text —
+// its /api/heal/action 'reset_circuit_breaker' handler returned a canned
+// success message with no breaker behind it anywhere in the codebase.
+// This one actually retries real requests.
+//
+// Applied to /api/ai/deal-closer-generate below, which every one of the 7
+// Deal Closer tools proxies through via callDealCloserAI() (see
+// src/components/DealCloser/shared.tsx) — fixing resilience at this one
+// call site covers all 7 at once. The other direct ai.models.generateContent
+// call sites elsewhere in this file don't route through this yet; that's a
+// deliberate, scoped follow-up rather than a risky mechanical rewrite of
+// every call site (many have different response shapes — grounding tools,
+// JSON response mode, etc. — that deserve individual review before wrapping).
+const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
+
+function isRetryableGeminiError(err: any): boolean {
+  const status = err?.status ?? err?.code ?? err?.response?.status;
+  if (typeof status === 'number' && RETRYABLE_STATUS_CODES.has(status)) return true;
+  const msg = String(err?.message || err).toLowerCase();
+  return (
+    msg.includes('429') ||
+    msg.includes('rate limit') ||
+    msg.includes('resource_exhausted') ||
+    msg.includes('resourcehasbeenexhausted') ||
+    msg.includes('econnreset') ||
+    msg.includes('etimedout') ||
+    msg.includes('overloaded') ||
+    msg.includes('503') ||
+    msg.includes('502')
+  );
+}
+
+interface GeminiCallResult {
+  response: any;
+  attempts: number;
+}
+
+/**
+ * Calls fn() (a thunk wrapping ai.models.generateContent(...)) with real
+ * retries: up to `maxAttempts` tries, exponential backoff (base 400ms,
+ * capped at 4s) with random jitter so concurrent requests don't retry in
+ * lockstep, and only for error classes that are actually transient. Any
+ * retry that happens is recorded to the real system_errors ledger the
+ * client already writes to (src/lib/systemMemory.ts) via a lightweight
+ * server -> client-schema-compatible fetch is NOT done here (server has no
+ * Firestore credential — see the "self-correct" conversation) — instead
+ * this returns attempts/retried info to the caller so the route can surface
+ * it, and logs server-side via console for the Vercel function log.
+ */
+async function callGeminiWithResilience(fn: () => Promise<any>, label: string, maxAttempts = 3): Promise<GeminiCallResult> {
+  let lastErr: any;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const response = await fn();
+      if (attempt > 1) {
+        console.log(`[Gemini Resilience] ${label} succeeded on attempt ${attempt}/${maxAttempts} after transient failure(s).`);
+      }
+      return { response, attempts: attempt };
+    } catch (err: any) {
+      lastErr = err;
+      const retryable = isRetryableGeminiError(err);
+      console.warn(
+        `[Gemini Resilience] ${label} attempt ${attempt}/${maxAttempts} failed (retryable=${retryable}):`,
+        err?.message || err
+      );
+      if (!retryable || attempt === maxAttempts) break;
+      const backoffMs = Math.min(400 * 2 ** (attempt - 1), 4000) + Math.floor(Math.random() * 250);
+      await new Promise((resolve) => setTimeout(resolve, backoffMs));
+    }
+  }
+  throw lastErr;
+}
 
 // Helper to initialize Google GenAI lazily
 const getGenAIClient = getGenAI;
@@ -165,23 +247,27 @@ async function parseBufferToText(buffer: Buffer, mimeType: string = 'application
     const base64Data = buffer.toString('base64');
     const prompt = `Extract all written document text, headings, chapter titles, bullet points, and main body paragraphs from this file into clean, readable document text. Keep the structure, headings, and paragraph breaks intact. Return ONLY the extracted text content. Do not add conversational intro/outro text, and do not output raw PDF or binary code like endobj or stream.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: [
-        {
-          role: 'user',
-          parts: [
+    const { response } = await callGeminiWithResilience(
+      () =>
+        ai.models.generateContent({
+          model: 'gemini-3.6-flash',
+          contents: [
             {
-              inlineData: {
-                mimeType,
-                data: base64Data
-              }
-            },
-            { text: prompt }
+              role: 'user',
+              parts: [
+                {
+                  inlineData: {
+                    mimeType,
+                    data: base64Data
+                  }
+                },
+                { text: prompt }
+              ]
+            }
           ]
-        }
-      ]
-    });
+        }),
+      'doc-parse-buffer'
+    );
 
     const text = response.text?.trim() || '';
     if (text && text.length > 10 && !isRawPdfOrBinarySyntax(text)) {
@@ -1350,14 +1436,21 @@ app.post('/api/ai/deal-closer-generate', async (req, res) => {
     // the 5-email drip sequence tool) - clamp to a sane range either way.
     const clampedMaxTokens = Math.min(Math.max(Number(maxTokens) || 1800, 200), 4000);
 
-    const modelResponse = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: `${systemPrompt}\n\n${userPrompt}`,
-      config: {
-        temperature: 0.7,
-        maxOutputTokens: clampedMaxTokens
-      }
-    });
+    const { response: modelResponse, attempts } = await callGeminiWithResilience(
+      () =>
+        ai.models.generateContent({
+          model: 'gemini-3.6-flash',
+          contents: `${systemPrompt}\n\n${userPrompt}`,
+          config: {
+            temperature: 0.7,
+            maxOutputTokens: clampedMaxTokens
+          }
+        }),
+      'deal-closer-generate'
+    );
+    if (attempts > 1) {
+      console.log(`[Deal Closer] Generation succeeded after ${attempts} attempts (self-corrected transient failure).`);
+    }
 
     const text = modelResponse.text;
     if (!text) {

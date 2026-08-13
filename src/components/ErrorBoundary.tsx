@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AlertTriangle, RotateCcw } from 'lucide-react';
+import { recordFailure } from '../lib/systemMemory';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
@@ -42,6 +43,13 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error(`[ErrorBoundary${this.props.label ? ` — ${this.props.label}` : ''}]`, error, info.componentStack);
+    // Real persistent memory (see src/lib/systemMemory.ts) — this is the
+    // exact crash class ("Master Admin hit an error") that used to vanish
+    // the moment the tab closed. Now it's a Firestore record with a
+    // signature + occurrence count, visible in Master Admin, that survives
+    // reloads/redeploys instead of only living in whatever DevTools
+    // console happened to be open when it happened.
+    recordFailure(`render:${this.props.label || 'unlabeled'}`, error, info.componentStack?.slice(0, 300));
   }
 
   render() {
