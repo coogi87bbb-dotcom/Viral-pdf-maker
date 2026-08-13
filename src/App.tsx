@@ -14,6 +14,7 @@ import { DocEditorModal } from './components/DocEditorModal';
 import { Studio3DBackground } from './components/Studio3DBackground';
 import { MotionPanel3D } from './components/MotionPanel3D';
 import { ModeTab } from './components/ModeTab';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { LandingPage } from './components/landing/LandingPage';
 
 // Viral OS Components
@@ -495,7 +496,9 @@ function MainWorkspace() {
         /* MASTER UNIFIED OWNER ADMIN DASHBOARD (OWNER ONLY) */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
-            <AdminDashboard />
+            <ErrorBoundary label="Master Admin">
+              <AdminDashboard />
+            </ErrorBoundary>
           </MotionPanel3D>
         </div>
       ) : (
@@ -551,7 +554,9 @@ function MainWorkspace() {
 export default function App() {
   return (
     <AuthProvider>
-      <MainWorkspace />
+      <ErrorBoundary>
+        <MainWorkspace />
+      </ErrorBoundary>
     </AuthProvider>
   );
 }

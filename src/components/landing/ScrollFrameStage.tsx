@@ -91,6 +91,9 @@ function fitContain(imgW: number, imgH: number, cw: number, ch: number) {
 
 export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContainerRef }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Tiny offscreen scratch canvas reused every frame for the ambient fill
+  // below — never attached to the DOM.
+  const ambientCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
   const progressRef = useRef(0);
   const [ready, setReady] = useState(false);
@@ -114,18 +117,58 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContai
     const ch = canvas.clientHeight;
     ctx.clearRect(0, 0, cw, ch);
 
+    // Ambient cover-fit backdrop, filling the ENTIRE canvas before the sharp
+    // "contain" copy is drawn on top. Pure "contain" alone is correct for
+    // never cropping the PERA INC wordmark, but on a tall portrait viewport
+    // (mobile) a 16:9 frame fit-to-width only occupies a thin horizontal
+    // band — most of the screen was flat solid --color-lf-ink with zero
+    // video in it, which read as far more "opaque"/walled-off than desktop,
+    // where contain already nearly fills the frame. This adds video-derived
+    // colour and motion to 100% of the canvas at any aspect ratio without
+    // ever cropping the sharp copy underneath it.
+    //
+    // Downscale-then-upscale instead of ctx.filter blur: drawing into a
+    // ~32px-wide scratch canvas forces the browser's own bilinear
+    // resampling to do the blurring, then that tiny canvas is stretched
+    // back up. This is dramatically cheaper than a real blur filter (which
+    // is especially slow on mobile Safari) run every scroll-driven redraw.
+    let ambient = ambientCanvasRef.current;
+    if (!ambient) {
+      ambient = document.createElement('canvas');
+      ambient.width = 32;
+      ambient.height = 18;
+      ambientCanvasRef.current = ambient;
+    }
+    const actx = ambient.getContext('2d');
+    if (actx) {
+      actx.clearRect(0, 0, ambient.width, ambient.height);
+      actx.drawImage(frame, 0, 0, ambient.width, ambient.height);
+
+      const coverScale = Math.max(cw / ambient.width, ch / ambient.height) * 1.1;
+      const coverW = ambient.width * coverScale;
+      const coverH = ambient.height * coverScale;
+      ctx.save();
+      ctx.globalAlpha = 0.65;
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(ambient, (cw - coverW) / 2, (ch - coverH) / 2, coverW, coverH);
+      ctx.restore();
+    }
+
     const geom = fitContain(frame.naturalWidth, frame.naturalHeight, cw, ch);
     ctx.drawImage(frame, geom.dx, geom.dy, geom.dw, geom.dh);
 
-    // Feather the plate's top and bottom edges into the page. The footage's
-    // studio backdrop is mid-grey, so a "contain" fit otherwise leaves two
-    // hard horizontal seams — most obvious on mobile, where letterboxing is
-    // deep. Done on the canvas so the fade tracks the drawn rect at any
-    // viewport rather than a fixed percentage of the screen.
-    const fade = Math.min(geom.dh * 0.18, 150);
+    // Feather the sharp plate's top and bottom edges — softens the seam
+    // where the crisp "contain" image meets the blurred ambient layer
+    // behind it. Fades to TRANSPARENT, not opaque ink: the ambient layer
+    // above already fills this whole region with blurred video colour, so
+    // fading to a flat colour here would paint back over it and reintroduce
+    // the same "opaque wall" problem on mobile that the ambient layer
+    // exists to fix. Only needed at the top/bottom now — the ambient layer
+    // handles the sides.
+    const fade = Math.min(geom.dh * 0.16, 130);
     if (fade > 2) {
       const top = ctx.createLinearGradient(0, geom.dy, 0, geom.dy + fade);
-      top.addColorStop(0, '#0a0b0d');
+      top.addColorStop(0, 'rgba(10,11,13,0.75)');
       top.addColorStop(1, 'rgba(10,11,13,0)');
       ctx.fillStyle = top;
       ctx.fillRect(geom.dx, geom.dy, geom.dw, fade);
@@ -133,7 +176,7 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContai
       const bottomStart = geom.dy + geom.dh - fade;
       const bottom = ctx.createLinearGradient(0, bottomStart, 0, geom.dy + geom.dh);
       bottom.addColorStop(0, 'rgba(10,11,13,0)');
-      bottom.addColorStop(1, '#0a0b0d');
+      bottom.addColorStop(1, 'rgba(10,11,13,0.75)');
       ctx.fillStyle = bottom;
       ctx.fillRect(geom.dx, bottomStart, geom.dw, fade);
     }
