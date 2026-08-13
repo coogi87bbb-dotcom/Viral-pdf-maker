@@ -61,6 +61,29 @@ service cloud.firestore {
       allow update, delete: if isOwner();
     }
 
+    // --- System error memory ---
+    // Real, persistent failure telemetry (src/lib/systemMemory.ts) — any
+    // signed-in user's client can record/increment a failure signature
+    // (it's app-health telemetry, not sensitive data, and multiple users
+    // hitting the same bug need to accumulate into the same doc), but only
+    // the owner can read the ledger back (surfaced in Master Admin).
+    match /system_errors/{signature} {
+      allow read: if isOwner();
+      allow create, update: if isSignedIn();
+      allow delete: if isOwner();
+    }
+
+    // --- Deal Closer usage analytics ---
+    // Written by trackDealCloserUsage() (src/components/DealCloser/shared.tsx)
+    // on every tool run; read by the owner-admin analytics panel. This
+    // collection had no rule at all before — every write silently failed
+    // under the "no catch-all" default-deny below (swallowed by that
+    // function's best-effort try/catch, so it never surfaced as an error).
+    match /dealCloserUsage/{toolId} {
+      allow read: if isOwner();
+      allow create, update: if isSignedIn();
+    }
+
     // No catch-all: anything not explicitly matched above is denied by default.
   }
 }

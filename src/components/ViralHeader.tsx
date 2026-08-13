@@ -37,7 +37,6 @@ export type ActiveTab =
   | 'visuals'
   | 'blueprint'
   | 'calendar'
-  | 'gigscale'
   | 'agency'
   | 'matrix'
   | 'roi';
@@ -56,7 +55,6 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
 
   const baseTabs = [
     { id: 'campaign' as ActiveTab, label: 'Omni-Campaign Factory', icon: Sparkles, badge: '7 Networks' },
-    { id: 'gigscale' as ActiveTab, label: 'GigScale Freelance Engine', icon: Zap, badge: 'High-Ticket Gigs' },
     { id: 'pulse' as ActiveTab, label: 'Trending Topics Pulse', icon: Radio, badge: 'Google Search Live' },
     { id: 'templates' as ActiveTab, label: 'Template Vault', icon: Bookmark, badge: 'Save & Reuse' },
     { id: 'hooks' as ActiveTab, label: 'Psychological Hook Studio', icon: Target, badge: '10+ Frameworks' },

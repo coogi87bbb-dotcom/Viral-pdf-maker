@@ -274,7 +274,7 @@ function MainWorkspace() {
             <ModeTab
               icon={Flame}
               label="Viral OS Engine"
-              badge="13 AI Tools"
+              badge="12 AI Tools"
               active={appMode === 'viral-os'}
               onClick={() => setAppMode('viral-os')}
             />
@@ -430,7 +430,6 @@ function MainWorkspace() {
           <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
             <MotionPanel3D key={viralTab} delay={0.1} tiltX={10} hoverTilt={false}>
               {viralTab === 'campaign' && <CampaignGenerator initialTopic={viralTrendTopic} />}
-              {viralTab === 'gigscale' && <GigScale />}
               {viralTab === 'pulse' && <TrendingPulse onSelectTrendForCampaign={handleSelectTrendForCampaign} />}
               {viralTab === 'templates' && <TemplateLibrary onSelectTemplate={handleSelectTemplateForCampaign} />}
               {viralTab === 'hooks' && (
