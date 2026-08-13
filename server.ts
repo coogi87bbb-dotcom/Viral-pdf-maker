@@ -23,7 +23,20 @@ import path from 'path';
 import { google } from 'googleapis';
 import { GoogleGenAI, Type, Schema } from '@google/genai';
 import zlib from 'zlib';
-import { PDFParse } from 'pdf-parse';
+// NOTE: 'pdf-parse' is intentionally NOT statically imported here — same
+// reasoning as 'vite' above, and confirmed via real Vercel function logs
+// this time rather than guessed: pdf-parse pulls in pdfjs-dist's legacy
+// build, which references the global `DOMMatrix` at module-evaluation
+// time. Node has no DOMMatrix; pdfjs-dist's own polyfill loader depends on
+// the optional native `@napi-rs/canvas` package, which isn't available in
+// Vercel's function bundle, so it warns and continues — then immediately
+// crashes anyway on the first unconditional DOMMatrix reference. A static
+// top-level `import` crashed EVERY request in the whole app (including
+// completely unrelated routes like /api/health), exactly like the vite
+// bug. Loaded lazily instead, inside parsePdfBuffer()'s own try/catch
+// below, which already falls through to extractPdfStreamTextFallback()
+// and then the Gemini-vision extraction path in parseBufferToText() —
+// both of which work without pdf-parse at all.
 import mammoth from 'mammoth';
 // .js extensions required on these two — see the comment in
 // api/[...path].ts on why: package.json's "type": "module" means Vercel's
@@ -35,12 +48,14 @@ import { requireAuth } from './auth-middleware.js';
 // Safe resolver for pdf-parse v2 PDFParse class
 async function parsePdfBuffer(buffer: Buffer): Promise<{ text: string }> {
   try {
+    const { PDFParse } = await import('pdf-parse');
     const parser = new PDFParse({ data: new Uint8Array(buffer) });
     const result = await parser.getText();
     try { await parser.destroy(); } catch (e) {}
     return { text: result.text || '' };
   } catch (e1) {
     try {
+      const { PDFParse } = await import('pdf-parse');
       const Cls: any = (PDFParse as any)?.PDFParse || (PDFParse as any)?.default || PDFParse;
       const parser = new Cls({ data: new Uint8Array(buffer) });
       const result = await parser.getText();
