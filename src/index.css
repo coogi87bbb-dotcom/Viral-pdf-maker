@@ -199,13 +199,16 @@
   box-shadow: var(--shadow-elevated);
 }
 
-/* Keeps headline/body copy readable when it sits directly over the
-   scroll-driven video backdrop with little to no card fill behind it
-   (see .glass-panel and the landing feature/proof cards) — a soft drop
-   shadow on the glyphs themselves rather than a background scrim, so the
-   card underneath can stay almost invisible. */
+/* Previously a heavy glyph-level text-shadow (0 2px 16px black @ 85%) to
+   keep copy readable over the scroll-driven video backdrop. Removed on
+   request — it read as a visible black halo/shadow behind every word
+   rather than a subtle legibility aid. Legibility over the video is now
+   carried entirely by .lf-scrim (the blurred dark pool behind dense text
+   blocks) and the video's own darkening wash (see ScrollFrameStage.tsx);
+   this class is kept as a no-op rather than removed from every landing
+   file, so it stays available if a future section needs it back. */
 .text-legible {
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.85), 0 1px 3px rgba(0, 0, 0, 0.9);
+  text-shadow: none;
 }
 
 .bg-radial {
