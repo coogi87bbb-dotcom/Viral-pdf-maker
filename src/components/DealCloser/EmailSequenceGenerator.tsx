@@ -106,7 +106,7 @@ Subject: <subject line>
 ===EMAIL2END===
 (continue through EMAIL5)`;
 
-      const text = await callDealCloserAI(systemPrompt, userPrompt, 2400);
+      const text = await callDealCloserAI(systemPrompt, userPrompt);
       const parsed = parseEmailSequence(text);
       if (parsed.length === 0) {
         throw new Error('Could not parse the generated email sequence. Please try again.');

@@ -52,7 +52,7 @@ Generate a full marketing strategy package with EXACTLY these 4 labeled sections
 [${roiLabel}]: A 100-word ${isCommercial ? 'investor' : 'buyer'} ROI / profit angle.
 [${scriptLabel}]: ${isCommercial ? 'A short broker network outreach email/video script.' : 'A 30-second TikTok/Reel script with emojis.'}`;
 
-      const text = await callDealCloserAI(systemPrompt, userPrompt, 1800);
+      const text = await callDealCloserAI(systemPrompt, userPrompt);
       setResult(text);
       trackDealCloserUsage('marketing', mode);
     } catch (err: any) {
