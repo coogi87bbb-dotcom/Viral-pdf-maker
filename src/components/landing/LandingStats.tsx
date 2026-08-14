@@ -15,7 +15,7 @@ import { Reveal, CountUp } from './Reveal';
  *                 (99 + 249 + 45 + 25)
  *   - 30s       = the 7-channel campaign generation claim already made in
  *                 CompetitorDominationMatrix.tsx
- *   - 9 tools   = the shipped surface count
+ *   - 10 tools  = the shipped surface count
  * The calculator's own default preset produces far larger figures; the
  * conservative end is used here on purpose.
  */
@@ -31,7 +31,7 @@ const STATS: Stat[] = [
   { value: 9, suffix: 'hrs / wk', label: 'Reclaimed at five posts a week' },
   { value: 418, prefix: '$', suffix: '/ mo', label: 'Subscriptions replaced outright' },
   { value: 30, suffix: 'sec', label: 'For a full seven-channel campaign' },
-  { value: 9, suffix: 'tools', label: 'One workspace, one login' },
+  { value: 10, suffix: 'tools', label: 'One workspace, one login' },
 ];
 
 export const LandingStats: React.FC = () => {
