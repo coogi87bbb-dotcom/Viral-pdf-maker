@@ -23,11 +23,14 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
  * tighter, closer framing, before the fps/scale pass. Re-run that script
  * (see its own header comment) if the frames ever need regenerating.
  *
- * The plate renders at reduced opacity under a dark wash purely for text
- * legibility against the body copy that sits over every part of it — the
- * footage is already dark (averages ~rgb(48,54,57)) so it supplies most of
- * its own contrast; an aggressive scrim on top of a low canvas opacity
- * crushed it to near-black and threw the video away.
+ * The plate renders under a light dark-wash vignette (heavier at the edges
+ * than the centre) for text legibility against the body copy that sits over
+ * every part of it, but canvas opacity itself is high (0.92) rather than the
+ * originally-lower value — per direct feedback the plate should read as a
+ * vivid, prominent scroll-driven centerpiece, not a faded backdrop. An
+ * aggressive scrim stacked on TOP of a low canvas opacity previously crushed
+ * it to near-black and threw the video away; the vignette alone (no scrim)
+ * still supplies the legibility this needs.
  *
  * Fit is "contain" (`fitContain`, with a tunable anchor point) — the whole
  * figure (head to feet, and the full explosion spread mid-clip) must always
@@ -303,7 +306,14 @@ export const ScrollFrameStage: React.FC<ScrollFrameStageProps> = ({ scrollContai
           height, hiding the whole video plate. If grain texture is wanted
           here later, apply it via a plain absolutely-positioned sibling div
           instead of this utility class. */}
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-[0.72]" />
+      {/* Bumped from 0.72: per direct feedback, the plate should read as a
+          vivid, prominent scroll-driven centerpiece ("stand out when they
+          scroll"), not a faded backdrop. Combined with the background-crush
+          tuning above (extract-hero-frames.sh's BG_CRUSH, kept deliberately
+          light — see that script's comments), the subject/screens are now
+          brighter/more present while the studio backdrop still reads as
+          less of a flat gray box than the untouched source footage. */}
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full opacity-[0.92]" />
 
       {/* Wash over the plate, kept deliberately light. The footage is already
           dark (it averages ~rgb(48,54,57)), so it supplies most of its own
