@@ -10,6 +10,7 @@ import {
   GenerateButton,
   ErrorBanner,
   ResultSection,
+  SendToPdfButton,
   callDealCloserAI,
   extractSection,
   trackDealCloserUsage,
@@ -22,7 +23,11 @@ const CRE_BUYER_TYPES = ['Owner-User', 'Investor', 'Cap Rate Buyer', 'Developer'
 const BUILDING_CLASSES = ['Class A', 'Class B', 'Class C'];
 const LEASE_TYPES = ['NNN (Triple Net)', 'Gross', 'Modified Gross'];
 
-export const ListingDescriptionGenerator: React.FC = () => {
+interface ListingDescriptionGeneratorProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const ListingDescriptionGenerator: React.FC<ListingDescriptionGeneratorProps> = ({ onSendToPdf }) => {
   const mode = usePropertyMode();
   const isCommercial = mode === 'commercial';
 
@@ -139,6 +144,9 @@ Generate listing copy with EXACTLY these 4 labeled sections:
 
       {result && (
         <div className="space-y-3">
+          <SendToPdfButton
+            onClick={() => onSendToPdf(result, location ? `${location} — Listing Description` : 'Listing Description')}
+          />
           <ResultSection title="📝 Full MLS Description" content={extractSection(result, 'FULL MLS DESCRIPTION')} copyKey="mls" />
           <ResultSection title="📱 Short Version — Social / Flyers / Email" content={extractSection(result, 'SHORT VERSION')} copyKey="short" />
           <ResultSection title="💡 Headline Options" content={extractSection(result, 'HEADLINE OPTIONS')} copyKey="headlines" />

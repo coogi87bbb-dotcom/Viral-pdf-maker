@@ -190,6 +190,29 @@ function MainWorkspace() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Send generated content (Deal Closer tools, GigScale) into PDF Studio.
+  // Reuses the exact same instant-preview + background-AI-polish pipeline
+  // as importing a Google Doc/pasted text — no separate document pipeline
+  // for these tools. Always replaces whatever's currently open in PDF
+  // Studio, matching Doc Importer's existing behavior.
+  const handleSendToPdfStudio = (text: string, title: string) => {
+    handleImportAndEnhance(text, title);
+    setAppMode('pdf-studio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Same idea, but for the Underwriting Verifier's "Deal Deck" — that
+  // content is already fully structured (tables, stat rows, verdict), so
+  // it's mapped directly into DocumentData (dealDeckDataToDocument) rather
+  // than round-tripped through the raw-text importer, which would flatten
+  // its structure away.
+  const handleSendDealDeckToPdfStudio = (doc: DocumentData) => {
+    setDocument(doc);
+    applyDocumentThemeAndSettings(doc);
+    setAppMode('pdf-studio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Handlers for Viral OS
   const handleViralQuickStart = () => {
     setViralTab('campaign');
@@ -453,7 +476,7 @@ function MainWorkspace() {
         /* APP C: GIGSCALE FREELANCE & SERVICE ENGINE */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
-            <GigScale />
+            <GigScale onSendToPdf={handleSendToPdfStudio} />
           </MotionPanel3D>
         </div>
       ) : appMode === 'digital-kit' ? (
@@ -488,7 +511,10 @@ function MainWorkspace() {
         /* APP F: DEAL CLOSER — REAL ESTATE TOOLKIT (7 AI TOOLS) */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
-            <DealCloserStudio />
+            <DealCloserStudio
+              onSendToPdf={handleSendToPdfStudio}
+              onSendDealDeckToPdfStudio={handleSendDealDeckToPdfStudio}
+            />
           </MotionPanel3D>
         </div>
       ) : appMode === 'owner-admin' && user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() ? (
@@ -516,7 +542,7 @@ function MainWorkspace() {
       <DocImporter
         isOpen={isImporterOpen}
         onClose={() => setIsImporterOpen(false)}
-        onImportDoc={handleImportDocument}
+        onImportDocument={handleImportDocument}
         onImportRawText={handleImportRawText}
         onImportAndEnhance={handleImportAndEnhance}
       />

@@ -11,6 +11,7 @@ import {
   GenerateButton,
   ErrorBanner,
   ResultSection,
+  SendToPdfButton,
   callDealCloserAI,
   extractSection,
   trackDealCloserUsage,
@@ -19,7 +20,11 @@ import {
 const RES_VISITOR_TYPES = ['Mixed — Families, Investors & Neighbors', 'Luxury Buyers Only', 'Mostly First-Time Buyers', 'Investment-Focused Buyers'];
 const CRE_VISITOR_TYPES = ['Institutional Investors', 'Private Equity Buyers', 'Owner-User', 'Tenant Prospects', 'Developers & Brokers (Broker Preview)'];
 
-export const EventPlanner: React.FC = () => {
+interface EventPlannerProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const EventPlanner: React.FC<EventPlannerProps> = ({ onSendToPdf }) => {
   const mode = usePropertyMode();
   const isCommercial = mode === 'commercial';
 
@@ -124,6 +129,9 @@ Generate a full ${eventNoun} playbook with EXACTLY these 4 labeled sections:
 
       {result && (
         <div className="space-y-3">
+          <SendToPdfButton
+            onClick={() => onSendToPdf(result, address ? `${address} — Open House / Tour Plan` : 'Open House / Tour Plan')}
+          />
           <ResultSection title="💵 Budget Breakdown & ROI Allocation" content={extractSection(result, 'BUDGET BREAKDOWN')} copyKey="budget" />
           <ResultSection
             title={isCommercial ? '🎤 Complete Tour Script' : '🎤 Complete Agent Script'}

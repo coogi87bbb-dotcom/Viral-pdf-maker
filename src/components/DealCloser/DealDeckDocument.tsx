@@ -24,6 +24,7 @@
 import React from 'react';
 import type { DealStatus } from './underwritingMath';
 import { STATUS_COLOR, STATUS_LABEL } from './underwritingMath';
+import type { DocumentData, DocSection, CalloutBox } from '../../types';
 
 const NAVY = '#0f172a';
 const GOLD = '#9c7a2e';
@@ -57,6 +58,104 @@ export interface DealDeckData {
   verificationGap: { confidence: string; notes: string; flags: string[] };
   sourceDataNotes: string;
   preparedDate: string;
+}
+
+// Maps the Deal Deck's own structured data into PDF Studio's generic
+// DocumentData/DocSection model, so it can be sent into PDF Studio for
+// further editing/theming alongside every other document — deliberately
+// NOT round-tripped through parseTextIntoDocument/the AI-enhance raw-text
+// pipeline, since this data is already fully structured (tables, stat
+// rows, verdict) and flattening it to text first would just lose that
+// structure for no benefit.
+function statusToCalloutType(status: DealStatus): CalloutBox['type'] {
+  if (status === 'REJECTED') return 'warning';
+  if (status === 'APPROVED') return 'key-takeaway';
+  return 'tip'; // CONDITIONALLY_APPROVED, HOLD
+}
+
+function confidenceToCalloutType(confidence: string): CalloutBox['type'] {
+  return confidence === 'unverified' ? 'warning' : 'insight';
+}
+
+function confidenceToTitle(confidence: string): string {
+  if (confidence === 'verified') return 'Verified';
+  if (confidence === 'partial') return 'Partially Verified';
+  return 'Unverified';
+}
+
+export function dealDeckDataToDocument(deal: DealDeckData): DocumentData {
+  const sourceNotesParagraphs = deal.verificationGap.flags.length
+    ? [deal.sourceDataNotes, ...deal.verificationGap.flags.map((f) => `• ${f}`)]
+    : [deal.sourceDataNotes];
+
+  const sections: DocSection[] = [
+    {
+      id: 'deck-1',
+      chapterNumber: 1,
+      title: 'Deal Verdict',
+      paragraphs: [deal.verdictText],
+      callout: {
+        type: statusToCalloutType(deal.status),
+        title: STATUS_LABEL[deal.status],
+        content: deal.statusMeta
+      }
+    },
+    {
+      id: 'deck-2',
+      chapterNumber: 2,
+      title: 'Property Snapshot',
+      paragraphs: [],
+      bulletCards: deal.propertySnapshot.map((r) => ({ title: r.label, description: r.value }))
+    },
+    {
+      id: 'deck-3',
+      chapterNumber: 3,
+      title: 'Underwriting Calculation',
+      paragraphs: [],
+      tableData: deal.underwritingCalc
+    },
+    {
+      id: 'deck-4',
+      chapterNumber: 4,
+      title: 'Exit Strategy',
+      paragraphs: [deal.exitStrategyText],
+      tableData: deal.exitStrategyTable
+    },
+    {
+      id: 'deck-5',
+      chapterNumber: 5,
+      title: 'Comp & Repair Assumptions',
+      paragraphs: [],
+      bulletCards: deal.compAssumptions.map((r) => ({ title: r.label, description: r.value }))
+    },
+    {
+      id: 'deck-6',
+      chapterNumber: 6,
+      title: 'Verification & Source Data',
+      paragraphs: sourceNotesParagraphs,
+      callout: {
+        type: confidenceToCalloutType(deal.verificationGap.confidence),
+        title: confidenceToTitle(deal.verificationGap.confidence),
+        content: deal.verificationGap.notes
+      }
+    }
+  ];
+
+  return {
+    title: `Deal Deck — ${deal.address || deal.propertyTypeLabel}`,
+    subtitle: `${deal.propertyTypeLabel} · Prepared ${deal.preparedDate}`,
+    author: 'Deal Closer — Underwriting & Verification',
+    category: 'Investor Deal Deck',
+    keyTakeaways: [STATUS_LABEL[deal.status], deal.statusMeta, deal.exitStrategyText],
+    sections,
+    callToAction: {
+      headline: 'Ready to move on this deal?',
+      subhead: 'Share this deck with your lender, partner, or investor group.',
+      buttonText: 'Contact Agent',
+      websiteOrHandle: deal.address
+    },
+    suggestedCoverStyle: 'minimalist'
+  };
 }
 
 const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) => (
