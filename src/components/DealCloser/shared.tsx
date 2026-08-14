@@ -70,14 +70,26 @@ export async function trackDealCloserUsage(toolId: DealCloserToolId, mode: Prope
 // ---------------------------------------------------------------------------
 // AI-response section extraction (source's extractSection) + currency/percent
 // parsing helpers (source's parseCurrency/parsePercent).
+//
+// Real bug found via a screen recording ("every box is showing all the
+// information"): the model frequently prefixes each [LABEL] with a
+// markdown heading marker (e.g. `### [COMPLETE AGENT SCRIPT]`), including
+// on the very first section. The boundary lookahead below required the
+// NEXT section's `[LABEL]` to follow a newline with nothing in between —
+// it never matched against a `###`-prefixed heading, so the non-greedy
+// capture ran all the way to the end of the string instead of stopping at
+// the next section, and every box after the first ended up rendering the
+// entire remaining response. `#{0,6}\s*` tolerates that heading marker
+// (0-6 #'s covers every markdown heading level) in both the opening match
+// and the boundary lookahead.
 // ---------------------------------------------------------------------------
 export function extractSection(text: string, label: string): string {
   if (!text) return '';
-  const bracketPattern = new RegExp(`\\[${label}\\]:?\\s*([\\s\\S]*?)(?=\\n\\[[A-Z0-9 _\\/&-]+\\]:|$)`, 'i');
+  const bracketPattern = new RegExp(`#{0,6}\\s*\\[${label}\\]:?\\*{0,2}\\s*([\\s\\S]*?)(?=\\n#{0,6}\\s*\\[[A-Z0-9 _\\/&-]+\\]:?|$)`, 'i');
   const bracketMatch = text.match(bracketPattern);
   if (bracketMatch?.[1]?.trim()) return bracketMatch[1].trim();
 
-  const plainPattern = new RegExp(`${label}:?\\s*\\n?([\\s\\S]*?)(?=\\n[A-Z][A-Za-z0-9 _\\/&-]{2,40}:|$)`, 'i');
+  const plainPattern = new RegExp(`${label}:?\\s*\\n?([\\s\\S]*?)(?=\\n#{0,6}\\s*[A-Z][A-Za-z0-9 _\\/&-]{2,40}:|$)`, 'i');
   const plainMatch = text.match(plainPattern);
   if (plainMatch?.[1]?.trim()) return plainMatch[1].trim();
 
