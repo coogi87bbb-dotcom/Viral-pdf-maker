@@ -158,8 +158,18 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
       case 'side-column-notes': return 'py-8 pl-6 pr-20';
       case 'bottom-heavy': return 'pt-6 px-8 pb-16';
       case 'pocket-dense': return 'p-3 sm:p-4';
-      case 'standard':
-      default: return 'p-8 sm:p-10';
+      case 'standard': return 'p-8 sm:p-10';
+      // Unset (every freshly-created/imported document, before the user
+      // has ever touched the Page Margins control in StudioControls.tsx)
+      // used to fall through to the same generous 'standard' padding as an
+      // explicit choice — per direct feedback, imported content should use
+      // as much of the page as possible by default while staying
+      // professional, so the out-of-the-box default is now 'compact'
+      // (16px/0.5", still a normal print margin, not the more aggressive
+      // 'magazine-bleed'/'pocket-dense' options). A user who explicitly
+      // selects "Standard" from the control still gets the original wider
+      // padding above — only the unset default changed.
+      default: return 'p-4 sm:p-5';
     }
   };
 
