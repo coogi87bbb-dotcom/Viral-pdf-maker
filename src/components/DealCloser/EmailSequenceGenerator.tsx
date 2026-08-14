@@ -11,6 +11,7 @@ import {
   GenerateButton,
   ErrorBanner,
   CopyButton,
+  SendToPdfButton,
   callDealCloserAI,
   trackDealCloserUsage,
 } from './shared';
@@ -57,7 +58,20 @@ function parseEmailSequence(text: string): ParsedEmail[] {
   return emails;
 }
 
-export const EmailSequenceGenerator: React.FC = () => {
+// Combines all 5 emails into one text blob for Send to PDF Studio. Sends
+// the whole sequence, not just the currently-viewed tab — a drip sequence
+// is one deliverable, and silently dropping 4/5 emails with no visual cue
+// that content is missing would be a real correctness bug, not a
+// convenience trade-off.
+function combineEmailsForExport(emails: ParsedEmail[]): string {
+  return emails.map((e, i) => `EMAIL ${i + 1}\nSubject: ${e.subject}\n\n${e.body}`).join('\n\n---\n\n');
+}
+
+interface EmailSequenceGeneratorProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const EmailSequenceGenerator: React.FC<EmailSequenceGeneratorProps> = ({ onSendToPdf }) => {
   const mode = usePropertyMode();
   const isCommercial = mode === 'commercial';
   const leadTypes = isCommercial ? COMMERCIAL_LEAD_TYPES : RESIDENTIAL_LEAD_TYPES;
@@ -156,6 +170,10 @@ Subject: <subject line>
       </div>
 
       {emails.length > 0 && (
+        <div className="space-y-3">
+          <SendToPdfButton
+            onClick={() => onSendToPdf(combineEmailsForExport(emails), name ? `${name} — Follow-Up Email Sequence` : 'Follow-Up Email Sequence')}
+          />
         <div className="bg-surface-0 border border-white/10 rounded-2xl overflow-hidden">
           <div className="flex flex-wrap gap-1 p-2 bg-surface-2/60 border-b border-white/10">
             {emails.map((e, idx) => (
@@ -178,6 +196,7 @@ Subject: <subject line>
             </div>
             <div className="text-xs text-ink-secondary leading-[1.7] whitespace-pre-wrap">{emails[activeEmail]?.body}</div>
           </div>
+        </div>
         </div>
       )}
     </div>

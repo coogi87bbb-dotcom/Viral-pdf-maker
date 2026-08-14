@@ -11,6 +11,7 @@ import {
   GenerateButton,
   ErrorBanner,
   ResultSection,
+  SendToPdfButton,
   callDealCloserAI,
   extractSection,
   trackDealCloserUsage,
@@ -19,7 +20,11 @@ import {
 const MOTIVATION_OPTIONS = ['Unknown — Not sure', 'Low', 'Medium', 'High', 'Distressed'];
 const DEAL_TYPE_OPTIONS = ['Purchase', 'Lease'];
 
-export const NegotiationScriptGenerator: React.FC = () => {
+interface NegotiationScriptGeneratorProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const NegotiationScriptGenerator: React.FC<NegotiationScriptGeneratorProps> = ({ onSendToPdf }) => {
   const mode = usePropertyMode();
   const isCommercial = mode === 'commercial';
 
@@ -191,6 +196,9 @@ Generate a negotiation package with EXACTLY these 4 labeled sections:
 
       {result && (
         <div className="space-y-3">
+          <SendToPdfButton
+            onClick={() => onSendToPdf(result, address ? `${address} — Negotiation Script` : 'Negotiation Script')}
+          />
           <ResultSection title="⚔️ Negotiation Strategy" content={extractSection(result, 'NEGOTIATION STRATEGY')} copyKey="strategy" />
           <ResultSection title="📄 Offer Language" content={extractSection(result, 'OFFER LANGUAGE')} copyKey="language" />
           <ResultSection title="🛡️ Objection Responses" content={extractSection(result, 'OBJECTION RESPONSES')} copyKey="objections" />

@@ -31,7 +31,8 @@ import {
   Target,
   Award,
   Crown,
-  LogOut
+  LogOut,
+  FileOutput
 } from 'lucide-react';
 
 interface GigPackage {
@@ -160,7 +161,11 @@ const INITIAL_ORDERS: GigOrder[] = [
   }
 ];
 
-export const GigScale: React.FC = () => {
+interface GigScaleProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const GigScale: React.FC<GigScaleProps> = ({ onSendToPdf }) => {
   const { user, logout } = useAuth();
   const isOwner = user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase();
 
@@ -974,22 +979,31 @@ GigScale VIP Creator`);
                   <span>Generated Pitch Script</span>
                 </h3>
                 {generatedPitch && (
-                  <button
-                    onClick={copyPitchToClipboard}
-                    className="px-3 py-1 rounded-lg bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
-                  >
-                    {copiedPitch ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-emerald-400" />
-                        <span>Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="h-3.5 w-3.5" />
-                        <span>Copy Pitch</span>
-                      </>
-                    )}
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={copyPitchToClipboard}
+                      className="px-3 py-1 rounded-lg bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                    >
+                      {copiedPitch ? (
+                        <>
+                          <Check className="h-3.5 w-3.5 text-emerald-400" />
+                          <span>Copied!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3.5 w-3.5" />
+                          <span>Copy Pitch</span>
+                        </>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => onSendToPdf(generatedPitch, clientNiche ? `${clientNiche} — Client Pitch` : 'Client Pitch')}
+                      className="px-3 py-1 rounded-lg bg-surface-2 border border-accent-rosegold-400/40 hover:border-accent-rosegold-400 hover:bg-accent-rosegold-500/10 text-accent-rosegold-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
+                    >
+                      <FileOutput className="h-3.5 w-3.5" />
+                      <span>Send to PDF Studio</span>
+                    </button>
+                  </div>
                 )}
               </div>
 

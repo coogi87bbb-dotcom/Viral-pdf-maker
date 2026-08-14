@@ -19,6 +19,7 @@ import {
   FieldLabel,
   GenerateButton,
   ErrorBanner,
+  SendToPdfButton,
   trackDealCloserUsage,
 } from './shared';
 import { apiPostJson } from '../../lib/apiClient';
@@ -40,7 +41,8 @@ import {
   type RepositionCostItem,
   type DealStatus,
 } from './underwritingMath';
-import { DealDeckDocument, type DealDeckData } from './DealDeckDocument';
+import { DealDeckDocument, dealDeckDataToDocument, type DealDeckData } from './DealDeckDocument';
+import type { DocumentData } from '../../types';
 
 type UnderwritingType = 'residential' | 'commercial-income' | 'commercial-reposition';
 
@@ -81,7 +83,11 @@ const CONFIDENCE_STYLE: Record<VerificationResult['confidence'], { icon: React.E
   unverified: { icon: ShieldAlert, className: 'text-rose-400 bg-rose-500/10 border-rose-500/30', label: 'Unverified' },
 };
 
-export const UnderwritingVerifier: React.FC = () => {
+interface UnderwritingVerifierProps {
+  onSendDealDeckToPdfStudio: (doc: DocumentData) => void;
+}
+
+export const UnderwritingVerifier: React.FC<UnderwritingVerifierProps> = ({ onSendDealDeckToPdfStudio }) => {
   const mode = usePropertyMode();
   void mode; // read via context for consistency; this tool drives its own 3-way type below
 
@@ -596,6 +602,12 @@ export const UnderwritingVerifier: React.FC = () => {
             {exportingPdf ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="h-4 w-4" />}
             {exportingPdf ? 'Exporting…' : 'Download PDF'}
           </button>
+        )}
+        {showDeck && (
+          <SendToPdfButton
+            label="Send Deck to PDF Studio"
+            onClick={() => onSendDealDeckToPdfStudio(dealDeckDataToDocument(buildDeckData()))}
+          />
         )}
       </div>
       {exportError && <ErrorBanner message={exportError} />}

@@ -5,7 +5,7 @@
 // against this app's design tokens (surface ladder, rosegold accents)
 // rather than the source's dark-gold Playfair aesthetic.
 import React, { createContext, useCallback, useContext, useRef, useState } from 'react';
-import { Mic, Copy, Check, Loader2, AlertTriangle } from 'lucide-react';
+import { Mic, Copy, Check, Loader2, AlertTriangle, FileOutput } from 'lucide-react';
 import { apiPostJson } from '../../lib/apiClient';
 import { db, doc, setDoc, increment, serverTimestamp } from '../../lib/firebase';
 import type { PropertyMode, DealCloserToolId } from './types';
@@ -152,6 +152,23 @@ export const CopyButton: React.FC<{ text: string; copyKey: string }> = ({ text, 
     </button>
   );
 };
+
+// ---------------------------------------------------------------------------
+// Sends a tool's generated output into PDF Studio for editing/export as a
+// professional PDF — reuses the app's existing raw-text import + AI-polish
+// pipeline (App.tsx's handleSendToPdfStudio), so this button is just the
+// trigger; the actual document construction lives there, not here.
+// ---------------------------------------------------------------------------
+export const SendToPdfButton: React.FC<{ onClick: () => void; label?: string }> = ({ onClick, label = 'Send to PDF Studio' }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-2 border border-accent-rosegold-400/40 hover:border-accent-rosegold-400 hover:bg-accent-rosegold-500/10 text-accent-rosegold-300 text-xs font-bold transition-colors active:scale-[0.98] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
+  >
+    <FileOutput className="h-3.5 w-3.5" />
+    <span>{label}</span>
+  </button>
+);
 
 // ---------------------------------------------------------------------------
 // Voice input (source's mic button on any text/textarea field) via the Web

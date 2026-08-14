@@ -18,6 +18,7 @@ import { ListingDescriptionGenerator } from './ListingDescriptionGenerator';
 import { EventPlanner } from './EventPlanner';
 import { TransactionTimeline } from './TransactionTimeline';
 import { UnderwritingVerifier } from './UnderwritingVerifier';
+import type { DocumentData } from '../../types';
 
 const TOOLS: { id: DealCloserToolId; label: string; icon: React.ElementType }[] = [
   { id: 'commission', label: 'Commission Calculator', icon: Crown },
@@ -32,7 +33,12 @@ const TOOLS: { id: DealCloserToolId; label: string; icon: React.ElementType }[] 
 
 const FOCUS_RING = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400';
 
-export const DealCloserStudio: React.FC = () => {
+interface DealCloserStudioProps {
+  onSendToPdf: (text: string, title: string) => void;
+  onSendDealDeckToPdfStudio: (doc: DocumentData) => void;
+}
+
+export const DealCloserStudio: React.FC<DealCloserStudioProps> = ({ onSendToPdf, onSendDealDeckToPdfStudio }) => {
   const [activeTool, setActiveTool] = useState<DealCloserToolId>('commission');
   const [mode, setMode] = useState<'residential' | 'commercial'>('residential');
 
@@ -104,13 +110,13 @@ export const DealCloserStudio: React.FC = () => {
       <PropertyModeProvider value={mode}>
         <div className="bg-surface-2/50 border border-hairline rounded-2xl p-5">
           {activeTool === 'commission' && <CommissionCalculator />}
-          {activeTool === 'marketing' && <MarketingCopyGenerator />}
-          {activeTool === 'negotiation' && <NegotiationScriptGenerator />}
-          {activeTool === 'emailSequence' && <EmailSequenceGenerator />}
-          {activeTool === 'listingDescription' && <ListingDescriptionGenerator />}
-          {activeTool === 'eventPlanner' && <EventPlanner />}
+          {activeTool === 'marketing' && <MarketingCopyGenerator onSendToPdf={onSendToPdf} />}
+          {activeTool === 'negotiation' && <NegotiationScriptGenerator onSendToPdf={onSendToPdf} />}
+          {activeTool === 'emailSequence' && <EmailSequenceGenerator onSendToPdf={onSendToPdf} />}
+          {activeTool === 'listingDescription' && <ListingDescriptionGenerator onSendToPdf={onSendToPdf} />}
+          {activeTool === 'eventPlanner' && <EventPlanner onSendToPdf={onSendToPdf} />}
           {activeTool === 'timeline' && <TransactionTimeline />}
-          {activeTool === 'underwriting' && <UnderwritingVerifier />}
+          {activeTool === 'underwriting' && <UnderwritingVerifier onSendDealDeckToPdfStudio={onSendDealDeckToPdfStudio} />}
         </div>
       </PropertyModeProvider>
     </div>

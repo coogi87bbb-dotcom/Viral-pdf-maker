@@ -9,12 +9,17 @@ import {
   GenerateButton,
   ErrorBanner,
   ResultSection,
+  SendToPdfButton,
   callDealCloserAI,
   extractSection,
   trackDealCloserUsage,
 } from './shared';
 
-export const MarketingCopyGenerator: React.FC = () => {
+interface MarketingCopyGeneratorProps {
+  onSendToPdf: (text: string, title: string) => void;
+}
+
+export const MarketingCopyGenerator: React.FC<MarketingCopyGeneratorProps> = ({ onSendToPdf }) => {
   const mode = usePropertyMode();
   const isCommercial = mode === 'commercial';
 
@@ -96,6 +101,9 @@ Generate a full marketing strategy package with EXACTLY these 4 labeled sections
 
       {result && (
         <div className="space-y-3">
+          <SendToPdfButton
+            onClick={() => onSendToPdf(result, neighborhood ? `${neighborhood} — Marketing & Strategy Package` : 'Marketing & Strategy Package')}
+          />
           <ResultSection title="📊 SEO Strategy" content={extractSection(result, 'SEO STRATEGY')} copyKey="seo" />
           <ResultSection title="🏆 Market Positioning Pitch" content={extractSection(result, 'MARKET POSITIONING PITCH')} copyKey="positioning" />
           <ResultSection

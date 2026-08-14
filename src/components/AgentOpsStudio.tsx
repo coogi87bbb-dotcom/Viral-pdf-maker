@@ -30,7 +30,7 @@ import {
   Server
 } from 'lucide-react';
 import { selfHealingEngine, SelfHealingEvent, BackendTelemetryData } from '../utils/selfHealingEngine';
-import { DocumentData, StudioSettings } from '../types';
+import { DocumentData, DocSection, StudioSettings } from '../types';
 
 interface AgentOpsStudioProps {
   document: DocumentData;
@@ -184,41 +184,42 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
   };
 
   // Apply Agent Output to Active Document
+  //
+  // Bug fix: this used to build sections shaped {id, title, content, layout,
+  // style} — none of which exist on the real DocSection type (paragraphs,
+  // callout, bulletCards, tableData). PdfCanvas.tsx renders
+  // section.paragraphs.map(...) unguarded, so applying agent output threw
+  // at render (paragraphs was undefined). It also spread an `updatedAt`
+  // field onto DocumentData, which has no such field. Fixed to build real
+  // DocSection objects (paragraphs: string[], split on blank lines rather
+  // than dumped into one oversized paragraph) and typed the array
+  // explicitly as DocSection[] so a future edit to this function is
+  // actually caught by tsc rather than silently passing like this one did.
   const applyOutputToDocument = () => {
     if (!agentOutput || !onUpdateDocument) return;
     setIsApplyingToDoc(true);
 
-    const updatedSections = [...document.sections];
-    if (selectedAgent === 'docmaster') {
-      updatedSections.unshift({
-        id: `sec-agent-${Date.now()}`,
-        title: '📖 E-Book Blueprint & Chapters',
-        content: agentOutput,
-        layout: 'full',
-        style: 'callout'
-      });
-    } else if (selectedAgent === 'copywriter') {
-      updatedSections.unshift({
-        id: `sec-agent-${Date.now()}`,
-        title: '✉️ Direct-Response Sales Copy Sequence',
-        content: agentOutput,
-        layout: 'full',
-        style: 'modern'
-      });
-    } else {
-      updatedSections.push({
-        id: `sec-agent-${Date.now()}`,
-        title: `🤖 ${getAgentTitle(selectedAgent)} Output`,
-        content: agentOutput,
-        layout: 'full',
-        style: 'standard'
-      });
-    }
+    const buildSection = (title: string): DocSection => ({
+      id: `sec-agent-${Date.now()}`,
+      title,
+      paragraphs: agentOutput.split(/\n\n+/).map((p) => p.trim()).filter(Boolean)
+    });
+
+    const newSection =
+      selectedAgent === 'docmaster'
+        ? buildSection('📖 E-Book Blueprint & Chapters')
+        : selectedAgent === 'copywriter'
+        ? buildSection('✉️ Direct-Response Sales Copy Sequence')
+        : buildSection(`🤖 ${getAgentTitle(selectedAgent)} Output`);
+
+    const updatedSections: DocSection[] =
+      selectedAgent === 'docmaster' || selectedAgent === 'copywriter'
+        ? [newSection, ...document.sections]
+        : [...document.sections, newSection];
 
     onUpdateDocument({
       ...document,
-      sections: updatedSections,
-      updatedAt: new Date().toISOString()
+      sections: updatedSections
     });
 
     setTimeout(() => {
