@@ -1421,7 +1421,12 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
               <label className="block text-[11px] font-semibold text-ink-muted">Page Margins & Padding ({pageMargins.length} Styles)</label>
               <div className="max-h-40 overflow-y-auto pr-1 grid grid-cols-2 gap-1.5 rounded-xl border border-hairline bg-surface-0 p-2">
                 {pageMargins.map((m) => {
-                  const active = (settings.pageMargin || 'standard') === m.id;
+                  // Unset pageMargin now actually renders 'compact' padding
+                  // (see PdfCanvas.tsx's getMarginClass default case) — this
+                  // highlight has to agree with that or a freshly-imported
+                  // document would show "Standard" as selected while every
+                  // page visibly renders Compact's tighter margins.
+                  const active = (settings.pageMargin || 'compact') === m.id;
                   return (
                     <button
                       key={m.id}
