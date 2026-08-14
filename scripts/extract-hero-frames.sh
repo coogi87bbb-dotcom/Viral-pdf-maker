@@ -14,23 +14,28 @@
 #      reaches close to the very top of the frame in several frames; a vertical
 #      crop risks clipping it, but there's comfortable horizontal margin on both
 #      sides throughout the whole clip.
-#   3. curves  — crushes the source's lit studio backdrop toward black so it
-#      blends into the page's ink background (--color-lf-ink: #0a0b0d) instead
-#      of reading as a visible gray box. Measured directly against source
-#      pixels: the backdrop is a real lighting gradient, not a flat/keyable
-#      color — dark on the right (~RGB 10-20, already close to ink) but a
-#      distinct mid-gray on the left (~RGB 70-105, the part that actually read
-#      as "gray" against the page). A hard chromakey was ruled out: the subject
-#      itself is a dark/near-black metallic figure in a similar luminance range
-#      to the backdrop, so a similarity-based key risked eating into it too.
-#      This curve (0/0 -> 0.43/0.02 -> 1/1) instead crushes everything up to
-#      ~110/255 toward black while leaving bright content (the cyan UI
-#      screens, ~200-255) essentially untouched — verified directly against
-#      source pixels: 255->255, 254->254, worst case ~200->190 on the dimmest
-#      sampled cyan, vs. the backdrop's 70-105 range crushing to 0-3. Placed
-#      after delogo+crop (not before) so delogo's own blend-into-surrounding-
-#      gradient logic still operates on the original graded footage it was
-#      tuned against.
+#   3. curves  — dims the source's lit studio backdrop so it recedes toward
+#      the page's ink background (--color-lf-ink: #0a0b0d) instead of reading
+#      as a visible gray box. Measured directly against source pixels: the
+#      backdrop is a real lighting gradient, not a flat/keyable color — dark
+#      on the right (~RGB 10-20, already close to ink) but a distinct
+#      mid-gray on the left (~RGB 70-105, the part that actually read as
+#      "gray" against the page). A hard chromakey was ruled out: the subject
+#      itself is a dark/near-black metallic figure in a similar luminance
+#      range to the backdrop, so a similarity-based key risked eating into it
+#      too. An earlier version of this curve (0/0 -> 0.43/0.02 -> 1/1) crushed
+#      that whole low-mid range toward pure black — which also erased the
+#      subject's own shadow gradation in the same range (verified: a
+#      subject shadow point at baseline RGB 25-34 was crushing to 0-1) and
+#      read as "the video is too dark" overall, not just a fixed background.
+#      This gentler curve (0/0 -> 0.3/0.13 -> 0.6/0.45 -> 1/1) instead dims
+#      the backdrop moderately (verified: ~70-97 -> ~28-52, still visibly
+#      darker/less gray without going to near-black) while mostly preserving
+#      subject shadow detail (~25-34 -> ~7-10, not crushed to 0) and leaving
+#      bright content (the cyan UI screens, ~250+) essentially untouched.
+#      Placed after delogo+crop (not before) so delogo's own blend-into-
+#      surrounding-gradient logic still operates on the original graded
+#      footage it was tuned against.
 #   4. fps + scale — unchanged cadence/target size from the original extraction.
 #
 # Re-run with --preview first after changing any of the constants below to sanity
@@ -59,7 +64,7 @@ DELOGO="x=95:y=515:w=680:h=145:show=0"
 CROP="1400:1080:260:0"
 
 # --- background crush (see rationale above) ----------------------------------
-BG_CRUSH="curves=all='0/0 0.43/0.02 1/1'"
+BG_CRUSH="curves=all='0/0 0.3/0.13 0.6/0.45 1/1'"
 
 FFMPEG_BIN="$(node -e "console.log(require('ffmpeg-static'))" 2>/dev/null || true)"
 if [ -z "$FFMPEG_BIN" ] || [ ! -x "$FFMPEG_BIN" ]; then
