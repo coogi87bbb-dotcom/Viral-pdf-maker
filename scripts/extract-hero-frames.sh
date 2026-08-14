@@ -23,16 +23,17 @@
 #      "gray" against the page). A hard chromakey was ruled out: the subject
 #      itself is a dark/near-black metallic figure in a similar luminance
 #      range to the backdrop, so a similarity-based key risked eating into it
-#      too. An earlier version of this curve (0/0 -> 0.43/0.02 -> 1/1) crushed
-#      that whole low-mid range toward pure black — which also erased the
-#      subject's own shadow gradation in the same range (verified: a
-#      subject shadow point at baseline RGB 25-34 was crushing to 0-1) and
-#      read as "the video is too dark" overall, not just a fixed background.
-#      This gentler curve (0/0 -> 0.3/0.13 -> 0.6/0.45 -> 1/1) instead dims
-#      the backdrop moderately (verified: ~70-97 -> ~28-52, still visibly
-#      darker/less gray without going to near-black) while mostly preserving
-#      subject shadow detail (~25-34 -> ~7-10, not crushed to 0) and leaving
-#      bright content (the cyan UI screens, ~250+) essentially untouched.
+#      too. Two earlier, progressively gentler versions of this curve were
+#      both reported as "too dark" overall (not just the background fixed):
+#        v1 (0/0 -> 0.43/0.02 -> 1/1): crushed backdrop 70-97 -> 0-3,
+#           subject shadow 25-34 -> 0-1 (erased almost entirely).
+#        v2 (0/0 -> 0.3/0.13 -> 0.6/0.45 -> 1/1): backdrop 70-97 -> 28-52,
+#           subject shadow 25-34 -> 7-10 (still crushed most of the way).
+#      This third, much subtler curve (0/0 -> 0.4/0.28 -> 1/1) only dims
+#      the backdrop to roughly 60-65% of its original brightness (verified:
+#      ~70-97 -> ~44-66) and leaves subject shadow mostly intact
+#      (~25-34 -> ~14-20, closer to half rather than near-zero). Bright
+#      content (the cyan UI screens, ~250+) still essentially untouched.
 #      Placed after delogo+crop (not before) so delogo's own blend-into-
 #      surrounding-gradient logic still operates on the original graded
 #      footage it was tuned against.
@@ -64,7 +65,7 @@ DELOGO="x=95:y=515:w=680:h=145:show=0"
 CROP="1400:1080:260:0"
 
 # --- background crush (see rationale above) ----------------------------------
-BG_CRUSH="curves=all='0/0 0.3/0.13 0.6/0.45 1/1'"
+BG_CRUSH="curves=all='0/0 0.4/0.28 1/1'"
 
 FFMPEG_BIN="$(node -e "console.log(require('ffmpeg-static'))" 2>/dev/null || true)"
 if [ -z "$FFMPEG_BIN" ] || [ ! -x "$FFMPEG_BIN" ]; then
