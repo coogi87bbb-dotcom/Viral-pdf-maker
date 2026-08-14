@@ -30,7 +30,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
           LogFlow<span className="text-lf-copper"> AI</span>
         </span>
         <span className="lf-label hidden text-lf-on-ink-muted text-legible sm:inline">
-          Nine tools · One workspace
+          Ten tools · One workspace
         </span>
       </Reveal>
 
