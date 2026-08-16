@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { OWNER_EMAIL } from '../lib/firebase';
+import { isLikelyInAppBrowser } from '../utils/browserEnv';
 import { ModalShell } from './ui/ModalShell';
 import { Button } from './ui/Button';
 import {
@@ -13,7 +14,8 @@ import {
   ArrowRight,
   ArrowLeft,
   Award,
-  Zap
+  Zap,
+  ExternalLink
 } from 'lucide-react';
 
 interface AuthModalProps {
@@ -35,6 +37,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onBack }) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+
+  // Instagram/TikTok/Facebook/etc.'s built-in "mini browser" WebViews
+  // routinely break Firebase's signInWithRedirect Google flow with a cryptic
+  // "missing initial state" error (their WebView doesn't reliably carry
+  // sessionStorage across the full-page trip to Google and back) — and that
+  // failure renders on Firebase's own hosted page, before control ever
+  // returns to this component, so it can't be caught and retried here. The
+  // only real fix is warning up front and pointing at email/password
+  // sign-in instead, which never leaves this page.
+  const inAppBrowser = useMemo(() => isLikelyInAppBrowser(), []);
 
   const handleGoogleSignIn = async () => {
     setError(null);
@@ -145,6 +157,21 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onBack }) => {
             <div className="space-y-1">
               <span className="font-bold text-red-200">Access Error</span>
               <p>{error || authError}</p>
+            </div>
+          </div>
+        )}
+
+        {inAppBrowser && (
+          <div className="p-3.5 rounded-2xl bg-accent-amber-500/10 border border-accent-amber-500/30 text-amber-200 text-xs flex items-start gap-2.5">
+            <ExternalLink className="h-4 w-4 text-accent-amber-400 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <span className="font-bold text-accent-amber-300">Google sign-in won't work in this in-app browser</span>
+              <p className="text-ink-secondary">
+                Apps like Instagram, TikTok, and Facebook open links in a limited built-in browser that blocks Google
+                sign-in. Tap the <span className="font-semibold text-ink-primary">⋯ / share menu</span> and choose
+                "Open in Browser" (Safari or Chrome) — or just sign in with email and password below, which works
+                here too.
+              </p>
             </div>
           </div>
         )}

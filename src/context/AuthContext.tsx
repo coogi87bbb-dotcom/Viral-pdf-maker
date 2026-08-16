@@ -20,6 +20,7 @@ import {
   addDoc,
   collection
 } from '../lib/firebase';
+import { isEmbeddedInIframe } from '../utils/browserEnv';
 
 interface AuthContextType {
   user: FirebaseUser | null;
@@ -221,19 +222,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUserProfile(profile);
 
     logActivity(u.uid, cleanEmail, 'User logged in');
-  };
-
-  // Environments that embed the app in a cross-origin iframe (e.g. Google
-  // AI Studio's preview) routinely block window.open, so a popup there is
-  // doomed before we even try it — go straight to redirect in that case.
-  const isEmbeddedInIframe = () => {
-    try {
-      return window.top !== window.self;
-    } catch {
-      // Cross-origin access to window.top throws, which itself confirms
-      // we're embedded in a frame we don't control.
-      return true;
-    }
   };
 
   // Note: auth/unauthorized-domain is deliberately excluded — it's a
