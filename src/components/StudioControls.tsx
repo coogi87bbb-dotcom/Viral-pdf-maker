@@ -268,7 +268,12 @@ export const StudioControls: React.FC<StudioControlsProps> = ({
   return (
     <div
       id="studio-controls-bar"
-      className="w-full bg-surface-1 border border-hairline rounded-3xl text-ink-secondary flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] shadow-[var(--shadow-floating)] overflow-hidden select-none"
+      // 160px reserves space for Header.tsx + GuidedStepper's stacked
+      // height (measured ~127px at desktop) plus `main`'s own vertical
+      // padding — was 210px when a separate global top nav sat above
+      // Header.tsx; that nav is now the left Sidebar, which doesn't
+      // consume top-of-viewport height at sm+, so the reserve shrank.
+      className="w-full bg-surface-1 border border-hairline rounded-3xl text-ink-secondary flex flex-col h-[calc(100vh-160px)] min-h-[660px] max-h-[880px] shadow-[var(--shadow-floating)] overflow-hidden select-none"
     >
       {/* Controls Header */}
       <div className="p-3.5 border-b border-hairline flex items-center justify-between bg-surface-0/90 shrink-0 z-20 backdrop-blur-md">

@@ -29,7 +29,9 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleSplitScreen
 }) => {
   return (
-    <header id="app-header" className="bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary sticky top-0 z-30 shadow-[var(--shadow-elevated)]">
+    // top-14 on mobile clears the Sidebar's fixed mobile top bar (h-14);
+    // sm:top-0 because that bar only exists <sm — see Sidebar.tsx.
+    <header id="app-header" className="bg-surface-1/80 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary sticky top-14 sm:top-0 z-30 shadow-[var(--shadow-elevated)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand & Document Name */}
         <div className="flex items-center space-x-3 min-w-0">

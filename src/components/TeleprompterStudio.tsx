@@ -506,13 +506,13 @@ export const TeleprompterStudio: React.FC = () => {
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-semibold text-cyan-300 mb-2">
-              <Film className="h-4 w-4 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+              <Film className="h-4 w-4 text-accent-brass-400" />
               <span>Studio Video Teleprompter & Recording Suite</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               <span>Teleprompter Studio Pro</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold tracking-normal uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-400 to-accent-brass-600 text-white font-bold tracking-normal uppercase">
                 v10.0 HD
               </span>
             </h2>
@@ -528,7 +528,7 @@ export const TeleprompterStudio: React.FC = () => {
               <div className="text-[10px] text-ink-muted uppercase font-bold">Pacing Speed</div>
             </div>
             <div className="px-3 py-1 text-center border-r border-white/10">
-              <div className="text-base font-black text-cyan-400">{scriptData.targetDurationSeconds}s</div>
+              <div className="text-base font-black text-accent-brass-400">{scriptData.targetDurationSeconds}s</div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">Est. Duration</div>
             </div>
             <div className="px-3 py-1 text-center">
@@ -553,7 +553,7 @@ export const TeleprompterStudio: React.FC = () => {
                   setPlatform(preset.platform);
                   setVideoLength(preset.length);
                 }}
-                className="p-2.5 rounded-xl bg-surface-1 border border-white/10 hover:border-cyan-500/50 hover:bg-surface-2 text-[11px] font-bold text-ink-secondary transition-colors text-left truncate"
+                className="p-2.5 rounded-xl bg-surface-1 border border-white/10 hover:border-accent-brass-500/50 hover:bg-surface-2 text-[11px] font-bold text-ink-secondary transition-colors text-left truncate"
               >
                 {preset.label}
               </button>
@@ -571,7 +571,7 @@ export const TeleprompterStudio: React.FC = () => {
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-cyan-500"
+              className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500"
               placeholder="e.g. 3 AI prompts that double cold email conversions"
               required
             />
@@ -584,7 +584,7 @@ export const TeleprompterStudio: React.FC = () => {
             <select
               value={videoLength}
               onChange={(e) => setVideoLength(e.target.value)}
-              className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-cyan-500 font-semibold"
+              className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
             >
               <option value="15 seconds">15 Seconds (Super Short Hook)</option>
               <option value="30 seconds">30 Seconds (Ultra Punchy)</option>
@@ -598,7 +598,7 @@ export const TeleprompterStudio: React.FC = () => {
             <button
               type="submit"
               disabled={loading || !topic.trim()}
-              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-violet-600 hover:from-cyan-500 hover:via-blue-500 hover:to-violet-500 text-white font-black text-xs shadow-lg shadow-cyan-600/25 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:from-accent-brass-400 hover:via-accent-brass-300 hover:to-accent-brass-400 text-white font-black text-xs shadow-[var(--shadow-glow-brass)] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
             >
               <Sparkles className="h-4 w-4 text-accent-amber-300" />
               <span>{loading ? 'AI Directing Script...' : 'Generate Teleprompter Script'}</span>
@@ -653,7 +653,7 @@ export const TeleprompterStudio: React.FC = () => {
                     onClick={() => setIsWebcamMirrored(!isWebcamMirrored)}
                     title="Mirror Flip Camera"
                     className={`p-1.5 rounded-lg border text-xs font-bold transition-colors ${
-                      isWebcamMirrored ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30' : 'bg-surface-2 border-white/15 text-ink-muted'
+                      isWebcamMirrored ? 'bg-accent-brass-500/20 text-accent-brass-300 border-accent-brass-500/30' : 'bg-surface-2 border-white/15 text-ink-muted'
                     }`}
                   >
                     <FlipHorizontal className="h-4 w-4" />
@@ -665,12 +665,12 @@ export const TeleprompterStudio: React.FC = () => {
                   <button
                     onClick={toggleVoiceFollow}
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors ${
-                      isVoiceFollowActive 
-                        ? 'bg-violet-500/20 text-violet-300 border border-violet-500/30 animate-pulse' 
+                      isVoiceFollowActive
+                        ? 'bg-accent-brass-500/20 text-accent-brass-300 border border-accent-brass-500/30 animate-pulse'
                         : 'bg-surface-2 hover:bg-slate-700 text-ink-secondary'
                     }`}
                   >
-                    {isVoiceFollowActive ? <Mic className="h-4 w-4 text-violet-400" /> : <MicOff className="h-4 w-4 text-ink-muted" />}
+                    {isVoiceFollowActive ? <Mic className="h-4 w-4 text-accent-brass-400" /> : <MicOff className="h-4 w-4 text-ink-muted" />}
                     <span>{isVoiceFollowActive ? 'Voice Tracking ON' : 'Voice-Follow Mode'}</span>
                   </button>
                 )}
@@ -701,7 +701,7 @@ export const TeleprompterStudio: React.FC = () => {
                 onClick={handleCopyScript}
                 className="px-3 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
               >
-                {copiedScript ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-cyan-400" />}
+                {copiedScript ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
                 <span>{copiedScript ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
@@ -744,7 +744,7 @@ export const TeleprompterStudio: React.FC = () => {
             {/* Microphone Audio VU Meter Bar */}
             {isWebcamActive && (
               <div className="absolute top-4 right-4 z-30 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-0/80 border border-white/10 text-[10px] font-mono font-bold text-ink-secondary">
-                <Volume2 className="h-3.5 w-3.5 text-cyan-400" />
+                <Volume2 className="h-3.5 w-3.5 text-accent-brass-400" />
                 <span>MIC LEVEL</span>
                 <div className="w-16 h-2 bg-surface-2 rounded-full overflow-hidden">
                   <div 
@@ -776,7 +776,7 @@ export const TeleprompterStudio: React.FC = () => {
                     {/* Scene Cue Header */}
                     <div className="flex flex-wrap items-center justify-between gap-2 mb-3 font-mono text-xs">
                       <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30">
+                        <span className="px-2.5 py-1 rounded bg-accent-brass-500/20 text-accent-brass-300 font-bold border border-accent-brass-500/30">
                           ⏱️ {segment.timeMarker}
                         </span>
                         <span className="px-2.5 py-1 rounded bg-accent-amber-500/20 text-accent-amber-300 font-bold border border-amber-500/30 uppercase">
@@ -799,7 +799,7 @@ export const TeleprompterStudio: React.FC = () => {
                             updated[idx].spokenText = e.target.value;
                             setScriptData({ ...scriptData, segments: updated });
                           }}
-                          className="w-full bg-surface-0 border border-cyan-500 p-3 rounded-xl text-white text-base focus:outline-none"
+                          className="w-full bg-surface-0 border border-accent-brass-500 p-3 rounded-xl text-white text-base focus:outline-none"
                           rows={3}
                         />
                         <button
@@ -812,7 +812,7 @@ export const TeleprompterStudio: React.FC = () => {
                     ) : (
                       <p 
                         onClick={() => setEditingSegmentIdx(idx)}
-                        className={`font-semibold cursor-pointer hover:text-cyan-300 transition-colors ${fontSizeClasses[fontSize]}`}
+                        className={`font-semibold cursor-pointer hover:text-accent-brass-300 transition-colors ${fontSizeClasses[fontSize]}`}
                         title="Click to edit segment text"
                       >
                         &quot;{segment.spokenText}&quot;
@@ -852,7 +852,7 @@ export const TeleprompterStudio: React.FC = () => {
             {/* Pacing WPM Speed Slider */}
             <div className="flex items-center gap-3 bg-surface-0 p-2 px-4 rounded-2xl border border-white/10">
               <span className="text-ink-muted font-bold uppercase text-[10px] flex items-center gap-1">
-                <Gauge className="h-3.5 w-3.5 text-cyan-400" />
+                <Gauge className="h-3.5 w-3.5 text-accent-brass-400" />
                 <span>Speed:</span>
               </span>
               <input
@@ -862,9 +862,9 @@ export const TeleprompterStudio: React.FC = () => {
                 step={5}
                 value={scrollSpeedWpm}
                 onChange={(e) => setScrollSpeedWpm(Number(e.target.value))}
-                className="w-24 accent-cyan-500 cursor-pointer"
+                className="w-24 accent-[var(--color-accent-brass-500)] cursor-pointer"
               />
-              <span className="font-mono font-bold text-cyan-300 w-16 text-right">
+              <span className="font-mono font-bold text-accent-brass-300 w-16 text-right">
                 {scrollSpeedWpm} WPM
               </span>
             </div>
@@ -877,7 +877,7 @@ export const TeleprompterStudio: React.FC = () => {
                   key={sz}
                   onClick={() => setFontSize(sz)}
                   className={`px-2 py-1 rounded-lg uppercase font-bold text-[10px] transition-colors ${
-                    fontSize === sz ? 'bg-cyan-500 text-slate-950' : 'bg-surface-2 text-ink-muted hover:bg-slate-700'
+                    fontSize === sz ? 'bg-accent-brass-500 text-slate-950' : 'bg-surface-2 text-ink-muted hover:bg-slate-700'
                   }`}
                 >
                   {sz}
@@ -892,7 +892,7 @@ export const TeleprompterStudio: React.FC = () => {
           {/* Display & Hardware Mirror Settings Card */}
           <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-5">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2 border-b border-white/10 pb-3">
-              <Sliders className="h-4 w-4 text-cyan-400" />
+              <Sliders className="h-4 w-4 text-accent-brass-400" />
               <span>Studio Display & Hardware Controls</span>
             </h3>
 
@@ -923,7 +923,7 @@ export const TeleprompterStudio: React.FC = () => {
                 <button
                   onClick={() => setTheme('studio')}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-between ${
-                    theme === 'studio' ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    theme === 'studio' ? 'bg-accent-brass-400/20 border-accent-brass-400 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   <span>⚪ Studio Crisp White</span>
@@ -932,7 +932,7 @@ export const TeleprompterStudio: React.FC = () => {
                 <button
                   onClick={() => setTheme('subtitle')}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-between ${
-                    theme === 'subtitle' ? 'bg-violet-500/20 border-violet-500 text-violet-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    theme === 'subtitle' ? 'bg-accent-brass-700/20 border-accent-brass-600 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   <span>🟣 Subtitle Backdrop</span>
@@ -951,7 +951,7 @@ export const TeleprompterStudio: React.FC = () => {
                     key={w}
                     onClick={() => setReadingWidth(w)}
                     className={`py-2 rounded-xl text-xs font-bold capitalize border ${
-                      readingWidth === w ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                      readingWidth === w ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                     }`}
                   >
                     {w}
@@ -969,7 +969,7 @@ export const TeleprompterStudio: React.FC = () => {
                 <button
                   onClick={() => setMirrorX(!mirrorX)}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 ${
-                    mirrorX ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    mirrorX ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   <FlipHorizontal className="h-4 w-4" />
@@ -979,7 +979,7 @@ export const TeleprompterStudio: React.FC = () => {
                 <button
                   onClick={() => setMirrorY(!mirrorY)}
                   className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-2 ${
-                    mirrorY ? 'bg-cyan-500/20 border-cyan-500 text-cyan-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    mirrorY ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   <FlipHorizontal className="h-4 w-4 rotate-90" />
@@ -994,7 +994,7 @@ export const TeleprompterStudio: React.FC = () => {
                 <label className="font-bold text-ink-muted uppercase tracking-wider">
                   Eye Contact Target Height:
                 </label>
-                <span className="font-mono text-cyan-300 font-bold">{eyeGuideY}%</span>
+                <span className="font-mono text-accent-brass-300 font-bold">{eyeGuideY}%</span>
               </div>
               <input
                 type="range"
@@ -1010,7 +1010,7 @@ export const TeleprompterStudio: React.FC = () => {
           {/* Quick Scene Cue Jumper Cards */}
           <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-4">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
-              <Layers className="h-4 w-4 text-cyan-400" />
+              <Layers className="h-4 w-4 text-accent-brass-400" />
               <span>Scene Block Cue Jumpers</span>
             </h3>
 
@@ -1024,12 +1024,12 @@ export const TeleprompterStudio: React.FC = () => {
                   }}
                   className={`w-full p-3 rounded-2xl border text-left transition-colors space-y-1 ${
                     activeSegmentIdx === idx
-                      ? 'bg-surface-2 border-accent-amber-400 text-white shadow-lg'
+                      ? 'bg-surface-2 border-accent-amber-400 text-white shadow-[var(--shadow-panel-brass)]'
                       : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                   }`}
                 >
                   <div className="flex items-center justify-between text-[11px] font-bold">
-                    <span className="text-cyan-400 font-mono">⏱️ {seg.timeMarker}</span>
+                    <span className="text-accent-brass-400 font-mono">⏱️ {seg.timeMarker}</span>
                     <span className="text-accent-amber-400 text-[10px] uppercase">CUE #{idx + 1}</span>
                   </div>
                   <p className="text-xs font-medium line-clamp-1">

@@ -201,13 +201,13 @@ SOFTWARE CONSOLIDATION:
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-semibold text-emerald-300 mb-2">
-              <Calculator className="h-3.5 w-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+              <Calculator className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>Commercial ROI & Financial Capital Auditor v10.0</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-3">
               <span>Agency Cost & ROI Savings Studio</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-emerald-500 to-brass-500 text-slate-950 font-black uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-black font-black uppercase">
                 10x Precision
               </span>
             </h2>
@@ -217,11 +217,11 @@ SOFTWARE CONSOLIDATION:
           </div>
 
           {/* Quick Stats Pill */}
-          <div className="px-4 py-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-lg">
-            <TrendingUp className="h-6 w-6 text-emerald-400" />
+          <div className="px-4 py-3 rounded-2xl bg-status-positive-dim border border-status-positive/30 text-status-positive text-xs font-bold flex items-center gap-3 shrink-0 shadow-[var(--shadow-panel)]">
+            <TrendingUp className="h-6 w-6 text-status-positive" />
             <div>
               <div className="text-sm font-black text-white">${yearlyTotalSavingsAgencyMode.toLocaleString()} / year</div>
-              <div className="text-[10px] text-emerald-300/80">Est. Total Annual Capital Retained</div>
+              <div className="text-[10px] text-status-positive/80">Est. Total Annual Capital Retained</div>
             </div>
           </div>
         </div>
@@ -241,7 +241,7 @@ SOFTWARE CONSOLIDATION:
                 onClick={() => handleSelectPreset(preset)}
                 className={`p-3.5 rounded-2xl border text-left transition-colors space-y-1.5 relative ${
                   selectedPresetId === preset.id
-                    ? 'bg-surface-1 border-emerald-500 ring-2 ring-emerald-500/50 shadow-xl'
+                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
                     : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
@@ -251,7 +251,7 @@ SOFTWARE CONSOLIDATION:
                 </p>
                 <div className="flex items-center justify-between text-[10px] font-mono font-bold pt-1">
                   <span className="text-accent-brass-400">{preset.postsPerWeek} posts/wk</span>
-                  <span className="text-emerald-400">${preset.agencyCost.toLocaleString()}/mo</span>
+                  <span className="text-accent-brass-300">${preset.agencyCost.toLocaleString()}/mo</span>
                 </div>
               </button>
             ))}
@@ -264,7 +264,7 @@ SOFTWARE CONSOLIDATION:
             onClick={() => setCalcMode('agency-vs-viralos')}
             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
               calcMode === 'agency-vs-viralos'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20'
+                ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]'
                 : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
@@ -276,7 +276,7 @@ SOFTWARE CONSOLIDATION:
             onClick={() => setCalcMode('in-house-payroll')}
             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
               calcMode === 'in-house-payroll'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20'
+                ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]'
                 : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
@@ -288,7 +288,7 @@ SOFTWARE CONSOLIDATION:
             onClick={() => setCalcMode('lead-revenue')}
             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
               calcMode === 'lead-revenue'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20'
+                ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]'
                 : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
@@ -300,7 +300,7 @@ SOFTWARE CONSOLIDATION:
             onClick={() => setCalcMode('tool-stack')}
             className={`px-4 py-2.5 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
               calcMode === 'tool-stack'
-                ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-600/20'
+                ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]'
                 : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
@@ -326,7 +326,7 @@ SOFTWARE CONSOLIDATION:
                 max="100"
                 value={postsPerWeek}
                 onChange={(e) => setPostsPerWeek(parseInt(e.target.value))}
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-brass-500 cursor-pointer"
               />
               <p className="text-[11px] text-slate-500">Across X, IG, TikTok, FB, Threads, Pinterest & LinkedIn</p>
             </div>
@@ -350,7 +350,7 @@ SOFTWARE CONSOLIDATION:
             <div className="space-y-2">
               <div className="flex justify-between text-xs font-bold text-ink-secondary">
                 <span>Traditional Agency Fee:</span>
-                <span className="text-emerald-400 font-mono text-sm">${agencyMonthlyCost.toLocaleString()}/mo</span>
+                <span className="text-accent-brass-400 font-mono text-sm">${agencyMonthlyCost.toLocaleString()}/mo</span>
               </div>
               <input
                 type="range"
@@ -359,7 +359,7 @@ SOFTWARE CONSOLIDATION:
                 step="500"
                 value={agencyMonthlyCost}
                 onChange={(e) => setAgencyMonthlyCost(parseInt(e.target.value))}
-                className="w-full accent-emerald-500 cursor-pointer"
+                className="w-full accent-brass-500 cursor-pointer"
               />
               <p className="text-[11px] text-slate-500">Typical boutique social media agency retainer</p>
             </div>
@@ -393,12 +393,12 @@ SOFTWARE CONSOLIDATION:
               <p className="text-xs text-ink-muted">Combines saved agency retainer + recovered creator time value.</p>
             </div>
 
-            <div className="p-6 bg-surface-1/90 rounded-2xl border border-emerald-500/40 bg-emerald-950/20 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+            <div className="p-6 bg-surface-1/90 rounded-2xl border border-status-positive/40 bg-status-positive-dim space-y-2">
+              <div className="flex items-center gap-2 text-xs font-bold text-status-positive uppercase tracking-wider">
                 <TrendingUp className="h-4 w-4" />
                 <span>12-Month Total Retained</span>
               </div>
-              <div className="text-3xl font-black text-emerald-400 font-mono">${yearlyTotalSavingsAgencyMode.toLocaleString()}</div>
+              <div className="text-3xl font-black text-status-positive font-mono">${yearlyTotalSavingsAgencyMode.toLocaleString()}</div>
               <p className="text-xs text-ink-muted">Total capital preserved in your business bank account.</p>
             </div>
 
@@ -462,7 +462,7 @@ SOFTWARE CONSOLIDATION:
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-bold text-ink-secondary">
                   <span>Average Salary per Employee:</span>
-                  <span className="text-emerald-400 font-mono">${avgEmployeeSalary.toLocaleString()}/year</span>
+                  <span className="text-accent-brass-400 font-mono">${avgEmployeeSalary.toLocaleString()}/year</span>
                 </div>
                 <input
                   type="range"
@@ -471,7 +471,7 @@ SOFTWARE CONSOLIDATION:
                   step="5000"
                   value={avgEmployeeSalary}
                   onChange={(e) => setAvgEmployeeSalary(parseInt(e.target.value))}
-                  className="w-full accent-emerald-500"
+                  className="w-full accent-brass-500"
                 />
               </div>
             </div>
@@ -481,7 +481,7 @@ SOFTWARE CONSOLIDATION:
                 <span className="text-xs font-black uppercase text-violet-400 tracking-wider block mb-1">
                   ANNUAL PAYROLL CAPITAL SAVINGS:
                 </span>
-                <div className="text-3xl font-black text-emerald-400 font-mono">
+                <div className="text-3xl font-black text-status-positive font-mono">
                   ${yearlyPayrollSavings.toLocaleString()} / year
                 </div>
                 <p className="text-xs text-ink-muted mt-2 leading-relaxed">
@@ -491,7 +491,7 @@ SOFTWARE CONSOLIDATION:
 
               <div className="text-xs font-mono font-bold text-ink-secondary bg-surface-1 p-3 rounded-xl border border-white/10 flex justify-between">
                 <span>Total Annual Salaries: ${totalAnnualPayroll.toLocaleString()}</span>
-                <span className="text-emerald-400">Net Margin Boost: +94%</span>
+                <span className="text-status-positive">Net Margin Boost: +94%</span>
               </div>
             </div>
           </div>
@@ -531,7 +531,7 @@ SOFTWARE CONSOLIDATION:
             <div className="space-y-2 bg-surface-0 p-4 rounded-2xl border border-white/10">
               <label className="text-xs font-bold text-ink-secondary flex justify-between">
                 <span>Average Deal Value ($):</span>
-                <strong className="text-emerald-400 font-mono">${avgDealValue.toLocaleString()}</strong>
+                <strong className="text-accent-brass-400 font-mono">${avgDealValue.toLocaleString()}</strong>
               </label>
               <input
                 type="range"
@@ -540,7 +540,7 @@ SOFTWARE CONSOLIDATION:
                 step="100"
                 value={avgDealValue}
                 onChange={(e) => setAvgDealValue(parseInt(e.target.value))}
-                className="w-full accent-emerald-500"
+                className="w-full accent-brass-500"
               />
             </div>
 
@@ -567,9 +567,9 @@ SOFTWARE CONSOLIDATION:
               <span className="text-2xl font-black text-white font-mono">{closedDealsMonthly} Deals / mo</span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-surface-0 border border-emerald-500/40 space-y-1">
-              <span className="text-[10px] text-emerald-400 font-bold uppercase block">Gross Added Monthly Revenue</span>
-              <span className="text-2xl font-black text-emerald-400 font-mono">${grossMonthlyNewRevenue.toLocaleString()} / mo</span>
+            <div className="p-5 rounded-2xl bg-surface-0 border border-status-positive/40 space-y-1">
+              <span className="text-[10px] text-status-positive font-bold uppercase block">Gross Added Monthly Revenue</span>
+              <span className="text-2xl font-black text-status-positive font-mono">${grossMonthlyNewRevenue.toLocaleString()} / mo</span>
             </div>
 
             <div className="p-5 rounded-2xl bg-surface-0 border border-brass-500/40 space-y-1">
@@ -594,7 +594,7 @@ SOFTWARE CONSOLIDATION:
               </p>
             </div>
 
-            <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-sm font-bold rounded-xl shrink-0">
+            <div className="px-4 py-2 bg-accent-brass-500/10 border border-accent-brass-500/30 text-accent-brass-300 font-mono text-sm font-bold rounded-xl shrink-0">
               Current Software Spend: ${monthlySoftwareSpend}/mo (${annualSoftwareSpend.toLocaleString()}/yr)
             </div>
           </div>
@@ -609,7 +609,7 @@ SOFTWARE CONSOLIDATION:
                   onClick={() => toggleSoftwareTool(tool.id)}
                   className={`p-4 rounded-2xl border text-left transition-colors flex items-center justify-between gap-3 ${
                     isSelected
-                      ? 'bg-surface-0 border-emerald-500/80 ring-1 ring-emerald-500/50 shadow-lg'
+                      ? 'bg-surface-0 border-accent-brass-500/80 ring-1 ring-accent-brass-500/50 shadow-[var(--shadow-panel-brass)]'
                       : 'bg-surface-0/60 border-white/10 opacity-50 hover:opacity-100'
                   }`}
                 >
@@ -618,7 +618,7 @@ SOFTWARE CONSOLIDATION:
                     <div className="text-[10px] text-ink-muted">{tool.category}</div>
                   </div>
 
-                  <span className="text-xs font-mono font-bold text-rose-400 bg-rose-950/40 px-2 py-1 rounded border border-rose-800/40 shrink-0">
+                  <span className="text-xs font-mono font-bold text-status-danger bg-status-danger-dim px-2 py-1 rounded border border-status-danger/40 shrink-0">
                     ${tool.monthly}/mo
                   </span>
                 </button>
@@ -633,7 +633,7 @@ SOFTWARE CONSOLIDATION:
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
             <h3 className="text-lg font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-emerald-400" />
+              <BarChart3 className="h-5 w-5 text-accent-brass-400" />
               <span>Side-by-Side Cost & Productivity Comparison</span>
             </h3>
             <p className="text-xs text-ink-muted mt-0.5">
@@ -647,13 +647,13 @@ SOFTWARE CONSOLIDATION:
               onClick={handleCopySummary}
               className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
             >
-              {copiedSummary ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
+              {copiedSummary ? <Check className="h-4 w-4 text-accent-brass-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedSummary ? 'Copied Report' : 'Copy Executive Summary'}</span>
             </button>
 
             <button
               onClick={handlePrintReport}
-              className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black flex items-center gap-1.5 shadow-md shadow-emerald-600/20"
+              className="px-3.5 py-2 rounded-xl bg-accent-brass-500 hover:bg-accent-brass-400 text-black text-xs font-black flex items-center gap-1.5 shadow-[var(--shadow-panel-brass)]"
             >
               <Printer className="h-4 w-4" />
               <span>Print / PDF Audit</span>
@@ -665,14 +665,14 @@ SOFTWARE CONSOLIDATION:
         <div className="space-y-2">
           <div className="flex justify-between text-xs font-bold">
             <span className="text-ink-secondary">Annual Software & Content Budget Impact:</span>
-            <span className="text-emerald-400 font-mono font-black">98.5% Cost Reduction</span>
+            <span className="text-status-positive font-mono font-black">98.5% Cost Reduction</span>
           </div>
 
           <div className="h-4 w-full bg-surface-0 rounded-full overflow-hidden border border-white/10 flex">
-            <div className="h-full bg-rose-600 text-[10px] text-white font-bold flex items-center justify-center pl-2" style={{ width: '85%' }}>
+            <div className="h-full bg-status-danger text-[10px] text-white font-bold flex items-center justify-center pl-2" style={{ width: '85%' }}>
               Traditional Retainer / Stack ($54,000/yr)
             </div>
-            <div className="h-full bg-emerald-500 text-[10px] text-slate-950 font-black flex items-center justify-center px-1" style={{ width: '15%' }}>
+            <div className="h-full bg-status-positive text-[10px] text-slate-950 font-black flex items-center justify-center px-1" style={{ width: '15%' }}>
               ViralOS
             </div>
           </div>
@@ -681,56 +681,56 @@ SOFTWARE CONSOLIDATION:
         {/* Comparison Table */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3">
-            <div className="font-extrabold text-rose-400 text-xs uppercase tracking-wider flex items-center justify-between">
+            <div className="font-extrabold text-status-danger text-xs uppercase tracking-wider flex items-center justify-between">
               <span>Traditional Agency / Contractors</span>
               <span className="font-mono text-xs">${agencyMonthlyCost.toLocaleString()}/mo</span>
             </div>
             <ul className="space-y-2 text-xs text-ink-muted">
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">❌</span>
+                <span className="text-status-danger font-bold">❌</span>
                 <span>High monthly retainers ($3,000 – $15,000+ per month).</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">❌</span>
+                <span className="text-status-danger font-bold">❌</span>
                 <span>Slow 3-5 day turnaround times per post & manual edits.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">❌</span>
+                <span className="text-status-danger font-bold">❌</span>
                 <span>Extra fees for additional social platforms or visual graphics.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-rose-400 font-bold">❌</span>
+                <span className="text-status-danger font-bold">❌</span>
                 <span>Fragmented tools, manual copy-pasting, and missing video scripts.</span>
               </li>
             </ul>
           </div>
 
-          <div className="p-5 rounded-2xl bg-surface-0 border border-emerald-500/40 shadow-xl space-y-3 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-            
-            <div className="font-extrabold text-emerald-400 text-xs uppercase tracking-wider flex items-center justify-between">
+          <div className="p-5 rounded-2xl bg-surface-0 border border-status-positive/40 shadow-xl space-y-3 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-status-positive/10 rounded-full blur-2xl pointer-events-none" />
+
+            <div className="font-extrabold text-status-positive text-xs uppercase tracking-wider flex items-center justify-between">
               <span className="flex items-center gap-1.5">
                 <Sparkles className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
                 <span>ViralOS Autonomous Operating System</span>
               </span>
-              <span className="font-mono text-xs text-white bg-emerald-600 px-2 py-0.5 rounded">All-in-One</span>
+              <span className="font-mono text-xs text-black bg-status-positive px-2 py-0.5 rounded">All-in-One</span>
             </div>
 
             <ul className="space-y-2 text-xs text-ink-secondary">
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
                 <span>Instant 10-second multi-channel campaigns across 7 networks.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
                 <span>Built-in Gemini 3.6 Flash image studio, thumbnail & banner generator.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
                 <span>Integrated TikTok/Reels video script teleprompter studio.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
                 <span>White-label agency proposal deck generator to close $5k/mo clients.</span>
               </li>
             </ul>

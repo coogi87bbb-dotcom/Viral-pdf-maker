@@ -230,13 +230,13 @@ Structure your response cleanly using Markdown:
       {/* Header Banner */}
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300 mb-2">
-            <FileCode2 className="h-3.5 w-3.5 text-violet-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+            <FileCode2 className="h-3.5 w-3.5 text-accent-brass-400" />
             <span>AI Studio Meta-Architect v10.0 Pro</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
             <span>Master System Instruction Blueprint Builder</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-violet-500 to-fuchsia-600 text-white font-bold tracking-normal uppercase">
+            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 font-bold tracking-normal uppercase">
               10x Architect
             </span>
           </h2>
@@ -248,7 +248,7 @@ Structure your response cleanly using Markdown:
         {/* 1-Click Industrial Architecture Presets */}
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
-            <Cpu className="h-4 w-4 text-violet-400" />
+            <Cpu className="h-4 w-4 text-accent-brass-400" />
             <span>Select 1-Click System Architecture Blueprint Preset:</span>
           </label>
 
@@ -260,7 +260,7 @@ Structure your response cleanly using Markdown:
                 onClick={() => handleSelectPreset(preset)}
                 className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
                   selectedPreset === preset.id
-                    ? 'bg-surface-1 border-violet-500 ring-2 ring-violet-500/50 shadow-xl'
+                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
                     : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
@@ -268,7 +268,7 @@ Structure your response cleanly using Markdown:
                 <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
                   {preset.description}
                 </p>
-                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-violet-300">
+                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-accent-brass-300">
                   {preset.targetModel}
                 </span>
               </button>
@@ -287,7 +287,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
                 required
               />
             </div>
@@ -300,7 +300,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={targetAudience}
                 onChange={(e) => setTargetAudience(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
                 required
               />
             </div>
@@ -313,7 +313,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={monetizationGoal}
                 onChange={(e) => setMonetizationGoal(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-violet-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
                 required
               />
             </div>
@@ -327,7 +327,7 @@ Structure your response cleanly using Markdown:
               <select
                 value={targetModel}
                 onChange={(e) => setTargetModel(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
               >
                 <option value="Gemini 3.6 Flash">Gemini 3.6 Flash (High-Speed Autonomous Workflows)</option>
                 <option value="Gemini 3.1 Pro">Gemini 3.1 Pro (Complex Multi-Step Enterprise Reasoning)</option>
@@ -343,7 +343,7 @@ Structure your response cleanly using Markdown:
               <select
                 value={personaTone}
                 onChange={(e) => setPersonaTone(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
               >
                 <option value="Senior Systems Architect & Growth Hacker">Senior Systems Architect & Growth Hacker</option>
                 <option value="Ruthless Direct Response Copywriter">Ruthless Direct Response Copywriter</option>
@@ -380,18 +380,18 @@ Structure your response cleanly using Markdown:
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
             <div>
               <div className="flex items-center gap-2">
-                <Terminal className="h-5 w-5 text-violet-400" />
+                <Terminal className="h-5 w-5 text-accent-brass-400" />
                 <h3 className="text-xl font-extrabold text-white">{blueprint.title}</h3>
               </div>
               <div className="flex items-center gap-3 mt-1.5 text-xs text-ink-muted">
-                <span>Model Target: <strong className="text-violet-300 font-mono">{blueprint.targetModel}</strong></span>
+                <span>Model Target: <strong className="text-accent-brass-300 font-mono">{blueprint.targetModel}</strong></span>
                 {blueprint.complianceGrade && (
                   <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold">
                     {blueprint.complianceGrade}
                   </span>
                 )}
                 {blueprint.estimatedTokenCount && (
-                  <span className="px-2 py-0.5 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20 font-mono">
+                  <span className="px-2 py-0.5 rounded bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20 font-mono">
                     ~{blueprint.estimatedTokenCount} Tokens
                   </span>
                 )}
@@ -518,7 +518,7 @@ Structure your response cleanly using Markdown:
                       </div>
                       <p className="text-xs text-ink-secondary leading-relaxed">{mod.description}</p>
                       {mod.codeSnippet && (
-                        <div className="bg-surface-1 p-3 rounded-xl border border-white/10 font-mono text-[11px] text-cyan-300 overflow-x-auto">
+                        <div className="bg-surface-1 p-3 rounded-xl border border-white/10 font-mono text-[11px] text-accent-brass-300 overflow-x-auto">
                           {mod.codeSnippet}
                         </div>
                       )}
@@ -604,7 +604,7 @@ Structure your response cleanly using Markdown:
                   value={testInputPrompt}
                   onChange={(e) => setTestInputPrompt(e.target.value)}
                   rows={2}
-                  className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500 font-sans"
+                  className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-accent-brass-500 font-sans"
                   placeholder="e.g. Write a 30-second video hook for my SaaS launch"
                 />
               </div>

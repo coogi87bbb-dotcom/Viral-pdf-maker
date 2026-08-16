@@ -13,7 +13,8 @@ import { GuidedStepper } from './components/GuidedStepper';
 import { DocEditorModal } from './components/DocEditorModal';
 import { Studio3DBackground } from './components/Studio3DBackground';
 import { MotionPanel3D } from './components/MotionPanel3D';
-import { ModeTab } from './components/ModeTab';
+import { Sidebar, SidebarItem } from './components/ui/Sidebar';
+import { DashboardHome } from './components/DashboardHome';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { LandingPage } from './components/landing/LandingPage';
 
@@ -41,24 +42,26 @@ import { DocumentData, DocSection, StudioSettings, StudioTheme } from './types';
 import { parseTextIntoDocument, cleanRawText } from './utils/textCleaner';
 import { SAMPLE_DOCUMENTS } from './data/sampleDocs';
 import { STUDIO_THEMES } from './data/themes';
-import { FileText, Flame, Sparkles, Layers, ArrowRight, Zap, ShieldCheck, LogOut, User, Crown, Package, Bot, Handshake } from 'lucide-react';
+import { FileText, Flame, Zap, Crown, Package, Bot, Handshake, LayoutDashboard } from 'lucide-react';
 import { OWNER_EMAIL } from './lib/firebase';
 
-type AppMode = 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'deal-closer' | 'owner-admin';
+export type AppMode = 'home' | 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'deal-closer' | 'owner-admin';
 
 function MainWorkspace() {
   const { user, userProfile, logout, loading, authError } = useAuth();
-  const [appMode, setAppMode] = useState<AppMode>('pdf-studio');
+  const [appMode, setAppMode] = useState<AppMode>('home');
   const [showLanding, setShowLanding] = useState(true);
 
   // Self-heal stale 'owner-admin' state if the auth session drops/changes out
   // from under it (e.g. a Firebase token refresh momentarily nulling `user`
   // while the owner is sitting on the Master Admin screen). Without this, the
   // final fallback branch below would otherwise be the only thing standing
-  // between that state and a broken render.
+  // between that state and a broken render. Falls back to 'home' (the
+  // dashboard) rather than a specific tool, matching its actual job: land
+  // somewhere safe, not assume which tool the user wants.
   useEffect(() => {
     if (appMode === 'owner-admin' && user?.email?.toLowerCase() !== OWNER_EMAIL.toLowerCase()) {
-      setAppMode('pdf-studio');
+      setAppMode('home');
     }
   }, [appMode, user]);
 
@@ -260,113 +263,49 @@ function MainWorkspace() {
     return <AuthModal onBack={() => setShowLanding(true)} />;
   }
 
+  const displayName = userProfile?.displayName || user.displayName || user.email?.split('@')[0] || 'VIP Member';
+  const isOwner = user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase();
+
+  // Drives both the Sidebar and the Home screen's quick-launch grid from one
+  // list, so the two never drift out of sync the way the old ModeTab row's
+  // hand-duplicated badges eventually did (see the "7 RE Tools" vs. 8 fix
+  // below).
+  const sidebarItems: SidebarItem<AppMode>[] = [
+    { id: 'home', icon: LayoutDashboard, label: 'Dashboard' },
+    { id: 'pdf-studio', icon: FileText, label: 'PDF & Mockup Studio' },
+    { id: 'viral-os', icon: Flame, label: 'Viral OS Engine', badge: '12 AI Tools', badgeTone: 'brass' },
+    { id: 'gig-scale', icon: Zap, label: 'GigScale Engine', badge: 'Agency OS', badgeTone: 'brass' },
+    { id: 'digital-kit', icon: Package, label: 'Digital Kit Studio', badge: 'Kit Builder', badgeTone: 'brass' },
+    { id: 'agent-ops', icon: Bot, label: 'AI Agent Ops', badge: 'Self-Healing', badgeTone: 'positive' },
+    { id: 'deal-closer', icon: Handshake, label: 'Deal Closer', badge: '8 RE Tools', badgeTone: 'brass' },
+    ...(isOwner ? [{ id: 'owner-admin' as const, icon: Crown, label: 'Master Admin', emphasized: true }] : []),
+  ];
+
   return (
-    <div className="min-h-screen bg-surface-0 text-ink-primary font-sans selection:bg-accent-rosegold-400 selection:text-slate-950 flex flex-col relative overflow-x-hidden">
+    <div className="min-h-screen bg-surface-0 text-ink-primary font-sans selection:bg-accent-brass-400 selection:text-slate-950 flex relative overflow-x-hidden">
       {/* Global 3D Liquid Gold & Metallic Silver Mouse-Tracking Background */}
       <Studio3DBackground intensity="medium" className="fixed inset-0 z-0 opacity-90" />
 
-      {/* GLOBAL TOP NAVIGATION BAR */}
-      <header className="sticky top-0 z-50 bg-surface-1/90 backdrop-blur-xl border-b border-hairline px-4 py-2.5 shadow-[var(--shadow-elevated)]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
-          {/* Logo & Platform Title */}
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-accent-rosegold-400 via-accent-rosegold-500 to-accent-rosegold-600 p-0.5 shadow-[var(--shadow-glow-rosegold)] border border-accent-rosegold-400/30">
-              <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-accent-rosegold-400" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-display font-semibold text-base tracking-[-0.01em] text-white">LogFlow<span className="text-accent-rosegold-400"> AI</span></span>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-accent-rosegold-500/10 text-accent-rosegold-300 font-bold border border-accent-rosegold-500/20">
-                  STUDIO
-                </span>
-              </div>
-              <p className="text-[10px] text-ink-muted font-normal">High-DPI Publishing, 3D Book Mockups & Creator Workspaces</p>
-            </div>
-          </div>
+      {/* GLOBAL LEFT NAVIGATION — persistent sidebar (desktop), icon-rail
+          (tablet), bottom sheet (mobile). Replaces the old flat ModeTab
+          pill row. */}
+      <Sidebar
+        items={sidebarItems}
+        activeId={appMode}
+        onSelect={setAppMode}
+        userLabel={displayName}
+        onLogout={() => logout()}
+      />
 
-          {/* MAIN APP MODE SWITCHER TABS */}
-          <div className="flex flex-wrap items-center justify-center bg-surface-0/90 border border-hairline p-1 rounded-xl gap-1 shadow-inner">
-            <ModeTab
-              icon={FileText}
-              label="PDF & Mockup Studio"
-              active={appMode === 'pdf-studio'}
-              onClick={() => setAppMode('pdf-studio')}
-            />
-            <ModeTab
-              icon={Flame}
-              label="Viral OS Engine"
-              badge="12 AI Tools"
-              active={appMode === 'viral-os'}
-              onClick={() => setAppMode('viral-os')}
-            />
-            <ModeTab
-              icon={Zap}
-              label="GigScale Engine"
-              badge="Agency OS"
-              active={appMode === 'gig-scale'}
-              onClick={() => setAppMode('gig-scale')}
-            />
-            <ModeTab
-              icon={Package}
-              label="Digital Kit Studio"
-              badge="Kit Builder"
-              active={appMode === 'digital-kit'}
-              onClick={() => setAppMode('digital-kit')}
-            />
-            <ModeTab
-              icon={Bot}
-              label="AI Agent Ops"
-              badge="Self-Healing"
-              badgeVariant="positive"
-              active={appMode === 'agent-ops'}
-              onClick={() => setAppMode('agent-ops')}
-            />
-            <ModeTab
-              icon={Handshake}
-              label="Deal Closer"
-              badge="7 RE Tools"
-              active={appMode === 'deal-closer'}
-              onClick={() => setAppMode('deal-closer')}
-            />
-            {user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() && (
-              <ModeTab
-                icon={Crown}
-                label="Master Admin"
-                emphasized
-                active={appMode === 'owner-admin'}
-                onClick={() => setAppMode('owner-admin')}
-              />
-            )}
-          </div>
-
-          {/* User Account Session & Sign Out */}
-          <div className="flex items-center gap-3">
-            <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-semibold text-ink-secondary truncate max-w-[130px]">
-                {userProfile?.displayName || user.displayName || user.email?.split('@')[0] || 'VIP Member'}
-              </span>
-              <span className="text-[10px] text-accent-rosegold-400/90 font-mono flex items-center justify-end gap-1">
-                <span className="h-1.5 w-1.5 rounded-full bg-status-positive animate-pulse" />
-                <span>Connected</span>
-              </span>
-            </div>
-
-            <button
-              onClick={() => logout()}
-              title="Sign Out of Creator Platform"
-              className="px-3 py-1.5 rounded-lg bg-surface-1/80 hover:bg-surface-2 border border-hairline text-ink-secondary hover:text-white transition-colors active:scale-[0.98] flex items-center gap-1.5 text-xs font-medium cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
-            >
-              <LogOut className="h-3.5 w-3.5 text-ink-muted" />
-              <span className="hidden md:inline font-sans text-xs">Sign Out</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
+      {/* CONTENT COLUMN — offset to clear the sidebar's 3 responsive tiers
+          (mobile top bar height / tablet icon-rail width / desktop sidebar
+          width), mirroring the app's existing flex-col-on-mobile /
+          flex-row-on-desktop breakpoint idiom rather than a new pattern. */}
+      <div className="flex-1 flex flex-col pt-14 sm:pt-0 sm:pl-16 lg:pl-60 min-w-0 relative z-10">
       {/* APP MODE CONTENT PANELS */}
-      {appMode === 'pdf-studio' ? (
+      {appMode === 'home' ? (
+        <DashboardHome displayName={displayName} document={document} isOwner={isOwner} onNavigate={setAppMode} />
+      ) : appMode === 'pdf-studio' ? (
         <div className="flex-1 flex flex-col">
           {/* Header Controls for PDF Studio */}
           <Header
@@ -508,7 +447,7 @@ function MainWorkspace() {
           </MotionPanel3D>
         </div>
       ) : appMode === 'deal-closer' ? (
-        /* APP F: DEAL CLOSER — REAL ESTATE TOOLKIT (7 AI TOOLS) */
+        /* APP F: DEAL CLOSER — REAL ESTATE TOOLKIT (8 AI TOOLS) */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
             <DealCloserStudio
@@ -537,6 +476,7 @@ function MainWorkspace() {
           </MotionPanel3D>
         </div>
       )}
+      </div>
 
       {/* Global Modals for PDF Studio */}
       <DocImporter

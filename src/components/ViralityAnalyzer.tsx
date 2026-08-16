@@ -198,13 +198,13 @@ export const ViralityAnalyzer: React.FC = () => {
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs font-semibold text-cyan-300 mb-3">
-              <Activity className="h-4 w-4 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-3">
+              <Activity className="h-4 w-4 text-accent-brass-400" />
               <span>Real-Time Algorithm Simulator & Virality Diagnostics</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               <span>Virality Score Auditor</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold tracking-normal uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-400 to-accent-brass-600 text-white font-bold tracking-normal uppercase">
                 v10.0 Pro
               </span>
             </h2>
@@ -216,7 +216,7 @@ export const ViralityAnalyzer: React.FC = () => {
           {/* Key Metrics Bar */}
           <div className="flex items-center gap-3 bg-surface-0/80 p-3 rounded-2xl border border-white/10 shrink-0">
             <div className="px-3 py-1.5 text-center border-r border-white/10">
-              <div className="text-lg font-black text-cyan-400">
+              <div className="text-lg font-black text-accent-brass-400">
                 {analysis ? `${analysis.score}/100` : '--'}
               </div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">Virality Index</div>
@@ -228,7 +228,7 @@ export const ViralityAnalyzer: React.FC = () => {
               <div className="text-[10px] text-ink-muted uppercase font-bold">Overall Grade</div>
             </div>
             <div className="px-3 py-1.5 text-center">
-              <div className="text-lg font-black text-violet-400">
+              <div className="text-lg font-black text-accent-brass-300">
                 {analysis?.benchmarkPercentile ? `Top ${100 - analysis.benchmarkPercentile}%` : 'Top 5%'}
               </div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">Percentile</div>
@@ -240,7 +240,7 @@ export const ViralityAnalyzer: React.FC = () => {
         <form onSubmit={handleAnalyze} className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2">
-              <FileText className="h-4 w-4 text-cyan-400" />
+              <FileText className="h-4 w-4 text-accent-brass-400" />
               <span>Draft Post / Script Content to Audit:</span>
             </label>
 
@@ -249,7 +249,7 @@ export const ViralityAnalyzer: React.FC = () => {
               <select
                 value={platform}
                 onChange={(e) => setPlatform(e.target.value)}
-                className="bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-ink-secondary focus:outline-none focus:border-cyan-500 font-semibold"
+                className="bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-500 font-semibold"
               >
                 <option value="X / Twitter">🐤 X / Twitter (280 Char / Thread)</option>
                 <option value="Instagram Reel/Carousel">📸 Instagram Reel / Carousel Cover</option>
@@ -267,7 +267,7 @@ export const ViralityAnalyzer: React.FC = () => {
               onChange={(e) => setContentToAnalyze(e.target.value)}
               rows={5}
               placeholder="Paste your post or video script here..."
-              className="w-full bg-surface-0 border border-white/10 rounded-2xl p-4 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 font-sans leading-relaxed shadow-inner"
+              className="w-full bg-surface-0 border border-white/10 rounded-2xl p-4 text-slate-100 text-sm focus:outline-none focus:border-accent-brass-500 font-sans leading-relaxed shadow-inner"
               required
             />
             <div className="absolute right-4 bottom-4 text-[11px] text-slate-500 font-mono">
@@ -289,7 +289,7 @@ export const ViralityAnalyzer: React.FC = () => {
                     setContentToAnalyze(preset.text);
                     setPlatform(preset.platform);
                   }}
-                  className="p-2.5 rounded-xl bg-surface-1 border border-white/10 hover:border-cyan-500/50 hover:bg-surface-2 text-[11px] font-bold text-ink-secondary transition-colors text-left truncate"
+                  className="p-2.5 rounded-xl bg-surface-1 border border-white/10 hover:border-accent-brass-500/50 hover:bg-surface-2 text-[11px] font-bold text-ink-secondary transition-colors text-left truncate"
                 >
                   {preset.label}
                 </button>
@@ -301,7 +301,7 @@ export const ViralityAnalyzer: React.FC = () => {
           <button
             type="submit"
             disabled={loading || !contentToAnalyze.trim()}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-violet-600 hover:from-cyan-500 hover:via-blue-500 hover:to-violet-500 text-white font-black text-sm shadow-xl shadow-cyan-600/25 transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:from-accent-brass-400 hover:via-accent-brass-300 hover:to-accent-brass-400 text-white font-black text-sm shadow-[var(--shadow-glow-brass)] transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
           >
             {loading ? (
               <>
@@ -326,7 +326,7 @@ export const ViralityAnalyzer: React.FC = () => {
             {/* Left Score Gauge Column */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-surface-0 rounded-2xl border border-white/10 text-center space-y-4">
               <div className="relative">
-                <div className="h-28 w-28 rounded-3xl bg-gradient-to-tr from-cyan-500/10 via-blue-500/20 to-violet-500/20 border-2 border-cyan-500/30 flex flex-col items-center justify-center shadow-inner">
+                <div className="h-28 w-28 rounded-3xl bg-gradient-to-tr from-accent-brass-500/10 via-accent-brass-400/20 to-accent-brass-500/20 border-2 border-accent-brass-500/30 flex flex-col items-center justify-center shadow-inner">
                   <span className={`text-4xl font-black tracking-tight ${
                     analysis.score >= 85 ? 'text-emerald-400' : analysis.score >= 65 ? 'text-accent-amber-400' : 'text-rose-400'
                   }`}>
@@ -367,11 +367,11 @@ export const ViralityAnalyzer: React.FC = () => {
             <div className="lg:col-span-8 space-y-4">
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
                 <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2">
-                  <BarChart3 className="h-4 w-4 text-cyan-400" />
+                  <BarChart3 className="h-4 w-4 text-accent-brass-400" />
                   <span>5-Factor Algorithmic Score Diagnostics</span>
                 </h3>
                 <span className="text-xs text-ink-muted">
-                  Target Platform: <strong className="text-cyan-300">{platform}</strong>
+                  Target Platform: <strong className="text-accent-brass-300">{platform}</strong>
                 </span>
               </div>
 
@@ -503,7 +503,7 @@ export const ViralityAnalyzer: React.FC = () => {
           {analysis.sentenceAnalysis && analysis.sentenceAnalysis.length > 0 && (
             <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-4">
               <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Eye className="h-5 w-5 text-violet-400" />
+                <Eye className="h-5 w-5 text-accent-brass-400" />
                 <span>Sentence-Level Virality & Friction Breakdown</span>
               </h3>
 
@@ -515,9 +515,9 @@ export const ViralityAnalyzer: React.FC = () => {
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase border ${
-                        sent.type === 'hook' ? 'bg-pink-500/10 text-pink-300 border-pink-500/20' :
-                        sent.type === 'value' ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20' :
-                        sent.type === 'cta' ? 'bg-violet-500/10 text-violet-300 border-violet-500/20' :
+                        sent.type === 'hook' ? 'bg-accent-brass-500/10 text-accent-brass-300 border-accent-brass-500/20' :
+                        sent.type === 'value' ? 'bg-accent-brass-400/10 text-accent-brass-400 border-accent-brass-400/20' :
+                        sent.type === 'cta' ? 'bg-accent-brass-600/10 text-accent-brass-300 border-accent-brass-600/30' :
                         'bg-rose-500/10 text-rose-300 border-rose-500/20'
                       }`}>
                         {sent.type === 'hook' ? '🎯 Hook / Pattern Interrupt' : sent.type === 'value' ? '💎 Value Payload' : sent.type === 'cta' ? '🚀 Action CTA' : '⚠️ Potential Friction'}
@@ -594,7 +594,7 @@ export const ViralityAnalyzer: React.FC = () => {
               {analysis.optimizedVersions.map((opt, idx) => (
                 <div
                   key={idx}
-                  className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 space-y-4 shadow-2xl hover:border-cyan-500/40 transition-colors"
+                  className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 space-y-4 shadow-2xl hover:border-accent-brass-500/40 transition-colors"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-3">
                     <div className="flex items-center gap-2">
@@ -602,7 +602,7 @@ export const ViralityAnalyzer: React.FC = () => {
                         Option #{idx + 1}: {opt.label}
                       </span>
                       {opt.frameworkUsed && (
-                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-violet-500/10 text-violet-300 border border-violet-500/20">
+                        <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20">
                           {opt.frameworkUsed}
                         </span>
                       )}
@@ -634,7 +634,7 @@ export const ViralityAnalyzer: React.FC = () => {
                           </>
                         ) : (
                           <>
-                            <Copy className="h-4 w-4 text-violet-400" />
+                            <Copy className="h-4 w-4 text-accent-brass-400" />
                             <span>Copy Rewrite</span>
                           </>
                         )}
@@ -642,7 +642,7 @@ export const ViralityAnalyzer: React.FC = () => {
 
                       <button
                         onClick={() => handleApplyRewrite(opt.versionText)}
-                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold flex items-center gap-2 transition-colors shadow-lg shadow-cyan-600/20"
+                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-accent-brass-500 to-accent-brass-600 hover:from-accent-brass-400 hover:to-accent-brass-500 text-white text-xs font-bold flex items-center gap-2 transition-colors shadow-[var(--shadow-glow-brass)]"
                       >
                         <span>Apply to Editor & Re-Audit</span>
                         <ArrowRight className="h-4 w-4" />

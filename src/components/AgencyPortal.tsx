@@ -292,13 +292,13 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       title: 'Executive Growth Audit',
       subtitle: `Prepared for ${proposal.clientName} by ${agencyName}`,
       content: proposal.executiveSummary,
-      icon: <Building2 className="h-8 w-8 text-violet-400" />
+      icon: <Building2 className="h-8 w-8 text-accent-brass-400" />
     },
     {
       title: 'Competitor Gap Analysis',
       subtitle: 'Market Supremacy & Cognitive Hooks Strategy',
       content: proposal.competitorGapAnalysis,
-      icon: <Layers className="h-8 w-8 text-fuchsia-400" />
+      icon: <Layers className="h-8 w-8 text-accent-brass-400" />
     },
     {
       title: 'Monthly Core Deliverables',
@@ -322,7 +322,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       title: 'Contractual SLA Guarantee & Terms',
       subtitle: '100% Performance Commitment',
       content: proposal.slaGuarantee,
-      icon: <Award className="h-8 w-8 text-cyan-400" />
+      icon: <Award className="h-8 w-8 text-accent-brass-400" />
     }
   ];
 
@@ -331,13 +331,13 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       {/* Header Banner */}
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300 mb-2">
-            <Briefcase className="h-3.5 w-3.5 text-violet-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+            <Briefcase className="h-3.5 w-3.5 text-accent-brass-400" />
             <span>Commercial High-Ticket B2B Engine v10.0</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
             <span>White-Label Agency Client Proposal Studio</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-violet-500 to-indigo-600 text-white font-bold tracking-normal uppercase">
+            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 font-bold tracking-normal uppercase">
               10x Pitch Deck
             </span>
           </h2>
@@ -361,7 +361,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 onClick={() => handleSelectPreset(preset)}
                 className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
                   selectedPresetId === preset.id
-                    ? 'bg-surface-1 border-violet-500 ring-2 ring-violet-500/50 shadow-xl'
+                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
                     : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
@@ -388,7 +388,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={agencyName}
                 onChange={(e) => setAgencyName(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-violet-500"
+                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-accent-brass-500"
                 placeholder="e.g. Apex Viral Media Studio"
                 required
               />
@@ -402,7 +402,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500"
+                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500"
                 required
               />
             </div>
@@ -415,7 +415,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={clientIndustry}
                 onChange={(e) => setClientIndustry(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500"
+                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500"
                 required
               />
             </div>
@@ -430,7 +430,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   type="number"
                   value={monthlyRetainer}
                   onChange={(e) => setMonthlyRetainer(e.target.value)}
-                  className="w-full bg-surface-1 border border-white/10 rounded-xl pl-7 pr-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 font-mono font-bold"
+                  className="w-full bg-surface-1 border border-white/10 rounded-xl pl-7 pr-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-mono font-bold"
                   required
                 />
               </div>
@@ -440,16 +440,16 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             type="submit"
             disabled={loading || !clientName.trim()}
-            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-indigo-600 hover:from-violet-500 hover:via-fuchsia-500 hover:to-indigo-500 text-white font-black text-xs shadow-xl shadow-violet-600/25 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-black text-xs shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] transition-[transform,opacity,box-shadow,filter] flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
               <>
-                <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" />
+                <RefreshCw className="h-4 w-4 animate-spin text-slate-950" />
                 <span>Generating White-Label Proposal Deck...</span>
               </>
             ) : (
               <>
-                <Sparkles className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
+                <Sparkles className="h-4 w-4 text-slate-950 fill-slate-950" />
                 <span>Generate Enterprise Client Proposal Deck</span>
               </>
             )}
@@ -470,9 +470,9 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
           <div>
             <div className="flex items-center gap-3">
-              <Building2 className="h-6 w-6 text-violet-400" />
+              <Building2 className="h-6 w-6 text-accent-brass-400" />
               <div>
-                <span className="text-[10px] font-extrabold text-violet-400 uppercase tracking-widest block">
+                <span className="text-[10px] font-extrabold text-accent-brass-400 uppercase tracking-widest block">
                   WHITE-LABEL AGENCY PROPOSAL • {agencyName}
                 </span>
                 <h3 className="text-xl sm:text-2xl font-black text-white">{proposal.proposalTitle}</h3>
@@ -501,7 +501,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               onClick={handleCopyShareableLink}
               className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
             >
-              {copiedLink ? <Check className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4 text-cyan-400" />}
+              {copiedLink ? <Check className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedLink ? 'Link Copied' : 'Share Link'}</span>
             </button>
 
@@ -509,13 +509,13 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               onClick={handleCopyProposal}
               className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
             >
-              {copiedProposal ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-violet-400" />}
+              {copiedProposal ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedProposal ? 'Copied' : 'Copy Text'}</span>
             </button>
 
             <button
               onClick={handleExportPDF}
-              className="px-3.5 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-md shadow-violet-600/20"
+              className="px-3.5 py-2 rounded-xl bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 shadow-[var(--shadow-panel-brass)]"
             >
               <Printer className="h-4 w-4" />
               <span>Print / Save PDF</span>
@@ -528,7 +528,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             onClick={() => setViewMode('document')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'document' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              viewMode === 'document' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
             <FileText className="h-4 w-4" />
@@ -538,7 +538,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             onClick={() => setViewMode('presentation')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'presentation' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              viewMode === 'presentation' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
             <Maximize2 className="h-4 w-4 text-accent-brass-300" />
@@ -548,17 +548,17 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             onClick={() => setViewMode('tiers')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'tiers' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              viewMode === 'tiers' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
-            <Layers className="h-4 w-4 text-fuchsia-400" />
+            <Layers className="h-4 w-4 text-accent-brass-400" />
             <span>3-Tier Package Pricing</span>
           </button>
 
           <button
             onClick={() => setViewMode('roadmap')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'roadmap' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              viewMode === 'roadmap' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
             <Calendar className="h-4 w-4 text-accent-brass-400" />
@@ -568,7 +568,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             onClick={() => setViewMode('roi')}
             className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'roi' ? 'bg-violet-600 text-white shadow-lg shadow-violet-600/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              viewMode === 'roi' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
             }`}
           >
             <Calculator className="h-4 w-4 text-emerald-400" />
@@ -588,7 +588,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
               <div>
                 <span className="text-[10px] text-ink-muted font-bold uppercase block">Prepared By Agency:</span>
-                <span className="text-sm font-extrabold text-violet-400">{agencyName}</span>
+                <span className="text-sm font-extrabold text-accent-brass-400">{agencyName}</span>
               </div>
 
               <div>
@@ -599,7 +599,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
             {/* Section 1 */}
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-violet-400 flex items-center gap-2">
+              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
                 <span>1. Executive Growth Audit & Strategy Overview</span>
               </h4>
               <p className="bg-surface-1 p-4 rounded-xl border border-white/10 text-ink-secondary leading-relaxed">
@@ -609,7 +609,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
             {/* Section 2 */}
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-violet-400 flex items-center gap-2">
+              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
                 <span>2. Monthly Core Deliverables Matrix</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -625,7 +625,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
             {/* Section 3 & 4 Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-violet-400">
+                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400">
                   3. Competitor Gap Analysis
                 </h4>
                 <p className="bg-surface-1 p-4 rounded-xl border border-white/10 text-ink-secondary leading-relaxed">
@@ -634,7 +634,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-violet-400">
+                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400">
                   4. Projected Client ROI & Inquiries
                 </h4>
                 <p className="bg-surface-1 p-4 rounded-xl border border-white/10 font-medium text-emerald-300 leading-relaxed">
@@ -645,10 +645,10 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
             {/* Section 5: SLA Guarantee */}
             {proposal.slaGuarantee && (
-              <div className="p-4 rounded-2xl bg-cyan-950/20 border border-cyan-800/30 text-xs text-cyan-300 flex items-start gap-3">
-                <Award className="h-5 w-5 text-cyan-400 shrink-0 mt-0.5" />
+              <div className="p-4 rounded-2xl bg-accent-brass-500/10 border border-accent-brass-500/25 text-xs text-accent-brass-300 flex items-start gap-3">
+                <Award className="h-5 w-5 text-accent-brass-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block font-bold uppercase text-cyan-200 mb-0.5">5. Service Level Agreement (SLA) & Quality Guarantee:</strong>
+                  <strong className="block font-bold uppercase text-accent-brass-200 mb-0.5">5. Service Level Agreement (SLA) & Quality Guarantee:</strong>
                   <span>{proposal.slaGuarantee}</span>
                 </div>
               </div>
@@ -663,7 +663,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               <div className="flex items-center gap-3">
                 {slides[currentSlideIndex].icon}
                 <div>
-                  <span className="text-[10px] font-extrabold text-violet-400 uppercase tracking-widest block">
+                  <span className="text-[10px] font-extrabold text-accent-brass-400 uppercase tracking-widest block">
                     SLIDE {currentSlideIndex + 1} OF {slides.length} • {agencyName} PITCH DECK
                   </span>
                   <h3 className="text-2xl font-black text-white">{slides[currentSlideIndex].title}</h3>
@@ -729,7 +729,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                     key={idx}
                     onClick={() => setCurrentSlideIndex(idx)}
                     className={`h-2.5 rounded-full transition-colors ${
-                      currentSlideIndex === idx ? 'w-8 bg-violet-500' : 'w-2.5 bg-surface-2 hover:bg-slate-700'
+                      currentSlideIndex === idx ? 'w-8 bg-accent-brass-500' : 'w-2.5 bg-surface-2 hover:bg-slate-700'
                     }`}
                   />
                 ))}
@@ -738,7 +738,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               <button
                 disabled={currentSlideIndex === slides.length - 1}
                 onClick={() => setCurrentSlideIndex(prev => Math.min(slides.length - 1, prev + 1))}
-                className="px-5 py-2.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white text-xs font-black flex items-center gap-2 disabled:opacity-30 shadow-lg shadow-violet-600/20"
+                className="px-5 py-2.5 rounded-xl bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 text-xs font-black flex items-center gap-2 disabled:opacity-30 shadow-[var(--shadow-panel-brass)]"
               >
                 <span>Next Slide</span>
                 <ChevronRight className="h-4 w-4" />
@@ -751,7 +751,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         {viewMode === 'tiers' && (
           <div className="space-y-4">
             <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-              <Layers className="h-4 w-4 text-fuchsia-400" />
+              <Layers className="h-4 w-4 text-accent-brass-400" />
               <span>Multi-Tier Agency Retainer Investment Options</span>
             </h4>
 
@@ -781,12 +781,12 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   key={idx}
                   className={`p-6 rounded-2xl border space-y-4 relative flex flex-col justify-between ${
                     tier.isRecommended
-                      ? 'bg-surface-0 border-violet-500 ring-2 ring-violet-500/50 shadow-2xl'
+                      ? 'bg-surface-0 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-2xl'
                       : 'bg-surface-0 border-white/10'
                   }`}
                 >
                   {tier.isRecommended && (
-                    <span className="absolute -top-3 right-6 px-3 py-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-[10px] font-black uppercase tracking-wider rounded-full shadow-lg">
+                    <span className="absolute -top-3 right-6 px-3 py-1 bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 text-[10px] font-black uppercase tracking-wider rounded-full shadow-[var(--shadow-panel-brass)]">
                       Most Popular
                     </span>
                   )}
@@ -814,7 +814,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                     }}
                     className={`w-full py-2.5 rounded-xl text-xs font-extrabold transition-colors ${
                       tier.isRecommended
-                        ? 'bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-600/20'
+                        ? 'bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)]'
                         : 'bg-surface-2 hover:bg-slate-700 text-ink-secondary'
                     }`}
                   >
@@ -841,7 +841,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                     <span className="text-xs font-black text-accent-brass-400 uppercase tracking-wider">
                       {step.month}
                     </span>
-                    <span className="text-xs font-bold text-violet-300 bg-violet-500/10 px-2.5 py-0.5 rounded border border-violet-500/20">
+                    <span className="text-xs font-bold text-accent-brass-300 bg-accent-brass-500/10 px-2.5 py-0.5 rounded border border-accent-brass-500/20">
                       Focus: {step.focus}
                     </span>
                   </div>

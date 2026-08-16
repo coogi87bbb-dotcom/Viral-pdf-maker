@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { apiFetch } from '../lib/apiClient';
 import { useAuth } from '../context/AuthContext';
 import { OWNER_EMAIL } from '../lib/firebase';
-import { MotionPanel3D } from './MotionPanel3D';
-import { 
+import {
   Briefcase, 
   Plus, 
   Sparkles, 
@@ -351,7 +350,7 @@ GigScale VIP Creator`);
               }}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 suiteMode === 'full-os'
-                  ? 'bg-brass-400 text-slate-950 shadow-md font-black'
+                  ? 'bg-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)] font-black'
                   : 'text-ink-muted hover:text-white'
               }`}
             >
@@ -383,7 +382,7 @@ GigScale VIP Creator`);
               }}
               className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 suiteMode === 'buyer'
-                  ? 'bg-indigo-400 text-slate-950 shadow-md font-black'
+                  ? 'bg-accent-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)] font-black'
                   : 'text-ink-muted hover:text-white'
               }`}
             >
@@ -472,7 +471,7 @@ GigScale VIP Creator`);
                 : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
             }`}
           >
-            <Sparkles className="h-4 w-4 text-indigo-400" />
+            <Sparkles className="h-4 w-4 text-accent-brass-400" />
             <span>{suiteMode === 'buyer' ? 'Request AI Proposal' : 'AI Pitch Studio'}</span>
           </button>
 
@@ -481,11 +480,11 @@ GigScale VIP Creator`);
               onClick={() => setActiveSubTab('audit-deck')}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors cursor-pointer ${
                 activeSubTab === 'audit-deck'
-                  ? 'bg-indigo-500/20 border border-indigo-500 text-indigo-300'
+                  ? 'bg-accent-brass-500/10 border border-accent-brass-500 text-accent-brass-300'
                   : 'bg-surface-1 text-ink-muted border border-hairline hover:text-white'
               }`}
             >
-              <FileSpreadsheet className="h-4 w-4 text-indigo-400" />
+              <FileSpreadsheet className="h-4 w-4 text-accent-brass-400" />
               <span>{suiteMode === 'buyer' ? 'Request Funnel Audit' : 'Audit Deck Studio'}</span>
             </button>
           )}
@@ -556,7 +555,7 @@ GigScale VIP Creator`);
             <>
               <button
                 onClick={() => setActiveSubTab('packages')}
-                className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-indigo-500/20 transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] hover:brightness-105 transition-[transform,opacity,box-shadow,filter] cursor-pointer"
               >
                 <Compass className="h-4 w-4" />
                 <span>Browse Marketplace Gigs</span>
@@ -577,7 +576,7 @@ GigScale VIP Creator`);
                 onClick={() => setActiveSubTab('ai-pitch')}
                 className="px-5 py-2.5 rounded-2xl bg-surface-1 border border-white/15 hover:bg-surface-2 text-white font-bold text-xs flex items-center gap-2 transition-colors cursor-pointer"
               >
-                <Sparkles className="h-4 w-4 text-indigo-400" />
+                <Sparkles className="h-4 w-4 text-accent-brass-400" />
                 <span>Request Custom AI Proposal</span>
               </button>
             </>
@@ -585,7 +584,7 @@ GigScale VIP Creator`);
             <>
               <button
                 onClick={() => setShowProfitAuditModal(true)}
-                className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-white text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-lg transition-colors cursor-pointer"
+                className="px-5 py-2.5 rounded-2xl bg-slate-100 hover:bg-white text-slate-950 font-extrabold text-xs flex items-center gap-2 shadow-[var(--shadow-panel-brass)] transition-colors cursor-pointer"
               >
                 <Sparkles className="h-4 w-4 text-slate-900" />
                 <span>10x Profit Audit</span>
@@ -635,8 +634,8 @@ GigScale VIP Creator`);
             <div className="p-5 rounded-2xl bg-surface-1/90 border border-hairline space-y-1">
               <span className="text-[11px] font-mono text-ink-muted uppercase tracking-wider">Avg. Order Value</span>
               <div className="flex items-baseline justify-between">
-                <span className="text-2xl font-black text-indigo-400">${avgOrderValue}</span>
-                <span className="text-xs font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">High Margin</span>
+                <span className="text-2xl font-black text-accent-brass-400">${avgOrderValue}</span>
+                <span className="text-xs font-bold text-accent-brass-400 bg-accent-brass-500/10 px-2 py-0.5 rounded">High Margin</span>
               </div>
             </div>
 
@@ -712,7 +711,7 @@ GigScale VIP Creator`);
                         <span className={`text-[9px] font-mono px-1.5 py-0.2 rounded border ${
                           order.status === 'Paid' ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' :
                           order.status === 'In Progress' ? 'bg-accent-brass-500/10 text-accent-brass-400 border-brass-500/30' :
-                          'bg-indigo-500/10 text-indigo-400 border-indigo-500/30'
+                          'bg-accent-brass-500/10 text-accent-brass-400 border-accent-brass-500/30'
                         }`}>
                           {order.status}
                         </span>
@@ -998,7 +997,7 @@ GigScale VIP Creator`);
                     </button>
                     <button
                       onClick={() => onSendToPdf(generatedPitch, clientNiche ? `${clientNiche} — Client Pitch` : 'Client Pitch')}
-                      className="px-3 py-1 rounded-lg bg-surface-2 border border-accent-rosegold-400/40 hover:border-accent-rosegold-400 hover:bg-accent-rosegold-500/10 text-accent-rosegold-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-rosegold-400"
+                      className="px-3 py-1 rounded-lg bg-surface-2 border border-accent-brass-400/40 hover:border-accent-brass-400 hover:bg-accent-brass-500/10 text-accent-brass-300 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
                     >
                       <FileOutput className="h-3.5 w-3.5" />
                       <span>Send to PDF Studio</span>

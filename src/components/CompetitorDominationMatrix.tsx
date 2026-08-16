@@ -231,7 +231,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
             </p>
           </div>
 
-          <div className="px-4 py-3 rounded-2xl bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-lg">
+          <div className="px-4 py-3 rounded-2xl bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-[var(--shadow-panel-brass)]">
             <Flame className="h-6 w-6 text-accent-brass-400 fill-brass-400 animate-pulse" />
             <div>
               <div className="text-sm font-black text-white">98/100 Parity Index</div>
@@ -374,7 +374,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
             {customAnalysis.rebuttalBattlecards && customAnalysis.rebuttalBattlecards.length > 0 && (
               <div className="space-y-3 pt-2">
                 <h4 className="text-xs font-black uppercase tracking-wider text-ink-muted flex items-center gap-2">
-                  <ShieldCheck className="h-4 w-4 text-cyan-400" />
+                  <ShieldCheck className="h-4 w-4 text-accent-brass-400" />
                   <span>Sales Battlecards & Objection Killers:</span>
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -514,7 +514,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                 onClick={() => setSelectedCategory(tab.id as any)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-colors ${
                   selectedCategory === tab.id
-                    ? 'bg-accent-brass-500 text-slate-950 shadow-md'
+                    ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]'
                     : 'bg-surface-0 text-ink-muted hover:text-white'
                 }`}
               >

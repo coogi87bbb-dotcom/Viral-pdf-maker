@@ -37,8 +37,7 @@ import {
 } from 'lucide-react';
 import { ViralHook } from '../types';
 import { PRESET_NICHES } from '../data/niches';
-import { MotionPanel3D } from './MotionPanel3D';
-import { 
+import {
   EXTENDED_HOOK_FRAMEWORKS, 
   ICONIC_SWIPE_FILE_HOOKS, 
   PRESET_SWIPE_TOPICS,
@@ -411,7 +410,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       type="button"
                       onClick={() => setSpiciness('nuclear')}
                       className={`py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        spiciness === 'nuclear' ? 'bg-surface-2 text-pink-400' : 'text-ink-muted hover:text-white'
+                        spiciness === 'nuclear' ? 'bg-surface-2 text-status-danger' : 'text-ink-muted hover:text-white'
                       }`}
                     >
                       Nuclear ⚛️
@@ -934,7 +933,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'linkedin' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'linkedin' ? 'bg-blue-600 text-white' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'linkedin' ? 'bg-accent-brass-500 text-white' : 'text-ink-muted hover:text-white'
                           }`}
                         >
                           <Linkedin className="h-3 w-3" />
@@ -944,7 +943,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'tiktok' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'tiktok' ? 'bg-cyan-500 text-black font-black' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'tiktok' ? 'bg-accent-brass-400 text-slate-950 font-black' : 'text-ink-muted hover:text-white'
                           }`}
                         >
                           <Video className="h-3 w-3" />
@@ -967,7 +966,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     {activeEmul === 'x' && (
                       <div className="bg-surface-0 p-4 rounded-2xl border border-sky-500/20 space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center font-bold text-white text-xs">
+                          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-sky-400 to-accent-brass-600 flex items-center justify-center font-bold text-white text-xs">
                             OS
                           </div>
                           <div>
@@ -989,8 +988,8 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     )}
 
                     {activeEmul === 'linkedin' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-blue-500/20 space-y-2">
-                        <div className="text-[11px] text-blue-400 font-bold flex items-center gap-1">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-brass-500/20 space-y-2">
+                        <div className="text-[11px] text-accent-brass-400 font-bold flex items-center gap-1">
                           <Linkedin className="h-3.5 w-3.5" />
                           <span>LinkedIn First 140 Characters (&quot;...see more&quot; Fold Check):</span>
                         </div>
@@ -1011,14 +1010,14 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     )}
 
                     {activeEmul === 'tiktok' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-cyan-500/20 flex flex-col sm:flex-row items-center gap-4">
-                        <div className="w-full sm:w-48 aspect-[9/16] bg-surface-1 rounded-xl border border-cyan-500/30 p-3 flex flex-col justify-between relative overflow-hidden shrink-0 shadow-lg">
-                          <div className="flex justify-between items-center text-[10px] text-cyan-400 font-bold">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-brass-500/20 flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-full sm:w-48 aspect-[9/16] bg-surface-1 rounded-xl border border-brass-500/30 p-3 flex flex-col justify-between relative overflow-hidden shrink-0 shadow-[var(--shadow-panel-brass)]">
+                          <div className="flex justify-between items-center text-[10px] text-accent-brass-400 font-bold">
                             <span>0:00 - 0:03</span>
-                            <span className="px-1.5 py-0.5 rounded bg-cyan-500/20">HOOK ZONE</span>
+                            <span className="px-1.5 py-0.5 rounded bg-accent-brass-500/20">HOOK ZONE</span>
                           </div>
 
-                          <div className="bg-black/80 backdrop-blur p-2 rounded-lg border border-cyan-400/50 text-center space-y-1">
+                          <div className="bg-black/80 backdrop-blur p-2 rounded-lg border border-brass-400/50 text-center space-y-1">
                             <span className="text-[9px] font-black uppercase text-accent-brass-400 block tracking-wider">
                               On-Screen Headline
                             </span>
@@ -1091,7 +1090,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                           onClick={() => onNavigateTab('teleprompter')}
                           className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
                         >
-                          <Video className="h-3.5 w-3.5 text-cyan-400" />
+                          <Video className="h-3.5 w-3.5 text-accent-brass-400" />
                           <span>Teleprompter</span>
                         </button>
                       )}

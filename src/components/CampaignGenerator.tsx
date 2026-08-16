@@ -209,14 +209,14 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
     <div className="space-y-8">
       {/* Hero Header & Niche Selector */}
       <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-72 h-72 bg-violet-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-10 -bottom-10 w-72 h-72 bg-pink-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-10 -top-10 w-72 h-72 bg-accent-brass-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-10 -bottom-10 w-72 h-72 bg-accent-brass-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-semibold text-violet-300 mb-2">
-                <Flame className="h-3.5 w-3.5 text-fuchsia-400" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+                <Flame className="h-3.5 w-3.5 text-accent-brass-400" />
                 <span>Multi-Platform Virality Engine</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
@@ -241,7 +241,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                   onClick={() => handleSelectPresetNiche(preset)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${
                     selectedNiche === preset.name
-                      ? 'bg-violet-600 text-white shadow-md shadow-violet-600/30 font-semibold ring-1 ring-violet-400'
+                      ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)] font-semibold ring-1 ring-accent-brass-400'
                       : 'bg-surface-1 text-ink-secondary hover:bg-surface-2 border border-white/10'
                   }`}
                 >
@@ -257,7 +257,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <div className="flex items-center justify-between mb-1.5">
                 <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2">
                   <span>Topic, Product, or Core Message</span>
-                  <span className="text-pink-400">*</span>
+                  <span className="text-accent-brass-400">*</span>
                 </label>
                 <VoiceInputButton
                   onTranscript={(text) => setTopic(text)}
@@ -272,7 +272,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                 placeholder="e.g. How to use AI agents to automate social media content, generate 100k views, and scale SaaS revenue... (Or click 'Speak Topic' to dictate by voice)"
                 rows={3}
                 required
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors placeholder:text-slate-600"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors placeholder:text-slate-600"
               />
             </div>
 
@@ -280,7 +280,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center justify-between mb-1.5">
                   <span>Target Audience</span>
-                  <span className="text-[10px] text-violet-400 font-medium">12+ Presets</span>
+                  <span className="text-[10px] text-accent-brass-400 font-medium">12+ Presets</span>
                 </label>
                 <select
                   value={selectedAudienceOption}
@@ -293,7 +293,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                       setTargetAudience('');
                     }
                   }}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors cursor-pointer mb-1.5"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer mb-1.5"
                 >
                   {TARGET_AUDIENCE_OPTIONS.map((opt, idx) => (
                     <option key={idx} value={opt} className="bg-surface-1 text-slate-100 py-1">
@@ -308,7 +308,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                     value={targetAudience}
                     onChange={(e) => setTargetAudience(e.target.value)}
                     placeholder="Type custom target audience..."
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-violet-500 animate-fadeIn"
+                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-accent-brass-500 animate-fadeIn"
                   />
                 )}
               </div>
@@ -320,7 +320,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                 <select
                   value={goal}
                   onChange={(e: any) => setGoal(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors cursor-pointer"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer"
                 >
                   <option value="Viral Traffic">🔥 Viral Traffic & Views</option>
                   <option value="Lead Generation">🎯 High-Intent Lead Gen</option>
@@ -333,7 +333,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center justify-between mb-1.5">
                   <span>Tone & Energy</span>
-                  <span className="text-[10px] text-pink-400 font-medium">12+ Options</span>
+                  <span className="text-[10px] text-accent-brass-400 font-medium">12+ Options</span>
                 </label>
                 <select
                   value={selectedToneOption}
@@ -346,7 +346,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                       setDesiredTone('');
                     }
                   }}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-violet-500 transition-colors cursor-pointer mb-1.5"
+                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer mb-1.5"
                 >
                   {TONE_OPTIONS.map((opt, idx) => (
                     <option key={idx} value={opt} className="bg-surface-1 text-slate-100 py-1">
@@ -361,27 +361,27 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                     value={desiredTone}
                     onChange={(e) => setDesiredTone(e.target.value)}
                     placeholder="Type custom tone / energy..."
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-violet-500 animate-fadeIn"
+                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-accent-brass-500 animate-fadeIn"
                   />
                 )}
               </div>
             </div>
 
             {/* Network Voice Dictation Panel (7 Networks) */}
-            <div className="bg-surface-0/80 rounded-2xl border border-violet-500/30 p-4 space-y-3">
+            <div className="bg-surface-0/80 rounded-2xl border border-accent-brass-500/30 p-4 space-y-3">
               <button
                 type="button"
                 onClick={() => setShowNetworkVoicePanel(!showNetworkVoicePanel)}
                 className="w-full flex items-center justify-between text-left focus:outline-none"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="p-1.5 rounded-lg bg-pink-500/20 text-pink-400 border border-pink-500/30">
+                  <div className="p-1.5 rounded-lg bg-accent-brass-500/20 text-accent-brass-400 border border-accent-brass-500/30">
                     <Mic className="h-4 w-4 animate-pulse" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
                       <span>Network Voice Instructions (All 7 Networks)</span>
-                      <span className="px-2 py-0.5 rounded-full bg-pink-500/10 text-pink-300 border border-pink-500/20 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20 text-[10px] font-semibold">
                         Speak or Type per Network
                       </span>
                     </h4>
@@ -429,7 +429,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                           value={currentInstr}
                           onChange={(e) => updateNetworkInstruction(pKey, e.target.value)}
                           placeholder={`Speak or type what you need to go viral on ${pConf.name}...`}
-                          className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-ink-secondary focus:outline-none focus:border-violet-500"
+                          className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-500"
                         />
                       </div>
                     );
@@ -449,7 +449,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <button
                 type="submit"
                 disabled={loading || !topic.trim()}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600 hover:from-violet-500 hover:via-fuchsia-500 hover:to-pink-500 text-white font-bold text-sm shadow-xl shadow-fuchsia-600/20 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-sm shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] transition-[transform,opacity,box-shadow,filter] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -494,7 +494,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               onClick={handleCopyAllPlatforms}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-slate-100 text-xs font-semibold border border-white/15 transition-colors shrink-0"
             >
-              {batchCopied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-violet-400" />}
+              {batchCopied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{batchCopied ? 'Campaign Copied!' : 'Export Full Campaign (All Networks)'}</span>
             </button>
           </div>
@@ -511,7 +511,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                   onClick={() => setActivePlatformTab(plat)}
                   className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
                     isActive
-                      ? `${platConfig.bgColor} ${platConfig.color} border ${platConfig.borderColor} shadow-md`
+                      ? `${platConfig.bgColor} ${platConfig.color} border ${platConfig.borderColor} shadow-[var(--shadow-panel)]`
                       : 'bg-surface-1/60 text-ink-muted hover:text-ink-secondary border border-transparent'
                   }`}
                 >

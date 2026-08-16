@@ -295,24 +295,24 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
           </div>
 
           <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center">
-              <Cpu className="w-5 h-5 text-blue-400" />
+            <div className="w-10 h-10 rounded-lg bg-accent-brass-500/10 border border-brass-500/30 flex items-center justify-center">
+              <Cpu className="w-5 h-5 text-accent-brass-400" />
             </div>
             <div>
               <span className="text-[10px] text-ink-muted font-mono uppercase block">Node.js Memory Heap</span>
-              <span className="text-base font-extrabold text-blue-300">
+              <span className="text-base font-extrabold text-accent-brass-300">
                 {telemetry?.memory ? `${telemetry.memory.heapUsedMb} MB used (${telemetry.memory.percentUsed}%)` : '38.4 MB Heap'}
               </span>
             </div>
           </div>
 
           <div className="bg-surface-1/60 rounded-xl p-3 border border-hairline flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center">
-              <Bot className="w-5 h-5 text-purple-400" />
+            <div className="w-10 h-10 rounded-lg bg-accent-brass-500/10 border border-brass-500/30 flex items-center justify-center">
+              <Bot className="w-5 h-5 text-accent-brass-400" />
             </div>
             <div>
               <span className="text-[10px] text-ink-muted font-mono uppercase block">Server Uptime</span>
-              <span className="text-base font-extrabold text-purple-300">
+              <span className="text-base font-extrabold text-accent-brass-300">
                 {telemetry ? `${Math.floor(telemetry.uptimeSeconds / 60)}m ${telemetry.uptimeSeconds % 60}s` : 'Active Process'}
               </span>
             </div>
@@ -459,8 +459,8 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex items-center gap-2.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold uppercase ${
-                        evt.category === 'EXPORT' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' :
-                        evt.category === 'SETTINGS' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' :
+                        evt.category === 'EXPORT' ? 'bg-surface-2 text-ink-secondary border border-white/15' :
+                        evt.category === 'SETTINGS' ? 'bg-surface-2 text-ink-secondary border border-white/15' :
                         evt.category === 'CANVAS' ? 'bg-accent-brass-500/20 text-accent-brass-300 border border-brass-500/30' :
                         evt.category === 'API' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' :
                         'bg-surface-2 text-ink-secondary border border-white/15'
@@ -535,7 +535,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
                 onClick={() => setSelectedAgent(agent.id)}
                 className={`w-full text-left p-3 rounded-xl border transition-colors cursor-pointer flex items-start gap-3 ${
                   selectedAgent === agent.id
-                    ? 'bg-accent-brass-500/10 border-brass-500/50 text-slate-100 shadow-md ring-1 ring-brass-500/30'
+                    ? 'bg-accent-brass-500/10 border-brass-500/50 text-slate-100 shadow-[var(--shadow-panel-brass)] ring-1 ring-brass-500/30'
                     : 'bg-surface-0/60 border-hairline text-ink-muted hover:text-ink-secondary hover:bg-surface-1'
                 }`}
               >
@@ -575,7 +575,7 @@ export const AgentOpsStudio: React.FC<AgentOpsStudioProps> = ({
               <button
                 onClick={runAgent}
                 disabled={isAgentRunning}
-                className="px-4 py-2 rounded-xl bg-accent-brass-500 hover:bg-brass-400 text-slate-950 font-bold text-xs shadow-md transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                className="px-4 py-2 rounded-xl bg-accent-brass-500 hover:bg-brass-400 text-slate-950 font-bold text-xs shadow-[var(--shadow-panel-brass)] transition-colors flex items-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <Play className={`w-3.5 h-3.5 ${isAgentRunning ? 'animate-spin' : ''}`} />
                 <span>{isAgentRunning ? 'Agent Processing...' : 'Execute Agent'}</span>

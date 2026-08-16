@@ -229,13 +229,13 @@ export const VisualStudio: React.FC = () => {
       <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-fuchsia-500/10 border border-fuchsia-500/20 text-xs font-semibold text-fuchsia-300 mb-2">
-              <ImageIcon className="h-4 w-4 text-fuchsia-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+              <ImageIcon className="h-4 w-4 text-accent-brass-400" />
               <span>Gemini 3.1 Flash-Lite AI Graphic & Overlay Studio</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
               <span>Thumbnail & Visual Studio</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-fuchsia-500 to-pink-600 text-white font-bold tracking-normal uppercase">
+              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-black font-bold tracking-normal uppercase">
                 v10.0 Pro
               </span>
             </h2>
@@ -249,7 +249,7 @@ export const VisualStudio: React.FC = () => {
             <button
               onClick={() => setStudioMode('single')}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
-                studioMode === 'single' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
+                studioMode === 'single' ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]' : 'text-ink-muted hover:text-white'
               }`}
             >
               <FileImage className="h-4 w-4" />
@@ -259,7 +259,7 @@ export const VisualStudio: React.FC = () => {
             <button
               onClick={() => setStudioMode('carousel')}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
-                studioMode === 'carousel' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
+                studioMode === 'carousel' ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]' : 'text-ink-muted hover:text-white'
               }`}
             >
               <Layers className="h-4 w-4" />
@@ -269,7 +269,7 @@ export const VisualStudio: React.FC = () => {
             <button
               onClick={() => setStudioMode('ab_variants')}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
-                studioMode === 'ab_variants' ? 'bg-fuchsia-600 text-white shadow-lg' : 'text-ink-muted hover:text-white'
+                studioMode === 'ab_variants' ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]' : 'text-ink-muted hover:text-white'
               }`}
             >
               <Grid className="h-4 w-4" />
@@ -281,7 +281,7 @@ export const VisualStudio: React.FC = () => {
         {/* Style Archetype Selector Cards */}
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
-            <Palette className="h-4 w-4 text-fuchsia-400" />
+            <Palette className="h-4 w-4 text-accent-brass-400" />
             <span>Select 1-Click Aesthetic Style Archetype:</span>
           </label>
 
@@ -293,7 +293,7 @@ export const VisualStudio: React.FC = () => {
                 onClick={() => handleSelectArchetype(arch)}
                 className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
                   selectedArchetype === arch.id
-                    ? 'bg-surface-1 border-fuchsia-500 ring-2 ring-fuchsia-500/50 shadow-xl'
+                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
                     : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
                 }`}
               >
@@ -303,7 +303,7 @@ export const VisualStudio: React.FC = () => {
                 <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
                   {arch.description}
                 </p>
-                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-fuchsia-300">
+                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-accent-brass-300">
                   {arch.badge}
                 </span>
               </button>
@@ -338,7 +338,7 @@ export const VisualStudio: React.FC = () => {
               }}
               rows={2}
               placeholder="e.g. 3 AI WORKFLOWS TO REPLACE A $50K AGENCY"
-              className="w-full bg-surface-0 border border-white/10 rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-fuchsia-500 leading-relaxed font-sans shadow-inner"
+              className="w-full bg-surface-0 border border-white/10 rounded-2xl p-4 text-white text-sm focus:outline-none focus:border-accent-brass-500 leading-relaxed font-sans shadow-inner"
               required
             />
           </div>
@@ -351,7 +351,7 @@ export const VisualStudio: React.FC = () => {
               <select
                 value={aspectRatio}
                 onChange={(e) => setAspectRatio(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
               >
                 <option value="1:1">1:1 Square (Instagram / LinkedIn Carousel)</option>
                 <option value="9:16">9:16 Vertical (TikTok / Reels / Shorts / Story)</option>
@@ -368,7 +368,7 @@ export const VisualStudio: React.FC = () => {
               <select
                 value={platform}
                 onChange={(e: any) => setPlatform(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-fuchsia-500 font-semibold"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
               >
                 <option value="instagram">Instagram Carousel / Reel Thumbnail</option>
                 <option value="tiktok">TikTok Video Cover Thumbnail</option>
@@ -381,8 +381,8 @@ export const VisualStudio: React.FC = () => {
           </div>
 
           {error && (
-            <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+            <div className="p-3.5 rounded-xl bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
+              <AlertCircle className="h-4 w-4 shrink-0 text-status-danger" />
               <span>{error}</span>
             </div>
           )}
@@ -390,7 +390,7 @@ export const VisualStudio: React.FC = () => {
           <button
             type="submit"
             disabled={loading || !promptText.trim()}
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-fuchsia-600 via-pink-600 to-violet-600 hover:from-fuchsia-500 hover:via-pink-500 hover:to-violet-500 text-white font-black text-sm shadow-xl shadow-fuchsia-600/25 transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
+            className="w-full py-4 rounded-2xl bg-gradient-to-r from-accent-brass-600 via-accent-brass-500 to-violet-600 hover:from-accent-brass-500 hover:via-accent-brass-400 hover:to-violet-500 text-white font-black text-sm shadow-[var(--shadow-glow-brass)] transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
           >
             {loading ? (
               <>
@@ -424,7 +424,7 @@ export const VisualStudio: React.FC = () => {
                   <span className="text-sm font-black text-white uppercase">
                     {selectedAsset.platform.toUpperCase()} GRAPHIC
                   </span>
-                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-fuchsia-500/10 text-fuchsia-300 border border-fuchsia-500/20">
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20">
                     {selectedAsset.aspectRatio}
                   </span>
                   {selectedAsset.styleTheme && (
@@ -530,21 +530,21 @@ export const VisualStudio: React.FC = () => {
 
             {/* Prompt Meta Box */}
             <div className="bg-surface-0 p-3.5 rounded-2xl border border-white/10 text-xs font-mono text-ink-secondary">
-              <strong className="text-fuchsia-400">AI Prompt Stack:</strong> {selectedAsset.prompt}
+              <strong className="text-accent-brass-400">AI Prompt Stack:</strong> {selectedAsset.prompt}
             </div>
 
             {/* IF CAROUSEL DECK MODE: 5 SEQUENTIAL SLIDES DISPLAY */}
             {selectedAsset.slides && selectedAsset.slides.length > 0 && (
               <div className="space-y-4 pt-2 border-t border-white/10">
                 <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-                  <Layers className="h-4 w-4 text-fuchsia-400" />
+                  <Layers className="h-4 w-4 text-accent-brass-400" />
                   <span>5-Slide Sequential Carousel Deck Preview</span>
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
                   {selectedAsset.slides.map((slide) => (
                     <div key={slide.slideNumber} className="bg-surface-0 p-3 rounded-2xl border border-white/10 space-y-2">
-                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-fuchsia-400">
+                      <div className="flex items-center justify-between text-[10px] font-mono font-bold text-accent-brass-400">
                         <span>SLIDE #{slide.slideNumber}</span>
                       </div>
                       <div className="font-bold text-xs text-white line-clamp-1">{slide.title}</div>
@@ -562,7 +562,7 @@ export const VisualStudio: React.FC = () => {
           {/* Text Overlay Customizer Card */}
           <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-5">
             <h3 className="text-sm font-extrabold text-white uppercase tracking-wider flex items-center gap-2 border-b border-white/10 pb-3">
-              <Sliders className="h-4 w-4 text-fuchsia-400" />
+              <Sliders className="h-4 w-4 text-accent-brass-400" />
               <span>Canvas Text Overlay Controls</span>
             </h3>
 
@@ -576,7 +576,7 @@ export const VisualStudio: React.FC = () => {
                 value={badgeOverlay}
                 onChange={(e) => setBadgeOverlay(e.target.value)}
                 placeholder="e.g. DO NOT IGNORE ⚠️"
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-fuchsia-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-accent-brass-500"
               />
             </div>
 
@@ -590,7 +590,7 @@ export const VisualStudio: React.FC = () => {
                 onChange={(e) => setHeadlineOverlay(e.target.value)}
                 rows={2}
                 placeholder="e.g. 3 AI WORKFLOWS TO REPLACE $50K AGENCIES"
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-fuchsia-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-accent-brass-500"
               />
             </div>
 
@@ -604,7 +604,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('impact')}
                   className={`p-2 rounded-xl border text-xs font-black uppercase ${
-                    fontStyle === 'impact' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    fontStyle === 'impact' ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Heavy Impact
@@ -613,7 +613,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('serif')}
                   className={`p-2 rounded-xl border text-xs font-serif font-bold ${
-                    fontStyle === 'serif' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    fontStyle === 'serif' ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Editorial Serif
@@ -622,7 +622,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('mono')}
                   className={`p-2 rounded-xl border text-xs font-mono font-bold ${
-                    fontStyle === 'mono' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    fontStyle === 'mono' ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Tech Mono
@@ -631,7 +631,7 @@ export const VisualStudio: React.FC = () => {
                   type="button"
                   onClick={() => setFontStyle('sans')}
                   className={`p-2 rounded-xl border text-xs font-bold ${
-                    fontStyle === 'sans' ? 'bg-fuchsia-500/20 border-fuchsia-500 text-fuchsia-300' : 'bg-surface-0 border-white/10 text-ink-muted'
+                    fontStyle === 'sans' ? 'bg-accent-brass-500/20 border-accent-brass-500 text-accent-brass-300' : 'bg-surface-0 border-white/10 text-ink-muted'
                   }`}
                 >
                   Clean Sans
@@ -688,7 +688,7 @@ export const VisualStudio: React.FC = () => {
                   onClick={() => setSelectedAsset(asset)}
                   className={`p-3 rounded-2xl border cursor-pointer transition-colors flex items-center gap-3 ${
                     selectedAsset?.id === asset.id
-                      ? 'bg-fuchsia-500/10 border-fuchsia-500 ring-2 ring-fuchsia-500/30'
+                      ? 'bg-accent-brass-500/10 border-accent-brass-500 ring-2 ring-accent-brass-500/30'
                       : 'bg-surface-0 border-white/10 hover:border-white/15'
                   }`}
                 >
@@ -699,7 +699,7 @@ export const VisualStudio: React.FC = () => {
                     className="h-16 w-16 object-cover rounded-xl shrink-0 border border-white/10"
                   />
                   <div className="overflow-hidden space-y-0.5">
-                    <span className="text-[10px] font-black text-fuchsia-400 uppercase block">
+                    <span className="text-[10px] font-black text-accent-brass-400 uppercase block">
                       {asset.platform} ({asset.aspectRatio})
                     </span>
                     <p className="text-xs font-bold text-white truncate">{asset.headlineOverlay || asset.prompt}</p>

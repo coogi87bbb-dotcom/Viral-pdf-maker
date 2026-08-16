@@ -42,7 +42,6 @@ import { GoogleGenAI } from '@google/genai';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { DocumentData } from '../types';
-import { MotionPanel3D } from './MotionPanel3D';
 import { sanitizeClonedDocForHtml2Canvas } from '../utils/pdfExport';
 
 interface DigitalKitStudioProps {
@@ -1628,7 +1627,7 @@ WRITE A 5-PART EMAIL NURTURE SEQUENCE INTRODUCING A DIGITAL PRODUCT OR HIGH-TICK
               </div>
               <div className="flex justify-between text-ink-muted">
                 <span>STORAGE OS:</span>
-                <span className="text-cyan-400 font-bold">DIGITALKIT ARCHIVE V10</span>
+                <span className="text-accent-brass-400 font-bold">DIGITALKIT ARCHIVE V10</span>
               </div>
             </div>
 

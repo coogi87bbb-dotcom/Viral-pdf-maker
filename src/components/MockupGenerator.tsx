@@ -330,12 +330,12 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
   const platformMeta: Record<SocialPlatform, { name: string; icon: string; color: string; border: string }> = {
     pinterest: { name: 'Pinterest', icon: '📌', color: 'from-red-600 to-rose-600', border: 'border-red-500/40' },
     gumroad: { name: 'Gumroad', icon: '🛍️', color: 'from-brass-500 to-brass-600', border: 'border-brass-500/40' },
-    twitter: { name: 'Twitter / X', icon: '🐦', color: 'from-sky-500 to-blue-600', border: 'border-sky-500/40' },
+    twitter: { name: 'Twitter / X', icon: '🐦', color: 'from-accent-brass-400 to-accent-brass-500', border: 'border-accent-brass-400/40' },
     youtube: { name: 'YouTube', icon: '🎥', color: 'from-red-700 to-red-800', border: 'border-red-600/40' },
-    tiktok: { name: 'TikTok', icon: '🎵', color: 'from-pink-500 to-purple-600', border: 'border-pink-500/40' },
-    threads: { name: 'Threads', icon: '🧵', color: 'from-purple-600 to-indigo-600', border: 'border-purple-500/40' },
-    instagram: { name: 'Instagram', icon: '📸', color: 'from-fuchsia-600 to-purple-600', border: 'border-fuchsia-500/40' },
-    linkedin: { name: 'LinkedIn', icon: '💼', color: 'from-blue-600 to-cyan-600', border: 'border-blue-500/40' }
+    tiktok: { name: 'TikTok', icon: '🎵', color: 'from-accent-brass-500 to-accent-brass-600', border: 'border-accent-brass-500/40' },
+    threads: { name: 'Threads', icon: '🧵', color: 'from-accent-brass-600 to-accent-brass-700', border: 'border-accent-brass-600/40' },
+    instagram: { name: 'Instagram', icon: '📸', color: 'from-accent-brass-500 to-accent-brass-400', border: 'border-accent-brass-500/40' },
+    linkedin: { name: 'LinkedIn', icon: '💼', color: 'from-accent-brass-400 to-accent-brass-600', border: 'border-accent-brass-400/40' }
   };
 
   // Background style classes definition
@@ -396,8 +396,8 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
   return (
     <div className="max-w-6xl mx-auto p-4 sm:p-6 space-y-6 text-slate-100">
       {/* Top Banner Header */}
-      <div className="bg-gradient-to-r from-purple-950 via-slate-900 to-indigo-950 border border-purple-800/50 p-6 rounded-3xl shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-purple-600/10 blur-[100px] pointer-events-none rounded-full" />
+      <div className="bg-gradient-to-r from-accent-brass-900/50 via-surface-1 to-accent-brass-800/40 border border-accent-brass-500/30 p-6 rounded-3xl shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-80 h-80 bg-accent-brass-500/10 blur-[100px] pointer-events-none rounded-full" />
         
         <div className="space-y-1.5 max-w-2xl z-10">
           <div className="flex items-center space-x-2.5">
@@ -416,7 +416,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
         <div className="flex items-center space-x-2 shrink-0 z-10">
           <button
             onClick={handleRegenerateViralAngles}
-            className="px-3.5 py-2.5 bg-surface-2 hover:bg-slate-700 text-accent-brass-300 border border-white/15 font-bold text-xs rounded-xl shadow-md flex items-center space-x-1.5 transition-colors"
+            className="px-3.5 py-2.5 bg-surface-2 hover:bg-slate-700 text-accent-brass-300 border border-white/15 font-bold text-xs rounded-xl shadow-[var(--shadow-panel-brass)] flex items-center space-x-1.5 transition-colors"
             title="Generate a new viral hook angle (Contrarian, Case Study, or Step-by-Step)"
           >
             <RefreshCw className="w-3.5 h-3.5 text-accent-brass-400" />
@@ -426,7 +426,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
           <button
             onClick={handleDownloadMockupImage}
             disabled={isExporting}
-            className="px-4 py-2.5 bg-gradient-to-r from-brass-500 to-brass-400 hover:from-brass-400 hover:to-brass-300 text-slate-950 font-extrabold text-xs rounded-xl shadow-lg flex items-center space-x-2 disabled:opacity-50"
+            className="px-4 py-2.5 bg-gradient-to-r from-brass-500 to-brass-400 hover:from-brass-400 hover:to-brass-300 text-slate-950 font-extrabold text-xs rounded-xl shadow-[var(--shadow-glow-brass)] flex items-center space-x-2 disabled:opacity-50"
           >
             <Download className="w-4 h-4 text-slate-950" />
             <span>{isExporting ? 'Exporting PNG...' : 'Download Graphic PNG'}</span>
@@ -441,7 +441,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             onClick={() => setActiveTab('visual')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-extrabold transition-colors ${
               activeTab === 'visual'
-                ? 'bg-gradient-to-r from-brass-500 to-brass-400 text-slate-950 shadow-md'
+                ? 'bg-gradient-to-r from-brass-500 to-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)]'
                 : 'text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -453,7 +453,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             onClick={() => setActiveTab('pipeline')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-extrabold transition-colors ${
               activeTab === 'pipeline'
-                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md'
+                ? 'bg-gradient-to-r from-accent-brass-600 to-accent-brass-500 text-white shadow-[var(--shadow-panel-brass)]'
                 : 'text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -517,13 +517,13 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             {/* Layout Preset */}
             <div className="space-y-1">
               <label className="font-bold text-ink-secondary flex items-center space-x-1">
-                <Sliders className="w-3.5 h-3.5 text-purple-400" />
+                <Sliders className="w-3.5 h-3.5 text-accent-brass-400" />
                 <span>Pinterest Pin Preset</span>
               </label>
               <select
                 value={pinTemplate}
                 onChange={(e) => setPinTemplate(e.target.value as PinTemplate)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-purple-500"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-accent-brass-500"
               >
                 <option value="classic-hook">1. Classic Headline Hook</option>
                 <option value="infographic-bullets">2. Infographic 1-2-3 Blueprint</option>
@@ -615,7 +615,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 style={{ fontFamily: getFontFamily() }}
               >
                 {/* Background Atmosphere Glow Effect */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-500/10 blur-[100px] rounded-full pointer-events-none" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent-brass-500/10 blur-[100px] rounded-full pointer-events-none" />
 
                 {/* Floating Sticker / Callout Badge */}
                 {stickerOverlay && (
@@ -661,7 +661,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 {pinTemplate === 'infographic-bullets' && (
                   <div className="relative z-10 w-full space-y-3 pt-4">
                     <div className="text-center space-y-1">
-                      <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <span className="text-[10px] font-mono uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-accent-brass-500/20 text-accent-brass-300 border border-accent-brass-500/30">
                         Step-by-Step Blueprint
                       </span>
                       <h3 className="text-base sm:text-lg font-black leading-tight">
@@ -730,7 +730,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 {/* LAYOUT TEMPLATE 6: CHEAT SHEET SPLIT */}
                 {pinTemplate === 'cheat-sheet-split' && (
                   <div className="relative z-10 w-full space-y-2 pt-4">
-                    <div className="bg-purple-950/70 border border-purple-500/40 p-3 rounded-xl text-purple-200 text-center">
+                    <div className="bg-accent-brass-900/40 border border-accent-brass-500/40 p-3 rounded-xl text-accent-brass-100 text-center">
                       <span className="text-[9px] font-mono uppercase tracking-widest text-brass-300 block">
                         PDF CHEAT SHEET
                       </span>
@@ -757,9 +757,9 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 {/* LAYOUT TEMPLATE 8: CAROUSEL SWIPE COVER */}
                 {pinTemplate === 'carousel-swipe-cover' && (
                   <div className="relative z-10 text-center space-y-2 w-full pt-4">
-                    <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-[10px] font-bold text-purple-300">
+                    <div className="inline-flex items-center space-x-1.5 px-3 py-1 bg-accent-brass-500/20 border border-accent-brass-500/40 rounded-full text-[10px] font-bold text-accent-brass-300">
                       <span>SWIPE FOR BLUEPRINT</span>
-                      <ArrowRight className="w-3 h-3 text-purple-400" />
+                      <ArrowRight className="w-3 h-3 text-accent-brass-400" />
                     </div>
                     <h3 className="text-base sm:text-lg font-black leading-tight px-2">
                       "{customPinOverlay}"
@@ -878,7 +878,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                   {mockupPose === 'multi-stack' && (
                     <div className="relative w-64 h-80 flex items-center justify-center">
                       <div className="absolute w-52 h-72 rounded-r-lg bg-slate-800 shadow-xl border border-white/20 transform -rotate-12 translate-x-4 opacity-70" />
-                      <div className="absolute w-52 h-72 rounded-r-lg bg-purple-900 shadow-xl border border-white/20 transform -rotate-6 translate-x-2 opacity-85" />
+                      <div className="absolute w-52 h-72 rounded-r-lg bg-accent-brass-900 shadow-xl border border-white/20 transform -rotate-6 translate-x-2 opacity-85" />
                       <div
                         className="w-52 h-72 rounded-r-lg shadow-2xl p-4 flex flex-col justify-between border-r border-t border-b border-white/20 relative"
                         style={{ backgroundColor: theme.colors.paperBg, color: theme.colors.textPrimary }}
@@ -1048,7 +1048,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
               {/* 3D Angle & Lighting Sliders */}
               <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-4 text-xs">
-                <span className="font-bold text-purple-400 uppercase tracking-wider flex items-center space-x-1.5">
+                <span className="font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <SlidersHorizontal className="w-3.5 h-3.5" />
                   <span>3D Tilt Angle & Glare Lighting</span>
                 </span>
@@ -1078,7 +1078,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                       max="30"
                       value={tiltX}
                       onChange={(e) => setTiltX(Number(e.target.value))}
-                      className="w-full accent-purple-400"
+                      className="w-full accent-brass-500"
                     />
                   </div>
 
@@ -1245,7 +1245,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             {/* Editable Main Caption / Script / Thread */}
             <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center space-x-1.5">
+                <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Post Body / Spoken Audio Script / Thread</span>
                 </span>
@@ -1262,7 +1262,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 rows={2}
                 value={currentPack.hook}
                 onChange={(e) => handleUpdatePackField('hook', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-accent-brass-300 font-medium focus:ring-1 focus:ring-purple-500 focus:outline-none"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-accent-brass-300 font-medium focus:ring-1 focus:ring-accent-brass-500 focus:outline-none"
                 placeholder="Opening hook..."
               />
 
@@ -1270,7 +1270,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 rows={7}
                 value={currentPack.body}
                 onChange={(e) => handleUpdatePackField('body', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-purple-500 focus:outline-none leading-relaxed"
+                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-accent-brass-500 focus:outline-none leading-relaxed"
                 placeholder="Full content body..."
               />
             </div>
@@ -1319,7 +1319,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
               {/* Mini Graphic Rendering */}
               <div className="w-full aspect-[4/5] bg-surface-0 border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center text-center relative overflow-hidden group">
-                <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-purple-900/40 to-transparent text-[10px] text-accent-brass-300 font-extrabold uppercase tracking-wider">
+                <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-accent-brass-900/40 to-transparent text-[10px] text-accent-brass-300 font-extrabold uppercase tracking-wider">
                   {platformMeta[activePlatform].name} Graphic Preset
                 </div>
 

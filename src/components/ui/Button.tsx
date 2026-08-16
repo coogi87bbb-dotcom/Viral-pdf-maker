@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+export type ButtonVariant = 'primary' | 'brass' | 'secondary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -30,6 +30,15 @@ const VARIANTS: Record<ButtonVariant, string> = {
     'bg-gradient-to-r from-accent-rosegold-500 via-accent-rosegold-400 to-accent-rosegold-500 text-slate-950 ' +
     'shadow-[var(--shadow-glow-rosegold)] hover:shadow-[0_14px_50px_rgba(192,117,74,0.45)] hover:brightness-105 ' +
     'focus-visible:ring-accent-rosegold-400',
+  // Brass primary — the signed-in Studio OS app chrome's actual CTA
+  // accent ("Modern Grand Hotel" identity). `primary` above stays rosegold
+  // for its one real consumer (AuthModal.tsx, pre-login); every in-app tool
+  // surface should reach for `brass` instead of hand-rolling its own
+  // gradient button.
+  brass:
+    'bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 ' +
+    'shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] hover:brightness-105 ' +
+    'focus-visible:ring-accent-brass-400',
   secondary:
     'bg-surface-2 text-ink-primary border border-accent-violet-500/30 ' +
     'shadow-[var(--shadow-elevated)] hover:border-accent-violet-500/60 hover:bg-surface-3 ' +

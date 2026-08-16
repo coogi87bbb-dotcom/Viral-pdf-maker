@@ -129,7 +129,10 @@ export const ScaledCanvasStage: React.FC<ScaledCanvasStageProps> = ({
   const effectiveScale = computeScale();
 
   return (
-    <div className={`flex-1 flex flex-col h-[calc(100vh-210px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-hairline rounded-3xl shadow-2xl ${className}`}>
+    // 160px (was 210px) — see the matching comment in StudioControls.tsx:
+    // the global top nav that used to sit above Header.tsx is now the left
+    // Sidebar, which reserves no top-of-viewport height at sm+.
+    <div className={`flex-1 flex flex-col h-[calc(100vh-160px)] min-h-[660px] max-h-[880px] w-full overflow-hidden bg-surface-0 border border-hairline rounded-3xl shadow-2xl ${className}`}>
       {/* Control Toolbar Header */}
       <div className="px-3 py-2 bg-surface-1/90 border-b border-hairline flex flex-wrap items-center justify-between gap-2 shrink-0 z-10 backdrop-blur-md">
         {/* Device Viewport Mode Selector */}

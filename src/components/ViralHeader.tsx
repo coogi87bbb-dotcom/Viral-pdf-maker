@@ -71,7 +71,9 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onQuick
   const tabs = baseTabs;
 
   return (
-    <header className="sticky top-0 z-50 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary shadow-[var(--shadow-elevated)]">
+    // top-14 on mobile clears the Sidebar's fixed mobile top bar (h-14);
+    // sm:top-0 because that bar only exists <sm — see Sidebar.tsx.
+    <header className="sticky top-14 sm:top-0 z-40 bg-surface-1/85 backdrop-blur-[20px] backdrop-saturate-150 border-b border-hairline text-ink-primary shadow-[var(--shadow-elevated)]">
       {/* Top Banner */}
       <div className="bg-gradient-to-r from-surface-0 via-surface-1 to-surface-0 border-b border-accent-brass-500/20 px-4 py-1.5 text-xs font-medium text-accent-brass-200 text-center flex items-center justify-between">
         <div className="flex items-center gap-2 mx-auto sm:mx-0">
