@@ -86,4 +86,3 @@ Never use the same layout for consecutive sections.
 - Numbers MUST count up via GSAP (never appear statically)
 - Use a suffix element for units (x, M, %, etc.) at a smaller size
 - Labels below in small caps or uppercase muted text
-

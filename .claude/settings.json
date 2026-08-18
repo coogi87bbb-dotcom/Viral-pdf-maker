@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); f=$(printf %s \"$input\" | jq -r '.tool_input.file_path // empty'); case \"$f\" in *\"/.claude/skills/\"*) rel=\"${f#*/.claude/skills/}\"; dest=\"$HOME/.claude/skills/$rel\"; mkdir -p \"$(dirname \"$dest\")\"; cp \"$f\" \"$dest\";; esac; true",
+            "timeout": 10,
+            "statusMessage": "Mirroring skill to ~/.claude/skills/..."
+          }
+        ]
+      }
+    ]
+  }
+}
