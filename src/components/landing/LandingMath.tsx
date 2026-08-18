@@ -47,16 +47,16 @@ export const LandingMath: React.FC = () => {
                   </span>
                 </div>
                 <p className="mt-3 text-right font-sans text-xs text-lf-on-ink-muted">
-                  $5,016 a year — before a single hour of your own time.
+                  $5,016 a year, before a single hour of your own time.
                 </p>
               </div>
             </Reveal>
           </div>
 
           <div className="order-1 lg:order-2 lg:col-span-6">
-            <Reveal kind="slide-right" delay={0.12}>
-              <span className="lf-label text-lf-copper-light">006 / The arithmetic</span>
-            </Reveal>
+            {/* No eyebrow here - see LandingCost.tsx's comment for why the
+                page caps section eyebrows at 3 total instead of stamping
+                one on every section. */}
             <Reveal kind="slide-right" delay={0.2} className="mt-6 block">
               <h2 className="lf-heading text-lf-on-ink">
                 One workspace,
@@ -69,7 +69,7 @@ export const LandingMath: React.FC = () => {
             <Reveal kind="slide-right" delay={0.3} className="lf-scrim mt-8 block">
               <p className="lf-body text-lf-on-ink-muted">
                 The subscriptions are the visible cost. The nine hours a week
-                spent stitching their outputs together is the expensive one —
+                spent stitching their outputs together is the expensive one,
                 and it never appears on an invoice.
               </p>
             </Reveal>

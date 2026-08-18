@@ -25,7 +25,11 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
       aria-label="LogFlow AI introduction"
     >
       {/* Masthead */}
-      <Reveal kind="fade-up" immediate className="flex items-baseline justify-between gap-4">
+      <Reveal
+        kind="fade-up"
+        immediate
+        className="relative z-10 flex items-baseline justify-between gap-4"
+      >
         <span className="font-editorial text-xl font-semibold tracking-[-0.01em] text-lf-on-ink text-legible sm:text-2xl">
           LogFlow<span className="text-lf-copper"> AI</span>
         </span>
@@ -35,9 +39,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
       </Reveal>
 
       {/* Title card */}
-      <div className="mx-auto w-full max-w-7xl">
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
         <Reveal kind="fade-up" delay={0.05} immediate>
-          <span className="lf-label text-lf-copper-light text-legible">001 / The workspace</span>
+          <span className="lf-label text-lf-copper-light text-legible">The workspace</span>
         </Reveal>
 
         {/* Wraps on a phone; stays on ONE line from lg up. */}
@@ -50,7 +54,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
         <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <Reveal kind="fade-up" delay={0.26} immediate>
             <p className="lf-body text-lf-on-ink-muted text-legible">
-              Nine production tools in one workspace — campaigns, publishing,
+              Ten production tools in one workspace: campaigns, publishing,
               proposals, real estate. The work that eats your evenings takes
               minutes here.
             </p>

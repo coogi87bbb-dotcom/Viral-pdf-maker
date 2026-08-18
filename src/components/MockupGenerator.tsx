@@ -329,7 +329,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
   const platformMeta: Record<SocialPlatform, { name: string; icon: string; color: string; border: string }> = {
     pinterest: { name: 'Pinterest', icon: '📌', color: 'from-red-600 to-rose-600', border: 'border-red-500/40' },
-    gumroad: { name: 'Gumroad', icon: '🛍️', color: 'from-brass-500 to-brass-600', border: 'border-brass-500/40' },
+    gumroad: { name: 'Gumroad', icon: '🛍️', color: 'from-accent-brass-500 to-brass-600', border: 'border-accent-brass-500/40' },
     twitter: { name: 'Twitter / X', icon: '🐦', color: 'from-accent-brass-400 to-accent-brass-500', border: 'border-accent-brass-400/40' },
     youtube: { name: 'YouTube', icon: '🎥', color: 'from-red-700 to-red-800', border: 'border-red-600/40' },
     tiktok: { name: 'TikTok', icon: '🎵', color: 'from-accent-brass-500 to-accent-brass-600', border: 'border-accent-brass-500/40' },
@@ -394,17 +394,17 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 sm:p-6 space-y-6 text-slate-100">
+    <div className="max-w-6xl mx-auto p-4 sm:p-6 space-y-6 text-ink-secondary">
       {/* Top Banner Header */}
-      <div className="bg-gradient-to-r from-accent-brass-900/50 via-surface-1 to-accent-brass-800/40 border border-accent-brass-500/30 p-6 rounded-3xl shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-accent-brass-900/50 via-surface-1 to-accent-brass-800/40 border border-accent-brass-500/30 p-6 rounded-3xl shadow-[var(--shadow-panel-brass)] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 bg-accent-brass-500/10 blur-[100px] pointer-events-none rounded-full" />
         
         <div className="space-y-1.5 max-w-2xl z-10">
           <div className="flex items-center space-x-2.5">
-            <span className="p-2 rounded-xl bg-accent-brass-500/20 text-accent-brass-300 border border-brass-500/30">
+            <span className="p-2 rounded-xl bg-accent-brass-500/20 text-accent-brass-300 border border-accent-brass-500/30">
               <Sparkles className="w-5 h-5" />
             </span>
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-black text-ink-primary tracking-tight">
               Genius 3D Product Mockup & Pinterest Viral Engine
             </h2>
           </div>
@@ -416,7 +416,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
         <div className="flex items-center space-x-2 shrink-0 z-10">
           <button
             onClick={handleRegenerateViralAngles}
-            className="px-3.5 py-2.5 bg-surface-2 hover:bg-slate-700 text-accent-brass-300 border border-white/15 font-bold text-xs rounded-xl shadow-[var(--shadow-panel-brass)] flex items-center space-x-1.5 transition-colors"
+            className="px-3.5 py-2.5 bg-surface-2 hover:bg-surface-3 text-accent-brass-300 border border-hairline-strong font-bold text-xs rounded-xl shadow-[var(--shadow-panel-brass)] flex items-center space-x-1.5 transition-colors"
             title="Generate a new viral hook angle (Contrarian, Case Study, or Step-by-Step)"
           >
             <RefreshCw className="w-3.5 h-3.5 text-accent-brass-400" />
@@ -426,7 +426,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
           <button
             onClick={handleDownloadMockupImage}
             disabled={isExporting}
-            className="px-4 py-2.5 bg-gradient-to-r from-brass-500 to-brass-400 hover:from-brass-400 hover:to-brass-300 text-slate-950 font-extrabold text-xs rounded-xl shadow-[var(--shadow-glow-brass)] flex items-center space-x-2 disabled:opacity-50"
+            className="px-4 py-2.5 bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 hover:from-accent-brass-400 hover:to-brass-300 text-slate-950 font-extrabold text-xs rounded-xl shadow-[var(--shadow-glow-brass)] flex items-center space-x-2 disabled:opacity-50"
           >
             <Download className="w-4 h-4 text-slate-950" />
             <span>{isExporting ? 'Exporting PNG...' : 'Download Graphic PNG'}</span>
@@ -435,13 +435,13 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
       </div>
 
       {/* Main Studio Navigation Mode Bar */}
-      <div className="flex items-center justify-between bg-surface-1 border border-white/10 p-2 rounded-2xl gap-2 flex-wrap">
-        <div className="flex items-center space-x-1 bg-surface-0 p-1 rounded-xl border border-white/10">
+      <div className="flex items-center justify-between bg-surface-1 border border-hairline p-2 rounded-2xl gap-2 flex-wrap">
+        <div className="flex items-center space-x-1 bg-surface-0 p-1 rounded-xl border border-hairline">
           <button
             onClick={() => setActiveTab('visual')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-extrabold transition-colors ${
               activeTab === 'visual'
-                ? 'bg-gradient-to-r from-brass-500 to-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)]'
+                ? 'bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)]'
                 : 'text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -453,7 +453,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             onClick={() => setActiveTab('pipeline')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-extrabold transition-colors ${
               activeTab === 'pipeline'
-                ? 'bg-gradient-to-r from-accent-brass-600 to-accent-brass-500 text-white shadow-[var(--shadow-panel-brass)]'
+                ? 'bg-gradient-to-r from-accent-brass-600 to-accent-brass-500 text-ink-primary shadow-[var(--shadow-panel-brass)]'
                 : 'text-ink-muted hover:text-ink-secondary'
             }`}
           >
@@ -479,7 +479,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 }}
                 className={`flex items-center space-x-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap ${
                   isSelected
-                    ? `bg-surface-2 text-white ring-1 ${meta.border} shadow-sm`
+                    ? `bg-surface-2 text-ink-primary ring-1 ${meta.border} shadow-sm`
                     : 'text-ink-muted hover:text-ink-secondary hover:bg-surface-0'
                 }`}
               >
@@ -495,7 +495,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
       {activeTab === 'visual' && (
         <div className="space-y-6">
           {/* Main Controls Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 bg-surface-1 border border-white/10 p-3 rounded-2xl text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 bg-surface-1 border border-hairline p-3 rounded-2xl text-xs">
             {/* Format Selector */}
             <div className="space-y-1">
               <label className="font-bold text-ink-secondary flex items-center space-x-1">
@@ -505,7 +505,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               <select
                 value={graphicFormat}
                 onChange={(e) => setGraphicFormat(e.target.value as GraphicFormat)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-brass-500"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-2 text-ink-primary font-medium focus:ring-1 focus:ring-brass-500"
               >
                 <option value="pinterest">📌 Pinterest Pin (2:3)</option>
                 <option value="gumroad">🛍️ Gumroad Hero (3:2)</option>
@@ -523,7 +523,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               <select
                 value={pinTemplate}
                 onChange={(e) => setPinTemplate(e.target.value as PinTemplate)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-accent-brass-500"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-2 text-ink-primary font-medium focus:ring-1 focus:ring-accent-brass-500"
               >
                 <option value="classic-hook">1. Classic Headline Hook</option>
                 <option value="infographic-bullets">2. Infographic 1-2-3 Blueprint</option>
@@ -545,7 +545,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               <select
                 value={mockupPose}
                 onChange={(e) => setMockupPose(e.target.value as MockupPose)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-emerald-500"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-2 text-ink-primary font-medium focus:ring-1 focus:ring-emerald-500"
               >
                 <option value="single-3d">Hardcover 3D Stand</option>
                 <option value="bundle-tablet">Hardcover + Tablet Bundle</option>
@@ -564,7 +564,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               <select
                 value={fontPairing}
                 onChange={(e) => setFontPairing(e.target.value as PinFontPairing)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-rose-500"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-2 text-ink-primary font-medium focus:ring-1 focus:ring-rose-500"
               >
                 <option value="modern-sans">Modern Sans Display</option>
                 <option value="editorial-serif">Editorial Serif Luxury</option>
@@ -582,7 +582,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               <select
                 value={bgStyle}
                 onChange={(e) => setBgStyle(e.target.value as BackgroundStyle)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-2 text-white font-medium focus:ring-1 focus:ring-sky-500"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-2 text-ink-primary font-medium focus:ring-1 focus:ring-sky-500"
               >
                 <option value="studio-dark">Studio Dark Ambient</option>
                 <option value="minimal-cream">Warm Editorial Cream</option>
@@ -603,7 +603,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             <div className="lg:col-span-7 flex flex-col items-center justify-center min-h-[500px]">
               <div
                 ref={mockupCardRef}
-                className={`w-full rounded-3xl shadow-2xl relative overflow-hidden flex flex-col items-center justify-between p-6 sm:p-8 space-y-6 transition-all duration-300 border ${getBgClass()} ${
+                className={`w-full rounded-3xl shadow-2xl relative overflow-hidden flex flex-col items-center justify-between p-6 sm:p-8 space-y-6 transition-[background-color,border-color] duration-300 border ${getBgClass()} ${
                   graphicFormat === 'pinterest'
                     ? 'max-w-[420px] aspect-[2/3] min-h-[580px]'
                     : graphicFormat === 'story'
@@ -972,7 +972,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             {/* Right: Fine-Tuning Inspector Controls */}
             <div className="lg:col-span-5 space-y-5">
               {/* Overlay Text Customizer */}
-              <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+              <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                     <Edit3 className="w-3.5 h-3.5" />
@@ -980,7 +980,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                   </span>
                   <button
                     onClick={() => copyToClipboard(customPinOverlay, 'overlayText')}
-                    className="px-2 py-0.5 bg-surface-2 hover:bg-slate-700 text-ink-secondary rounded text-[11px] flex items-center space-x-1"
+                    className="px-2 py-0.5 bg-surface-2 hover:bg-surface-3 text-ink-secondary rounded text-[11px] flex items-center space-x-1"
                   >
                     {copiedField === 'overlayText' ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                     <span>{copiedField === 'overlayText' ? 'Copied' : 'Copy'}</span>
@@ -990,13 +990,13 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                   rows={2}
                   value={customPinOverlay}
                   onChange={(e) => setCustomPinOverlay(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-brass-500 focus:outline-none"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-ink-primary focus:ring-1 focus:ring-brass-500 focus:outline-none"
                   placeholder="Enter hook headline..."
                 />
               </div>
 
               {/* Sticker / Callout Badge Customizer */}
-              <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+              <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
                 <span className="text-xs font-bold text-rose-400 uppercase tracking-wider block">
                   Sticker Callout & Price Tag
                 </span>
@@ -1007,7 +1007,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                       type="text"
                       value={stickerOverlay}
                       onChange={(e) => setStickerOverlay(e.target.value)}
-                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-white font-bold"
+                      className="w-full bg-surface-0 border border-hairline rounded-lg p-2 text-ink-primary font-bold"
                       placeholder="e.g. 📌 SAVE THIS PIN"
                     />
                   </div>
@@ -1017,7 +1017,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                       type="text"
                       value={priceTag}
                       onChange={(e) => setPriceTag(e.target.value)}
-                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-emerald-400 font-bold"
+                      className="w-full bg-surface-0 border border-hairline rounded-lg p-2 text-emerald-400 font-bold"
                     />
                   </div>
                 </div>
@@ -1025,7 +1025,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
               {/* Problem vs Solution Editable Fields */}
               {pinTemplate === 'problem-solution' && (
-                <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+                <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
                   <span className="text-xs font-bold text-red-400 uppercase tracking-wider block">
                     Problem & Solution Text
                   </span>
@@ -1033,21 +1033,21 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                     type="text"
                     value={problemText}
                     onChange={(e) => setProblemText(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl p-2.5 text-xs text-red-200"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl p-2.5 text-xs text-red-200"
                     placeholder="Problem text..."
                   />
                   <input
                     type="text"
                     value={solutionText}
                     onChange={(e) => setSolutionText(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl p-2.5 text-xs text-emerald-200"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl p-2.5 text-xs text-emerald-200"
                     placeholder="Solution text..."
                   />
                 </div>
               )}
 
               {/* 3D Angle & Lighting Sliders */}
-              <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-4 text-xs">
+              <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-4 text-xs">
                 <span className="font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <SlidersHorizontal className="w-3.5 h-3.5" />
                   <span>3D Tilt Angle & Glare Lighting</span>
@@ -1097,7 +1097,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               </div>
 
               {/* Badges & Ribbon Controls */}
-              <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3 text-xs">
+              <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3 text-xs">
                 <span className="font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <Award className="w-3.5 h-3.5" />
                   <span>Foil Badge & Rating Controls</span>
@@ -1110,7 +1110,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                       type="text"
                       value={badgeText}
                       onChange={(e) => setBadgeText(e.target.value)}
-                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-white font-bold"
+                      className="w-full bg-surface-0 border border-hairline rounded-lg p-2 text-ink-primary font-bold"
                     />
                   </div>
 
@@ -1119,7 +1119,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                     <select
                       value={badgeColor}
                       onChange={(e) => setBadgeColor(e.target.value as any)}
-                      className="w-full bg-surface-0 border border-white/10 rounded-lg p-2 text-white"
+                      className="w-full bg-surface-0 border border-hairline rounded-lg p-2 text-ink-primary"
                     >
                       <option value="gold">Gold Foil</option>
                       <option value="emerald">Emerald</option>
@@ -1165,7 +1165,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
           {/* Left Side: Active Platform Card & Editable Formats */}
           <div className="lg:col-span-8 space-y-6">
             {/* Active Platform Header Banner */}
-            <div className={`p-5 rounded-2xl bg-gradient-to-r ${platformMeta[activePlatform].color} text-white shadow-xl flex items-center justify-between`}>
+            <div className={`p-5 rounded-2xl bg-gradient-to-r ${platformMeta[activePlatform].color} text-ink-primary shadow-[var(--shadow-panel)] flex items-center justify-between`}>
               <div className="flex items-center space-x-3">
                 <span className="text-2xl p-2 bg-black/20 rounded-xl backdrop-blur-sm">
                   {platformMeta[activePlatform].icon}
@@ -1178,7 +1178,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
               <button
                 onClick={handleCopyFullPlatformPack}
-                className="px-3.5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-xl text-xs font-bold backdrop-blur-sm flex items-center space-x-1.5 transition-colors"
+                className="px-3.5 py-2 bg-white/20 hover:bg-white/30 text-ink-primary rounded-xl text-xs font-bold backdrop-blur-sm flex items-center space-x-1.5 transition-colors"
               >
                 {copiedField === `full-${activePlatform}` ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
                 <span>{copiedField === `full-${activePlatform}` ? 'Copied Full Pack!' : 'Copy Entire Pack'}</span>
@@ -1186,7 +1186,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             </div>
 
             {/* Platform Strategy Tip Box */}
-            <div className="bg-surface-1 border border-brass-500/30 p-4 rounded-2xl flex items-start space-x-3 text-xs text-brass-200">
+            <div className="bg-surface-1 border border-accent-brass-500/30 p-4 rounded-2xl flex items-start space-x-3 text-xs text-brass-200">
               <TrendingUp className="w-4 h-4 text-accent-brass-400 shrink-0 mt-0.5" />
               <div>
                 <span className="font-bold text-accent-brass-300">VIRAL STRATEGY TIP: </span>
@@ -1204,7 +1204,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                   </span>
                   <button
                     onClick={() => copyToClipboard(currentPack.pinterestAltText || '', 'alttext')}
-                    className="px-2.5 py-1 bg-surface-2 hover:bg-slate-700 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
+                    className="px-2.5 py-1 bg-surface-2 hover:bg-surface-3 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
                   >
                     {copiedField === 'alttext' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedField === 'alttext' ? 'Copied' : 'Copy Alt-Text'}</span>
@@ -1214,13 +1214,13 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                   rows={2}
                   value={currentPack.pinterestAltText}
                   onChange={(e) => handleUpdatePackField('pinterestAltText', e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-red-500 focus:outline-none"
+                  className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-red-500 focus:outline-none"
                 />
               </div>
             )}
 
             {/* Editable Title / Hook */}
-            <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <Zap className="w-3.5 h-3.5" />
@@ -1228,7 +1228,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 </span>
                 <button
                   onClick={() => copyToClipboard(currentPack.title, 'title')}
-                  className="px-2.5 py-1 bg-surface-2 hover:bg-slate-700 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
+                  className="px-2.5 py-1 bg-surface-2 hover:bg-surface-3 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
                 >
                   {copiedField === 'title' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedField === 'title' ? 'Copied' : 'Copy Title'}</span>
@@ -1238,12 +1238,12 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 type="text"
                 value={currentPack.title}
                 onChange={(e) => handleUpdatePackField('title', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-white font-bold focus:ring-1 focus:ring-brass-500 focus:outline-none"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-ink-primary font-bold focus:ring-1 focus:ring-brass-500 focus:outline-none"
               />
             </div>
 
             {/* Editable Main Caption / Script / Thread */}
-            <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <MessageSquare className="w-3.5 h-3.5" />
@@ -1251,7 +1251,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 </span>
                 <button
                   onClick={() => copyToClipboard(`${currentPack.hook}\n\n${currentPack.body}`, 'body')}
-                  className="px-2.5 py-1 bg-surface-2 hover:bg-slate-700 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
+                  className="px-2.5 py-1 bg-surface-2 hover:bg-surface-3 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
                 >
                   {copiedField === 'body' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedField === 'body' ? 'Copied Body' : 'Copy Body'}</span>
@@ -1262,7 +1262,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 rows={2}
                 value={currentPack.hook}
                 onChange={(e) => handleUpdatePackField('hook', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-accent-brass-300 font-medium focus:ring-1 focus:ring-accent-brass-500 focus:outline-none"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-accent-brass-300 font-medium focus:ring-1 focus:ring-accent-brass-500 focus:outline-none"
                 placeholder="Opening hook..."
               />
 
@@ -1270,13 +1270,13 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 rows={7}
                 value={currentPack.body}
                 onChange={(e) => handleUpdatePackField('body', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-accent-brass-500 focus:outline-none leading-relaxed"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-ink-secondary font-mono focus:ring-1 focus:ring-accent-brass-500 focus:outline-none leading-relaxed"
                 placeholder="Full content body..."
               />
             </div>
 
             {/* Editable Hashtags & Tags */}
-            <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center space-x-1.5">
                   <Tag className="w-3.5 h-3.5" />
@@ -1284,7 +1284,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 </span>
                 <button
                   onClick={() => copyToClipboard(currentPack.hashtags, 'hashtags')}
-                  className="px-2.5 py-1 bg-surface-2 hover:bg-slate-700 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
+                  className="px-2.5 py-1 bg-surface-2 hover:bg-surface-3 text-ink-secondary rounded-lg text-xs font-medium flex items-center space-x-1 transition-colors"
                 >
                   {copiedField === 'hashtags' ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedField === 'hashtags' ? 'Copied Tags' : 'Copy Tags'}</span>
@@ -1294,7 +1294,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 type="text"
                 value={currentPack.hashtags}
                 onChange={(e) => handleUpdatePackField('hashtags', e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-3 text-xs text-emerald-300 font-mono focus:ring-1 focus:ring-emerald-500 focus:outline-none"
+                className="w-full bg-surface-0 border border-hairline rounded-xl p-3 text-xs text-emerald-300 font-mono focus:ring-1 focus:ring-emerald-500 focus:outline-none"
               />
             </div>
           </div>
@@ -1302,9 +1302,9 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
           {/* Right Side: Visual Graphic Companion Preview & Platform Checklist */}
           <div className="lg:col-span-4 space-y-6">
             {/* Graphic Stage Preview Card */}
-            <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-4">
+            <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center space-x-1.5">
+                <span className="text-xs font-bold text-ink-primary uppercase tracking-wider flex items-center space-x-1.5">
                   <Eye className="w-3.5 h-3.5 text-accent-brass-400" />
                   <span>Visual Graphic Companion</span>
                 </span>
@@ -1318,7 +1318,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
               </div>
 
               {/* Mini Graphic Rendering */}
-              <div className="w-full aspect-[4/5] bg-surface-0 border border-white/10 rounded-xl p-4 flex flex-col justify-between items-center text-center relative overflow-hidden group">
+              <div className="w-full aspect-[4/5] bg-surface-0 border border-hairline rounded-xl p-4 flex flex-col justify-between items-center text-center relative overflow-hidden group">
                 <div className="absolute top-0 left-0 right-0 p-2 bg-gradient-to-b from-accent-brass-900/40 to-transparent text-[10px] text-accent-brass-300 font-extrabold uppercase tracking-wider">
                   {platformMeta[activePlatform].name} Graphic Preset
                 </div>
@@ -1326,7 +1326,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
                 {/* 3D Mini Book */}
                 <div className="my-auto transform group-hover:scale-105 transition-transform">
                   <div
-                    className="w-32 h-44 rounded-r-lg shadow-2xl p-3 flex flex-col justify-between border-r border-t border-b border-white/20 relative"
+                    className="w-32 h-44 rounded-r-lg shadow-[var(--shadow-panel-brass)] p-3 flex flex-col justify-between border-r border-t border-b border-white/20 relative"
                     style={{ backgroundColor: theme.colors.paperBg, color: theme.colors.textPrimary }}
                   >
                     <span className="text-[7px] uppercase tracking-widest font-bold px-1 rounded bg-brass-400 text-slate-950 self-start">
@@ -1343,7 +1343,7 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
 
                 <button
                   onClick={handleDownloadMockupImage}
-                  className="w-full py-2 bg-surface-2 hover:bg-slate-700 text-xs text-white font-bold rounded-lg border border-white/15 flex items-center justify-center space-x-1.5 transition-colors"
+                  className="w-full py-2 bg-surface-2 hover:bg-surface-3 text-xs text-ink-primary font-bold rounded-lg border border-hairline-strong flex items-center justify-center space-x-1.5 transition-colors"
                 >
                   <Download className="w-3.5 h-3.5 text-accent-brass-400" />
                   <span>Export PNG Image</span>
@@ -1352,21 +1352,21 @@ export const MockupGenerator: React.FC<MockupGeneratorProps> = ({ document, them
             </div>
 
             {/* Social Media Distribution Checklist */}
-            <div className="bg-surface-1 border border-white/10 p-5 rounded-2xl space-y-3">
+            <div className="bg-surface-1 border border-hairline p-5 rounded-2xl space-y-3">
               <h4 className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center space-x-1.5">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>Bestseller Launch Checklist</span>
               </h4>
               <ul className="space-y-2 text-xs text-ink-secondary">
-                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-white/10">
+                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-hairline">
                   <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Post at peak creator engagement hours (8-10 AM or 5-7 PM EST).</span>
                 </li>
-                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-white/10">
+                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-hairline">
                   <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Attach 3D Book Graphic or Pinterest 2:3 Pin PNG asset.</span>
                 </li>
-                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-white/10">
+                <li className="flex items-start space-x-2 bg-surface-0 p-2.5 rounded-xl border border-hairline">
                   <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Include direct PDF checkout link in Bio / 1st comment.</span>
                 </li>

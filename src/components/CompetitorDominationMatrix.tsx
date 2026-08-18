@@ -30,6 +30,12 @@ import {
 } from 'lucide-react';
 import { CompetitorComparison, CustomCompetitorAnalysis } from '../types';
 
+// Data rows below carry a leading emoji token (⚡/❌/⚠️/💎/💸) used purely as a
+// machine-checkable prefix for icon-selection (see the `.startsWith(...)` calls
+// below) — stripLeadPrefix() removes it for on-screen display only, so the data
+// itself and the classification logic stay untouched.
+const stripLeadPrefix = (text: string) => text.replace(/^\S+\s+/, '');
+
 const BASE_MATRIX_DATA: CompetitorComparison[] = [
   {
     feature: 'Multi-Platform Sync (7 Networks Simultaneously)',
@@ -213,65 +219,64 @@ export const CompetitorDominationMatrix: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Hero Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="relative overflow-hidden bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] space-y-6">
+        <div className="pointer-events-none absolute -right-16 -top-16 w-72 h-72 bg-accent-brass-500/[0.07] rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
               <Trophy className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>Competitive Parity & Market Domination Benchmark 2026</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight flex items-center gap-3">
-              <span>ViralOS v10.0 vs. The Competition</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-brass-500 to-emerald-500 text-slate-950 font-black uppercase">
-                10x Advantage
-              </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
+              ViralOS v10.0 vs. The Competition
             </h2>
-            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
+            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-[1.7]">
               Compare ViralOS against fragmented legacy SaaS tools. Unify copy, visuals, video teleprompter studio, multi-channel scheduling, and white-label client proposals into 1 autonomous engine.
             </p>
           </div>
 
-          <div className="px-4 py-3 rounded-2xl bg-accent-brass-500/10 border border-brass-500/30 text-accent-brass-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-[var(--shadow-panel-brass)]">
-            <Flame className="h-6 w-6 text-accent-brass-400 fill-brass-400 animate-pulse" />
+          <div className="px-4 py-3 rounded-xl bg-accent-brass-500/10 border border-accent-brass-500/30 text-accent-brass-300 text-xs font-bold flex items-center gap-3 shrink-0 shadow-[var(--shadow-panel-brass)]">
+            <Flame className="h-6 w-6 text-accent-brass-400" />
             <div>
-              <div className="text-sm font-black text-white">98/100 Parity Index</div>
-              <div className="text-[10px] text-brass-200/80">Replaces $500/mo tool stack</div>
+              <div className="text-sm font-black text-ink-primary">98/100 Parity Index</div>
+              <div className="text-[10px] text-accent-brass-300/80">Replaces $500/mo tool stack</div>
             </div>
           </div>
         </div>
 
         {/* AI Custom Competitor Teardown Search Bar */}
-        <div className="bg-surface-0 p-5 rounded-2xl border border-white/10 space-y-3">
-          <label className="text-xs font-black uppercase tracking-wider text-ink-secondary flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-accent-brass-400 fill-brass-400" />
-            <span>Generate Live AI Teardown for ANY Competitor or Tool Stack:</span>
+        <div className="relative bg-surface-0 p-5 rounded-xl border border-hairline space-y-3">
+          <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-accent-brass-400" />
+            <span>Generate live AI teardown for any competitor or tool stack</span>
           </label>
 
           <form onSubmit={(e) => handleCustomTeardown(e)} className="flex flex-col sm:flex-row items-center gap-2">
             <div className="relative w-full">
-              <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" />
+              <Search className="absolute left-3.5 top-3 h-4 w-4 text-ink-muted" />
               <input
                 type="text"
                 value={targetCompetitor}
                 onChange={(e) => setTargetCompetitor(e.target.value)}
                 placeholder="e.g. Sprout Social, Metricool, Later, or 'ChatGPT + Canva Pro'"
-                className="w-full bg-surface-1 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-white text-xs focus:outline-none focus:border-brass-500 font-medium"
+                className="w-full bg-surface-1 border border-hairline rounded-lg pl-10 pr-4 py-2.5 text-ink-primary text-xs placeholder-ink-muted/70 transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-medium"
               />
             </div>
 
             <button
               type="submit"
               disabled={customAnalysisLoading || !targetCompetitor.trim()}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-xs shrink-0 flex items-center justify-center gap-2 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 disabled:opacity-50 active:translate-y-0.5 cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-lg bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-xs shrink-0 flex items-center justify-center gap-2 shadow-[var(--shadow-glow-brass)] transition-[filter,transform] disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
               {customAnalysisLoading ? (
                 <>
                   <RefreshCw className="h-4 w-4 animate-spin text-slate-950" />
-                  <span>Auditing Competitor...</span>
+                  <span>Auditing Competitor…</span>
                 </>
               ) : (
                 <>
-                  <Zap className="h-4 w-4 fill-slate-950" />
+                  <Zap className="h-4 w-4" />
                   <span>Run AI Teardown</span>
                 </>
               )}
@@ -280,7 +285,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
 
           {/* Preset Buttons */}
           <div className="flex flex-wrap items-center gap-2 pt-1">
-            <span className="text-[10px] text-slate-500 font-bold uppercase">Popular Stack Audits:</span>
+            <span className="text-[10px] text-ink-muted font-bold uppercase">Popular Stack Audits:</span>
             {[
               'Jasper / Copy.ai Stack',
               'Taplio / Hypefury',
@@ -294,7 +299,7 @@ export const CompetitorDominationMatrix: React.FC = () => {
                   setTargetCompetitor(preset);
                   handleCustomTeardown(undefined, preset);
                 }}
-                className="text-[10px] font-bold px-2.5 py-1 rounded-lg bg-surface-1 border border-white/10 text-ink-secondary hover:border-brass-500/50 hover:text-accent-brass-300 transition-colors"
+                className="text-[10px] font-bold px-2.5 py-1 rounded-md bg-surface-1 border border-hairline text-ink-secondary hover:border-accent-brass-500/50 hover:text-accent-brass-300 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 {preset}
               </button>
@@ -303,65 +308,65 @@ export const CompetitorDominationMatrix: React.FC = () => {
         </div>
 
         {customAnalysisError && (
-          <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 text-rose-400 shrink-0" />
+          <div className="relative p-3.5 rounded-lg bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
+            <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{customAnalysisError}</span>
           </div>
         )}
 
         {/* CUSTOM AI TEARDOWN RESULT DRAWER */}
         {customAnalysis && (
-          <div className="p-6 rounded-2xl bg-surface-0 border border-brass-500/40 space-y-6 shadow-2xl animate-fade-in">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="relative p-6 rounded-2xl bg-surface-0 border border-accent-brass-500/40 space-y-6 shadow-[var(--shadow-panel-brass)] animate-fade-in">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
               <div>
-                <span className="text-[10px] font-black uppercase text-accent-brass-400 tracking-widest block">
-                  AI COMPETITIVE TEARDOWN REPORT
+                <span className="text-[10px] font-bold uppercase text-accent-brass-400 tracking-widest block">
+                  AI Competitive Teardown Report
                 </span>
-                <h3 className="text-xl font-extrabold text-white flex items-center gap-2">
+                <h3 className="font-display text-xl font-semibold text-ink-primary tracking-[-0.01em] flex items-center gap-2">
                   <span>ViralOS v10.0 vs. {customAnalysis.targetCompetitorName}</span>
                 </h3>
               </div>
 
               <div className="flex items-center gap-3">
-                <div className="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+                <div className="px-3.5 py-1.5 rounded-lg bg-status-positive-dim border border-status-positive/30 text-status-positive text-xs font-mono font-bold">
                   Parity Score: {customAnalysis.overallParityScore}/100
                 </div>
                 <button
                   onClick={() => setCustomAnalysis(null)}
-                  className="text-ink-muted hover:text-white text-xs underline font-bold"
+                  className="text-ink-muted hover:text-ink-primary text-xs underline font-bold transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 rounded px-1"
                 >
                   Close Teardown
                 </button>
               </div>
             </div>
 
-            <p className="text-xs text-ink-secondary bg-surface-1 p-4 rounded-xl border border-white/10 leading-relaxed font-sans">
+            <p className="text-xs text-ink-secondary bg-surface-1 p-4 rounded-lg border border-hairline leading-[1.6]">
               {customAnalysis.viralOSAdvantageSummary}
             </p>
 
             {/* Custom Feature Rows */}
             {customAnalysis.featureRows && customAnalysis.featureRows.length > 0 && (
               <div className="space-y-3">
-                <h4 className="text-xs font-black uppercase tracking-wider text-ink-muted">
-                  Feature Gap & Capability Breakdown:
+                <h4 className="text-xs font-bold uppercase tracking-wider text-ink-muted">
+                  Feature Gap & Capability Breakdown
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {customAnalysis.featureRows.map((row, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2">
+                    <div key={idx} className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-extrabold text-white">{row.featureName}</span>
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20">
+                        <span className="text-xs font-bold text-ink-primary">{row.featureName}</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20">
                           {row.impactMultiplier}
                         </span>
                       </div>
 
-                      <div className="text-xs text-emerald-400 font-medium flex items-start gap-1.5">
+                      <div className="text-xs text-status-positive font-medium flex items-start gap-1.5">
                         <CheckCircle2 className="h-4 w-4 shrink-0 mt-0.5" />
                         <span>{row.viralOSCapability}</span>
                       </div>
 
                       <div className="text-xs text-ink-muted flex items-start gap-1.5">
-                        <XCircle className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
+                        <XCircle className="h-4 w-4 text-status-danger shrink-0 mt-0.5" />
                         <span>{row.competitorCapability}</span>
                       </div>
                     </div>
@@ -373,16 +378,16 @@ export const CompetitorDominationMatrix: React.FC = () => {
             {/* Rebuttal Battlecards */}
             {customAnalysis.rebuttalBattlecards && customAnalysis.rebuttalBattlecards.length > 0 && (
               <div className="space-y-3 pt-2">
-                <h4 className="text-xs font-black uppercase tracking-wider text-ink-muted flex items-center gap-2">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-ink-muted flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-accent-brass-400" />
-                  <span>Sales Battlecards & Objection Killers:</span>
+                  <span>Sales Battlecards & Objection Killers</span>
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {customAnalysis.rebuttalBattlecards.map((card, idx) => (
-                    <div key={idx} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2 text-xs">
-                      <div className="font-extrabold text-accent-brass-300">❓ Objection: "{card.objection}"</div>
-                      <div className="text-ink-secondary leading-relaxed bg-surface-0 p-3 rounded-lg border border-white/10">
-                        <strong className="text-emerald-400 block mb-0.5">💡 Winning Rebuttal:</strong>
+                    <div key={idx} className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-2 text-xs">
+                      <div className="font-bold text-accent-brass-300">Objection: "{card.objection}"</div>
+                      <div className="text-ink-secondary leading-[1.6] bg-surface-0 p-3 rounded-md border border-hairline">
+                        <strong className="text-status-positive block mb-0.5">Winning Rebuttal</strong>
                         {card.winningRebuttal}
                       </div>
                     </div>
@@ -394,48 +399,48 @@ export const CompetitorDominationMatrix: React.FC = () => {
         )}
 
         {/* 3 HIGHLIGHT METRIC CARDS */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="p-4 rounded-2xl bg-surface-0 border border-emerald-500/30 space-y-2">
-            <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+        <div className="relative grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="p-4 rounded-xl bg-surface-0 border border-hairline space-y-2">
+            <div className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center gap-1.5">
               <Zap className="h-4 w-4" />
               <span>Speed & Automation Multiplier</span>
             </div>
-            <div className="text-2xl font-black text-white">10x Faster Execution</div>
+            <div className="text-2xl font-semibold text-ink-primary">10x Faster Execution</div>
             <p className="text-xs text-ink-muted">Generate 7-channel campaigns in 30 seconds vs 3+ hours manually.</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30 space-y-2">
+          <div className="p-4 rounded-xl bg-surface-0 border border-hairline space-y-2">
             <div className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center gap-1.5">
               <Cpu className="h-4 w-4" />
               <span>Multi-Model AI Synergy</span>
             </div>
-            <div className="text-2xl font-black text-white">Gemini 3.6 Flash Engine</div>
+            <div className="text-2xl font-semibold text-ink-primary">Gemini 3.6 Flash Engine</div>
             <p className="text-xs text-ink-muted">Combines text, visual banners, video teleprompters, and viral scoring.</p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30 space-y-2">
+          <div className="p-4 rounded-xl bg-surface-0 border border-hairline space-y-2">
             <div className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider flex items-center gap-1.5">
               <DollarSign className="h-4 w-4" />
               <span>Software Stack Consolidation</span>
             </div>
-            <div className="text-2xl font-black text-white">$4,100+/yr Savings</div>
+            <div className="text-2xl font-semibold text-ink-primary">$4,100+/yr Savings</div>
             <p className="text-xs text-ink-muted">Replaces Jasper, Hootsuite, Canva, and Teleprompter subscriptions.</p>
           </div>
         </div>
       </div>
 
       {/* INTERACTIVE STACK COST SAVINGS CALCULATOR (TCO) */}
-      <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <div className="bg-surface-1 rounded-2xl border border-hairline p-6 sm:p-8 shadow-[var(--shadow-panel)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-hairline pb-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">
+            <div className="flex items-center gap-2 text-xs font-bold text-accent-brass-400 uppercase tracking-wider mb-1">
               <Calculator className="h-4 w-4" />
               <span>Total Cost of Ownership (TCO) Calculator</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-black text-white">How Much Are Fragmented SaaS Tools Costing You?</h3>
+            <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink-primary tracking-[-0.01em]">How much are fragmented SaaS tools costing you?</h3>
           </div>
 
-          <div className="px-4 py-2 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono text-sm font-bold shrink-0">
+          <div className="px-4 py-2 rounded-lg bg-accent-brass-500/10 border border-accent-brass-500/30 text-accent-brass-300 font-mono text-sm font-bold shrink-0">
             Current Spend: ${currentMonthlyStackSpend}/mo (${currentAnnualStackSpend.toLocaleString()}/yr)
           </div>
         </div>
@@ -448,25 +453,26 @@ export const CompetitorDominationMatrix: React.FC = () => {
                 key={tool.id}
                 type="button"
                 onClick={() => toggleStackTool(tool.id)}
-                className={`p-4 rounded-2xl border text-left transition-colors flex items-center justify-between gap-3 ${
+                aria-pressed={isSelected}
+                className={`p-4 rounded-xl border text-left transition-colors flex items-center justify-between gap-3 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
                   isSelected
-                    ? 'bg-surface-0 border-emerald-500/80 ring-1 ring-emerald-500/50 shadow-lg'
-                    : 'bg-surface-0/60 border-white/10 opacity-60 hover:opacity-100'
+                    ? 'bg-surface-0 border-accent-brass-500/80 ring-1 ring-accent-brass-500/50 shadow-[var(--shadow-panel-brass)]'
+                    : 'bg-surface-0/60 border-hairline opacity-60 hover:opacity-100'
                 }`}
               >
                 <div className="flex items-center gap-3">
                   {isSelected ? (
-                    <CheckSquare className="h-5 w-5 text-emerald-400 shrink-0" />
+                    <CheckSquare className="h-5 w-5 text-accent-brass-400 shrink-0" />
                   ) : (
-                    <Square className="h-5 w-5 text-slate-600 shrink-0" />
+                    <Square className="h-5 w-5 text-ink-muted shrink-0" />
                   )}
                   <div>
-                    <div className="text-xs font-extrabold text-white">{tool.name}</div>
+                    <div className="text-xs font-bold text-ink-primary">{tool.name}</div>
                     <div className="text-[10px] text-ink-muted">{tool.category} Tool</div>
                   </div>
                 </div>
 
-                <span className="text-xs font-mono font-bold text-rose-400 bg-rose-950/40 px-2 py-1 rounded border border-rose-800/40 shrink-0">
+                <span className="text-xs font-mono font-bold text-status-danger bg-status-danger-dim px-2 py-1 rounded border border-status-danger/40 shrink-0">
                   ${tool.cost}/mo
                 </span>
               </button>
@@ -475,19 +481,19 @@ export const CompetitorDominationMatrix: React.FC = () => {
         </div>
 
         {/* Savings Metric Box */}
-        <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-950 to-brass-950/40 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-5 rounded-xl bg-status-positive-dim border border-status-positive/40 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-xs font-black uppercase text-emerald-400 tracking-wider">
-              YOUR POTENTIAL ANNUAL MARGIN BOOST WITH VIRALOS:
+            <span className="text-xs font-bold uppercase text-status-positive tracking-wider">
+              Your Potential Annual Margin Boost with ViralOS
             </span>
-            <div className="text-2xl sm:text-3xl font-black text-white font-mono">
-              Save ${currentAnnualStackSpend.toLocaleString()} / year in software subscriptions!
+            <div className="text-2xl sm:text-3xl font-semibold text-ink-primary font-mono tabular-nums">
+              Save ${currentAnnualStackSpend.toLocaleString()} / year in software subscriptions
             </div>
           </div>
 
           <button
             onClick={handleCopyMatrix}
-            className="px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-2 shadow-lg shrink-0"
+            className="px-5 py-3 rounded-lg bg-status-positive hover:brightness-105 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-[var(--shadow-panel)] transition-[filter] shrink-0 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-positive focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
           >
             {copiedMatrix ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             <span>{copiedMatrix ? 'Report Copied!' : 'Copy Benchmark Matrix'}</span>
@@ -496,26 +502,27 @@ export const CompetitorDominationMatrix: React.FC = () => {
       </div>
 
       {/* COMPREHENSIVE PARITY COMPARISON TABLE */}
-      <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-6">
+      <div className="bg-surface-1 rounded-2xl border border-hairline p-6 shadow-[var(--shadow-panel)] space-y-6">
         {/* Table Controls */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-hairline pb-4">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-1.5">
             {[
               { id: 'all', label: 'All Capabilities' },
-              { id: 'ai', label: '🧠 AI & Psychology' },
-              { id: 'features', label: '⚡ Multi-Channel' },
-              { id: 'video', label: '🎥 Video & Visuals' },
-              { id: 'agency', label: '💼 Agency Pitch' },
-              { id: 'pricing', label: '💰 Pricing & TCO' }
+              { id: 'ai', label: 'AI & Psychology' },
+              { id: 'features', label: 'Multi-Channel' },
+              { id: 'video', label: 'Video & Visuals' },
+              { id: 'agency', label: 'Agency Pitch' },
+              { id: 'pricing', label: 'Pricing & TCO' }
             ].map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setSelectedCategory(tab.id as any)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-extrabold transition-colors ${
+                aria-pressed={selectedCategory === tab.id}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
                   selectedCategory === tab.id
                     ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]'
-                    : 'bg-surface-0 text-ink-muted hover:text-white'
+                    : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
                 }`}
               >
                 {tab.label}
@@ -525,13 +532,13 @@ export const CompetitorDominationMatrix: React.FC = () => {
 
           {/* Search Input */}
           <div className="relative w-full md:w-64">
-            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-500" />
+            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-ink-muted" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Filter feature capability..."
-              className="w-full bg-surface-0 border border-white/10 rounded-xl pl-9 pr-3 py-2 text-white text-xs focus:outline-none focus:border-brass-500"
+              placeholder="Filter feature capability…"
+              className="w-full bg-surface-0 border border-hairline rounded-lg pl-9 pr-3 py-2 text-ink-primary text-xs placeholder-ink-muted/70 transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
             />
           </div>
         </div>
@@ -540,71 +547,74 @@ export const CompetitorDominationMatrix: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="border-b border-white/10 text-ink-muted uppercase text-[10px] tracking-wider">
+              <tr className="border-b border-hairline text-ink-muted uppercase text-[10px] tracking-wider">
                 <th className="py-3 px-4 font-bold">Core Feature / Capability</th>
-                <th className="py-3 px-4 font-black text-accent-brass-400 bg-accent-brass-500/10 border-x border-brass-500/20 text-center">
-                  🚀 ViralOS v10.0 (Winner)
+                <th className="py-3 px-4 font-bold text-accent-brass-300 bg-accent-brass-500/10 border-x border-accent-brass-500/20 text-center">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Trophy className="h-3.5 w-3.5" />
+                    ViralOS v10.0 (Winner)
+                  </span>
                 </th>
                 <th className="py-3 px-4 font-bold text-ink-secondary">Jasper / Copy.ai</th>
                 <th className="py-3 px-4 font-bold text-ink-secondary">Taplio / Hypefury</th>
                 <th className="py-3 px-4 font-bold text-ink-secondary">Buffer / Hootsuite</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 font-medium">
+            <tbody className="divide-y divide-hairline font-medium">
               {filteredMatrix.map((row, idx) => {
                 const isExpanded = expandedRowIndex === idx;
                 return (
                   <React.Fragment key={idx}>
-                    <tr 
+                    <tr
                       onClick={() => setExpandedRowIndex(isExpanded ? null : idx)}
                       className="hover:bg-surface-2/50 transition-colors cursor-pointer group"
                     >
                       <td className="py-4 px-4 text-ink-secondary font-bold max-w-xs">
                         <div className="flex items-center justify-between gap-2">
                           <span>{row.feature}</span>
-                          <span className="text-slate-500 group-hover:text-accent-brass-400 transition-colors">
+                          <span className="text-ink-muted group-hover:text-accent-brass-400 transition-colors">
                             {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                           </span>
                         </div>
                       </td>
 
-                      <td className="py-4 px-4 font-bold text-accent-brass-300 bg-accent-brass-500/5 border-x border-brass-500/20">
+                      <td className="py-4 px-4 font-bold text-accent-brass-300 bg-accent-brass-500/5 border-x border-accent-brass-500/20">
                         <div className="flex items-start gap-1.5">
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                          <span>{row.viralOS}</span>
+                          <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
+                          <span>{stripLeadPrefix(row.viralOS)}</span>
                         </div>
                       </td>
 
                       <td className="py-4 px-4 text-ink-muted">
                         <div className="flex items-start gap-1.5">
                           {row.jasperCopyAI.startsWith('❌') ? (
-                            <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                            <XCircle className="h-4 w-4 text-status-danger shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-brass-500">⚠️</span>
+                            <AlertCircle className="h-4 w-4 text-accent-brass-400 shrink-0 mt-0.5" />
                           )}
-                          <span>{row.jasperCopyAI}</span>
+                          <span>{stripLeadPrefix(row.jasperCopyAI)}</span>
                         </div>
                       </td>
 
                       <td className="py-4 px-4 text-ink-muted">
                         <div className="flex items-start gap-1.5">
                           {row.taplioHypefury.startsWith('❌') ? (
-                            <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                            <XCircle className="h-4 w-4 text-status-danger shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-brass-500">⚠️</span>
+                            <AlertCircle className="h-4 w-4 text-accent-brass-400 shrink-0 mt-0.5" />
                           )}
-                          <span>{row.taplioHypefury}</span>
+                          <span>{stripLeadPrefix(row.taplioHypefury)}</span>
                         </div>
                       </td>
 
                       <td className="py-4 px-4 text-ink-muted">
                         <div className="flex items-start gap-1.5">
                           {row.bufferHootsuite.startsWith('❌') ? (
-                            <XCircle className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                            <XCircle className="h-4 w-4 text-status-danger shrink-0 mt-0.5" />
                           ) : (
-                            <span className="text-brass-500">⚠️</span>
+                            <AlertCircle className="h-4 w-4 text-accent-brass-400 shrink-0 mt-0.5" />
                           )}
-                          <span>{row.bufferHootsuite}</span>
+                          <span>{stripLeadPrefix(row.bufferHootsuite)}</span>
                         </div>
                       </td>
                     </tr>
@@ -612,12 +622,12 @@ export const CompetitorDominationMatrix: React.FC = () => {
                     {/* Expanded Drawer */}
                     {isExpanded && row.description && (
                       <tr className="bg-surface-0/80">
-                        <td colSpan={5} className="p-4 text-xs text-ink-secondary border-y border-brass-500/30">
-                          <div className="flex items-start gap-3 bg-surface-1 p-3.5 rounded-xl border border-white/10">
+                        <td colSpan={5} className="p-4 text-xs text-ink-secondary border-y border-accent-brass-500/30">
+                          <div className="flex items-start gap-3 bg-surface-1 p-3.5 rounded-lg border border-hairline">
                             <Sparkles className="h-5 w-5 text-accent-brass-400 shrink-0 mt-0.5" />
                             <div>
-                              <strong className="text-white block font-bold mb-1">Deep-Dive Workflow Advantage:</strong>
-                              <p className="text-ink-secondary leading-relaxed">{row.description}</p>
+                              <strong className="text-ink-primary block font-bold mb-1">Deep-Dive Workflow Advantage</strong>
+                              <p className="text-ink-secondary leading-[1.6]">{row.description}</p>
                             </div>
                           </div>
                         </td>

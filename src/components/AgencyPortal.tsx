@@ -36,7 +36,8 @@ import { AgencyPitchData } from '../types';
 const PROPOSAL_PRESETS = [
   {
     id: 'real-estate',
-    label: '🏰 Luxury Real Estate & Wealth Management',
+    label: 'Luxury Real Estate & Wealth Management',
+    icon: Building2,
     clientName: 'Apex Wealth & Luxury Real Estate',
     clientIndustry: 'High-Ticket Financial Services & Luxury Real Estate',
     monthlyRetainer: '8500',
@@ -44,7 +45,8 @@ const PROPOSAL_PRESETS = [
   },
   {
     id: 'b2b-saas',
-    label: '🚀 B2B SaaS & Enterprise Tech Founder',
+    label: 'B2B SaaS & Enterprise Tech Founder',
+    icon: Layers,
     clientName: 'CloudScale Intelligence',
     clientIndustry: 'Enterprise B2B SaaS & Developer Infrastructure',
     monthlyRetainer: '12000',
@@ -52,7 +54,8 @@ const PROPOSAL_PRESETS = [
   },
   {
     id: 'ecommerce-dtc',
-    label: '🛍️ E-Commerce & DTC Brand Scale',
+    label: 'E-Commerce & DTC Brand Scale',
+    icon: DollarSign,
     clientName: 'Aura Organic Skincare',
     clientIndustry: 'DTC Health, Beauty & E-Commerce',
     monthlyRetainer: '6500',
@@ -60,7 +63,8 @@ const PROPOSAL_PRESETS = [
   },
   {
     id: 'healthcare',
-    label: '⚕️ Private Healthcare & High-Ticket Dental',
+    label: 'Private Healthcare & High-Ticket Dental',
+    icon: ShieldCheck,
     clientName: 'Savant Dental & Facial Aesthetics',
     clientIndustry: 'High-Ticket Cosmetic Dentistry & Private Medical',
     monthlyRetainer: '4500',
@@ -304,7 +308,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       title: 'Monthly Core Deliverables',
       subtitle: 'Full-Stack Programmatic Content Matrix',
       deliverables: proposal.deliverables,
-      icon: <ShieldCheck className="h-8 w-8 text-emerald-400" />
+      icon: <ShieldCheck className="h-8 w-8 text-status-positive" />
     },
     {
       title: '90-Day Implementation Roadmap',
@@ -316,7 +320,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       title: 'Financial ROI & Growth Projection',
       subtitle: `Target Investment: ${proposal.monthlyFee}`,
       content: proposal.roiProjection,
-      icon: <TrendingUp className="h-8 w-8 text-emerald-400" />
+      icon: <TrendingUp className="h-8 w-8 text-status-positive" />
     },
     {
       title: 'Contractual SLA Guarantee & Terms',
@@ -329,56 +333,62 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+      <div className="relative overflow-hidden bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] space-y-6">
+        <div className="pointer-events-none absolute -right-16 -top-16 w-72 h-72 bg-accent-brass-500/[0.07] rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
+        <div className="relative">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
             <Briefcase className="h-3.5 w-3.5 text-accent-brass-400" />
-            <span>Commercial High-Ticket B2B Engine v10.0</span>
+            <span>Commercial High-Ticket B2B Engine</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-            <span>White-Label Agency Client Proposal Studio</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 font-bold tracking-normal uppercase">
-              10x Pitch Deck
-            </span>
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
+            White-Label Agency Client Proposal Studio
           </h2>
-          <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
+          <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-[1.7]">
             Generate high-converting, white-label client proposals, pitch decks, 90-day roadmaps, and financial ROI calculators to close $3,000–$15,000/month agency retainers.
           </p>
         </div>
 
         {/* 1-Click High-Ticket Proposal Presets */}
-        <div>
+        <div className="relative">
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
-            <Zap className="h-4 w-4 text-accent-brass-400 fill-brass-400" />
-            <span>Select High-Ticket Client Industry Preset:</span>
+            <Zap className="h-4 w-4 text-accent-brass-400" />
+            <span>Select High-Ticket Client Industry Preset</span>
           </label>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {PROPOSAL_PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => handleSelectPreset(preset)}
-                className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
-                  selectedPresetId === preset.id
-                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
-                    : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
-                }`}
-              >
-                <div className="text-xs font-black text-white truncate">{preset.label}</div>
-                <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
-                  {preset.description}
-                </p>
-                <span className="inline-block text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  ${parseInt(preset.monthlyRetainer).toLocaleString()}/mo Retainer
-                </span>
-              </button>
-            ))}
+            {PROPOSAL_PRESETS.map((preset) => {
+              const PresetIcon = preset.icon;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => handleSelectPreset(preset)}
+                  aria-pressed={selectedPresetId === preset.id}
+                  className={`p-3 rounded-xl border text-left transition-colors space-y-1.5 relative overflow-hidden cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                    selectedPresetId === preset.id
+                      ? 'bg-surface-2 border-accent-brass-500 ring-1 ring-accent-brass-500/40 shadow-[var(--shadow-panel-brass)]'
+                      : 'bg-surface-0 border-hairline text-ink-muted hover:bg-surface-2 hover:border-hairline-strong'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-ink-primary truncate">
+                    <PresetIcon className="h-3.5 w-3.5 text-accent-brass-400 shrink-0" />
+                    <span className="truncate">{preset.label}</span>
+                  </div>
+                  <p className="text-[10px] text-ink-muted line-clamp-2 leading-[1.6]">
+                    {preset.description}
+                  </p>
+                  <span className="inline-block text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-status-positive-dim text-status-positive border border-status-positive/20">
+                    ${parseInt(preset.monthlyRetainer).toLocaleString()}/mo Retainer
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Input Form & Agency White-Label Branding */}
-        <form onSubmit={handleGeneratePitch} className="space-y-4 bg-surface-0 p-5 rounded-2xl border border-white/10">
+        <form onSubmit={handleGeneratePitch} className="relative space-y-4 bg-surface-0 p-5 rounded-xl border border-hairline">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary block mb-1.5">
@@ -388,7 +398,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={agencyName}
                 onChange={(e) => setAgencyName(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-accent-brass-500"
+                className="w-full bg-surface-1 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs font-bold transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
                 placeholder="e.g. Apex Viral Media Studio"
                 required
               />
@@ -402,7 +412,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={clientName}
                 onChange={(e) => setClientName(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500"
+                className="w-full bg-surface-1 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
                 required
               />
             </div>
@@ -415,7 +425,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 type="text"
                 value={clientIndustry}
                 onChange={(e) => setClientIndustry(e.target.value)}
-                className="w-full bg-surface-1 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500"
+                className="w-full bg-surface-1 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
                 required
               />
             </div>
@@ -425,12 +435,12 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                 Target Monthly Retainer Fee
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-slate-500 text-xs font-bold">$</span>
+                <span className="absolute left-3 top-2.5 text-ink-muted text-xs font-bold">$</span>
                 <input
                   type="number"
                   value={monthlyRetainer}
                   onChange={(e) => setMonthlyRetainer(e.target.value)}
-                  className="w-full bg-surface-1 border border-white/10 rounded-xl pl-7 pr-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-mono font-bold"
+                  className="w-full bg-surface-1 border border-hairline rounded-lg pl-7 pr-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-mono font-bold"
                   required
                 />
               </div>
@@ -440,16 +450,16 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           <button
             type="submit"
             disabled={loading || !clientName.trim()}
-            className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-black text-xs shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] transition-[transform,opacity,box-shadow,filter] flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-xs shadow-[var(--shadow-glow-brass)] transition-[filter,transform] flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0"
           >
             {loading ? (
               <>
                 <RefreshCw className="h-4 w-4 animate-spin text-slate-950" />
-                <span>Generating White-Label Proposal Deck...</span>
+                <span>Generating white-label proposal deck…</span>
               </>
             ) : (
               <>
-                <Sparkles className="h-4 w-4 text-slate-950 fill-slate-950" />
+                <Sparkles className="h-4 w-4 text-slate-950" />
                 <span>Generate Enterprise Client Proposal Deck</span>
               </>
             )}
@@ -457,25 +467,25 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         </form>
 
         {error && (
-          <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+          <div className="relative p-3.5 rounded-lg bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
+            <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{error}</span>
           </div>
         )}
       </div>
 
       {/* PROPOSAL STUDIO DISPLAY DASHBOARD */}
-      <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6">
+      <div className="bg-surface-1 rounded-2xl border border-hairline p-6 sm:p-8 shadow-[var(--shadow-panel)] space-y-6">
         {/* White-Label Header & Status */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-hairline">
           <div>
             <div className="flex items-center gap-3">
               <Building2 className="h-6 w-6 text-accent-brass-400" />
               <div>
-                <span className="text-[10px] font-extrabold text-accent-brass-400 uppercase tracking-widest block">
-                  WHITE-LABEL AGENCY PROPOSAL • {agencyName}
+                <span className="text-[10px] font-bold text-accent-brass-400 uppercase tracking-widest block">
+                  White-Label Agency Proposal · {agencyName}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-white">{proposal.proposalTitle}</h3>
+                <h3 className="font-display text-xl sm:text-2xl font-semibold text-ink-primary tracking-[-0.01em]">{proposal.proposalTitle}</h3>
               </div>
             </div>
           </div>
@@ -483,14 +493,14 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
           {/* Action Toolbar */}
           <div className="flex flex-wrap items-center gap-2 shrink-0">
             {clientSigned ? (
-              <span className="px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <span className="px-3 py-1.5 rounded-lg bg-status-positive-dim border border-status-positive/30 text-status-positive text-xs font-bold flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4" />
                 <span>Signed & Approved by {signerName || 'Client'}</span>
               </span>
             ) : (
               <button
                 onClick={() => setShowSignModal(true)}
-                className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-lg shadow-emerald-600/20"
+                className="px-3.5 py-2 rounded-lg bg-status-positive hover:brightness-105 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-[var(--shadow-panel)] transition-[filter] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-positive focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 <FileCheck2 className="h-4 w-4" />
                 <span>Sign & Approve Proposal</span>
@@ -499,23 +509,23 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
             <button
               onClick={handleCopyShareableLink}
-              className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-lg bg-surface-2 border border-hairline hover:bg-surface-3 hover:border-accent-brass-500/30 text-ink-secondary hover:text-ink-primary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
-              {copiedLink ? <Check className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4 text-accent-brass-400" />}
+              {copiedLink ? <Check className="h-4 w-4 text-status-positive" /> : <Share2 className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedLink ? 'Link Copied' : 'Share Link'}</span>
             </button>
 
             <button
               onClick={handleCopyProposal}
-              className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-lg bg-surface-2 border border-hairline hover:bg-surface-3 hover:border-accent-brass-500/30 text-ink-secondary hover:text-ink-primary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
-              {copiedProposal ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
+              {copiedProposal ? <Check className="h-4 w-4 text-status-positive" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{copiedProposal ? 'Copied' : 'Copy Text'}</span>
             </button>
 
             <button
               onClick={handleExportPDF}
-              className="px-3.5 py-2 rounded-xl bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 text-xs font-extrabold flex items-center gap-1.5 shadow-[var(--shadow-panel-brass)]"
+              className="px-3.5 py-2 rounded-lg bg-accent-brass-500 hover:brightness-105 text-slate-950 text-xs font-bold flex items-center gap-1.5 shadow-[var(--shadow-panel-brass)] transition-[filter] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
               <Printer className="h-4 w-4" />
               <span>Print / Save PDF</span>
@@ -524,11 +534,11 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         </div>
 
         {/* View Switcher Tabs */}
-        <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-3">
+        <div className="flex flex-wrap items-center gap-2 border-b border-hairline pb-3">
           <button
             onClick={() => setViewMode('document')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'document' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+              viewMode === 'document' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
             }`}
           >
             <FileText className="h-4 w-4" />
@@ -537,86 +547,86 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
           <button
             onClick={() => setViewMode('presentation')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'presentation' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+              viewMode === 'presentation' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
             }`}
           >
-            <Maximize2 className="h-4 w-4 text-accent-brass-300" />
+            <Maximize2 className="h-4 w-4" />
             <span>Live Pitch Deck Mode (Zoom / Meet)</span>
           </button>
 
           <button
             onClick={() => setViewMode('tiers')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'tiers' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+              viewMode === 'tiers' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
             }`}
           >
-            <Layers className="h-4 w-4 text-accent-brass-400" />
+            <Layers className="h-4 w-4" />
             <span>3-Tier Package Pricing</span>
           </button>
 
           <button
             onClick={() => setViewMode('roadmap')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'roadmap' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+              viewMode === 'roadmap' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
             }`}
           >
-            <Calendar className="h-4 w-4 text-accent-brass-400" />
+            <Calendar className="h-4 w-4" />
             <span>90-Day Implementation Roadmap</span>
           </button>
 
           <button
             onClick={() => setViewMode('roi')}
-            className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 ${
-              viewMode === 'roi' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 text-ink-muted hover:text-white'
+            className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+              viewMode === 'roi' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
             }`}
           >
-            <Calculator className="h-4 w-4 text-emerald-400" />
+            <Calculator className="h-4 w-4" />
             <span>Interactive ROI Calculator</span>
           </button>
         </div>
 
         {/* VIEW MODE 1: FULL EXECUTIVE DOCUMENT */}
         {viewMode === 'document' && (
-          <div className="space-y-6 text-xs leading-relaxed text-ink-secondary bg-surface-0 p-6 sm:p-8 rounded-2xl border border-white/10">
+          <div className="space-y-6 text-xs leading-[1.6] text-ink-secondary bg-surface-0 p-6 sm:p-8 rounded-xl border border-hairline">
             {/* Document Header Metadata Box */}
-            <div className="flex flex-wrap justify-between items-center bg-surface-1 p-4 rounded-2xl border border-white/10 gap-4">
+            <div className="flex flex-wrap justify-between items-center bg-surface-1 p-4 rounded-xl border border-hairline gap-4">
               <div>
-                <span className="text-[10px] text-ink-muted font-bold uppercase block">Prepared For Client:</span>
-                <span className="text-sm font-extrabold text-white">{proposal.clientName}</span>
+                <span className="text-[10px] text-ink-muted font-bold uppercase block">Prepared For Client</span>
+                <span className="text-sm font-bold text-ink-primary">{proposal.clientName}</span>
               </div>
 
               <div>
-                <span className="text-[10px] text-ink-muted font-bold uppercase block">Prepared By Agency:</span>
-                <span className="text-sm font-extrabold text-accent-brass-400">{agencyName}</span>
+                <span className="text-[10px] text-ink-muted font-bold uppercase block">Prepared By Agency</span>
+                <span className="text-sm font-bold text-accent-brass-400">{agencyName}</span>
               </div>
 
               <div>
-                <span className="text-[10px] text-ink-muted font-bold uppercase block">Proposed Investment:</span>
-                <span className="text-sm font-extrabold text-emerald-400 font-mono">{proposal.monthlyFee}</span>
+                <span className="text-[10px] text-ink-muted font-bold uppercase block">Proposed Investment</span>
+                <span className="text-sm font-bold text-status-positive font-mono">{proposal.monthlyFee}</span>
               </div>
             </div>
 
             {/* Section 1 */}
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
                 <span>1. Executive Growth Audit & Strategy Overview</span>
               </h4>
-              <p className="bg-surface-1 p-4 rounded-xl border border-white/10 text-ink-secondary leading-relaxed">
+              <p className="bg-surface-1 p-4 rounded-lg border border-hairline text-ink-secondary leading-[1.6]">
                 {proposal.executiveSummary}
               </p>
             </div>
 
             {/* Section 2 */}
             <div className="space-y-2">
-              <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-accent-brass-400 flex items-center gap-2">
                 <span>2. Monthly Core Deliverables Matrix</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {proposal.deliverables.map((item, idx) => (
-                  <div key={idx} className="p-3.5 rounded-xl bg-surface-1 border border-white/10 flex items-start gap-2.5">
-                    <ShieldCheck className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                    <span className="font-sans text-ink-secondary">{item}</span>
+                  <div key={idx} className="p-3.5 rounded-lg bg-surface-1 border border-hairline flex items-start gap-2.5">
+                    <ShieldCheck className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
+                    <span className="text-ink-secondary">{item}</span>
                   </div>
                 ))}
               </div>
@@ -625,19 +635,19 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
             {/* Section 3 & 4 Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-accent-brass-400">
                   3. Competitor Gap Analysis
                 </h4>
-                <p className="bg-surface-1 p-4 rounded-xl border border-white/10 text-ink-secondary leading-relaxed">
+                <p className="bg-surface-1 p-4 rounded-lg border border-hairline text-ink-secondary leading-[1.6]">
                   {proposal.competitorGapAnalysis}
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-xs font-extrabold text-white uppercase tracking-wider text-accent-brass-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-accent-brass-400">
                   4. Projected Client ROI & Inquiries
                 </h4>
-                <p className="bg-surface-1 p-4 rounded-xl border border-white/10 font-medium text-emerald-300 leading-relaxed">
+                <p className="bg-surface-1 p-4 rounded-lg border border-hairline font-medium text-status-positive leading-[1.6]">
                   {proposal.roiProjection}
                 </p>
               </div>
@@ -645,10 +655,10 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
             {/* Section 5: SLA Guarantee */}
             {proposal.slaGuarantee && (
-              <div className="p-4 rounded-2xl bg-accent-brass-500/10 border border-accent-brass-500/25 text-xs text-accent-brass-300 flex items-start gap-3">
+              <div className="p-4 rounded-xl bg-accent-brass-500/10 border border-accent-brass-500/25 text-xs text-accent-brass-300 flex items-start gap-3">
                 <Award className="h-5 w-5 text-accent-brass-400 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="block font-bold uppercase text-accent-brass-200 mb-0.5">5. Service Level Agreement (SLA) & Quality Guarantee:</strong>
+                  <strong className="block font-bold uppercase text-accent-brass-200 mb-0.5">5. Service Level Agreement (SLA) & Quality Guarantee</strong>
                   <span>{proposal.slaGuarantee}</span>
                 </div>
               </div>
@@ -658,18 +668,18 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
         {/* VIEW MODE 2: LIVE PRESENTATION PITCH DECK */}
         {viewMode === 'presentation' && (
-          <div className="bg-surface-0 p-8 sm:p-12 rounded-3xl border border-white/10 space-y-8 min-h-[450px] flex flex-col justify-between shadow-2xl relative">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="bg-surface-0 p-8 sm:p-12 rounded-2xl border border-hairline space-y-8 min-h-[450px] flex flex-col justify-between shadow-[var(--shadow-panel)] relative">
+            <div className="flex items-center justify-between border-b border-hairline pb-4">
               <div className="flex items-center gap-3">
                 {slides[currentSlideIndex].icon}
                 <div>
-                  <span className="text-[10px] font-extrabold text-accent-brass-400 uppercase tracking-widest block">
-                    SLIDE {currentSlideIndex + 1} OF {slides.length} • {agencyName} PITCH DECK
+                  <span className="text-[10px] font-bold text-accent-brass-400 uppercase tracking-widest block">
+                    Slide {currentSlideIndex + 1} of {slides.length} · {agencyName} pitch deck
                   </span>
-                  <h3 className="text-2xl font-black text-white">{slides[currentSlideIndex].title}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-ink-primary tracking-[-0.01em]">{slides[currentSlideIndex].title}</h3>
                 </div>
               </div>
-              <span className="text-xs font-mono font-bold text-ink-muted bg-surface-1 px-3 py-1 rounded-full border border-white/10">
+              <span className="text-xs font-mono font-bold text-ink-muted bg-surface-1 px-3 py-1 rounded-full border border-hairline">
                 Client: {proposal.clientName}
               </span>
             </div>
@@ -681,7 +691,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               </p>
 
               {slides[currentSlideIndex].content && (
-                <div className="bg-surface-1 p-6 rounded-2xl border border-white/10 text-sm text-ink-secondary leading-relaxed font-sans shadow-inner">
+                <div className="bg-surface-1 p-6 rounded-xl border border-hairline text-sm text-ink-secondary leading-[1.6]">
                   {slides[currentSlideIndex].content}
                 </div>
               )}
@@ -689,8 +699,8 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               {slides[currentSlideIndex].deliverables && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {slides[currentSlideIndex].deliverables?.map((d, i) => (
-                    <div key={i} className="p-4 rounded-xl bg-surface-1 border border-white/10 text-xs font-bold text-white flex items-center gap-3">
-                      <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0" />
+                    <div key={i} className="p-4 rounded-lg bg-surface-1 border border-hairline text-xs font-bold text-ink-primary flex items-center gap-3">
+                      <CheckCircle2 className="h-5 w-5 text-status-positive shrink-0" />
                       <span>{d}</span>
                     </div>
                   ))}
@@ -700,8 +710,8 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               {slides[currentSlideIndex].roadmap && (
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   {slides[currentSlideIndex].roadmap?.map((r, i) => (
-                    <div key={i} className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-2 text-xs">
-                      <span className="text-xs font-black text-accent-brass-400">{r.month}</span>
+                    <div key={i} className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-2 text-xs">
+                      <span className="text-xs font-bold text-accent-brass-400">{r.month}</span>
                       <p className="text-ink-secondary font-bold">{r.focus}</p>
                       <ul className="space-y-1 text-ink-muted text-[11px] list-disc list-inside">
                         {r.keyMilestones.map((m, j) => <li key={j}>{m}</li>)}
@@ -713,11 +723,11 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
             </div>
 
             {/* Slide Controls */}
-            <div className="flex items-center justify-between border-t border-white/10 pt-4">
+            <div className="flex items-center justify-between border-t border-hairline pt-4">
               <button
                 disabled={currentSlideIndex === 0}
                 onClick={() => setCurrentSlideIndex(prev => Math.max(0, prev - 1))}
-                className="px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-2 disabled:opacity-30"
+                className="px-4 py-2.5 rounded-lg bg-surface-2 border border-hairline hover:bg-surface-3 text-ink-secondary hover:text-ink-primary text-xs font-bold flex items-center gap-2 disabled:opacity-30 disabled:pointer-events-none transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
               >
                 <ChevronLeft className="h-4 w-4" />
                 <span>Previous Slide</span>
@@ -728,8 +738,9 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   <button
                     key={idx}
                     onClick={() => setCurrentSlideIndex(idx)}
-                    className={`h-2.5 rounded-full transition-colors ${
-                      currentSlideIndex === idx ? 'w-8 bg-accent-brass-500' : 'w-2.5 bg-surface-2 hover:bg-slate-700'
+                    aria-label={`Go to slide ${idx + 1}`}
+                    className={`h-2.5 rounded-full transition-[width,background-color] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                      currentSlideIndex === idx ? 'w-8 bg-accent-brass-500' : 'w-2.5 bg-surface-2 hover:bg-surface-3'
                     }`}
                   />
                 ))}
@@ -738,7 +749,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               <button
                 disabled={currentSlideIndex === slides.length - 1}
                 onClick={() => setCurrentSlideIndex(prev => Math.min(slides.length - 1, prev + 1))}
-                className="px-5 py-2.5 rounded-xl bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 text-xs font-black flex items-center gap-2 disabled:opacity-30 shadow-[var(--shadow-panel-brass)]"
+                className="px-5 py-2.5 rounded-lg bg-accent-brass-500 hover:brightness-105 text-slate-950 text-xs font-bold flex items-center gap-2 disabled:opacity-30 disabled:pointer-events-none shadow-[var(--shadow-panel-brass)] transition-[filter] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
               >
                 <span>Next Slide</span>
                 <ChevronRight className="h-4 w-4" />
@@ -750,7 +761,7 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         {/* VIEW MODE 3: 3-TIER PACKAGE PRICING */}
         {viewMode === 'tiers' && (
           <div className="space-y-4">
-            <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
+            <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2">
               <Layers className="h-4 w-4 text-accent-brass-400" />
               <span>Multi-Tier Agency Retainer Investment Options</span>
             </h4>
@@ -779,29 +790,29 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
               ]).map((tier, idx) => (
                 <div
                   key={idx}
-                  className={`p-6 rounded-2xl border space-y-4 relative flex flex-col justify-between ${
+                  className={`p-6 rounded-xl border space-y-4 relative flex flex-col justify-between ${
                     tier.isRecommended
-                      ? 'bg-surface-0 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-2xl'
-                      : 'bg-surface-0 border-white/10'
+                      ? 'bg-surface-0 border-accent-brass-500 ring-1 ring-accent-brass-500/40 shadow-[var(--shadow-panel-brass)]'
+                      : 'bg-surface-0 border-hairline'
                   }`}
                 >
                   {tier.isRecommended && (
-                    <span className="absolute -top-3 right-6 px-3 py-1 bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 text-[10px] font-black uppercase tracking-wider rounded-full shadow-[var(--shadow-panel-brass)]">
+                    <span className="absolute -top-3 right-6 px-3 py-1 bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider rounded-full shadow-[var(--shadow-panel-brass)]">
                       Most Popular
                     </span>
                   )}
 
                   <div className="space-y-2">
-                    <h5 className="text-sm font-extrabold text-white">{tier.name}</h5>
-                    <div className="text-2xl font-black text-emerald-400 font-mono">{tier.monthlyFee}</div>
-                    <p className="text-xs text-ink-muted leading-relaxed">{tier.description}</p>
+                    <h5 className="text-sm font-bold text-ink-primary">{tier.name}</h5>
+                    <div className="text-2xl font-semibold text-status-positive font-mono tabular-nums">{tier.monthlyFee}</div>
+                    <p className="text-xs text-ink-muted leading-[1.6]">{tier.description}</p>
                   </div>
 
-                  <div className="space-y-2 py-4 border-t border-white/10">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Features Included:</span>
+                  <div className="space-y-2 py-4 border-t border-hairline">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-ink-muted block">Features Included:</span>
                     {tier.features.map((feat, fIdx) => (
                       <div key={fIdx} className="flex items-center gap-2 text-xs text-ink-secondary">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                        <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0" />
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -812,10 +823,10 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                       setMonthlyRetainer(tier.monthlyFee.replace(/[^0-9]/g, ''));
                       setViewMode('document');
                     }}
-                    className={`w-full py-2.5 rounded-xl text-xs font-extrabold transition-colors ${
+                    className={`w-full py-2.5 rounded-lg text-xs font-bold transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
                       tier.isRecommended
-                        ? 'bg-accent-brass-500 hover:bg-accent-brass-400 text-slate-950 shadow-[var(--shadow-panel-brass)]'
-                        : 'bg-surface-2 hover:bg-slate-700 text-ink-secondary'
+                        ? 'bg-accent-brass-500 hover:brightness-105 text-slate-950 shadow-[var(--shadow-panel-brass)]'
+                        : 'bg-surface-2 border border-hairline hover:bg-surface-3 text-ink-secondary hover:text-ink-primary'
                     }`}
                   >
                     Select This Package
@@ -829,16 +840,16 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
         {/* VIEW MODE 4: 90-DAY IMPLEMENTATION ROADMAP */}
         {viewMode === 'roadmap' && (
           <div className="space-y-4">
-            <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
+            <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2">
               <Calendar className="h-4 w-4 text-accent-brass-400" />
               <span>90-Day Execution Roadmap & Growth Milestones</span>
             </h4>
 
             <div className="space-y-4">
               {(proposal.roadmap90Days || []).map((step, idx) => (
-                <div key={idx} className="p-5 rounded-2xl bg-surface-0 border border-white/10 space-y-3">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2">
-                    <span className="text-xs font-black text-accent-brass-400 uppercase tracking-wider">
+                <div key={idx} className="p-5 rounded-xl bg-surface-0 border border-hairline space-y-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-hairline pb-2">
+                    <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider">
                       {step.month}
                     </span>
                     <span className="text-xs font-bold text-accent-brass-300 bg-accent-brass-500/10 px-2.5 py-0.5 rounded border border-accent-brass-500/20">
@@ -847,10 +858,10 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   </div>
 
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-ink-muted block">Key Milestones & Deliverables:</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-ink-muted block">Key Milestones & Deliverables</span>
                     {step.keyMilestones.map((m, mIdx) => (
                       <div key={mIdx} className="flex items-start gap-2 text-xs text-ink-secondary">
-                        <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
+                        <CheckCircle2 className="h-4 w-4 text-status-positive shrink-0 mt-0.5" />
                         <span>{m}</span>
                       </div>
                     ))}
@@ -863,10 +874,10 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
 
         {/* VIEW MODE 5: INTERACTIVE ROI CALCULATOR */}
         {viewMode === 'roi' && (
-          <div className="bg-surface-0 p-6 rounded-2xl border border-white/10 space-y-6">
+          <div className="bg-surface-0 p-6 rounded-xl border border-hairline space-y-6">
             <div>
-              <h4 className="text-sm font-extrabold text-white flex items-center gap-2 mb-1">
-                <Calculator className="h-4 w-4 text-emerald-400" />
+              <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2 mb-1">
+                <Calculator className="h-4 w-4 text-accent-brass-400" />
                 <span>Interactive Client ROI & Pipeline Projections</span>
               </h4>
               <p className="text-xs text-ink-muted">
@@ -877,8 +888,8 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <label className="text-xs font-bold text-ink-secondary flex justify-between">
-                  <span>Monthly Inbound Lead Inquiries:</span>
-                  <strong className="text-emerald-400 font-mono">{calcInquiries} Leads</strong>
+                  <span>Monthly Inbound Lead Inquiries</span>
+                  <strong className="text-accent-brass-400 font-mono">{calcInquiries} Leads</strong>
                 </label>
                 <input
                   type="range"
@@ -886,14 +897,14 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   max="500"
                   value={calcInquiries}
                   onChange={(e) => setCalcInquiries(parseInt(e.target.value))}
-                  className="w-full accent-emerald-500"
+                  className="w-full accent-brass-500 cursor-pointer"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-ink-secondary flex justify-between">
-                  <span>Average Customer Deal Value ($):</span>
-                  <strong className="text-emerald-400 font-mono">${calcDealValue.toLocaleString()}</strong>
+                  <span>Average Customer Deal Value ($)</span>
+                  <strong className="text-accent-brass-400 font-mono">${calcDealValue.toLocaleString()}</strong>
                 </label>
                 <input
                   type="range"
@@ -902,14 +913,14 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   step="100"
                   value={calcDealValue}
                   onChange={(e) => setCalcDealValue(parseInt(e.target.value))}
-                  className="w-full accent-emerald-500"
+                  className="w-full accent-brass-500 cursor-pointer"
                 />
               </div>
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-ink-secondary flex justify-between">
-                  <span>Client Close Rate (%):</span>
-                  <strong className="text-emerald-400 font-mono">{calcCloseRate}%</strong>
+                  <span>Client Close Rate (%)</span>
+                  <strong className="text-accent-brass-400 font-mono">{calcCloseRate}%</strong>
                 </label>
                 <input
                   type="range"
@@ -917,26 +928,26 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
                   max="50"
                   value={calcCloseRate}
                   onChange={(e) => setCalcCloseRate(parseInt(e.target.value))}
-                  className="w-full accent-emerald-500"
+                  className="w-full accent-brass-500 cursor-pointer"
                 />
               </div>
             </div>
 
             {/* Projected Output Display */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/10">
-              <div className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-1">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-hairline">
+              <div className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-1">
                 <span className="text-[10px] text-ink-muted font-bold uppercase block">Projected Monthly Closed Deals</span>
-                <span className="text-2xl font-black text-white font-mono">{closedDeals} Deals/mo</span>
+                <span className="text-2xl font-semibold text-ink-primary font-mono tabular-nums">{closedDeals} Deals/mo</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-1">
+              <div className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-1">
                 <span className="text-[10px] text-ink-muted font-bold uppercase block">Est. Monthly Added Revenue</span>
-                <span className="text-2xl font-black text-emerald-400 font-mono">${monthlyRevenue.toLocaleString()}</span>
+                <span className="text-2xl font-semibold text-status-positive font-mono tabular-nums">${monthlyRevenue.toLocaleString()}</span>
               </div>
 
-              <div className="p-4 rounded-xl bg-surface-1 border border-white/10 space-y-1">
+              <div className="p-4 rounded-lg bg-surface-1 border border-hairline space-y-1">
                 <span className="text-[10px] text-ink-muted font-bold uppercase block">Projected Retainer Net ROI</span>
-                <span className="text-2xl font-black text-accent-brass-300 font-mono">{netROI}x Net ROI</span>
+                <span className="text-2xl font-semibold text-accent-brass-300 font-mono tabular-nums">{netROI}x Net ROI</span>
               </div>
             </div>
           </div>
@@ -946,13 +957,13 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
       {/* SIMULATED CLIENT E-SIGNATURE MODAL */}
       {showSignModal && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-surface-1 border border-white/10 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative">
-            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="bg-surface-1 border border-hairline rounded-2xl max-w-md w-full p-6 space-y-5 shadow-[var(--shadow-panel-brass)] relative">
+            <div className="flex items-center justify-between border-b border-hairline pb-3">
               <div className="flex items-center gap-2">
-                <FileCheck2 className="h-5 w-5 text-emerald-400" />
-                <h3 className="text-lg font-extrabold text-white">Sign & Approve Client Proposal</h3>
+                <FileCheck2 className="h-5 w-5 text-status-positive" />
+                <h3 className="font-display text-lg font-semibold text-ink-primary tracking-[-0.01em]">Sign & Approve Client Proposal</h3>
               </div>
-              <button onClick={() => setShowSignModal(false)} className="text-ink-muted hover:text-white p-1 rounded-lg bg-surface-2">
+              <button onClick={() => setShowSignModal(false)} className="text-ink-muted hover:text-ink-primary p-1 rounded-md bg-surface-2 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -960,47 +971,47 @@ ${proposal.slaGuarantee || 'Standard SLA Guarantee Active'}`;
             <form onSubmit={handleSignProposal} className="space-y-4">
               <div>
                 <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block mb-1">
-                  Client Authorized Signer Name:
+                  Client Authorized Signer Name
                 </label>
                 <input
                   type="text"
                   value={signerName}
                   onChange={(e) => setSignerName(e.target.value)}
                   placeholder="e.g. Johnathan Vance"
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs font-bold transition-colors focus:outline-none focus:border-status-positive focus-visible:ring-2 focus-visible:ring-status-positive/30"
                   required
                 />
               </div>
 
               <div>
                 <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block mb-1">
-                  Signer Title:
+                  Signer Title
                 </label>
                 <input
                   type="text"
                   value={signerTitle}
                   onChange={(e) => setSignerTitle(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs font-bold focus:outline-none focus:border-emerald-500"
+                  className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs font-bold transition-colors focus:outline-none focus:border-status-positive focus-visible:ring-2 focus-visible:ring-status-positive/30"
                   required
                 />
               </div>
 
-              <div className="p-3.5 rounded-xl bg-surface-0 border border-white/10 text-[11px] text-ink-muted font-mono">
-                By clicking "Confirm Digital Signature", you approve the monthly retainer investment of <strong className="text-emerald-400">{proposal.monthlyFee}</strong> for {proposal.clientName}.
+              <div className="p-3.5 rounded-lg bg-surface-0 border border-hairline text-[11px] text-ink-muted font-mono">
+                By clicking "Confirm Digital Signature", you approve the monthly retainer investment of <strong className="text-status-positive">{proposal.monthlyFee}</strong> for {proposal.clientName}.
               </div>
 
               <div className="flex items-center justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setShowSignModal(false)}
-                  className="px-4 py-2 rounded-xl bg-surface-2 text-ink-secondary text-xs font-bold hover:bg-slate-700"
+                  className="px-4 py-2 rounded-lg bg-surface-2 border border-hairline text-ink-secondary text-xs font-bold hover:bg-surface-3 hover:text-ink-primary transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black shadow-lg shadow-emerald-600/20"
+                  className="px-5 py-2 rounded-lg bg-status-positive hover:brightness-105 text-slate-950 text-xs font-bold shadow-[var(--shadow-panel)] transition-[filter] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-positive"
                 >
                   Confirm Digital Signature
                 </button>

@@ -28,7 +28,8 @@ import { SystemInstructionBlueprint } from '../types';
 const ARCHITECTURE_PRESETS = [
   {
     id: 'b2b-saas-agent',
-    label: '🤖 Autonomous B2B Lead Scraping Agent',
+    label: 'Autonomous B2B Lead Scraping Agent',
+    icon: Cpu,
     topic: 'Programmatic B2B Intelligence & Lead Scraping SaaS',
     targetAudience: 'B2B Founders & Growth Marketers',
     monetizationGoal: '$20,000/mo ARR via Automated AI Lead Workflows',
@@ -37,7 +38,8 @@ const ARCHITECTURE_PRESETS = [
   },
   {
     id: 'programmatic-seo',
-    label: '🌐 Programmatic SEO & Landing Page Matrix',
+    label: 'Programmatic SEO & Landing Page Matrix',
+    icon: Code2,
     topic: 'AI Programmatic SEO & Dynamic Keyword Page Engine',
     targetAudience: 'E-commerce Brands & SaaS CMOs',
     monetizationGoal: '100,000 Organic Dwell Views & $15,000 MRR',
@@ -46,7 +48,8 @@ const ARCHITECTURE_PRESETS = [
   },
   {
     id: 'tiktok-teleprompter',
-    label: '🎬 Viral Short-Form Video Script Director',
+    label: 'Viral Short-Form Video Script Director',
+    icon: Play,
     topic: 'TikTok / Shorts / Reels Algorithm Pattern Interrupts',
     targetAudience: 'Content Creators & Media Agencies',
     monetizationGoal: '1,000,000 Monthly Impressions & Brand Retainers',
@@ -55,7 +58,8 @@ const ARCHITECTURE_PRESETS = [
   },
   {
     id: 'agency-pitch-architect',
-    label: '💼 $10k/mo White-Label Client Pitch Engine',
+    label: '$10k/mo White-Label Client Pitch Engine',
+    icon: Share2,
     topic: 'Enterprise B2B Agency Retainer Proposals & Audits',
     targetAudience: 'Mid-Market SaaS & Real Estate Executives',
     monetizationGoal: '10 Closed Client Proposals @ $5,000/mo Retainer',
@@ -228,56 +232,62 @@ Structure your response cleanly using Markdown:
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+      <div className="relative overflow-hidden bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] space-y-6">
+        <div className="pointer-events-none absolute -right-16 -top-16 w-72 h-72 bg-accent-brass-500/[0.07] rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
+        <div className="relative">
+          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
             <FileCode2 className="h-3.5 w-3.5 text-accent-brass-400" />
-            <span>AI Studio Meta-Architect v10.0 Pro</span>
+            <span>AI Studio Meta-Architect Pro</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-            <span>Master System Instruction Blueprint Builder</span>
-            <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-r from-accent-brass-500 to-accent-brass-400 text-slate-950 font-bold tracking-normal uppercase">
-              10x Architect
-            </span>
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
+            Master System Instruction Blueprint Builder
           </h2>
-          <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
+          <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-[1.7]">
             Convert any niche or product idea into an enterprise-grade, copy-and-paste Master System Instruction. Features strict multi-pass chain-of-thought protocols, negative constraint filters, modular code blocks, and a live execution simulator.
           </p>
         </div>
 
         {/* 1-Click Industrial Architecture Presets */}
-        <div>
+        <div className="relative">
           <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary flex items-center gap-2 mb-2">
             <Cpu className="h-4 w-4 text-accent-brass-400" />
-            <span>Select 1-Click System Architecture Blueprint Preset:</span>
+            <span>Select 1-Click System Architecture Blueprint Preset</span>
           </label>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {ARCHITECTURE_PRESETS.map((preset) => (
-              <button
-                key={preset.id}
-                type="button"
-                onClick={() => handleSelectPreset(preset)}
-                className={`p-3 rounded-2xl border text-left transition-colors space-y-1.5 relative overflow-hidden ${
-                  selectedPreset === preset.id
-                    ? 'bg-surface-1 border-accent-brass-500 ring-2 ring-accent-brass-500/50 shadow-xl'
-                    : 'bg-surface-0 border-white/10 text-ink-muted hover:bg-surface-1'
-                }`}
-              >
-                <div className="text-xs font-black text-white truncate">{preset.label}</div>
-                <p className="text-[10px] text-ink-muted line-clamp-2 leading-relaxed">
-                  {preset.description}
-                </p>
-                <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-accent-brass-300">
-                  {preset.targetModel}
-                </span>
-              </button>
-            ))}
+            {ARCHITECTURE_PRESETS.map((preset) => {
+              const PresetIcon = preset.icon;
+              return (
+                <button
+                  key={preset.id}
+                  type="button"
+                  onClick={() => handleSelectPreset(preset)}
+                  aria-pressed={selectedPreset === preset.id}
+                  className={`p-3 rounded-xl border text-left transition-colors space-y-1.5 relative overflow-hidden cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                    selectedPreset === preset.id
+                      ? 'bg-surface-2 border-accent-brass-500 ring-1 ring-accent-brass-500/40 shadow-[var(--shadow-panel-brass)]'
+                      : 'bg-surface-0 border-hairline text-ink-muted hover:bg-surface-2 hover:border-hairline-strong'
+                  }`}
+                >
+                  <div className="flex items-center gap-1.5 text-xs font-bold text-ink-primary truncate">
+                    <PresetIcon className="h-3.5 w-3.5 text-accent-brass-400 shrink-0" />
+                    <span className="truncate">{preset.label}</span>
+                  </div>
+                  <p className="text-[10px] text-ink-muted line-clamp-2 leading-[1.6]">
+                    {preset.description}
+                  </p>
+                  <span className="inline-block text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-surface-2 text-accent-brass-300">
+                    {preset.targetModel}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* Architect Parameters Form */}
-        <form onSubmit={handleGenerate} className="space-y-4">
+        <form onSubmit={handleGenerate} className="relative space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-ink-secondary block mb-1.5">
@@ -287,7 +297,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-hairline rounded-lg px-4 py-3 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-medium"
                 required
               />
             </div>
@@ -300,7 +310,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={targetAudience}
                 onChange={(e) => setTargetAudience(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-hairline rounded-lg px-4 py-3 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-medium"
                 required
               />
             </div>
@@ -313,7 +323,7 @@ Structure your response cleanly using Markdown:
                 type="text"
                 value={monetizationGoal}
                 onChange={(e) => setMonetizationGoal(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-3 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-sans shadow-inner"
+                className="w-full bg-surface-0 border border-hairline rounded-lg px-4 py-3 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-medium"
                 required
               />
             </div>
@@ -327,7 +337,7 @@ Structure your response cleanly using Markdown:
               <select
                 value={targetModel}
                 onChange={(e) => setTargetModel(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
+                className="w-full bg-surface-0 border border-hairline rounded-lg px-4 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-semibold"
               >
                 <option value="Gemini 3.6 Flash">Gemini 3.6 Flash (High-Speed Autonomous Workflows)</option>
                 <option value="Gemini 3.1 Pro">Gemini 3.1 Pro (Complex Multi-Step Enterprise Reasoning)</option>
@@ -343,7 +353,7 @@ Structure your response cleanly using Markdown:
               <select
                 value={personaTone}
                 onChange={(e) => setPersonaTone(e.target.value)}
-                className="w-full bg-surface-0 border border-white/10 rounded-xl px-4 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 font-semibold"
+                className="w-full bg-surface-0 border border-hairline rounded-lg px-4 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 font-semibold"
               >
                 <option value="Senior Systems Architect & Growth Hacker">Senior Systems Architect & Growth Hacker</option>
                 <option value="Ruthless Direct Response Copywriter">Ruthless Direct Response Copywriter</option>
@@ -356,16 +366,16 @@ Structure your response cleanly using Markdown:
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 rounded-2xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(20, 168, 126,0.3)] border-b-4 border-brass-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-sm shadow-[var(--shadow-glow-brass)] transition-[filter,transform] flex items-center justify-center gap-3 disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
           >
             {loading ? (
               <>
                 <RefreshCw className="h-5 w-5 animate-spin text-slate-950" />
-                <span>Compiling Master System Instruction Blueprint...</span>
+                <span>Compiling Master System Instruction Blueprint…</span>
               </>
             ) : (
               <>
-                <Zap className="h-5 w-5 text-slate-950 fill-slate-950" />
+                <Zap className="h-5 w-5 text-slate-950" />
                 <span>Build Master System Instruction Blueprint</span>
               </>
             )}
@@ -375,18 +385,18 @@ Structure your response cleanly using Markdown:
 
       {/* BLUEPRINT DASHBOARD DISPLAY */}
       {blueprint && (
-        <div className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl space-y-6">
+        <div className="bg-surface-1 rounded-2xl border border-hairline p-6 shadow-[var(--shadow-panel)] space-y-6">
           {/* Blueprint Header */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-white/10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-hairline">
             <div>
               <div className="flex items-center gap-2">
                 <Terminal className="h-5 w-5 text-accent-brass-400" />
-                <h3 className="text-xl font-extrabold text-white">{blueprint.title}</h3>
+                <h3 className="font-display text-xl font-semibold text-ink-primary tracking-[-0.01em]">{blueprint.title}</h3>
               </div>
-              <div className="flex items-center gap-3 mt-1.5 text-xs text-ink-muted">
+              <div className="flex flex-wrap items-center gap-3 mt-1.5 text-xs text-ink-muted">
                 <span>Model Target: <strong className="text-accent-brass-300 font-mono">{blueprint.targetModel}</strong></span>
                 {blueprint.complianceGrade && (
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono font-bold">
+                  <span className="px-2 py-0.5 rounded bg-status-positive-dim text-status-positive border border-status-positive/20 font-mono font-bold">
                     {blueprint.complianceGrade}
                   </span>
                 )}
@@ -402,7 +412,7 @@ Structure your response cleanly using Markdown:
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="px-4 py-2 rounded-xl bg-brass-400 hover:bg-brass-300 text-slate-950 text-xs font-black flex items-center gap-2 shadow-lg shadow-brass-500/20 transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-accent-brass-500 hover:brightness-105 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-[var(--shadow-panel-brass)] transition-[filter] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 {copied ? <Check className="h-4 w-4 text-slate-950" /> : <Copy className="h-4 w-4 text-slate-950" />}
                 <span>{copied ? 'Copied Master Prompt!' : 'Copy System Instruction'}</span>
@@ -410,7 +420,7 @@ Structure your response cleanly using Markdown:
 
               <button
                 onClick={handleDownloadTxt}
-                className="px-3.5 py-2 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="px-3.5 py-2 rounded-lg bg-surface-2 border border-hairline hover:bg-surface-3 hover:border-accent-brass-500/30 text-ink-secondary hover:text-ink-primary text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 <Download className="h-4 w-4 text-accent-brass-400" />
                 <span>Export .TXT</span>
@@ -419,11 +429,11 @@ Structure your response cleanly using Markdown:
           </div>
 
           {/* Blueprint Navigation Tabs */}
-          <div className="flex flex-wrap items-center gap-2 border-b border-white/10 pb-3">
+          <div className="flex flex-wrap items-center gap-2 border-b border-hairline pb-3">
             <button
               onClick={() => setActiveTab('prompt')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'prompt' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                activeTab === 'prompt' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
               }`}
             >
               <FileCode2 className="h-4 w-4" />
@@ -432,41 +442,41 @@ Structure your response cleanly using Markdown:
 
             <button
               onClick={() => setActiveTab('architecture')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'architecture' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                activeTab === 'architecture' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
               }`}
             >
-              <Layers className="h-4 w-4 text-accent-brass-400" />
+              <Layers className="h-4 w-4" />
               <span>Modular Architecture</span>
             </button>
 
             <button
               onClick={() => setActiveTab('cot')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'cot' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                activeTab === 'cot' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
               }`}
             >
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <CheckCircle2 className="h-4 w-4" />
               <span>Chain-of-Thought</span>
             </button>
 
             <button
               onClick={() => setActiveTab('constraints')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'constraints' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                activeTab === 'constraints' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
               }`}
             >
-              <ShieldAlert className="h-4 w-4 text-rose-400" />
+              <ShieldAlert className="h-4 w-4" />
               <span>Negative Constraints</span>
             </button>
 
             <button
               onClick={() => setActiveTab('simulator')}
-              className={`px-4 py-2 rounded-xl text-xs font-extrabold transition-colors flex items-center gap-2 cursor-pointer ${
-                activeTab === 'simulator' ? 'bg-brass-400 text-slate-950 shadow-lg shadow-brass-500/20' : 'bg-surface-0 text-ink-muted hover:text-white'
+              className={`px-4 py-2 rounded-lg text-xs font-bold transition-colors flex items-center gap-2 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
+                activeTab === 'simulator' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'bg-surface-0 border border-hairline text-ink-muted hover:bg-surface-2 hover:text-ink-primary'
               }`}
             >
-              <Play className="h-4 w-4 text-slate-950 fill-slate-950" />
+              <Play className="h-4 w-4" />
               <span>Test Prompt Live (Simulator)</span>
             </button>
           </div>
@@ -474,15 +484,15 @@ Structure your response cleanly using Markdown:
           {/* TAB 1: RAW SYSTEM PROMPT EDITOR / VIEWER */}
           {activeTab === 'prompt' && (
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-ink-muted">
-                  Ready to paste into Gemini / AI Studio System Instruction Field:
+                  Ready to paste into Gemini / AI Studio System Instruction Field
                 </label>
                 {blueprint.variablePlaceholders && (
                   <div className="flex items-center gap-1.5 text-[10px] font-mono text-ink-muted">
                     <span className="text-accent-brass-400">Placeholders:</span>
                     {blueprint.variablePlaceholders.map((ph, idx) => (
-                      <span key={idx} className="bg-surface-0 px-1.5 py-0.5 rounded border border-white/10 text-accent-brass-300">
+                      <span key={idx} className="bg-surface-0 px-1.5 py-0.5 rounded border border-hairline text-accent-brass-300">
                         {ph}
                       </span>
                     ))}
@@ -490,7 +500,7 @@ Structure your response cleanly using Markdown:
                 )}
               </div>
 
-              <div className="bg-surface-0 rounded-2xl border border-white/10 p-5 font-mono text-xs text-emerald-300 leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto shadow-inner border-l-4 border-l-brass-500">
+              <div className="bg-surface-0 rounded-xl border border-hairline p-5 font-mono text-xs text-ink-secondary leading-[1.6] overflow-x-auto whitespace-pre-wrap max-h-[550px] overflow-y-auto border-l-2 border-l-accent-brass-500">
                 {blueprint.systemPrompt}
               </div>
             </div>
@@ -499,7 +509,7 @@ Structure your response cleanly using Markdown:
           {/* TAB 2: MODULAR ARCHITECTURE MODULES */}
           {activeTab === 'architecture' && (
             <div className="space-y-4">
-              <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
+              <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2">
                 <Layers className="h-4 w-4 text-accent-brass-400" />
                 <span>Core System Architecture Modules</span>
               </h4>
@@ -507,18 +517,18 @@ Structure your response cleanly using Markdown:
               <div className="grid grid-cols-1 gap-4">
                 {blueprint.architectureModules && blueprint.architectureModules.length > 0 ? (
                   blueprint.architectureModules.map((mod, idx) => (
-                    <div key={idx} className="bg-surface-0 p-5 rounded-2xl border border-white/10 space-y-2">
+                    <div key={idx} className="bg-surface-0 p-5 rounded-xl border border-hairline space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-black text-accent-brass-400 uppercase tracking-wider">
+                        <span className="text-xs font-bold text-accent-brass-400 uppercase tracking-wider">
                           Module 0{idx + 1}: {mod.moduleName}
                         </span>
                         <span className="text-[10px] font-mono bg-surface-2 text-ink-secondary px-2 py-0.5 rounded">
                           Production Ready
                         </span>
                       </div>
-                      <p className="text-xs text-ink-secondary leading-relaxed">{mod.description}</p>
+                      <p className="text-xs text-ink-secondary leading-[1.6]">{mod.description}</p>
                       {mod.codeSnippet && (
-                        <div className="bg-surface-1 p-3 rounded-xl border border-white/10 font-mono text-[11px] text-accent-brass-300 overflow-x-auto">
+                        <div className="bg-surface-1 p-3 rounded-lg border border-hairline font-mono text-[11px] text-accent-brass-300 overflow-x-auto">
                           {mod.codeSnippet}
                         </div>
                       )}
@@ -534,26 +544,26 @@ Structure your response cleanly using Markdown:
           {/* TAB 3: CHAIN OF THOUGHT STEPS */}
           {activeTab === 'cot' && (
             <div className="space-y-4">
-              <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+              <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-status-positive" />
                 <span>Deterministic Multi-Pass Reasoning Steps</span>
               </h4>
 
               <div className="space-y-3">
                 {blueprint.chainOfThoughtSteps.map((step, idx) => (
-                  <div key={idx} className="p-4 rounded-2xl bg-surface-0 border border-white/10 flex items-start gap-3">
-                    <span className="h-6 w-6 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-bold flex items-center justify-center shrink-0">
+                  <div key={idx} className="p-4 rounded-xl bg-surface-0 border border-hairline flex items-start gap-3">
+                    <span className="h-6 w-6 rounded-md bg-status-positive-dim border border-status-positive/20 text-status-positive text-xs font-mono font-bold flex items-center justify-center shrink-0">
                       {idx + 1}
                     </span>
-                    <p className="text-xs text-ink-secondary font-sans leading-relaxed pt-0.5">{step}</p>
+                    <p className="text-xs text-ink-secondary leading-[1.6] pt-0.5">{step}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="p-4 rounded-2xl bg-emerald-950/20 border border-emerald-800/30 text-xs text-emerald-300 flex items-center gap-3">
-                <DollarSign className="h-5 w-5 text-emerald-400 shrink-0" />
+              <div className="p-4 rounded-xl bg-status-positive-dim border border-status-positive/30 text-xs text-status-positive flex items-center gap-3">
+                <DollarSign className="h-5 w-5 shrink-0" />
                 <div>
-                  <strong className="block font-bold">Monetization & ROI Leverage:</strong>
+                  <strong className="block font-bold">Monetization & ROI Leverage</strong>
                   <span>{blueprint.monetizationLeverage}</span>
                 </div>
               </div>
@@ -563,8 +573,8 @@ Structure your response cleanly using Markdown:
           {/* TAB 4: NEGATIVE CONSTRAINTS */}
           {activeTab === 'constraints' && (
             <div className="space-y-4">
-              <h4 className="text-sm font-extrabold text-white flex items-center gap-2">
-                <ShieldAlert className="h-4 w-4 text-rose-400" />
+              <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2">
+                <ShieldAlert className="h-4 w-4 text-status-danger" />
                 <span>Negative Constraints & Anti-Hallucination Guardrails</span>
               </h4>
 
@@ -574,8 +584,8 @@ Structure your response cleanly using Markdown:
                   'No unescaped JSON strings',
                   'No hallucinated API keys'
                 ]).map((nc, idx) => (
-                  <div key={idx} className="p-3.5 rounded-2xl bg-rose-950/20 border border-rose-800/30 text-xs text-rose-300 flex items-start gap-2.5">
-                    <ShieldAlert className="h-4 w-4 text-rose-400 shrink-0 mt-0.5" />
+                  <div key={idx} className="p-3.5 rounded-xl bg-status-danger-dim border border-status-danger/30 text-xs text-status-danger flex items-start gap-2.5">
+                    <ShieldAlert className="h-4 w-4 shrink-0 mt-0.5" />
                     <span>{nc}</span>
                   </div>
                 ))}
@@ -585,10 +595,10 @@ Structure your response cleanly using Markdown:
 
           {/* TAB 5: LIVE SYSTEM INSTRUCTION SIMULATOR */}
           {activeTab === 'simulator' && (
-            <div className="space-y-5 bg-surface-0 p-6 rounded-2xl border border-white/10">
+            <div className="space-y-5 bg-surface-0 p-6 rounded-xl border border-hairline">
               <div>
-                <h4 className="text-sm font-extrabold text-white flex items-center gap-2 mb-1">
-                  <Play className="h-4 w-4 text-accent-brass-300 fill-brass-300" />
+                <h4 className="text-sm font-bold text-ink-primary flex items-center gap-2 mb-1">
+                  <Play className="h-4 w-4 text-accent-brass-300" />
                   <span>Live Gemini Execution Playground</span>
                 </h4>
                 <p className="text-xs text-ink-muted">
@@ -598,13 +608,13 @@ Structure your response cleanly using Markdown:
 
               <div className="space-y-2">
                 <label className="text-xs font-bold text-ink-secondary uppercase tracking-wider block">
-                  Test User Input Prompt:
+                  Test User Input Prompt
                 </label>
                 <textarea
                   value={testInputPrompt}
                   onChange={(e) => setTestInputPrompt(e.target.value)}
                   rows={2}
-                  className="w-full bg-surface-1 border border-white/10 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-accent-brass-500 font-sans"
+                  className="w-full bg-surface-1 border border-hairline rounded-lg p-3 text-xs text-ink-primary transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
                   placeholder="e.g. Write a 30-second video hook for my SaaS launch"
                 />
               </div>
@@ -612,37 +622,37 @@ Structure your response cleanly using Markdown:
               <button
                 onClick={handleRunSimulator}
                 disabled={simulating || !testInputPrompt.trim()}
-                className="px-6 py-3 rounded-xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+                className="px-6 py-3 rounded-lg bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-xs shadow-[var(--shadow-glow-brass)] transition-[filter,transform] flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 {simulating ? (
                   <>
                     <RefreshCw className="h-4 w-4 animate-spin text-slate-950" />
-                    <span>Executing Test Run in Gemini Engine...</span>
+                    <span>Executing Test Run in Gemini Engine…</span>
                   </>
                 ) : (
                   <>
-                    <Zap className="h-4 w-4 text-slate-950 fill-slate-950" />
+                    <Zap className="h-4 w-4 text-slate-950" />
                     <span>Run Test Prompt against System Instruction</span>
                   </>
                 )}
               </button>
 
               {simulatorError && (
-                <div className="p-3.5 rounded-xl bg-rose-950/40 border border-rose-800/50 text-rose-300 text-xs flex items-center gap-2">
-                  <AlertCircle className="h-4 w-4 shrink-0 text-rose-400" />
+                <div className="p-3.5 rounded-lg bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
+                  <AlertCircle className="h-4 w-4 shrink-0" />
                   <span>{simulatorError}</span>
                 </div>
               )}
 
               {simulatorResult && (
-                <div className="space-y-2 pt-2 border-t border-white/10">
+                <div className="space-y-2 pt-2 border-t border-hairline">
                   <div className="flex items-center justify-between text-xs text-ink-muted font-mono">
-                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="text-status-positive font-bold flex items-center gap-1">
                       <CheckCircle className="h-3.5 w-3.5" />
-                      <span>Live Model Output (Gemini 3.6 Flash):</span>
+                      <span>Live Model Output (Gemini 3.6 Flash)</span>
                     </span>
                   </div>
-                  <div className="bg-surface-1 rounded-xl border border-white/10 p-4 font-mono text-xs text-ink-secondary leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-[350px]">
+                  <div className="bg-surface-1 rounded-lg border border-hairline p-4 font-mono text-xs text-ink-secondary leading-[1.6] overflow-x-auto whitespace-pre-wrap max-h-[350px]">
                     {simulatorResult}
                   </div>
                 </div>

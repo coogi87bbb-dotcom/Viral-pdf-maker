@@ -6,13 +6,13 @@ interface LandingCTAProps {
   onGetStarted: () => void;
 }
 
-/** 007 — Close. Bone zone, centred: the only centred composition on the page. */
+/** Close. Bone zone, centred: the only centred composition on the page. */
 export const LandingCTA: React.FC<LandingCTAProps> = ({ onGetStarted }) => {
   return (
     <section className="relative py-28 sm:py-36 lg:py-44">
       <div className="mx-auto w-full max-w-4xl px-5 text-center sm:px-8">
         <Reveal kind="scale-up">
-          <span className="lf-label text-lf-copper-light text-legible">007 / Start</span>
+          <span className="lf-label text-lf-copper-light text-legible">Start</span>
         </Reveal>
 
         <Reveal kind="scale-up" delay={0.1} className="mt-6 block">
@@ -23,7 +23,7 @@ export const LandingCTA: React.FC<LandingCTAProps> = ({ onGetStarted }) => {
 
         <Reveal kind="scale-up" delay={0.2} className="lf-scrim mt-7 block">
           <p className="lf-body mx-auto text-center text-lf-on-ink-muted text-legible">
-            Free to start. No card, no sales call — open the workspace and run
+            Free to start. No card, no sales call. Open the workspace and run
             your own numbers.
           </p>
         </Reveal>

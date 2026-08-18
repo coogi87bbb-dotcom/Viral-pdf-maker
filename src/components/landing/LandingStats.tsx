@@ -49,10 +49,10 @@ export const LandingStats: React.FC = () => {
             'linear-gradient(180deg, rgba(192,117,74,0) 0%, rgba(192,117,74,0.20) 22%, rgba(192,117,74,0.20) 78%, rgba(192,117,74,0) 100%)',
         }}
       />
-      <div className="relative mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
-        <Reveal kind="scale-up">
-          <span className="lf-label text-lf-copper-light text-legible">004 / What that's worth</span>
-        </Reveal>
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
+        {/* No eyebrow here - the figures themselves are the section's whole
+            statement, and the page caps eyebrows at 3 total (see
+            LandingCost.tsx's comment for the reasoning). */}
 
         {/* Two columns even on the narrowest phone: the figures are short
             enough to fit ~170px, and a single column made this band scroll
@@ -78,7 +78,7 @@ export const LandingStats: React.FC = () => {
 
         <Reveal kind="fade-up" delay={0.4} className="lf-scrim mt-14 block">
           <p className="max-w-3xl font-sans text-xs leading-relaxed text-lf-on-ink-muted text-legible">
-            Estimates from LogFlow AI's built-in ROI model — 1.8 hours of manual
+            Estimates from LogFlow AI's built-in ROI model: 1.8 hours of manual
             work per multi-channel post; subscription figures are published list
             prices for the tools LogFlow AI replaces. Run your own numbers in the
             ROI calculator inside the app.

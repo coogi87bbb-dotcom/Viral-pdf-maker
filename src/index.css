@@ -213,6 +213,15 @@
   --color-lf-on-ink: #f2eee6;
   --color-lf-on-ink-muted: #8d8779;
 
+  /* The one "shock" note. An oxidised-copper patina green — thematically
+   * earned (this is literally what the page's copper accent oxidises to),
+   * and the only cool hue anywhere on an otherwise entirely warm ink/bone/
+   * copper page, which is what makes it read as a jolt rather than a fourth
+   * competing palette. Used in exactly one place (LandingCost's "1.8 hours"
+   * figure) — never sprinkled elsewhere. Hex only, per the html2canvas
+   * colour-safety rule. */
+  --color-lf-patina: #4a7c6c;
+
   /* Display face for the landing only. Cormorant Garamond is a high-contrast
    * old-style serif — the luxury/editorial register the app's Newsreader
    * doesn't reach. Already loaded by the @import at the top of this file, so
@@ -321,10 +330,11 @@
 .lf-display {
   font-family: var(--font-editorial);
   font-weight: 600;
-  /* Ceiling raised from 6rem now that the hero video's burned-in wordmark
-     (which used to force a hard height budget on the title card) is cropped
-     out at extraction time — see ScrollFrameStage.tsx. */
-  font-size: clamp(2.75rem, 7.4vw, 7.5rem);
+  /* Ceiling raised again (7.5rem -> 8.75rem) as part of the "Editorial
+     Maximalism" pass — the hero title should be a genuine oversized
+     typographic event on desktop, not just comfortably large. Floor is
+     unchanged so small phones are unaffected. */
+  font-size: clamp(2.75rem, 8vw, 8.75rem);
   line-height: 0.94;
   letter-spacing: -0.02em;
 }

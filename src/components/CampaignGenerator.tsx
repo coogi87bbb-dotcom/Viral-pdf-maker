@@ -208,21 +208,22 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
   return (
     <div className="space-y-8">
       {/* Hero Header & Niche Selector */}
-      <div className="bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-72 h-72 bg-accent-brass-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -left-10 -bottom-10 w-72 h-72 bg-accent-brass-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] relative overflow-hidden">
+        <div className="absolute -right-10 -top-10 w-72 h-72 bg-accent-brass-500/[0.08] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -left-10 -bottom-10 w-72 h-72 bg-accent-brass-500/[0.06] rounded-full blur-3xl pointer-events-none" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
 
         <div className="relative z-10 space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
                 <Flame className="h-3.5 w-3.5 text-accent-brass-400" />
                 <span>Multi-Platform Virality Engine</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
                 Generate Guaranteed Viral Campaigns
               </h2>
-              <p className="text-sm text-ink-muted mt-1 max-w-2xl">
+              <p className="text-sm text-ink-muted mt-2 max-w-2xl leading-[1.7]">
                 Enter your topic once. ViralOS automatically formats, optimizes, and structures psychological posts for X, Instagram, TikTok, Facebook, Threads, Pinterest, and LinkedIn simultaneously.
               </p>
             </div>
@@ -231,7 +232,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
           {/* Preset Niche Chips */}
           <div>
             <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-2">
-              Quick Niche Presets:
+              Quick niche presets
             </label>
             <div className="flex flex-wrap gap-2">
               {PRESET_NICHES.map((preset) => (
@@ -239,10 +240,11 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                   key={preset.id}
                   type="button"
                   onClick={() => handleSelectPresetNiche(preset)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${
+                  aria-pressed={selectedNiche === preset.name}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
                     selectedNiche === preset.name
                       ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)] font-semibold ring-1 ring-accent-brass-400'
-                      : 'bg-surface-1 text-ink-secondary hover:bg-surface-2 border border-white/10'
+                      : 'bg-surface-2 text-ink-secondary hover:bg-surface-3 hover:text-ink-primary border border-hairline'
                   }`}
                 >
                   {preset.name}
@@ -272,7 +274,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                 placeholder="e.g. How to use AI agents to automate social media content, generate 100k views, and scale SaaS revenue... (Or click 'Speak Topic' to dictate by voice)"
                 rows={3}
                 required
-                className="w-full bg-surface-0 border border-white/10 rounded-xl p-4 text-white text-sm focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors placeholder:text-slate-600"
+                className="w-full bg-surface-0 border border-hairline rounded-lg p-4 text-ink-primary text-sm transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 placeholder:text-ink-muted/60"
               />
             </div>
 
@@ -293,10 +295,10 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                       setTargetAudience('');
                     }
                   }}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer mb-1.5"
+                  className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 cursor-pointer mb-1.5"
                 >
                   {TARGET_AUDIENCE_OPTIONS.map((opt, idx) => (
-                    <option key={idx} value={opt} className="bg-surface-1 text-slate-100 py-1">
+                    <option key={idx} value={opt} className="bg-surface-1 text-ink-primary py-1">
                       {opt}
                     </option>
                   ))}
@@ -308,7 +310,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                     value={targetAudience}
                     onChange={(e) => setTargetAudience(e.target.value)}
                     placeholder="Type custom target audience..."
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-accent-brass-500 animate-fadeIn"
+                    className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 animate-fadeIn"
                   />
                 )}
               </div>
@@ -320,13 +322,13 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                 <select
                   value={goal}
                   onChange={(e: any) => setGoal(e.target.value)}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer"
+                  className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 cursor-pointer"
                 >
-                  <option value="Viral Traffic">🔥 Viral Traffic & Views</option>
-                  <option value="Lead Generation">🎯 High-Intent Lead Gen</option>
-                  <option value="Direct Sales">💰 Direct Sales & Conversions</option>
-                  <option value="Brand Awareness">🌟 Authority & Brand Reach</option>
-                  <option value="Community Growth">💬 Comments & Community</option>
+                  <option value="Viral Traffic">Viral Traffic & Views</option>
+                  <option value="Lead Generation">High-Intent Lead Gen</option>
+                  <option value="Direct Sales">Direct Sales & Conversions</option>
+                  <option value="Brand Awareness">Authority & Brand Reach</option>
+                  <option value="Community Growth">Comments & Community</option>
                 </select>
               </div>
 
@@ -346,10 +348,10 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                       setDesiredTone('');
                     }
                   }}
-                  className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2.5 text-white text-xs focus:outline-none focus:border-accent-brass-500 focus:ring-1 focus:ring-accent-brass-500 transition-colors cursor-pointer mb-1.5"
+                  className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2.5 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 cursor-pointer mb-1.5"
                 >
                   {TONE_OPTIONS.map((opt, idx) => (
-                    <option key={idx} value={opt} className="bg-surface-1 text-slate-100 py-1">
+                    <option key={idx} value={opt} className="bg-surface-1 text-ink-primary py-1">
                       {opt}
                     </option>
                   ))}
@@ -361,7 +363,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                     value={desiredTone}
                     onChange={(e) => setDesiredTone(e.target.value)}
                     placeholder="Type custom tone / energy..."
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3.5 py-2 text-white text-xs focus:outline-none focus:border-accent-brass-500 animate-fadeIn"
+                    className="w-full bg-surface-0 border border-hairline rounded-lg px-3.5 py-2 text-ink-primary text-xs transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30 animate-fadeIn"
                   />
                 )}
               </div>
@@ -372,16 +374,16 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <button
                 type="button"
                 onClick={() => setShowNetworkVoicePanel(!showNetworkVoicePanel)}
-                className="w-full flex items-center justify-between text-left focus:outline-none"
+                className="w-full flex items-center justify-between text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 rounded-lg"
               >
                 <div className="flex items-center gap-2.5">
                   <div className="p-1.5 rounded-lg bg-accent-brass-500/20 text-accent-brass-400 border border-accent-brass-500/30">
                     <Mic className="h-4 w-4 animate-pulse" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                    <h4 className="text-xs font-bold text-ink-primary uppercase tracking-wider flex items-center gap-2">
                       <span>Network Voice Instructions (All 7 Networks)</span>
-                      <span className="px-2 py-0.5 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded-md bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20 text-[10px] font-semibold">
                         Speak or Type per Network
                       </span>
                     </h4>
@@ -390,28 +392,28 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                     </p>
                   </div>
                 </div>
-                <div className="text-ink-muted p-1 hover:text-white transition-colors">
+                <div className="text-ink-muted p-1 hover:text-ink-primary active:scale-[0.98] transition-colors">
                   {showNetworkVoicePanel ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
                 </div>
               </button>
 
               {showNetworkVoicePanel && (
-                <div className="pt-3 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                <div className="pt-3 border-t border-hairline grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   {platformsList.map((pKey) => {
                     const pConf = PLATFORM_CONFIGS[pKey];
                     const currentInstr = networkInstructions[pKey] || '';
 
                     return (
-                      <div 
+                      <div
                         key={pKey}
-                        className="p-3 bg-surface-1/90 rounded-xl border border-white/10 space-y-2"
+                        className="p-3 bg-surface-1 rounded-xl border border-hairline space-y-2"
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <div className={`p-1.5 rounded-lg ${pConf.bgColor} border ${pConf.borderColor}`}>
                               <span className="text-xs">{pConf.name}</span>
                             </div>
-                            <span className="text-xs font-bold text-white">{pConf.name} Voice</span>
+                            <span className="text-xs font-bold text-ink-primary">{pConf.name} Voice</span>
                           </div>
 
                           <VoiceInputButton
@@ -429,7 +431,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                           value={currentInstr}
                           onChange={(e) => updateNetworkInstruction(pKey, e.target.value)}
                           placeholder={`Speak or type what you need to go viral on ${pConf.name}...`}
-                          className="w-full bg-surface-0 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-500"
+                          className="w-full bg-surface-0 border border-hairline rounded-lg px-3 py-1.5 text-xs text-ink-secondary transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
                         />
                       </div>
                     );
@@ -439,8 +441,8 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
             </div>
 
             {error && (
-              <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-800/50 text-red-300 text-xs flex items-center gap-2">
-                <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
+              <div className="p-3.5 rounded-lg bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
+                <AlertCircle className="h-4 w-4 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
@@ -449,7 +451,7 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
               <button
                 type="submit"
                 disabled={loading || !topic.trim()}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-sm shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] transition-[transform,opacity,box-shadow,filter] flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-4 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-sm shadow-[var(--shadow-glow-brass)] hover:shadow-[0_14px_50px_rgba(171,133,68,0.45)] transition-[transform,opacity,box-shadow,filter] duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
               >
                 {loading ? (
                   <>
@@ -472,35 +474,35 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
       {campaign && (
         <div className="space-y-6">
           {/* Virality Header Scorecard */}
-          <div className="p-6 bg-surface-1/90 rounded-2xl border border-white/10 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="p-6 bg-surface-1 rounded-2xl border border-hairline shadow-[var(--shadow-panel-brass)] flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="space-y-2">
               <div className="flex items-center gap-3">
-                <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">
+                <span className="font-display text-3xl font-semibold text-status-positive tracking-[-0.02em]">
                   {campaign.viralityScore}/100
                 </span>
-                <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                  S-TIER VIRALITY
+                <span className="text-[11px] font-mono font-bold uppercase tracking-wide px-2 py-1 rounded-md bg-status-positive-dim text-status-positive border border-status-positive/30">
+                  S-Tier Virality
                 </span>
               </div>
-              <h3 className="text-base font-bold text-white">
+              <h3 className="font-display text-lg font-semibold text-ink-primary tracking-[-0.01em]">
                 Core Hook: &quot;{campaign.coreHook}&quot;
               </h3>
               <p className="text-xs text-ink-muted">
-                Monetization Angle: <span className="text-ink-secondary font-medium">{campaign.monetizationAngle}</span>
+                Monetization angle: <span className="text-ink-secondary font-medium">{campaign.monetizationAngle}</span>
               </p>
             </div>
 
             <button
               onClick={handleCopyAllPlatforms}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-slate-100 text-xs font-semibold border border-white/15 transition-colors shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-surface-2 hover:bg-surface-3 hover:border-accent-brass-500/30 text-ink-primary text-xs font-semibold border border-hairline transition-colors shrink-0 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
-              {batchCopied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
+              {batchCopied ? <Check className="h-4 w-4 text-status-positive" /> : <Copy className="h-4 w-4 text-accent-brass-400" />}
               <span>{batchCopied ? 'Campaign Copied!' : 'Export Full Campaign (All Networks)'}</span>
             </button>
           </div>
 
           {/* Social Network Platform Tab Switcher */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-white/10">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-hairline">
             {platformsList.map((plat) => {
               const platConfig = PLATFORM_CONFIGS[plat];
               const isActive = activePlatformTab === plat;
@@ -509,7 +511,8 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
                 <button
                   key={plat}
                   onClick={() => setActivePlatformTab(plat)}
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
                     isActive
                       ? `${platConfig.bgColor} ${platConfig.color} border ${platConfig.borderColor} shadow-[var(--shadow-panel)]`
                       : 'bg-surface-1/60 text-ink-muted hover:text-ink-secondary border border-transparent'
@@ -525,8 +528,9 @@ export const CampaignGenerator: React.FC<CampaignGeneratorProps> = ({ onCampaign
           {campaign.platforms[activePlatformTab] ? (
             <PlatformCard content={campaign.platforms[activePlatformTab]} />
           ) : (
-            <div className="p-8 text-center text-ink-muted text-xs">
-              No platform content available for {activePlatformTab}.
+            <div className="bg-surface-1 border border-hairline rounded-2xl p-10 text-center space-y-2">
+              <p className="text-sm font-semibold text-ink-primary">No content generated for {PLATFORM_CONFIGS[activePlatformTab]?.name || activePlatformTab}</p>
+              <p className="text-xs text-ink-muted">Try regenerating the campaign, or switch to another network tab above.</p>
             </div>
           )}
         </div>

@@ -5,7 +5,14 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export type RevealKind = 'fade-up' | 'slide-left' | 'slide-right' | 'scale-up' | 'clip' | 'rise';
+export type RevealKind =
+  | 'fade-up'
+  | 'slide-left'
+  | 'slide-right'
+  | 'scale-up'
+  | 'clip'
+  | 'rise'
+  | 'skew-in';
 
 /**
  * Scroll-triggered entrance animation.
@@ -28,6 +35,7 @@ const FROM_STATE: Record<RevealKind, gsap.TweenVars> = {
   'scale-up': { opacity: 0, scale: 0.94 },
   clip: { opacity: 0, clipPath: 'inset(0 0 100% 0)' },
   rise: { opacity: 0, y: 64 },
+  'skew-in': { opacity: 0, y: 24, skewY: 4 },
 };
 
 const TO_STATE: Record<RevealKind, gsap.TweenVars> = {
@@ -37,6 +45,7 @@ const TO_STATE: Record<RevealKind, gsap.TweenVars> = {
   'scale-up': { opacity: 1, scale: 1 },
   clip: { opacity: 1, clipPath: 'inset(0 0 0% 0)' },
   rise: { opacity: 1, y: 0 },
+  'skew-in': { opacity: 1, y: 0, skewY: 0 },
 };
 
 interface RevealProps {

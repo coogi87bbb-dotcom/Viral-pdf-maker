@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { apiFetch } from '../lib/apiClient';
-import { 
-  Flame, 
-  Search, 
-  TrendingUp, 
-  Globe, 
-  RefreshCw, 
-  Zap, 
-  ArrowRight, 
-  Radio, 
+import {
+  Flame,
+  Search,
+  TrendingUp,
+  Globe,
+  RefreshCw,
+  Zap,
+  ArrowRight,
+  Radio,
   AlertCircle,
   Copy,
   CheckCircle2,
-  Filter
+  Filter,
+  Lightbulb,
+  SearchX
 } from 'lucide-react';
 import { TrendingPulseData, TrendingTopic } from '../types';
 
@@ -212,17 +214,19 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
   return (
     <div className="space-y-8">
       {/* Header Banner */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="relative overflow-hidden bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] space-y-6">
+        <div className="pointer-events-none absolute -right-16 -top-16 w-72 h-72 bg-accent-brass-500/[0.07] rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-brass-500/10 border border-accent-brass-500/20 text-xs font-semibold text-accent-brass-300 mb-2">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
               <Radio className="h-3.5 w-3.5 text-accent-brass-400 animate-pulse" />
-              <span>Google Search Grounded 10-Topic Radar</span>
+              <span>Google Search Grounded · 10-Topic Radar</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Real-Time 10-Topic Viral Pulse
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
+              Real-Time Viral Pulse
             </h2>
-            <p className="text-sm text-ink-muted mt-1 max-w-2xl">
+            <p className="text-sm text-ink-muted mt-2 max-w-2xl leading-[1.7]">
               Tap into 10 real-time viral web trends, search spikes, and breaking industry discussions. Powered by Google Search Grounding to keep your content ahead of the algorithm curve.
             </p>
           </div>
@@ -231,31 +235,32 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
             <button
               onClick={() => handleFetchTrends()}
               disabled={loading}
-              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-brass-600 via-accent-brass-500 to-violet-600 hover:from-accent-brass-500 hover:to-violet-500 text-white font-bold text-xs shadow-[var(--shadow-glow-brass)] transition-colors flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-bold text-xs shadow-[var(--shadow-glow-brass)] transition-[transform,box-shadow] duration-200 flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
-              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-accent-brass-300" /> : <Globe className="h-4 w-4 text-accent-brass-300" />}
-              <span>{loading ? 'Grounding 10 Live Web Trends...' : 'Scan Live Web Pulse (10 Topics)'}</span>
+              {loading ? <RefreshCw className="h-4 w-4 animate-spin text-slate-950" /> : <Globe className="h-4 w-4 text-slate-950" />}
+              <span>{loading ? 'Grounding Live Web Trends…' : 'Scan Live Web Pulse'}</span>
             </button>
           </div>
         </div>
 
         {/* Category Selector Pills (10 Options) */}
-        <div className="space-y-2">
+        <div className="relative space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block">
-              Select Trend Industry Sector (10 Niche Categories):
+              Trend Industry Sector
             </label>
-            <span className="text-[11px] text-accent-brass-400 font-medium">Click any to fetch 10 live trends</span>
+            <span className="text-[11px] text-accent-brass-400 font-medium">Click any to fetch live trends</span>
           </div>
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer ${
+                aria-pressed={category === cat}
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 ${
                   category === cat
-                    ? 'bg-accent-brass-500 text-black shadow-[var(--shadow-panel-brass)]'
-                    : 'bg-surface-1 border border-white/10 text-ink-secondary hover:bg-surface-2'
+                    ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]'
+                    : 'bg-surface-2 border border-hairline text-ink-secondary hover:bg-surface-3 hover:text-ink-primary'
                 }`}
               >
                 {cat}
@@ -265,41 +270,41 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
         </div>
 
         {/* Custom Grounding Search & Quick Filter Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex gap-2">
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" />
+              <Search className="absolute left-3.5 top-3 h-4 w-4 text-ink-muted" />
               <input
                 type="text"
                 value={customQuery}
                 onChange={(e) => setCustomQuery(e.target.value)}
-                placeholder="Search live topic on Google (e.g., 'SaaS marketing', 'AI video', 'Real Estate')..."
-                className="w-full bg-surface-0 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-accent-brass-500"
+                placeholder="Search live topic (e.g. 'SaaS marketing', 'AI video', 'real estate')…"
+                className="w-full bg-surface-0 border border-hairline rounded-lg pl-10 pr-4 py-2.5 text-xs text-ink-primary placeholder-ink-muted/70 transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
               />
             </div>
             <button
               onClick={() => handleFetchTrends()}
               disabled={loading}
-              className="px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2.5 rounded-lg bg-surface-2 border border-hairline hover:bg-surface-3 hover:border-accent-brass-500/30 text-ink-secondary hover:text-ink-primary text-xs font-bold transition-colors cursor-pointer active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1"
             >
               Search Web
             </button>
           </div>
 
           <div className="relative">
-            <Filter className="absolute left-3.5 top-3 h-4 w-4 text-slate-500" />
+            <Filter className="absolute left-3.5 top-3 h-4 w-4 text-ink-muted" />
             <input
               type="text"
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
-              placeholder="Filter these 10 loaded topics..."
-              className="w-full bg-surface-0 border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-violet-500"
+              placeholder="Filter these loaded topics…"
+              className="w-full bg-surface-0 border border-hairline rounded-lg pl-10 pr-4 py-2.5 text-xs text-ink-primary placeholder-ink-muted/70 transition-colors focus:outline-none focus:border-accent-brass-500 focus-visible:ring-2 focus-visible:ring-accent-brass-400/30"
             />
           </div>
         </div>
 
         {error && (
-          <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-800/50 text-red-300 text-xs flex items-center gap-2">
+          <div className="relative p-3.5 rounded-lg bg-status-danger-dim border border-status-danger/30 text-status-danger text-xs flex items-center gap-2">
             <AlertCircle className="h-4 w-4 shrink-0" />
             <span>{error}</span>
           </div>
@@ -311,111 +316,128 @@ export const TrendingPulse: React.FC<TrendingPulseProps> = ({ onSelectTrendForCa
         <div className="flex items-center justify-between text-xs text-ink-muted">
           <span className="font-bold text-ink-secondary uppercase tracking-wider flex items-center gap-2">
             <Flame className="h-4 w-4 text-accent-brass-400" />
-            <span>Spiking Viral Trends Radar ({displayedTrends.length} Loaded)</span>
+            <span>Spiking Viral Trends Radar ({displayedTrends.length} loaded)</span>
           </span>
-          <span className="font-mono text-slate-500">{pulseData.lastUpdated}</span>
+          <span className="font-mono text-ink-muted/80">{pulseData.lastUpdated}</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedTrends.map((trend, idx) => (
-            <div
-              key={trend.id || idx}
-              className="bg-surface-1/90 rounded-2xl border border-white/10 p-5 shadow-xl space-y-4 flex flex-col justify-between hover:border-accent-brass-500/50 transition-colors group relative"
-            >
-              <div className="space-y-3">
-                {/* Rank Badge & Metrics Header */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded-lg bg-accent-brass-500/20 border border-accent-brass-500/40 text-accent-brass-300 font-extrabold text-xs">
-                      #{idx + 1} Trend
-                    </span>
-                    <span className="px-2 py-0.5 rounded-full bg-surface-0 border border-white/10 text-accent-brass-400 font-mono text-[10px] font-bold flex items-center gap-1">
-                      <TrendingUp className="h-3 w-3 text-accent-brass-400" />
-                      {trend.searchVolumeGrowth}
-                    </span>
-                  </div>
-
-                  <span className="text-[10px] font-bold text-ink-muted uppercase tracking-wide bg-surface-0 px-2 py-0.5 rounded border border-white/10">
-                    {trend.platformFocus}
-                  </span>
-                </div>
-
-                {/* Topic Headline */}
-                <h3 className="text-base font-extrabold text-white group-hover:text-accent-brass-300 transition-colors leading-snug">
-                  {trend.topic}
-                </h3>
-
-                {/* Virality Score Bar */}
-                <div className="space-y-1">
-                  <div className="flex justify-between text-[10px] font-bold">
-                    <span className="text-ink-muted">Virality Index:</span>
-                    <span className="text-accent-brass-400 font-mono">{trend.viralityScore}/100</span>
-                  </div>
-                  <div className="h-1.5 w-full bg-surface-0 rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-accent-brass-600 via-accent-brass-500 to-brass-400 rounded-full"
-                      style={{ width: `${trend.viralityScore}%` }}
-                    />
-                  </div>
-                </div>
-
-                {/* Grounded Summary */}
-                <p className="text-xs text-ink-secondary leading-relaxed bg-surface-0 p-3 rounded-xl border border-white/10">
-                  {trend.summary}
-                </p>
-
-                {/* Suggested High-Converting Hook Angle */}
-                <div className="p-3 rounded-xl bg-accent-brass-900/20 border border-accent-brass-800/30 space-y-1.5 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold uppercase text-accent-brass-400 block">
-                      🧠 Content Hook Angle:
-                    </span>
-                    <button
-                      onClick={() => handleCopyHook(trend.suggestedAngle, trend.id || `t-${idx}`)}
-                      className="text-[10px] text-accent-brass-300 hover:text-white flex items-center gap-1 font-medium transition-colors"
-                    >
-                      {copiedId === (trend.id || `t-${idx}`) ? (
-                        <>
-                          <CheckCircle2 className="h-3 w-3 text-emerald-400" />
-                          <span className="text-emerald-400 font-bold">Copied!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="h-3 w-3" />
-                          <span>Copy Hook</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                  <p className="text-accent-brass-200 text-[11px] font-medium leading-snug">
-                    "{trend.suggestedAngle}"
-                  </p>
-                </div>
-
-                {/* Hashtags */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {trend.recommendedHashtags?.map((tag, tIdx) => (
-                    <span key={tIdx} className="px-2 py-0.5 rounded bg-surface-2 text-ink-muted text-[10px] font-mono">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Button */}
-              {onSelectTrendForCampaign && (
-                <button
-                  onClick={() => onSelectTrendForCampaign(trend.topic)}
-                  className="w-full py-2.5 rounded-xl bg-surface-2 hover:bg-accent-brass-600 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 group-hover:shadow-[var(--shadow-glow-brass)] cursor-pointer mt-3"
-                >
-                  <Zap className="h-3.5 w-3.5 text-accent-brass-300" />
-                  <span>Generate Campaign for this Trend</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              )}
+        {displayedTrends.length === 0 ? (
+          <div className="bg-surface-1 border border-hairline rounded-2xl p-10 text-center space-y-3">
+            <div className="mx-auto h-10 w-10 rounded-xl bg-accent-brass-500/10 border border-accent-brass-500/25 flex items-center justify-center">
+              <SearchX className="h-5 w-5 text-accent-brass-400" />
             </div>
-          ))}
-        </div>
+            <p className="text-sm font-semibold text-ink-primary">No trends match "{filterQuery}"</p>
+            <p className="text-xs text-ink-muted">Try a shorter filter term, or clear it to see all loaded topics.</p>
+            <button
+              onClick={() => setFilterQuery('')}
+              className="inline-flex text-xs font-bold text-accent-brass-300 hover:text-accent-brass-200 transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 rounded px-1"
+            >
+              Clear filter
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayedTrends.map((trend, idx) => (
+              <div
+                key={trend.id || idx}
+                className="bg-surface-1 rounded-2xl border border-hairline p-5 shadow-[var(--shadow-panel-brass)] space-y-4 flex flex-col justify-between hover:border-accent-brass-500/50 transition-colors group relative"
+              >
+                <div className="space-y-3">
+                  {/* Rank Badge & Metrics Header */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-0.5 rounded-md bg-accent-brass-500/15 border border-accent-brass-500/30 text-accent-brass-300 font-mono font-bold text-[11px]">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-md bg-surface-0 border border-hairline text-accent-brass-400 font-mono text-[10px] font-bold flex items-center gap-1">
+                        <TrendingUp className="h-3 w-3 text-accent-brass-400" />
+                        {trend.searchVolumeGrowth}
+                      </span>
+                    </div>
+
+                    <span className="text-[10px] font-bold text-ink-muted uppercase tracking-wide bg-surface-0 px-2 py-0.5 rounded-md border border-hairline">
+                      {trend.platformFocus}
+                    </span>
+                  </div>
+
+                  {/* Topic Headline */}
+                  <h3 className="font-display text-lg font-semibold text-ink-primary group-hover:text-accent-brass-300 transition-colors leading-snug tracking-[-0.01em]">
+                    {trend.topic}
+                  </h3>
+
+                  {/* Virality Score Bar */}
+                  <div className="space-y-1">
+                    <div className="flex justify-between text-[10px] font-bold">
+                      <span className="text-ink-muted">Virality index</span>
+                      <span className="text-accent-brass-400 font-mono">{trend.viralityScore}/100</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-surface-0 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-accent-brass-600 via-accent-brass-500 to-accent-brass-400 rounded-full"
+                        style={{ width: `${trend.viralityScore}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Grounded Summary */}
+                  <p className="text-xs text-ink-secondary leading-[1.6] bg-surface-0 p-3 rounded-lg border border-hairline">
+                    {trend.summary}
+                  </p>
+
+                  {/* Suggested High-Converting Hook Angle */}
+                  <div className="p-3 rounded-lg bg-accent-brass-900/20 border border-accent-brass-800/30 space-y-1.5 text-xs">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-extrabold uppercase text-accent-brass-400 flex items-center gap-1.5">
+                        <Lightbulb className="h-3 w-3" />
+                        Content Hook Angle
+                      </span>
+                      <button
+                        onClick={() => handleCopyHook(trend.suggestedAngle, trend.id || `t-${idx}`)}
+                        className="text-[10px] text-accent-brass-300 hover:text-ink-primary flex items-center gap-1 font-medium transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 rounded px-1"
+                      >
+                        {copiedId === (trend.id || `t-${idx}`) ? (
+                          <>
+                            <CheckCircle2 className="h-3 w-3 text-status-positive" />
+                            <span className="text-status-positive font-bold">Copied!</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="h-3 w-3" />
+                            <span>Copy Hook</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                    <p className="text-accent-brass-200 text-[11px] font-medium leading-snug">
+                      "{trend.suggestedAngle}"
+                    </p>
+                  </div>
+
+                  {/* Hashtags */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {trend.recommendedHashtags?.map((tag, tIdx) => (
+                      <span key={tIdx} className="px-2 py-0.5 rounded bg-surface-2 text-ink-muted text-[10px] font-mono">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                {onSelectTrendForCampaign && (
+                  <button
+                    onClick={() => onSelectTrendForCampaign(trend.topic)}
+                    className="w-full py-2.5 rounded-lg bg-surface-2 hover:bg-accent-brass-600 text-ink-primary hover:text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 group-hover:shadow-[var(--shadow-glow-brass)] cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-1 mt-3"
+                  >
+                    <Zap className="h-3.5 w-3.5 text-accent-brass-300" />
+                    <span>Generate Campaign for this Trend</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { apiFetch } from '../lib/apiClient';
-import { 
-  BarChart3, 
-  Sparkles, 
-  Zap, 
-  CheckCircle2, 
-  AlertTriangle, 
-  RefreshCw, 
-  Copy, 
-  Check, 
+import {
+  BarChart3,
+  Sparkles,
+  Zap,
+  CheckCircle2,
+  AlertTriangle,
+  RefreshCw,
+  Copy,
+  Check,
   ArrowRight,
   Gauge,
   ShieldAlert,
@@ -16,36 +16,33 @@ import {
   TrendingUp,
   Activity,
   Eye,
-  Sliders,
-  Flame,
-  HelpCircle,
-  Clock,
-  Layers,
-  Share2,
-  ExternalLink,
-  Award
+  Target,
+  Gem,
+  Rocket,
+  Lightbulb,
+  AlertOctagon
 } from 'lucide-react';
 import { ViralityAnalysisResult } from '../types';
 
 // Preset sample drafts for instant testing
 const PRESET_DRAFTS = [
   {
-    label: '🚨 Corporate Announcement (Low Virality 38/100)',
+    label: 'Corporate Announcement (Low Virality 38/100)',
     platform: 'X / Twitter',
     text: 'We are super excited to announce that our team has launched a new software update today! Check out our website link below to learn more about our amazing features.'
   },
   {
-    label: '⚠️ Engagement Bait (High Volatility Risk 52/100)',
+    label: 'Engagement Bait (High Volatility Risk 52/100)',
     platform: 'X / Twitter',
     text: 'LIKE AND RETWEET THIS POST RIGHT NOW! IF YOU WANT MY FREE 500-PAGE AI EBOOK COMMENT "YES" AND FOLLOW ME OR YOU WILL MISS OUT FOREVER! LINK IN BIO!'
   },
   {
-    label: '⚡ Solid Value Thread (Score 72/100)',
+    label: 'Solid Value Thread (Score 72/100)',
     platform: 'LinkedIn Thought Leadership',
     text: 'Most founders spend too much time on cold outreach. Here are 5 ways we used AI to automate lead generation in 2026 without spending money on ads.'
   },
   {
-    label: '🔥 Viral Masterclass (Score 94/100)',
+    label: 'Viral Masterclass (Score 94/100)',
     platform: 'X / Twitter',
     text: 'Stop paying $5,000/mo for social media marketing agencies.\n\nYou are burning money.\n\nWe spent 6 months testing 10,000 viral posts across X, LinkedIn, and TikTok.\n\nHere is the exact 3-step AI workflow that replaces a 5-person agency in 12 minutes (full breakdown below):'
   }

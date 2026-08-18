@@ -195,49 +195,48 @@ export const HookStudio: React.FC<HookStudioProps> = ({
   return (
     <div className="space-y-8">
       {/* Studio Banner & Navigation */}
-      <div className="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-6">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+      <div className="relative overflow-hidden bg-surface-1 p-6 sm:p-8 rounded-3xl border border-hairline shadow-[var(--shadow-panel-brass)] space-y-6">
+        <div className="pointer-events-none absolute -right-16 -top-16 w-72 h-72 bg-accent-brass-500/[0.07] rounded-full blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
+        <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brass-400 text-slate-950 text-xs font-black border border-brass-300 shadow mb-3">
-              <BrainCircuit className="h-4 w-4 text-slate-950" />
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-accent-brass-500/10 border border-accent-brass-500/25 text-[11px] font-mono font-bold uppercase tracking-wider text-accent-brass-300 mb-3">
+              <BrainCircuit className="h-3.5 w-3.5 text-accent-brass-400" />
               <span>Cognitive Psychology & Attention Mechanics Engine</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-3">
-              <span>Psychological Hook Studio</span>
-              <span className="text-xs px-2.5 py-0.5 rounded-md bg-gradient-to-b from-brass-300 to-brass-500 text-slate-950 font-black tracking-normal uppercase border-b-2 border-brass-700">
-                v10.0 Pro
-              </span>
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold text-ink-primary tracking-[-0.02em]">
+              Psychological Hook Studio
             </h2>
-            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-relaxed">
+            <p className="text-sm text-ink-muted mt-2 max-w-3xl leading-[1.7]">
               The first 3 seconds dictate 90% of your post or video performance. Engineer irresistible, high-conversion scroll-stoppers using behavioral economics, cognitive biases, and viral pattern interrupts.
             </p>
           </div>
 
           {/* Quick Metrics Bar */}
-          <div className="flex items-center gap-3 bg-surface-0/80 p-3 rounded-2xl border border-brass-500/30 shrink-0">
-            <div className="px-3 py-1.5 text-center border-r border-white/10">
+          <div className="flex items-center gap-3 bg-surface-0 p-3 rounded-xl border border-hairline shrink-0">
+            <div className="px-3 py-1.5 text-center border-r border-hairline">
               <div className="text-lg font-black text-accent-brass-300">10x</div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">Retention</div>
             </div>
-            <div className="px-3 py-1.5 text-center border-r border-white/10">
+            <div className="px-3 py-1.5 text-center border-r border-hairline">
               <div className="text-lg font-black text-accent-brass-400">0.5s</div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">Scroll Stop</div>
             </div>
             <div className="px-3 py-1.5 text-center">
-              <div className="text-lg font-black text-white">{savedHooks.length}</div>
+              <div className="text-lg font-black text-ink-primary">{savedHooks.length}</div>
               <div className="text-[10px] text-ink-muted uppercase font-bold">In Vault</div>
             </div>
           </div>
         </div>
 
         {/* Studio Sub-Navigation Tabs */}
-        <div className="flex items-center gap-2 border-b border-white/10 pb-3 overflow-x-auto">
+        <div className="flex items-center gap-2 border-b border-hairline pb-3 overflow-x-auto">
           <button
             onClick={() => setStudioTab('generator')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:translate-y-0.5 cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:scale-[0.98] cursor-pointer ${
               studioTab === 'generator'
-                ? 'bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 text-slate-950 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700'
-                : 'bg-surface-1/80 text-ink-secondary hover:text-white hover:bg-surface-2 border border-white/10'
+                ? 'bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 shadow-[var(--shadow-glow-brass)]'
+                : 'bg-surface-1/80 text-ink-secondary hover:text-ink-primary hover:bg-surface-2 border border-hairline'
             }`}
           >
             <Wand2 className="h-4 w-4" />
@@ -246,10 +245,10 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
           <button
             onClick={() => setStudioTab('swipefile')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:translate-y-0.5 cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:scale-[0.98] cursor-pointer ${
               studioTab === 'swipefile'
-                ? 'bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 text-slate-950 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700'
-                : 'bg-surface-1/80 text-ink-secondary hover:text-white hover:bg-surface-2 border border-white/10'
+                ? 'bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 shadow-[var(--shadow-glow-brass)]'
+                : 'bg-surface-1/80 text-ink-secondary hover:text-ink-primary hover:bg-surface-2 border border-hairline'
             }`}
           >
             <BookOpen className="h-4 w-4" />
@@ -258,10 +257,10 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
           <button
             onClick={() => setStudioTab('frameworks')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:translate-y-0.5 cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:scale-[0.98] cursor-pointer ${
               studioTab === 'frameworks'
-                ? 'bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 text-slate-950 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700'
-                : 'bg-surface-1/80 text-ink-secondary hover:text-white hover:bg-surface-2 border border-white/10'
+                ? 'bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 shadow-[var(--shadow-glow-brass)]'
+                : 'bg-surface-1/80 text-ink-secondary hover:text-ink-primary hover:bg-surface-2 border border-hairline'
             }`}
           >
             <BrainCircuit className="h-4 w-4" />
@@ -270,10 +269,10 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
           <button
             onClick={() => setStudioTab('vault')}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:translate-y-0.5 cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black transition-colors whitespace-nowrap active:scale-[0.98] cursor-pointer ${
               studioTab === 'vault'
-                ? 'bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 text-slate-950 shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700'
-                : 'bg-surface-1/80 text-ink-secondary hover:text-white hover:bg-surface-2 border border-white/10'
+                ? 'bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 shadow-[var(--shadow-glow-brass)]'
+                : 'bg-surface-1/80 text-ink-secondary hover:text-ink-primary hover:bg-surface-2 border border-hairline'
             }`}
           >
             <Bookmark className="h-4 w-4" />
@@ -301,7 +300,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
                     placeholder="e.g. How to use AI agents to automate social media marketing..."
-                    className="w-full bg-surface-0 border-2 border-brass-500/30 rounded-2xl px-5 py-3.5 text-white text-sm focus:outline-none focus:border-accent-brass-400 focus:ring-1 focus:ring-brass-400 pr-12 shadow-inner"
+                    className="w-full bg-surface-0 border-2 border-brass-500/30 rounded-2xl px-5 py-3.5 text-ink-primary text-sm focus:outline-none focus:border-accent-brass-400 focus:ring-1 focus:ring-brass-400 pr-12 shadow-inner"
                     required
                   />
                   <Sparkles className="absolute right-4 top-3.5 h-5 w-5 text-accent-brass-400 pointer-events-none" />
@@ -311,7 +310,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
               {/* Quick Topic Chips */}
               <div>
                 <label className="text-[11px] font-semibold text-ink-muted block mb-2">
-                  ⚡ Quick Preset Topics (Click to Auto-fill):
+                  Quick Preset Topics (Click to Auto-fill)
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {PRESET_SWIPE_TOPICS.map((preset, idx) => (
@@ -319,7 +318,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       key={idx}
                       type="button"
                       onClick={() => setTopic(preset)}
-                      className="px-3 py-1.5 rounded-lg bg-surface-1 border border-white/10 hover:border-accent-brass-400/60 hover:bg-surface-2 text-[11px] text-ink-secondary transition-colors text-left truncate max-w-xs cursor-pointer"
+                      className="px-3 py-1.5 rounded-lg bg-surface-1 border border-hairline hover:border-accent-brass-400/60 hover:bg-surface-2 text-[11px] text-ink-secondary transition-colors text-left truncate max-w-xs cursor-pointer"
                     >
                       {preset}
                     </button>
@@ -337,7 +336,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   <select
                     value={niche}
                     onChange={(e) => setNiche(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
                   >
                     {PRESET_NICHES.map((n) => (
                       <option key={n.id} value={n.name}>
@@ -355,14 +354,14 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   <select
                     value={formatStyle}
                     onChange={(e) => setFormatStyle(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
                   >
-                    <option value="all">⚡ All Social Formats</option>
-                    <option value="video-0-3s">🎥 Short Video Script (0-3s Voiceover)</option>
-                    <option value="x-thread">🐤 X / Twitter Thread Opener</option>
-                    <option value="linkedin-fold">💼 LinkedIn "...see more" Cutoff</option>
-                    <option value="carousel-cover">🖼️ Carousel Slide 1 Cover</option>
-                    <option value="email-subject">📧 Email Subject Line</option>
+                    <option value="all">All Social Formats</option>
+                    <option value="video-0-3s">Short Video Script (0-3s Voiceover)</option>
+                    <option value="x-thread">X / Twitter Thread Opener</option>
+                    <option value="linkedin-fold">LinkedIn "...see more" Cutoff</option>
+                    <option value="carousel-cover">Carousel Slide 1 Cover</option>
+                    <option value="email-subject">Email Subject Line</option>
                   </select>
                 </div>
 
@@ -374,11 +373,11 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   <select
                     value={audienceTemp}
                     onChange={(e) => setAudienceTemp(e.target.value)}
-                    className="w-full bg-surface-0 border border-white/10 rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
+                    className="w-full bg-surface-0 border border-hairline rounded-xl px-3 py-2.5 text-xs text-ink-secondary focus:outline-none focus:border-accent-brass-400"
                   >
-                    <option value="cold">❄️ Cold Audience (Skeptic / Stranger)</option>
-                    <option value="warm">🔥 Warm Followers (Engaged)</option>
-                    <option value="hot">💎 Hot Prospects (Ready to Buy)</option>
+                    <option value="cold">Cold Audience (Skeptic / Stranger)</option>
+                    <option value="warm">Warm Followers (Engaged)</option>
+                    <option value="hot">Hot Prospects (Ready to Buy)</option>
                   </select>
                 </div>
 
@@ -387,33 +386,33 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   <label className="text-xs font-bold uppercase tracking-wider text-ink-muted block mb-1.5">
                     Controversy / Spiciness
                   </label>
-                  <div className="grid grid-cols-3 gap-1 bg-surface-0 p-1 rounded-xl border border-white/10">
+                  <div className="grid grid-cols-3 gap-1 bg-surface-0 p-1 rounded-xl border border-hairline">
                     <button
                       type="button"
                       onClick={() => setSpiciness('mild')}
                       className={`py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        spiciness === 'mild' ? 'bg-surface-2 text-emerald-400' : 'text-ink-muted hover:text-white'
+                        spiciness === 'mild' ? 'bg-surface-2 text-status-positive' : 'text-ink-muted hover:text-ink-primary'
                       }`}
                     >
-                      Mild 🟢
+                      Mild
                     </button>
                     <button
                       type="button"
                       onClick={() => setSpiciness('spicy')}
                       className={`py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        spiciness === 'spicy' ? 'bg-surface-2 text-accent-brass-400' : 'text-ink-muted hover:text-white'
+                        spiciness === 'spicy' ? 'bg-surface-2 text-accent-brass-400' : 'text-ink-muted hover:text-ink-primary'
                       }`}
                     >
-                      Spicy 🔥
+                      Spicy
                     </button>
                     <button
                       type="button"
                       onClick={() => setSpiciness('nuclear')}
                       className={`py-1.5 rounded-lg text-[11px] font-bold transition-colors ${
-                        spiciness === 'nuclear' ? 'bg-surface-2 text-status-danger' : 'text-ink-muted hover:text-white'
+                        spiciness === 'nuclear' ? 'bg-surface-2 text-status-danger' : 'text-ink-muted hover:text-ink-primary'
                       }`}
                     >
-                      Nuclear ⚛️
+                      Nuclear
                     </button>
                   </div>
                 </div>
@@ -424,7 +423,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                 <button
                   type="submit"
                   disabled={loading || !topic.trim()}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-sm shadow-[0_8px_30px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:translate-y-0.5"
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-black text-sm shadow-[var(--shadow-glow-brass)] transition-colors flex items-center justify-center gap-3 disabled:opacity-50 cursor-pointer active:scale-[0.98]"
                 >
                   {loading ? (
                     <>
@@ -442,12 +441,12 @@ export const HookStudio: React.FC<HookStudioProps> = ({
             </form>
 
             {/* Framework Selector Badges */}
-            <div className="pt-2 border-t border-white/10">
+            <div className="pt-2 border-t border-hairline">
               <div className="flex items-center justify-between mb-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-ink-muted">
                   Filter By Cognitive Framework:
                 </label>
-                <span className="text-[11px] text-slate-500">
+                <span className="text-[11px] text-ink-muted">
                   Click to isolate specific psychological mechanisms
                 </span>
               </div>
@@ -457,10 +456,10 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   className={`p-2.5 rounded-xl border text-xs font-bold transition-colors text-center ${
                     selectedFramework === 'all'
                       ? 'bg-brass-400 text-slate-950 font-black border-brass-300 shadow'
-                      : 'bg-surface-1 border-white/10 text-ink-muted hover:text-white'
+                      : 'bg-surface-1 border-hairline text-ink-muted hover:text-ink-primary'
                   }`}
                 >
-                  ✨ All Frameworks
+                  All Frameworks
                 </button>
                 {EXTENDED_HOOK_FRAMEWORKS.slice(0, 9).map((fw) => (
                   <button
@@ -469,7 +468,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     className={`p-2.5 rounded-xl border text-xs font-bold transition-colors text-left truncate ${
                       selectedFramework === fw.id
                         ? 'bg-brass-400 text-slate-950 font-black border-brass-300 shadow'
-                        : 'bg-surface-1/90 border-white/10 text-ink-muted hover:border-white/15 hover:text-ink-secondary'
+                        : 'bg-surface-1/90 border-hairline text-ink-muted hover:border-hairline-strong hover:text-ink-secondary'
                     }`}
                     title={fw.description}
                   >
@@ -486,7 +485,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
           <div className="space-y-4">
             <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30 flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <h3 className="text-base font-bold text-ink-primary flex items-center gap-2">
                   <BookOpen className="h-5 w-5 text-accent-brass-400" />
                   <span>30 Iconic Viral Hook Formulas</span>
                 </h3>
@@ -510,18 +509,18 @@ export const HookStudio: React.FC<HookStudioProps> = ({
               {ICONIC_SWIPE_FILE_HOOKS.map((swipe, idx) => (
                 <div
                   key={swipe.id || idx}
-                  className="bg-surface-0 border border-white/10 rounded-2xl p-5 hover:border-brass-500/40 transition-colors space-y-3"
+                  className="bg-surface-0 border border-hairline rounded-2xl p-5 hover:border-brass-500/40 transition-colors space-y-3"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20">
                       Formula #{idx + 1}: {swipe.framework}
                     </span>
-                    <span className="text-xs font-black text-emerald-400">
+                    <span className="text-xs font-black text-status-positive">
                       {swipe.viralityScore}/100 Virality
                     </span>
                   </div>
 
-                  <div className="text-sm font-extrabold text-white bg-surface-1 p-3.5 rounded-xl border border-white/10 leading-snug">
+                  <div className="text-sm font-extrabold text-ink-primary bg-surface-1 p-3.5 rounded-xl border border-hairline leading-snug">
                     &quot;{swipe.hookText}&quot;
                   </div>
 
@@ -530,7 +529,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     <div><strong>Why It Works:</strong> {swipe.whyItWorks}</div>
                   </div>
 
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-900">
+                  <div className="flex items-center justify-between pt-2 border-t border-hairline">
                     <button
                       onClick={() => {
                         setTopic(swipe.hookText);
@@ -559,7 +558,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
         {studioTab === 'frameworks' && (
           <div className="space-y-4">
             <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-ink-primary flex items-center gap-2">
                 <BrainCircuit className="h-5 w-5 text-accent-brass-400" />
                 <span>The 10 Psychological Principles of Content Virality</span>
               </h3>
@@ -572,7 +571,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
               {EXTENDED_HOOK_FRAMEWORKS.map((fw) => (
                 <div
                   key={fw.id}
-                  className="bg-surface-0 border border-white/10 rounded-2xl p-5 space-y-3 hover:border-brass-500/40 transition-colors"
+                  className="bg-surface-0 border border-hairline rounded-2xl p-5 space-y-3 hover:border-brass-500/40 transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -589,17 +588,17 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     {fw.description}
                   </p>
 
-                  <div className="bg-surface-1/80 p-3 rounded-xl border border-white/10 space-y-1 text-xs">
-                    <div className="text-accent-brass-400 font-bold">🎯 Scroll-Stop Mechanism:</div>
+                  <div className="bg-surface-1/80 p-3 rounded-xl border border-hairline space-y-1 text-xs">
+                    <div className="text-accent-brass-400 font-bold">Scroll-Stop Mechanism:</div>
                     <div className="text-ink-muted">{fw.scrollStopMechanism}</div>
                   </div>
 
-                  <div className="bg-surface-1/50 p-3 rounded-xl border border-white/10 text-xs space-y-1">
-                    <div className="text-emerald-400 font-bold">✨ Real Example:</div>
-                    <div className="text-white italic">&quot;{fw.example}&quot;</div>
+                  <div className="bg-surface-1/50 p-3 rounded-xl border border-hairline text-xs space-y-1">
+                    <div className="text-status-positive font-bold">Real Example:</div>
+                    <div className="text-ink-primary italic">&quot;{fw.example}&quot;</div>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-slate-500 pt-1">
+                  <div className="flex items-center justify-between text-[11px] text-ink-muted pt-1">
                     <span>Ideal Platforms: <strong className="text-ink-secondary">{fw.idealPlatform}</strong></span>
                     <button
                       onClick={() => {
@@ -622,7 +621,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
           <div className="space-y-4">
             <div className="p-4 rounded-2xl bg-surface-0 border border-brass-500/30 flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
+                <h3 className="text-base font-bold text-ink-primary flex items-center gap-2">
                   <Bookmark className="h-5 w-5 text-accent-brass-400" />
                   <span>My Saved Hook Vault ({savedHooks.length})</span>
                 </h3>
@@ -640,14 +639,14 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       setCopiedId('vault-all');
                       setTimeout(() => setCopiedId(null), 2000);
                     }}
-                    className="px-3 py-1.5 rounded-xl bg-surface-1 border border-white/10 text-ink-secondary text-xs font-bold hover:bg-surface-2 transition-colors cursor-pointer"
+                    className="px-3 py-1.5 rounded-xl bg-surface-1 border border-hairline text-ink-secondary text-xs font-bold hover:bg-surface-2 transition-colors cursor-pointer"
                   >
                     {copiedId === 'vault-all' ? 'Copied All Markdown!' : 'Copy All Saved'}
                   </button>
 
                   <button
                     onClick={() => setSavedHooks([])}
-                    className="p-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-colors text-xs cursor-pointer"
+                    className="p-2 rounded-xl bg-status-danger-dim border border-status-danger/20 text-status-danger hover:bg-status-danger-dim/80 transition-colors text-xs cursor-pointer"
                     title="Clear Vault"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -657,9 +656,9 @@ export const HookStudio: React.FC<HookStudioProps> = ({
             </div>
 
             {savedHooks.length === 0 ? (
-              <div className="p-12 text-center bg-surface-0 rounded-2xl border border-white/10 space-y-3">
-                <Bookmark className="h-10 w-10 text-slate-600 mx-auto" />
-                <h4 className="text-base font-bold text-white">Your Vault is Empty</h4>
+              <div className="p-12 text-center bg-surface-0 rounded-2xl border border-hairline space-y-3">
+                <Bookmark className="h-10 w-10 text-ink-muted mx-auto" />
+                <h4 className="text-base font-bold text-ink-primary">Your Vault is Empty</h4>
                 <p className="text-xs text-ink-muted max-w-md mx-auto">
                   Click the bookmark icon on any generated hook to save it to your personal swipe file.
                 </p>
@@ -675,7 +674,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                 {savedHooks.map((hook, idx) => (
                   <div
                     key={hook.id || idx}
-                    className="bg-surface-0 border border-white/10 rounded-2xl p-5 space-y-3"
+                    className="bg-surface-0 border border-hairline rounded-2xl p-5 space-y-3"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20">
@@ -685,20 +684,20 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleCopy(hook.id, hook.hookText)}
-                          className="px-3 py-1 rounded-lg bg-surface-1 border border-white/10 text-xs text-ink-secondary cursor-pointer"
+                          className="px-3 py-1 rounded-lg bg-surface-1 border border-hairline text-xs text-ink-secondary cursor-pointer"
                         >
                           {copiedId === hook.id ? 'Copied!' : 'Copy'}
                         </button>
                         <button
                           onClick={() => toggleSaveHook(hook)}
-                          className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500/20 cursor-pointer"
+                          className="p-1.5 rounded-lg bg-status-danger-dim text-status-danger hover:bg-status-danger-dim/80 cursor-pointer"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
                     </div>
 
-                    <div className="text-base font-extrabold text-white bg-surface-1 p-4 rounded-xl border border-white/10">
+                    <div className="text-base font-extrabold text-ink-primary bg-surface-1 p-4 rounded-xl border border-hairline">
                       &quot;{hook.hookText}&quot;
                     </div>
 
@@ -710,7 +709,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       {onSelectHookForCampaign && (
                         <button
                           onClick={() => onSelectHookForCampaign(hook.hookText)}
-                          className="px-3 py-1.5 rounded-lg bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-md border-b-2 border-brass-700 cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 text-slate-950 font-black text-xs flex items-center gap-1.5 shadow-md border-b-2 border-brass-700 cursor-pointer"
                         >
                           <span>Launch Campaign</span>
                           <ArrowRight className="h-3.5 w-3.5 text-slate-950" />
@@ -729,13 +728,13 @@ export const HookStudio: React.FC<HookStudioProps> = ({
       {studioTab === 'generator' && (
         <div className="space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            <h3 className="text-xl font-extrabold text-white flex items-center gap-2.5">
+            <h3 className="text-xl font-extrabold text-ink-primary flex items-center gap-2.5">
               <Flame className="h-6 w-6 text-accent-brass-400 animate-pulse" />
               <span>Generated Viral Hooks ({filteredHooks.length})</span>
             </h3>
 
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 bg-surface-1 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-ink-secondary">
+              <div className="flex items-center gap-2 bg-surface-1 px-3 py-1.5 rounded-xl border border-hairline text-xs text-ink-secondary">
                 <Filter className="h-3.5 w-3.5 text-ink-muted" />
                 <select
                   value={selectedFramework}
@@ -766,36 +765,38 @@ export const HookStudio: React.FC<HookStudioProps> = ({
               return (
                 <div
                   key={hookId}
-                  className="bg-surface-1/90 rounded-3xl border border-white/10 p-6 shadow-2xl hover:border-brass-500/40 transition-colors space-y-5 relative overflow-hidden"
+                  className="bg-surface-1/90 rounded-3xl border border-hairline p-6 shadow-[var(--shadow-panel)] hover:border-brass-500/40 transition-colors space-y-5 relative overflow-hidden"
                 >
                   {/* Card Top Metadata & Action Bar */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-hairline">
                     <div className="flex flex-wrap items-center gap-2">
                       <span className="text-xs font-black px-3 py-1 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20 uppercase tracking-wide">
                         {hook.framework}
                       </span>
 
                       {hook.cognitiveBias && (
-                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-brass-500/20">
-                          🧠 {hook.cognitiveBias}
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-accent-brass-500/10 text-accent-brass-300 border border-accent-brass-500/20 inline-flex items-center gap-1">
+                          <BrainCircuit className="h-3 w-3" />
+                          {hook.cognitiveBias}
                         </span>
                       )}
 
                       {hook.spicinessLevel && (
-                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${
+                        <span className={`text-xs font-bold px-2.5 py-1 rounded-full border inline-flex items-center gap-1 ${
                           hook.spicinessLevel === 'Nuclear Viral'
-                            ? 'bg-accent-brass-500/20 text-accent-brass-300 border-brass-500/30'
+                            ? 'bg-accent-brass-500/20 text-accent-brass-300 border-accent-brass-500/30'
                             : hook.spicinessLevel === 'Spicy'
-                            ? 'bg-accent-brass-500/20 text-accent-brass-300 border-brass-500/30'
-                            : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                            ? 'bg-accent-brass-500/20 text-accent-brass-300 border-accent-brass-500/30'
+                            : 'bg-status-positive-dim text-status-positive border-status-positive/30'
                         }`}>
-                          {hook.spicinessLevel === 'Nuclear Viral' ? '⚛️ Nuclear' : hook.spicinessLevel === 'Spicy' ? '🔥 Spicy' : '🟢 Mild'}
+                          <Flame className="h-3 w-3" />
+                          {hook.spicinessLevel === 'Nuclear Viral' ? 'Nuclear' : hook.spicinessLevel === 'Spicy' ? 'Spicy' : 'Mild'}
                         </span>
                       )}
                     </div>
 
                     <div className="flex items-center gap-3 shrink-0">
-                      <div className="flex items-center gap-1.5 text-xs font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                      <div className="flex items-center gap-1.5 text-xs font-black text-status-positive bg-status-positive-dim px-2.5 py-1 rounded-lg border border-status-positive/20">
                         <TrendingUp className="h-4 w-4" />
                         <span>{hook.viralityScore}/100 Virality</span>
                       </div>
@@ -805,7 +806,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         className={`p-2 rounded-xl transition-colors border cursor-pointer ${
                           isSaved 
                             ? 'bg-brass-400 text-slate-950 font-black border-brass-300' 
-                            : 'bg-surface-2 hover:bg-slate-700 text-ink-secondary border-white/15'
+                            : 'bg-surface-2 hover:bg-surface-3 text-ink-secondary border-hairline-strong'
                         }`}
                         title={isSaved ? "Saved to Vault" : "Save to Vault"}
                       >
@@ -814,11 +815,11 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
                       <button
                         onClick={() => handleCopy(hookId, displayText)}
-                        className="p-2 rounded-xl bg-surface-1 hover:bg-surface-2 border border-white/15 text-ink-secondary transition-colors"
+                        className="p-2 rounded-xl bg-surface-1 hover:bg-surface-2 border border-hairline-strong text-ink-secondary transition-colors"
                         title="Copy Hook"
                       >
                         {copiedId === hookId ? (
-                          <Check className="h-4 w-4 text-emerald-400" />
+                          <Check className="h-4 w-4 text-status-positive" />
                         ) : (
                           <Copy className="h-4 w-4 text-accent-brass-400" />
                         )}
@@ -827,62 +828,67 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   </div>
 
                   {/* A/B Variation Tabs Selector */}
-                  <div className="flex items-center gap-1.5 bg-black p-1.5 rounded-2xl border border-brass-500/30 overflow-x-auto shadow-inner">
+                  <div className="flex items-center gap-1.5 bg-surface-0 p-1.5 rounded-xl border border-accent-brass-500/30 overflow-x-auto">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-accent-brass-400 px-2 shrink-0">
                       A/B Variations:
                     </span>
                     <button
                       onClick={() => setActiveVariation(prev => ({ ...prev, [hookId]: 'standard' }))}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
-                        currentVar === 'standard' ? 'bg-brass-400 text-slate-950 shadow border-b-2 border-brass-600' : 'text-ink-secondary hover:text-white'
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap inline-flex items-center gap-1 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                        currentVar === 'standard' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'text-ink-secondary hover:text-ink-primary'
                       }`}
                     >
-                      ⚡ Standard
+                      <Sliders className="h-3 w-3" />
+                      Standard
                     </button>
                     <button
                       onClick={() => setActiveVariation(prev => ({ ...prev, [hookId]: 'punchy' }))}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
-                        currentVar === 'punchy' ? 'bg-brass-400 text-slate-950 shadow border-b-2 border-brass-600' : 'text-ink-secondary hover:text-white'
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap inline-flex items-center gap-1 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                        currentVar === 'punchy' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'text-ink-secondary hover:text-ink-primary'
                       }`}
                     >
-                      🥊 Punchy 1-Liner
+                      <MessageSquare className="h-3 w-3" />
+                      Punchy 1-Liner
                     </button>
                     <button
                       onClick={() => setActiveVariation(prev => ({ ...prev, [hookId]: 'storyDriven' }))}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
-                        currentVar === 'storyDriven' ? 'bg-brass-400 text-slate-950 shadow border-b-2 border-brass-600' : 'text-ink-secondary hover:text-white'
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap inline-flex items-center gap-1 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                        currentVar === 'storyDriven' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'text-ink-secondary hover:text-ink-primary'
                       }`}
                     >
-                      📖 Story Opener
+                      <BookOpen className="h-3 w-3" />
+                      Story Opener
                     </button>
                     <button
                       onClick={() => setActiveVariation(prev => ({ ...prev, [hookId]: 'question' }))}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
-                        currentVar === 'question' ? 'bg-brass-400 text-slate-950 shadow border-b-2 border-brass-600' : 'text-ink-secondary hover:text-white'
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap inline-flex items-center gap-1 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                        currentVar === 'question' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'text-ink-secondary hover:text-ink-primary'
                       }`}
                     >
-                      ❓ Curiosity Question
+                      <HelpCircle className="h-3 w-3" />
+                      Curiosity Question
                     </button>
                     <button
                       onClick={() => setActiveVariation(prev => ({ ...prev, [hookId]: 'metricDriven' }))}
-                      className={`px-3 py-1 rounded-xl text-xs font-bold transition-colors whitespace-nowrap ${
-                        currentVar === 'metricDriven' ? 'bg-brass-400 text-slate-950 shadow border-b-2 border-brass-600' : 'text-ink-secondary hover:text-white'
+                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors whitespace-nowrap inline-flex items-center gap-1 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400 ${
+                        currentVar === 'metricDriven' ? 'bg-accent-brass-500 text-slate-950 shadow-[var(--shadow-panel-brass)]' : 'text-ink-secondary hover:text-ink-primary'
                       }`}
                     >
-                      📊 Metric-Heavy
+                      <BarChart2 className="h-3 w-3" />
+                      Metric-Heavy
                     </button>
                   </div>
 
                   {/* Main Hook Headline Display */}
                   <div className="relative group">
-                    <div className="text-lg sm:text-xl font-black text-white bg-black p-5 rounded-2xl border-2 border-brass-500/40 leading-snug tracking-tight shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
+                    <div className="text-lg sm:text-xl font-black text-ink-primary bg-surface-0 p-5 rounded-xl border border-accent-brass-500/40 leading-snug tracking-tight">
                       &quot;{displayText}&quot;
                     </div>
 
                     {/* Quick Speak Button overlay */}
                     <button
                       onClick={() => speakHookText(displayText)}
-                      className="absolute right-3 bottom-3 p-2 rounded-xl bg-surface-1/90 hover:bg-accent-brass-500 text-ink-secondary hover:text-slate-950 transition-colors border border-brass-500/40 shadow cursor-pointer"
+                      className="absolute right-3 bottom-3 p-2 rounded-lg bg-surface-1/90 hover:bg-accent-brass-500 text-ink-secondary hover:text-slate-950 transition-colors border border-accent-brass-500/40 cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
                       title="Listen Aloud (Speech Preview)"
                     >
                       <Volume2 className="h-4 w-4" />
@@ -891,7 +897,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
                   {/* Psychology Rationale & Metrics Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                    <div className="md:col-span-2 text-xs text-ink-secondary bg-surface-0/80 p-3.5 rounded-xl border border-brass-500/20 flex items-start gap-2.5">
+                    <div className="md:col-span-2 text-xs text-ink-secondary bg-surface-0/80 p-3.5 rounded-xl border border-accent-brass-500/20 flex items-start gap-2.5">
                       <HelpCircle className="h-4 w-4 text-accent-brass-400 shrink-0 mt-0.5" />
                       <div>
                         <strong className="text-accent-brass-300 block mb-0.5">Psychology Rationale:</strong>
@@ -899,7 +905,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       </div>
                     </div>
 
-                    <div className="bg-surface-0/60 p-3.5 rounded-xl border border-white/10 flex flex-col justify-between gap-2 text-xs">
+                    <div className="bg-surface-0/60 p-3.5 rounded-xl border border-hairline flex flex-col justify-between gap-2 text-xs">
                       <div className="flex items-center justify-between text-ink-muted">
                         <span>Emotional Trigger:</span>
                         <strong className="text-ink-secondary">{hook.emotionalTrigger}</strong>
@@ -912,18 +918,18 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   </div>
 
                   {/* Platform Visual Simulator Controls */}
-                  <div className="space-y-3 pt-2 border-t border-white/10">
+                  <div className="space-y-3 pt-2 border-t border-hairline">
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-ink-muted flex items-center gap-1.5">
                         <Eye className="h-4 w-4 text-accent-brass-400" />
                         <span>Platform Render Simulator:</span>
                       </span>
 
-                      <div className="flex items-center gap-1 bg-surface-0 p-1 rounded-xl border border-white/10">
+                      <div className="flex items-center gap-1 bg-surface-0 p-1 rounded-xl border border-hairline">
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'x' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'x' ? 'bg-sky-500 text-white' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'x' ? 'bg-sky-500 text-slate-950' : 'text-ink-muted hover:text-ink-primary'
                           }`}
                         >
                           <Twitter className="h-3 w-3" />
@@ -933,7 +939,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'linkedin' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'linkedin' ? 'bg-accent-brass-500 text-white' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'linkedin' ? 'bg-accent-brass-500 text-slate-950' : 'text-ink-muted hover:text-ink-primary'
                           }`}
                         >
                           <Linkedin className="h-3 w-3" />
@@ -943,7 +949,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'tiktok' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'tiktok' ? 'bg-accent-brass-400 text-slate-950 font-black' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'tiktok' ? 'bg-accent-brass-400 text-slate-950 font-black' : 'text-ink-muted hover:text-ink-primary'
                           }`}
                         >
                           <Video className="h-3 w-3" />
@@ -953,7 +959,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         <button
                           onClick={() => setActivePlatformEmulator(prev => ({ ...prev, [hookId]: 'carousel' }))}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer ${
-                            activeEmul === 'carousel' ? 'bg-brass-400 text-slate-950 font-black' : 'text-ink-muted hover:text-white'
+                            activeEmul === 'carousel' ? 'bg-brass-400 text-slate-950 font-black' : 'text-ink-muted hover:text-ink-primary'
                           }`}
                         >
                           <Layers className="h-3 w-3" />
@@ -964,36 +970,36 @@ export const HookStudio: React.FC<HookStudioProps> = ({
 
                     {/* PREVIEW CONTAINER BASED ON SELECTED PLATFORM */}
                     {activeEmul === 'x' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-sky-500/20 space-y-3">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-hairline space-y-3">
                         <div className="flex items-center gap-3">
-                          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-sky-400 to-accent-brass-600 flex items-center justify-center font-bold text-white text-xs">
+                          <div className="h-9 w-9 rounded-full bg-gradient-to-tr from-sky-400 to-accent-brass-600 flex items-center justify-center font-bold text-ink-primary text-xs">
                             OS
                           </div>
                           <div>
-                            <div className="text-xs font-bold text-white flex items-center gap-1">
+                            <div className="text-xs font-bold text-ink-primary flex items-center gap-1">
                               <span>Viral Growth Director</span>
                               <span className="text-sky-400">✓</span>
                             </div>
-                            <div className="text-[11px] text-slate-500">@viralos_official</div>
+                            <div className="text-[11px] text-ink-muted">@viralos_official</div>
                           </div>
                         </div>
-                        <div className="text-sm font-normal text-slate-100 whitespace-pre-wrap leading-relaxed font-sans">
+                        <div className="text-sm font-normal text-ink-primary whitespace-pre-wrap leading-relaxed font-sans">
                           {displayText}
                         </div>
-                        <div className="text-[11px] text-slate-500 pt-2 border-t border-slate-900 flex items-center justify-between">
+                        <div className="text-[11px] text-ink-muted pt-2 border-t border-hairline flex items-center justify-between">
                           <span>{displayText.length} / 280 characters</span>
-                          <span className="text-emerald-400 font-bold">Optimal Thread Opening Length</span>
+                          <span className="text-status-positive font-bold">Optimal Thread Opening Length</span>
                         </div>
                       </div>
                     )}
 
                     {activeEmul === 'linkedin' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-brass-500/20 space-y-2">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-accent-brass-500/20 space-y-2">
                         <div className="text-[11px] text-accent-brass-400 font-bold flex items-center gap-1">
                           <Linkedin className="h-3.5 w-3.5" />
                           <span>LinkedIn First 140 Characters (&quot;...see more&quot; Fold Check):</span>
                         </div>
-                        <div className="text-sm font-semibold text-slate-100 leading-snug">
+                        <div className="text-sm font-semibold text-ink-primary leading-snug">
                           {displayText.slice(0, 140)}
                           <span className="text-accent-brass-400 font-black cursor-pointer bg-accent-brass-500/10 px-1 rounded ml-1">
                             ...see more
@@ -1001,7 +1007,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                         </div>
                         <div className="text-[11px] text-ink-muted pt-1">
                           {displayText.length <= 140 ? (
-                            <span className="text-emerald-400 font-bold">✓ 100% visible before fold</span>
+                            <span className="text-status-positive font-bold">✓ 100% visible before fold</span>
                           ) : (
                             <span className="text-accent-brass-400 font-bold">⚠️ Payload extends after fold — curiosity gap triggered!</span>
                           )}
@@ -1010,29 +1016,29 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     )}
 
                     {activeEmul === 'tiktok' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-brass-500/20 flex flex-col sm:flex-row items-center gap-4">
-                        <div className="w-full sm:w-48 aspect-[9/16] bg-surface-1 rounded-xl border border-brass-500/30 p-3 flex flex-col justify-between relative overflow-hidden shrink-0 shadow-[var(--shadow-panel-brass)]">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-accent-brass-500/20 flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-full sm:w-48 aspect-[9/16] bg-surface-1 rounded-xl border border-accent-brass-500/30 p-3 flex flex-col justify-between relative overflow-hidden shrink-0 shadow-[var(--shadow-panel-brass)]">
                           <div className="flex justify-between items-center text-[10px] text-accent-brass-400 font-bold">
                             <span>0:00 - 0:03</span>
                             <span className="px-1.5 py-0.5 rounded bg-accent-brass-500/20">HOOK ZONE</span>
                           </div>
 
-                          <div className="bg-black/80 backdrop-blur p-2 rounded-lg border border-brass-400/50 text-center space-y-1">
+                          <div className="bg-surface-0/90 backdrop-blur p-2 rounded-lg border border-accent-brass-400/50 text-center space-y-1">
                             <span className="text-[9px] font-black uppercase text-accent-brass-400 block tracking-wider">
                               On-Screen Headline
                             </span>
-                            <div className="text-xs font-black text-white leading-tight">
+                            <div className="text-xs font-black text-ink-primary leading-tight">
                               &quot;{displayText.slice(0, 45)}...&quot;
                             </div>
                           </div>
 
                           <div className="text-[9px] text-ink-muted text-center">
-                            🔊 Speak time: ~{hook.spokenDurationSec || 2.4}s
+                            Speak time: ~{hook.spokenDurationSec || 2.4}s
                           </div>
                         </div>
 
                         <div className="space-y-2 text-xs text-ink-secondary">
-                          <div className="font-bold text-white">Video Retention Guidelines:</div>
+                          <div className="font-bold text-ink-primary">Video Retention Guidelines:</div>
                           <ul className="space-y-1 text-ink-muted list-disc list-inside">
                             <li>Deliver the audio hook in under 3.0 seconds.</li>
                             <li>Include bold visual pattern interrupt in frame 1.</li>
@@ -1043,27 +1049,27 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                     )}
 
                     {activeEmul === 'carousel' && (
-                      <div className="bg-surface-0 p-4 rounded-2xl border border-brass-500/20 flex flex-col sm:flex-row items-center gap-4">
-                        <div className="w-full sm:w-56 aspect-[4/5] bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 rounded-xl border border-brass-500/30 p-4 flex flex-col justify-between shrink-0 shadow-lg">
+                      <div className="bg-surface-0 p-4 rounded-2xl border border-accent-brass-500/20 flex flex-col sm:flex-row items-center gap-4">
+                        <div className="w-full sm:w-56 aspect-[4/5] bg-gradient-to-br from-surface-1 via-surface-0 to-surface-1 rounded-xl border border-accent-brass-500/30 p-4 flex flex-col justify-between shrink-0 shadow-[var(--shadow-panel)]">
                           <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-accent-brass-500/20 text-accent-brass-300 w-fit">
                             Slide 1 / 10
                           </span>
 
                           <div className="space-y-2">
-                            <h4 className="text-sm font-extrabold text-white leading-snug">
+                            <h4 className="text-sm font-extrabold text-ink-primary leading-snug">
                               {displayText}
                             </h4>
                             <p className="text-[10px] text-ink-muted">Swipe for full strategy &rarr;</p>
                           </div>
 
-                          <div className="text-[10px] text-slate-500 flex justify-between items-center">
+                          <div className="text-[10px] text-ink-muted flex justify-between items-center">
                             <span>@viralos</span>
-                            <span>Save Post 🔖</span>
+                            <span>Save Post</span>
                           </div>
                         </div>
 
                         <div className="space-y-2 text-xs text-ink-secondary">
-                          <div className="font-bold text-white">Carousel Slide 1 Best Practices:</div>
+                          <div className="font-bold text-ink-primary">Carousel Slide 1 Best Practices:</div>
                           <ul className="space-y-1 text-ink-muted list-disc list-inside">
                             <li>High contrast typography against dark canvas.</li>
                             <li>Clear swipe prompt arrow to maximize engagement rate.</li>
@@ -1075,10 +1081,10 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   </div>
 
                   {/* Bottom Action Footer */}
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-white/10">
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-hairline">
                     <button
                       onClick={() => startSprint(hook)}
-                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center justify-center gap-2 transition-colors"
+                      className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-surface-3 text-ink-secondary text-xs font-bold flex items-center justify-center gap-2 transition-colors"
                     >
                       <Clock className="h-4 w-4 text-accent-brass-400" />
                       <span>Practice 3-Sec Teleprompter Delivery</span>
@@ -1088,7 +1094,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       {onNavigateTab && (
                         <button
                           onClick={() => onNavigateTab('teleprompter')}
-                          className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-slate-700 text-ink-secondary text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
+                          className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-surface-2 hover:bg-surface-3 text-ink-secondary text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
                         >
                           <Video className="h-3.5 w-3.5 text-accent-brass-400" />
                           <span>Teleprompter</span>
@@ -1098,7 +1104,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                       {onSelectHookForCampaign && (
                         <button
                           onClick={() => onSelectHookForCampaign(displayText)}
-                          className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:from-brass-200 hover:to-brass-400 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 flex items-center justify-center gap-2 transition-colors active:translate-y-0.5 cursor-pointer"
+                          className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-black text-xs shadow-[var(--shadow-glow-brass)] flex items-center justify-center gap-2 transition-colors active:scale-[0.98] cursor-pointer"
                         >
                           <span>Launch Campaign</span>
                           <ArrowRight className="h-4 w-4 text-slate-950" />
@@ -1116,14 +1122,14 @@ export const HookStudio: React.FC<HookStudioProps> = ({
       {/* SPRINT TELEPROMPTER DELIVERY MODAL */}
       {sprintHook && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-surface-0 border-2 border-brass-500/50 rounded-3xl max-w-xl w-full p-6 space-y-6 shadow-[0_20px_50px_rgba(0,0,0,0.8)] relative">
+          <div className="bg-surface-0 border border-accent-brass-500/50 rounded-3xl max-w-xl w-full p-6 space-y-6 shadow-[var(--shadow-panel-brass)] relative">
             <button
               onClick={() => {
                 setSprintHook(null);
                 setIsSprintRunning(false);
                 if ('speechSynthesis' in window) window.speechSynthesis.cancel();
               }}
-              className="absolute right-4 top-4 p-2 rounded-xl bg-surface-1 border border-white/10 text-accent-brass-300 hover:text-white"
+              className="absolute right-4 top-4 p-2 rounded-xl bg-surface-1 border border-hairline text-accent-brass-300 hover:text-ink-primary"
             >
               <X className="h-5 w-5" />
             </button>
@@ -1133,8 +1139,8 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                 <Clock className="h-3.5 w-3.5" />
                 <span>3-Second Video Retention Sprint Test</span>
               </div>
-              <h3 className="text-2xl font-black text-white">Deliver Your Hook Aloud</h3>
-              <p className="text-xs text-brass-200/80">
+              <h3 className="text-2xl font-black text-ink-primary">Deliver Your Hook Aloud</h3>
+              <p className="text-xs text-accent-brass-200/80">
                 Practice speaking this hook with energy in under 3.0 seconds!
               </p>
             </div>
@@ -1142,25 +1148,25 @@ export const HookStudio: React.FC<HookStudioProps> = ({
             {/* Countdown Ring */}
             <div className="flex flex-col items-center justify-center space-y-3 py-4">
               <div className={`h-24 w-24 rounded-full border-4 flex items-center justify-center font-black text-4xl transition-colors ${
-                sprintTimer > 0 ? 'border-accent-brass-400 text-accent-brass-300 animate-pulse shadow-[0_0_25px_rgba(20, 168, 126,0.5)]' : 'border-emerald-400 text-emerald-400'
+                sprintTimer > 0 ? 'border-accent-brass-400 text-accent-brass-300 animate-pulse shadow-[var(--shadow-glow-brass)]' : 'border-status-positive text-status-positive'
               }`}>
                 {sprintTimer > 0 ? sprintTimer : 'GO!'}
               </div>
 
               <div className="text-xs font-bold text-ink-secondary">
-                {isSprintRunning ? '⏱️ Deliver hook with high energy...' : '✅ Delivery Sprint Completed!'}
+                {isSprintRunning ? 'Deliver hook with high energy...' : 'Delivery Sprint Completed!'}
               </div>
             </div>
 
             {/* Hook text teleprompter box */}
-            <div className="bg-black p-6 rounded-2xl border-2 border-brass-500/40 text-center text-xl font-black text-white leading-snug shadow-inner">
+            <div className="bg-surface-0 p-6 rounded-xl border border-accent-brass-500/40 text-center text-xl font-black text-ink-primary leading-snug">
               &quot;{getDisplayText(sprintHook)}&quot;
             </div>
 
             <div className="flex items-center justify-between gap-3 pt-2">
               <button
                 onClick={() => speakHookText(getDisplayText(sprintHook))}
-                className="px-4 py-2.5 rounded-xl bg-surface-1 hover:bg-surface-2 text-ink-secondary text-xs font-bold flex items-center gap-2 border border-white/15"
+                className="px-4 py-2.5 rounded-xl bg-surface-1 hover:bg-surface-2 text-ink-secondary text-xs font-bold flex items-center gap-2 border border-hairline-strong"
               >
                 <Volume2 className="h-4 w-4 text-accent-brass-400" />
                 <span>Replay AI Voiceover</span>
@@ -1172,7 +1178,7 @@ export const HookStudio: React.FC<HookStudioProps> = ({
                   setIsSprintRunning(true);
                   speakHookText(getDisplayText(sprintHook));
                 }}
-                className="px-5 py-2.5 rounded-xl bg-gradient-to-b from-brass-300 via-brass-400 to-brass-500 hover:brightness-110 text-slate-950 font-black text-xs shadow-[0_6px_20px_rgba(20, 168, 126,0.4)] border-b-4 border-brass-700 flex items-center gap-2 cursor-pointer active:translate-y-0.5"
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-brass-500 via-accent-brass-400 to-accent-brass-500 hover:brightness-105 text-slate-950 font-black text-xs shadow-[var(--shadow-glow-brass)] flex items-center gap-2 cursor-pointer active:scale-[0.98]"
               >
                 <RefreshCw className="h-4 w-4 text-slate-950" />
                 <span>Retry Sprint</span>

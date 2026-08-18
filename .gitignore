@@ -12,3 +12,13 @@ coverage/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# Brand + example media: folder structure tracked, actual files local-only
+/brand/photos/*
+!/brand/photos/.gitkeep
+/brand/videos/*
+!/brand/videos/.gitkeep
+
+/examples/web-app/*
+!/examples/web-app/.gitkeep
+!/examples/web-app/README.md

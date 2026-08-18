@@ -7,6 +7,12 @@ import { Reveal } from './Reveal';
  * Deliberately no boxes: rank number, serif name, sans description and a
  * right-aligned time figure carry the hierarchy. A 3x3 card grid is the
  * default AI-slop pattern this page is specifically avoiding.
+ *
+ * Laid out as two 5-item columns rather than one long 10-row column - a
+ * single column with a hairline under all 10 rows in sequence is its own
+ * generic "spec sheet" tell, even without cards. Splitting into two grouped
+ * columns keeps the no-boxes rank/name/description hierarchy intact while
+ * breaking that monotony.
  */
 interface Capability {
   name: string;
@@ -30,7 +36,7 @@ const CAPABILITIES: Capability[] = [
   {
     name: 'Virality Auditor',
     detail:
-      'Drafts audited against real algorithm behaviour — retention curve, shadowban risk — before you post.',
+      'Drafts audited against real algorithm behaviour (retention curve, shadowban risk) before you post.',
     saving: 'Catch it early',
   },
   {
@@ -60,7 +66,7 @@ const CAPABILITIES: Capability[] = [
   {
     name: 'Deal Closer',
     detail:
-      'Seven real-estate tools — commission maths, negotiation scripts, MLS listings, open house playbooks, contract timelines.',
+      'Seven real-estate tools: commission maths, negotiation scripts, MLS listings, open house playbooks, contract timelines.',
     saving: 'Hours → minutes',
   },
   {
@@ -86,7 +92,7 @@ export const LandingCapabilities: React.FC = () => {
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
               <Reveal kind="slide-left">
-                <span className="lf-label text-lf-copper-light text-legible">005 / What's inside</span>
+                <span className="lf-label text-lf-copper-light text-legible">What&apos;s inside</span>
               </Reveal>
               <Reveal kind="slide-left" delay={0.1} className="mt-6 block">
                 <h2 className="lf-heading text-lf-on-ink text-legible">
@@ -106,16 +112,16 @@ export const LandingCapabilities: React.FC = () => {
             </div>
           </div>
 
-          <ol className="lf-scrim lg:col-span-8">
+          <ol className="lf-scrim grid gap-x-8 sm:grid-cols-2 lg:col-span-8">
             {CAPABILITIES.map((cap, i) => (
               <Reveal as="li" key={cap.name} kind="slide-left" delay={0.05 * i}>
-                <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 border-t border-lf-on-ink/15 py-6 sm:gap-x-8 sm:py-7">
+                <div className="grid grid-cols-[auto_1fr] items-baseline gap-x-5 gap-y-2 border-t border-lf-on-ink/15 py-6 sm:gap-x-6">
                   <span className="lf-label pt-1 text-lf-on-ink-muted text-legible">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div>
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
-                      <h3 className="font-editorial text-2xl font-semibold leading-tight text-lf-on-ink text-legible sm:text-3xl">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h3 className="font-editorial text-xl font-semibold leading-tight text-lf-on-ink text-legible sm:text-2xl">
                         {cap.name}
                       </h3>
                       <span className="lf-label whitespace-nowrap text-lf-copper-light text-legible">
@@ -129,7 +135,6 @@ export const LandingCapabilities: React.FC = () => {
                 </div>
               </Reveal>
             ))}
-            <li aria-hidden="true" className="border-t border-lf-on-ink/15" />
           </ol>
         </div>
       </div>

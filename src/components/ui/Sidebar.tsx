@@ -119,6 +119,13 @@ export function Sidebar<T extends string = string>({
     <>
       {/* Mobile top bar (<sm) */}
       <div className="sm:hidden fixed top-0 inset-x-0 z-50 h-14 bg-surface-1/95 backdrop-blur-xl border-b border-hairline flex items-center justify-between px-4">
+        {/* Brass linework accent — CLAUDE.md names "warm ink base + brass
+            linework" as the Studio OS identity, but every chrome edge was a
+            flat neutral hairline. This is the same functional divider with
+            one added gradient line, not a new element competing for
+            attention (redesign-skill: targeted evolution over rebuild for
+            already-fresh, already-working chrome). */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
         {brand}
         <button
           onClick={() => setMobileOpen(true)}
@@ -138,6 +145,7 @@ export function Sidebar<T extends string = string>({
             className="absolute inset-0 bg-surface-0/80 backdrop-blur-sm cursor-pointer"
           />
           <div className="relative bg-surface-1 border-t border-hairline rounded-t-3xl shadow-[var(--shadow-panel-brass)] max-h-[75vh] overflow-y-auto">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-brass-500/40 to-transparent" />
             <div className="flex items-center justify-between px-4 py-3 border-b border-hairline">
               {brand}
               <button
@@ -160,6 +168,7 @@ export function Sidebar<T extends string = string>({
 
       {/* Tablet icon-rail (sm–lg) */}
       <aside className="hidden sm:flex lg:hidden fixed left-0 top-0 bottom-0 z-40 w-16 bg-surface-1/95 backdrop-blur-xl border-r border-hairline flex-col items-center py-4 gap-1">
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-accent-brass-500/40 to-transparent" />
         <div className="mb-3 h-9 w-9 rounded-xl bg-gradient-to-br from-accent-brass-400 via-accent-brass-500 to-accent-brass-600 p-0.5 shadow-[var(--shadow-glow-brass)] border border-accent-brass-400/30">
           <div className="h-full w-full bg-surface-0 rounded-[10px] flex items-center justify-center">
             <Sparkles className="h-4 w-4 text-accent-brass-400" />
@@ -181,6 +190,7 @@ export function Sidebar<T extends string = string>({
 
       {/* Desktop full sidebar (≥lg) */}
       <aside className="hidden lg:flex fixed left-0 top-0 bottom-0 z-40 w-60 bg-surface-1/95 backdrop-blur-xl border-r border-hairline flex-col">
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-px bg-gradient-to-b from-transparent via-accent-brass-500/40 to-transparent" />
         <div className="px-4 py-4 border-b border-hairline">{brand}</div>
         <nav className="flex-1 px-3 py-3 flex flex-col gap-1 overflow-y-auto">
           {items.map((item) => (
