@@ -629,7 +629,26 @@ export function renderFormattedParagraph(
   textColor: string,
   primaryColor: string,
   keyIdx: number | string,
-  paperBgColor: string = '#ffffff'
+  paperBgColor: string = '#ffffff',
+  // cardBg/borderColor: the active theme's own card surface + border
+  // (theme.colors.cardBg / theme.colors.border in PdfCanvas.tsx), used for
+  // the code-block/table/prompt-banner surfaces below instead of a
+  // hardcoded slate-900 card. Paired with `textColor` (also theme-derived)
+  // rather than a hardcoded light/dark text class, since a theme author
+  // already calibrated cardBg to read correctly against that text color —
+  // same pairing the callout box in PdfCanvas.tsx relies on. Defaults match
+  // the previous hardcoded slate-900/slate-800 look for any caller that
+  // doesn't pass them.
+  cardBg: string = '#0f172a',
+  borderColor: string = '#1e293b',
+  // fontSizeClass/lineSpacingClass: the user's actual font-size/line-spacing
+  // settings (getFontSizeClass()/getLineSpacingClass() in PdfCanvas.tsx).
+  // Every branch below used to hardcode its own text-sm/leading-relaxed
+  // regardless of these settings, so a "compact" or "double" line-spacing
+  // choice did almost nothing for formatted content — these now flow
+  // through instead.
+  fontSizeClass: string = 'text-sm sm:text-base',
+  lineSpacingClass: string = 'leading-relaxed'
 ) {
   if (!pText) return null;
 
@@ -658,7 +677,11 @@ export function renderFormattedParagraph(
     const restText = trimmed.slice(match ? match[0].length : 0).replace(/^:\s*/, '').trim();
 
     return (
-      <div key={keyIdx} className="my-3 p-3 rounded-xl bg-slate-900 border border-slate-800 text-white flex items-center space-x-3 shadow-md">
+      <div
+        key={keyIdx}
+        className="my-3 p-3 rounded-xl border flex items-center space-x-3 shadow-md"
+        style={{ backgroundColor: cardBg, borderColor }}
+      >
         {/* Was hardcoded to a fixed app-brand color regardless of which PDF
             theme the document uses — this badge renders inside the exported
             page itself, so on any theme other than that one brand color it
@@ -673,7 +696,7 @@ export function renderFormattedParagraph(
         >
           {badgeText}
         </span>
-        <span className="font-bold text-sm sm:text-base tracking-wide flex-1 text-slate-100">
+        <span className={`font-bold ${fontSizeClass} tracking-wide flex-1`} style={{ color: textColor }}>
           {restText}
         </span>
       </div>
@@ -684,11 +707,15 @@ export function renderFormattedParagraph(
   if (/^<[a-z0-9_-]+>/i.test(trimmed) || /<\/[a-z0-9_-]+>$/i.test(trimmed) || (trimmed.startsWith('<') && trimmed.endsWith('>')) || trimmed.startsWith('```')) {
     const codeContent = trimmed.replace(/^```[a-z]*\n?/i, '').replace(/```$/g, '');
     return (
-      <div key={keyIdx} className="my-2.5 p-3.5 rounded-xl bg-slate-950 border border-slate-800 font-mono text-xs leading-relaxed text-slate-200 overflow-x-auto shadow-inner space-y-1">
+      <div
+        key={keyIdx}
+        className="my-2.5 p-3.5 rounded-xl border font-mono text-xs leading-relaxed overflow-x-auto shadow-inner space-y-1"
+        style={{ backgroundColor: cardBg, borderColor }}
+      >
         {codeContent.split('\n').map((line, lIdx) => {
           const isTag = /^<\/?[a-z0-9_-]+>/i.test(line.trim());
           return (
-            <div key={lIdx} className={isTag ? 'text-cyan-400 font-bold tracking-wide' : 'text-slate-300'}>
+            <div key={lIdx} className={isTag ? 'font-bold tracking-wide' : ''} style={{ color: isTag ? primaryColor : textColor }}>
               {line}
             </div>
           );
@@ -705,10 +732,10 @@ export function renderFormattedParagraph(
       const rows = tableLines.slice(1).map((r) => r.split('|').map((c) => c.trim()).filter(Boolean));
 
       return (
-        <div key={keyIdx} className="my-3 overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/50 shadow-md">
+        <div key={keyIdx} className="my-3 overflow-x-auto rounded-xl border shadow-md" style={{ borderColor, backgroundColor: cardBg }}>
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-slate-900 border-b border-slate-800 text-slate-200 font-bold">
+              <tr className="font-bold" style={{ borderBottom: `1px solid ${borderColor}` }}>
                 {headers.map((h, hIdx) => (
                   <th key={hIdx} className="p-2.5 font-mono uppercase tracking-wider text-[11px]" style={{ color: primaryColor }}>
                     {h}
@@ -718,9 +745,9 @@ export function renderFormattedParagraph(
             </thead>
             <tbody>
               {rows.map((row, rIdx) => (
-                <tr key={rIdx} className={rIdx % 2 === 0 ? 'bg-slate-950/40' : 'bg-slate-900/20'}>
+                <tr key={rIdx}>
                   {row.map((cell, cIdx) => (
-                    <td key={cIdx} className="p-2.5 border-t border-slate-800/60 leading-normal" style={{ color: textColor }}>
+                    <td key={cIdx} className="p-2.5 leading-normal" style={{ color: textColor, borderTop: `1px solid ${borderColor}` }}>
                       {formatBoldInline(cell, primaryColor)}
                     </td>
                   ))}
@@ -742,7 +769,7 @@ export function renderFormattedParagraph(
           className="w-1.5 h-1.5 rounded-full shrink-0 mt-2 shadow-sm"
           style={{ backgroundColor: primaryColor }}
         />
-        <p className="text-sm sm:text-base leading-relaxed flex-1" style={{ color: textColor }}>
+        <p className={`${fontSizeClass} ${lineSpacingClass} flex-1`} style={{ color: textColor }}>
           {formatBoldInline(listContent, primaryColor)}
         </p>
       </div>
@@ -757,7 +784,7 @@ export function renderFormattedParagraph(
       const rest = trimmed.slice(label.length);
       return (
         <div key={keyIdx} className="my-2 p-2.5 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
-          <p className="text-sm sm:text-base leading-relaxed" style={{ color: textColor }}>
+          <p className={`${fontSizeClass} ${lineSpacingClass}`} style={{ color: textColor }}>
             {/* Tint/border were hardcoded to a fixed app-brand color too —
                 same issue as the PROMPT banner above. Derived from the
                 document's own primaryColor at low alpha instead, matching
@@ -778,7 +805,7 @@ export function renderFormattedParagraph(
 
   // 6. Regular paragraph with bold inline support
   return (
-    <p key={keyIdx} className="my-2 leading-relaxed" style={{ color: textColor }}>
+    <p key={keyIdx} className={`my-2 ${lineSpacingClass}`} style={{ color: textColor }}>
       {formatBoldInline(trimmed, primaryColor)}
     </p>
   );

@@ -1536,7 +1536,20 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
         )}
 
         {/* ================= CHAPTER / CONTENT PAGES ================= */}
-        {document.sections.map((section, secIdx) => (
+        {document.sections.map((section, secIdx) => {
+          // A section with barely any content (at/below the AI schema's own
+          // paragraph floor, no callout/cards/table) would otherwise
+          // top-align inside this flex-1 region and leave a large blank gap
+          // before the footer. When that happens, center it instead so a
+          // rare short section still reads as an intentional minimalist
+          // page rather than a broken/unfinished one.
+          const isSparseSection =
+            section.paragraphs.length <= 2 &&
+            !section.callout &&
+            (!section.bulletCards || section.bulletCards.length === 0) &&
+            !section.tableData;
+
+          return (
           <div
             key={section.id || secIdx}
             className={`pdf-page relative bg-white shadow-2xl overflow-hidden flex flex-col justify-between ${pageDimensionsClass}`}
@@ -1552,15 +1565,7 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
             {renderCustomHeader('chapter', secIdx)}
 
             {/* Section Content */}
-            <div className="flex-1 space-y-6">
-              {/* Active Design System Banner (Show on Chapter 1) */}
-              {secIdx === 0 && (
-                <div className="flex items-center justify-between px-3 py-1.5 rounded-lg border text-[10px] font-mono font-bold uppercase tracking-wider" style={{ backgroundColor: theme.colors.cardBg, borderColor: theme.colors.border, color: primaryColor }}>
-                  <span>ACTIVE DESIGN SYSTEM: STYLE 5 • MIDNIGHT AMETHYST GOLD</span>
-                  <span className="opacity-75">HIGH-DPI VECTOR CANVAS</span>
-                </div>
-              )}
-
+            <div className={`flex-1 space-y-6${isSparseSection ? ' flex flex-col justify-center' : ''}`}>
               {/* Chapter Header Banner */}
               <div className="space-y-1.5 border-b pb-4" style={{ borderColor: theme.colors.border }}>
                 {settings.chapterBadgeStyle !== 'none' && (
@@ -1580,7 +1585,15 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
                     {settings.chapterBadgeStyle === 'roman' ? `Chapter ${['I', 'II', 'III', 'IV', 'V'][secIdx] || secIdx + 1}` : `Chapter 0${secIdx + 1}`}
                   </span>
                 )}
-                <h2 className="text-2xl sm:text-3xl font-extrabold" style={{ fontFamily: headerFont, color: headingColor }}>
+                {/* Fixed print-width rem sizing (never vw/clamp — this
+                    renders at a fixed page width, not a responsive
+                    viewport). Tight negative tracking + balanced wrap gives
+                    the title real editorial weight instead of relying on
+                    font-weight as the only differentiator. */}
+                <h2
+                  className="font-extrabold [text-wrap:balance]"
+                  style={{ fontFamily: headerFont, color: headingColor, fontSize: '2rem', lineHeight: 1.08, letterSpacing: '-0.02em' }}
+                >
                   {cleanChapterTitle(section.title)}
                 </h2>
                 {section.subtitle && (
@@ -1617,7 +1630,17 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
                       </p>
                     );
                   }
-                  return renderFormattedParagraph(pText, textPrimaryColor, primaryColor, pIdx, paperBgColor);
+                  return renderFormattedParagraph(
+                    pText,
+                    textPrimaryColor,
+                    primaryColor,
+                    pIdx,
+                    paperBgColor,
+                    theme.colors.cardBg,
+                    theme.colors.border,
+                    getFontSizeClass(),
+                    getLineSpacingClass()
+                  );
                 })}
               </div>
 
@@ -1740,7 +1763,8 @@ export const PdfCanvas: React.FC<PdfCanvasProps> = ({ document, settings: rawSet
             {/* Running Footer */}
             {renderCustomFooter('chapter', secIdx + (settings.showTableOfContents ? 2 : 1))}
           </div>
-        ))}
+          );
+        })}
 
         {/* ================= FINAL PAGE: CALL TO ACTION (BACK COVER) ================= */}
         {settings.showCallToActionPage && document.callToAction && (

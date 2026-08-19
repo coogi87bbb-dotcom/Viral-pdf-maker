@@ -1292,15 +1292,28 @@ app.post('/api/ai/enhance-doc', async (req, res) => {
               subtitle: { type: Type.STRING },
               paragraphs: {
                 type: Type.ARRAY,
-                items: { type: Type.STRING }
+                items: { type: Type.STRING },
+                // Floor against the degenerate single-paragraph section —
+                // see the Instructions block below for the real density
+                // target (3-5 paragraphs); this is just a deterministic
+                // backstop the model can't talk its way around. Note:
+                // @google/genai's Schema.minItems is typed as a STRING,
+                // not a number.
+                minItems: '2'
               },
               callout: {
                 type: Type.OBJECT,
                 properties: {
                   type: { type: Type.STRING, description: 'tip, warning, quote, insight, worksheet, or key-takeaway' },
                   title: { type: Type.STRING },
-                  content: { type: Type.STRING }
-                }
+                  content: { type: Type.STRING, description: '2-3 sentences of real substance — never left blank' }
+                },
+                // Without this, live testing showed the model consistently
+                // emits a callout with only type/title and an EMPTY content
+                // field — a title-only box that undercuts the whole point
+                // of making callout required above (it was meant to add
+                // real page-filling substance, not just an empty box).
+                required: ['type', 'title', 'content']
               },
               bulletCards: {
                 type: Type.ARRAY,
@@ -1327,7 +1340,13 @@ app.post('/api/ai/enhance-doc', async (req, res) => {
                 }
               }
             },
-            required: ['title', 'paragraphs']
+            // 'callout' is required too — every section needs at least one
+            // visual/structural element beyond raw paragraphs so it doesn't
+            // render as a page-filling wall of blank space in PdfCanvas.tsx
+            // (each section becomes its own full printed page). bulletCards/
+            // tableData stay optional since forcing them onto a purely
+            // narrative section produces nonsensical filler.
+            required: ['title', 'paragraphs', 'callout']
           }
         },
         callToAction: {
@@ -1422,12 +1441,14 @@ ${rawText.slice(0, 200000)}
 Instructions:
 1. Re-organize the text into clear, well-structured Chapters / Sections with engaging titles and subheadings.
 2. Polish the text for high readability, professional clarity, and punchy value.
-3. Inject graphic callouts (tips, key insights, action steps, quotes, worksheet prompts) where relevant to break up wall-of-text paragraphs.
-4. Extract key bullet points into 'bulletCards' with clean titles, descriptions, and descriptive badgeText tags.
-5. Provide structured tableData where appropriate.
-6. Create a high-converting Title, Subtitle, Author, and Back-Cover Call To Action page.
-7. Provide short marketing copy suitable for Gumroad / Pinterest listing.
-8. CRITICAL — completeness: every fact, figure, name, step, and detail present in the Raw Content Input above must appear somewhere in the output. Reorganizing, polishing, and formatting are expected; silently dropping, condensing away, or skipping any of the source content is not — this is a reformat of the full source into a professional publication, not a summary of it. If the source is long, use more sections/chapters rather than omitting material.
+3. PAGE DENSITY — CRITICAL: in the final exported PDF, each section/chapter you produce becomes its own full, standalone printed page (roughly 8.5x11in). A section with only one or two short paragraphs renders as a page that's mostly blank white space below a tiny block of text — broken and unprofessional, not "concise." Every section must contain enough substance to visually fill a page: aim for 3-5 solid paragraphs of real content PLUS at least one callout box, and add bulletCards and/or tableData wherever the content naturally supports them. Treat callout, bulletCards, and tableData as expected default structural elements of a well-formed section, not optional decoration.
+4. ELABORATE, DON'T FABRICATE: if a piece of source material is thin (e.g. a single short sentence or a sparse list), expand it with clarifying context, plain-language definitions of terms already present, illustrative framing, and practical implications of that specific point — but ONLY using information stated in or directly, unambiguously implied by the Raw Content Input below. Never invent new facts, figures, statistics, names, dates, case studies, quotes, or claims that are not grounded in the source. When in doubt, elaborate on HOW to understand or apply what is already stated, rather than adding what is not stated.
+5. Inject graphic callouts (tips, key insights, action steps, quotes, worksheet prompts) to break up wall-of-text paragraphs and reinforce each section's core point.
+6. Extract key bullet points into 'bulletCards' with clean titles, descriptions, and descriptive badgeText tags, wherever the section content is naturally list-like or step-like.
+7. Provide structured tableData wherever the section content involves comparisons, steps, categories, or data that reads better as a table.
+8. Create a high-converting Title, Subtitle, Author, and Back-Cover Call To Action page.
+9. Provide short marketing copy suitable for Gumroad / Pinterest listing.
+10. CRITICAL — completeness: every fact, figure, name, step, and detail present in the Raw Content Input above must appear somewhere in the output. Reorganizing, polishing, and formatting are expected; silently dropping, condensing away, or skipping any of the source content is not — this is a reformat of the full source into a professional publication, not a summary of it. If the source is long, prefer FEWER, DENSER, fully-realized sections over splitting it into many thin ones — a long source should produce a smaller number of substantial, page-filling chapters that together cover everything, not a large number of sparse ones. Only add another section/chapter when the source material genuinely supports another full, dense section (per instruction #3) — never split content thin purely to create more chapters.
 
 Return pure structured JSON matching the requested schema.`;
 
