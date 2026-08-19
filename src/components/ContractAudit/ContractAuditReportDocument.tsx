@@ -13,9 +13,9 @@
 // correctly-sized page (exportPdfFromRef measures the div's real rendered
 // height) is safer than risking clipped content on a rigid multi-page split.
 import React from 'react';
-import type { AuditFinding, AuditResult, AuditSeverity } from './types';
+import type { AuditResult, Severity, VarianceFinding } from './types';
 import { SEVERITY_LABELS, USE_CASE_LABELS } from './types';
-import { formatCurrency } from './shared';
+import { formatCurrency } from './engine/decimalUtils';
 import type { DocumentData, DocSection, CalloutBox } from '../../types';
 
 const NAVY = '#0f172a';
@@ -26,30 +26,35 @@ const SLATE_300 = '#cbd5e1';
 const SLATE_200 = '#e2e8f0';
 const SLATE_50 = '#f8fafc';
 
-const SEVERITY_COLOR: Record<AuditSeverity, { bg: string; text: string }> = {
-  critical: { bg: '#7f1d1d', text: '#ffffff' },
-  high: { bg: '#b45309', text: '#ffffff' },
-  medium: { bg: '#a16207', text: '#ffffff' },
-  low: { bg: '#475569', text: '#ffffff' },
-  info: { bg: '#1e40af', text: '#ffffff' },
+// Ordered most- to least-severe — drives both the bars and the "worst
+// finding wins" callout-type selection below.
+const SEVERITY_ORDER: Severity[] = ['DISPUTE', 'REVIEW', 'WITHIN_TOLERANCE'];
+
+const SEVERITY_COLOR: Record<Severity, { bg: string; text: string }> = {
+  DISPUTE: { bg: '#7f1d1d', text: '#ffffff' },
+  REVIEW: { bg: '#b45309', text: '#ffffff' },
+  WITHIN_TOLERANCE: { bg: LEDGER_GREEN, text: '#ffffff' },
 };
 
-function severityCalloutType(critical: number, high: number): CalloutBox['type'] {
-  if (critical > 0) return 'warning';
-  if (high > 0) return 'tip';
+function severityCalloutType(disputeCount: number, reviewCount: number): CalloutBox['type'] {
+  if (disputeCount > 0) return 'warning';
+  if (reviewCount > 0) return 'tip';
   return 'key-takeaway';
 }
 
-// Maps the fetched AuditResult into PDF Studio's generic DocumentData/
-// DocSection model (same approach as DealCloser's dealDeckDataToDocument)
-// so it can flow through the standard PdfCanvas + STUDIO_THEMES export
-// pipeline for further editing/theming — entirely client-side, no re-call
-// to the Python service needed, so a saved "My Audits" record can
-// regenerate this anytime.
+function countBySeverity(findings: VarianceFinding[]): Record<Severity, number> {
+  const counts: Record<Severity, number> = { WITHIN_TOLERANCE: 0, REVIEW: 0, DISPUTE: 0 };
+  for (const f of findings) counts[f.severity] += 1;
+  return counts;
+}
+
+// Maps the client-computed AuditResult into PDF Studio's generic
+// DocumentData/DocSection model (same approach as DealCloser's
+// dealDeckDataToDocument) so it can flow through the standard PdfCanvas +
+// STUDIO_THEMES export pipeline for further editing/theming.
 export function auditResultToDocument(result: AuditResult): DocumentData {
-  const { summary, findings } = result;
-  const critical = summary.findingCounts.critical || 0;
-  const high = summary.findingCounts.high || 0;
+  const { findings } = result;
+  const counts = countBySeverity(findings);
 
   const sections: DocSection[] = [
     {
@@ -59,16 +64,14 @@ export function auditResultToDocument(result: AuditResult): DocumentData {
       paragraphs: [
         `This audit compared the submitted contract against the submitted invoice under the ${USE_CASE_LABELS[result.useCase]} use case${
           result.jurisdiction ? ` (${result.jurisdiction} jurisdiction)` : ''
-        }, identifying ${findings.length} finding${findings.length === 1 ? '' : 's'} totaling ${formatCurrency(
-          summary.totalVariance
-        )} in variance.`,
+        }, identifying ${findings.length} finding${findings.length === 1 ? '' : 's'} with ${formatCurrency(
+          result.totalRecoverable
+        )} potentially recoverable.`,
       ],
       callout: {
-        type: severityCalloutType(critical, high),
-        title: `${formatCurrency(summary.totalVariance)} in Total Variance`,
-        content: `${critical} critical, ${high} high, ${summary.findingCounts.medium || 0} medium, ${
-          summary.findingCounts.low || 0
-        } low, ${summary.findingCounts.info || 0} informational finding(s).`,
+        type: severityCalloutType(counts.DISPUTE, counts.REVIEW),
+        title: `${formatCurrency(result.totalRecoverable)} Potentially Recoverable`,
+        content: `${counts.DISPUTE} dispute-grade, ${counts.REVIEW} review, ${counts.WITHIN_TOLERANCE} within tolerance.`,
       },
     },
     {
@@ -77,13 +80,13 @@ export function auditResultToDocument(result: AuditResult): DocumentData {
       title: 'Findings',
       paragraphs: [],
       tableData: {
-        headers: ['Clause', 'Description', 'Contract', 'Invoice', 'Variance', 'Severity'],
+        headers: ['Item Code', 'Description', 'Agreed', 'Billed', 'Variance', 'Severity'],
         rows: findings.map((f) => [
-          f.clause,
+          f.itemCode,
           f.description,
-          formatCurrency(f.contractAmount),
-          formatCurrency(f.invoiceAmount),
-          formatCurrency(f.variance),
+          formatCurrency(f.agreedAmount),
+          formatCurrency(f.billedAmount),
+          formatCurrency(f.varianceAmount),
           SEVERITY_LABELS[f.severity],
         ]),
       },
@@ -91,10 +94,10 @@ export function auditResultToDocument(result: AuditResult): DocumentData {
     {
       id: 'audit-3',
       chapterNumber: 3,
-      title: 'Recommendations',
-      paragraphs: findings.filter((f) => f.recommendation).length
-        ? findings.filter((f) => f.recommendation).map((f) => `${f.clause}: ${f.recommendation}`)
-        : ['No specific recommendations were generated for this audit.'],
+      title: 'Dispute-Grade Findings',
+      paragraphs: counts.DISPUTE
+        ? findings.filter((f) => f.severity === 'DISPUTE').map((f) => `${f.itemCode}: ${f.explanation}`)
+        : ['No dispute-grade findings were identified in this audit.'],
     },
   ];
 
@@ -104,9 +107,9 @@ export function auditResultToDocument(result: AuditResult): DocumentData {
     author: 'Contract Audit — Variance Detection',
     category: 'Financial Audit Report',
     keyTakeaways: [
-      `${formatCurrency(summary.totalVariance)} in total variance identified`,
+      `${formatCurrency(result.totalRecoverable)} potentially recoverable`,
       `${findings.length} finding${findings.length === 1 ? '' : 's'} across ${USE_CASE_LABELS[result.useCase]}`,
-      critical > 0 ? `${critical} critical finding${critical === 1 ? '' : 's'} require immediate review` : 'No critical findings',
+      counts.DISPUTE > 0 ? `${counts.DISPUTE} dispute-grade finding${counts.DISPUTE === 1 ? '' : 's'} require immediate review` : 'No dispute-grade findings',
     ],
     sections,
     callToAction: {
@@ -138,7 +141,7 @@ const SectionHeading: React.FC<{ children: React.ReactNode }> = ({ children }) =
   </h2>
 );
 
-const SeverityPill: React.FC<{ severity: AuditSeverity }> = ({ severity }) => {
+const SeverityPill: React.FC<{ severity: Severity }> = ({ severity }) => {
   const c = SEVERITY_COLOR[severity];
   return (
     <span
@@ -163,11 +166,11 @@ function cellStyle(i: number): React.CSSProperties {
   return { textAlign: 'left', padding: '8px 10px', border: '1px solid #d1d5db', verticalAlign: 'top', background: i % 2 === 1 ? SLATE_50 : 'transparent' };
 }
 
-const FindingsTable: React.FC<{ findings: AuditFinding[] }> = ({ findings }) => (
+const FindingsTable: React.FC<{ findings: VarianceFinding[] }> = ({ findings }) => (
   <table style={{ width: '100%', borderCollapse: 'collapse', margin: '12px 0 22px', fontSize: '9.5pt' }}>
     <thead>
       <tr>
-        {['Clause', 'Description', 'Contract', 'Invoice', 'Variance', 'Severity'].map((h) => (
+        {['Item Code', 'Description', 'Agreed', 'Billed', 'Variance', 'Severity'].map((h) => (
           <th
             key={h}
             style={{
@@ -188,12 +191,12 @@ const FindingsTable: React.FC<{ findings: AuditFinding[] }> = ({ findings }) => 
     <tbody>
       {findings.map((f, i) => (
         <tr key={f.id}>
-          <td style={cellStyle(i)}>{f.clause}</td>
+          <td style={cellStyle(i)}>{f.itemCode}</td>
           <td style={cellStyle(i)}>{f.description}</td>
-          <td style={cellStyle(i)}>{formatCurrency(f.contractAmount)}</td>
-          <td style={cellStyle(i)}>{formatCurrency(f.invoiceAmount)}</td>
-          <td style={{ ...cellStyle(i), fontWeight: 700, color: f.variance && f.variance > 0 ? '#7f1d1d' : NAVY }}>
-            {formatCurrency(f.variance)}
+          <td style={cellStyle(i)}>{formatCurrency(f.agreedAmount)}</td>
+          <td style={cellStyle(i)}>{formatCurrency(f.billedAmount)}</td>
+          <td style={{ ...cellStyle(i), fontWeight: 700, color: f.varianceAmount.gt(0) ? '#7f1d1d' : NAVY }}>
+            {formatCurrency(f.varianceAmount)}
           </td>
           <td style={cellStyle(i)}>
             <SeverityPill severity={f.severity} />
@@ -209,18 +212,17 @@ const FindingsTable: React.FC<{ findings: AuditFinding[] }> = ({ findings }) => 
 // (Chart.js paints on a rAF tick after mount) risks a blank capture if
 // export fires before the first paint. Proportional-width <div> bars are
 // synchronously painted DOM, so there's no timing race to manage.
-const SeverityBars: React.FC<{ counts: Record<AuditSeverity, number> }> = ({ counts }) => {
-  const order: AuditSeverity[] = ['critical', 'high', 'medium', 'low', 'info'];
-  const max = Math.max(1, ...order.map((s) => counts[s] || 0));
+const SeverityBars: React.FC<{ counts: Record<Severity, number> }> = ({ counts }) => {
+  const max = Math.max(1, ...SEVERITY_ORDER.map((s) => counts[s] || 0));
   return (
     <div style={{ margin: '8px 0 22px' }}>
-      {order.map((sev) => {
+      {SEVERITY_ORDER.map((sev) => {
         const n = counts[sev] || 0;
         const pct = Math.round((n / max) * 100);
         const c = SEVERITY_COLOR[sev];
         return (
           <div key={sev} style={{ display: 'flex', alignItems: 'center', gap: 10, margin: '5px 0' }}>
-            <span style={{ width: 70, fontSize: '9pt', color: SLATE_700, flexShrink: 0 }}>{SEVERITY_LABELS[sev]}</span>
+            <span style={{ width: 110, fontSize: '9pt', color: SLATE_700, flexShrink: 0 }}>{SEVERITY_LABELS[sev]}</span>
             <div style={{ flex: 1, height: 12, background: SLATE_200, borderRadius: 2, overflow: 'hidden' }}>
               <div style={{ width: `${pct}%`, height: '100%', background: c.bg }} />
             </div>
@@ -233,7 +235,9 @@ const SeverityBars: React.FC<{ counts: Record<AuditSeverity, number> }> = ({ cou
 };
 
 export const ContractAuditReportDocument: React.FC<{ result: AuditResult }> = ({ result }) => {
-  const { summary, findings } = result;
+  const { findings } = result;
+  const counts = countBySeverity(findings);
+  const disputeFindings = findings.filter((f) => f.severity === 'DISPUTE');
 
   return (
     <div
@@ -307,35 +311,61 @@ export const ContractAuditReportDocument: React.FC<{ result: AuditResult }> = ({
       <div style={{ display: 'flex', gap: 16, margin: '8px 0 18px' }}>
         <div style={{ flex: 1, border: `1px solid ${SLATE_300}`, borderRadius: 4, padding: '14px 16px' }}>
           <p style={{ margin: '0 0 4px', fontSize: '8.5pt', textTransform: 'uppercase', letterSpacing: '0.05em', color: SLATE_500 }}>
-            Total Variance
+            Total Agreed
           </p>
-          <p style={{ margin: 0, fontSize: '18pt', fontWeight: 700, color: NAVY }}>{formatCurrency(summary.totalVariance)}</p>
+          <p style={{ margin: 0, fontSize: '16pt', fontWeight: 700, color: NAVY }}>{formatCurrency(result.totalAgreed)}</p>
         </div>
         <div style={{ flex: 1, border: `1px solid ${SLATE_300}`, borderRadius: 4, padding: '14px 16px' }}>
           <p style={{ margin: '0 0 4px', fontSize: '8.5pt', textTransform: 'uppercase', letterSpacing: '0.05em', color: SLATE_500 }}>
-            Findings
+            Total Billed
           </p>
-          <p style={{ margin: 0, fontSize: '18pt', fontWeight: 700, color: NAVY }}>{findings.length}</p>
+          <p style={{ margin: 0, fontSize: '16pt', fontWeight: 700, color: NAVY }}>{formatCurrency(result.totalBilled)}</p>
+        </div>
+        <div style={{ flex: 1, border: `1px solid ${SLATE_300}`, borderRadius: 4, padding: '14px 16px' }}>
+          <p style={{ margin: '0 0 4px', fontSize: '8.5pt', textTransform: 'uppercase', letterSpacing: '0.05em', color: SLATE_500 }}>
+            Potentially Recoverable
+          </p>
+          <p style={{ margin: 0, fontSize: '16pt', fontWeight: 700, color: '#7f1d1d' }}>{formatCurrency(result.totalRecoverable)}</p>
         </div>
       </div>
-      <SeverityBars counts={summary.findingCounts} />
+      <SeverityBars counts={counts} />
 
       <SectionHeading>Findings Detail</SectionHeading>
       <FindingsTable findings={findings} />
 
-      <SectionHeading>Recommendations</SectionHeading>
-      {findings.filter((f) => f.recommendation).length > 0 ? (
+      <SectionHeading>Dispute-Grade Findings</SectionHeading>
+      {disputeFindings.length > 0 ? (
         <ul style={{ margin: '8px 0', paddingLeft: 20 }}>
-          {findings
-            .filter((f) => f.recommendation)
-            .map((f) => (
-              <li key={f.id} style={{ margin: '4px 0', color: SLATE_700, fontSize: '10pt' }}>
-                <strong style={{ color: NAVY }}>{f.clause}:</strong> {f.recommendation}
-              </li>
-            ))}
+          {disputeFindings.map((f) => (
+            <li key={f.id} style={{ margin: '4px 0', color: SLATE_700, fontSize: '10pt' }}>
+              <strong style={{ color: NAVY }}>{f.itemCode}:</strong> {f.explanation}
+            </li>
+          ))}
         </ul>
       ) : (
-        <p style={{ margin: '8px 0', fontSize: '10pt', color: SLATE_700 }}>No specific recommendations were generated for this audit.</p>
+        <p style={{ margin: '8px 0', fontSize: '10pt', color: SLATE_700 }}>No dispute-grade findings were identified in this audit.</p>
+      )}
+
+      {(result.unmatchedContractItems.length > 0 || result.parseErrors.length > 0) && (
+        <>
+          <SectionHeading>Data Notes</SectionHeading>
+          {result.unmatchedContractItems.length > 0 && (
+            <p style={{ margin: '8px 0', fontSize: '10pt', color: SLATE_700 }}>
+              {result.unmatchedContractItems.length} contract line item{result.unmatchedContractItems.length === 1 ? '' : 's'} had no matching
+              invoice line and could not be evaluated for variance:{' '}
+              {result.unmatchedContractItems.map((c) => c.itemCode || c.description).join(', ')}.
+            </p>
+          )}
+          {result.parseErrors.length > 0 && (
+            <ul style={{ margin: '8px 0', paddingLeft: 20 }}>
+              {result.parseErrors.map((err, i) => (
+                <li key={i} style={{ margin: '2px 0', color: SLATE_500, fontSize: '9pt' }}>
+                  {err}
+                </li>
+              ))}
+            </ul>
+          )}
+        </>
       )}
 
       <p style={{ marginTop: 34, paddingTop: 12, borderTop: `1px solid ${SLATE_300}`, fontSize: '8.5pt', color: SLATE_500, fontStyle: 'italic' }}>

@@ -1,84 +1,75 @@
-// Cross-cutting helpers for the Contract Audit tool: file encoding, the
-// server.ts proxy client, Firestore-backed audit history ("My Audits"),
-// and styled form primitives scoped to this tool only. Copied and re-themed
-// from DealCloser/shared.tsx's pattern rather than cross-imported — keeps
-// each tool directory independently editable, matching this app's existing
-// one-directory-per-tool convention. Uses this tool's brass Studio OS
-// accent throughout (not DealCloser's rosegold — that ramp is reserved for
-// pre-login surfaces + Button.tsx's primary variant per CLAUDE.md).
+// Cross-cutting helpers for the Contract Audit tool: Firestore-backed audit
+// history ("My Audits") and styled form primitives scoped to this tool only.
+// Copied and re-themed from DealCloser/shared.tsx's pattern rather than
+// cross-imported — keeps each tool directory independently editable,
+// matching this app's existing one-directory-per-tool convention. Uses this
+// tool's brass Studio OS accent throughout (not DealCloser's rosegold —
+// that ramp is reserved for pre-login surfaces + Button.tsx's primary
+// variant per CLAUDE.md).
+//
+// There is no server round-trip anymore (see types.ts's header comment) —
+// runAudit (engine/auditEngine.ts) runs entirely in the browser, so this
+// file's only job is persisting/loading results, not proxying to one.
 import React from 'react';
+import Decimal from 'decimal.js';
 import { AlertTriangle, Loader2 } from 'lucide-react';
-import { apiFetch, apiPostJson } from '../../lib/apiClient';
 import { db, doc, setDoc, increment, serverTimestamp, collection, addDoc, query, where, orderBy, getDocs } from '../../lib/firebase';
-import type { AuditResult, ContractAuditUseCase, EncodedUpload, SavedAudit } from './types';
+import type { AuditResult, ContractAuditUseCase, SavedAudit } from './types';
 
-// ---------------------------------------------------------------------------
-// File -> base64 upload encoding.
-// ---------------------------------------------------------------------------
-export function fileToBase64(file: File): Promise<EncodedUpload> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = () => reject(new Error(`Could not read ${file.name}.`));
-    reader.onload = () => {
-      const result = reader.result as string;
-      const base64Data = result.slice(result.indexOf(',') + 1);
-      resolve({ fileName: file.name, mimeType: file.type || 'application/octet-stream', base64Data });
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// Matches the upstream Python service's own 10MB-per-file cap — checked
-// client-side before ever hitting the network so the common case never
-// round-trips just to fail.
+// Sanity cap on uploaded CSVs — Papa.parse can handle far larger files, but
+// there's no reason to accept an absurdly large one; also keeps the browser
+// tab responsive since parsing/matching/classifying all happen synchronously
+// on the main thread (see engine/auditEngine.ts).
 export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 
-// Shared by ContractAuditStudio.tsx's in-app results table and
-// ContractAuditReportDocument.tsx's branded PDF report, so both format
-// currency identically.
-export function formatCurrency(n: number | null | undefined): string {
-  if (n === null || n === undefined || !Number.isFinite(n)) return '—';
-  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+// ---------------------------------------------------------------------------
+// Firestore serialization — Decimal values (used throughout AuditResult; see
+// engine/decimalUtils.ts) have no native Firestore representation, so every
+// Decimal instance is written as { __decimal: "<string>" } and rehydrated
+// back into a real Decimal on read. rawSource (each line item's full
+// original CSV row) is dropped at write time: it's only needed during
+// matching/ingestion, never for displaying a saved result, and keeping it
+// would multiply every stored line item's size by however many columns the
+// source file had.
+// ---------------------------------------------------------------------------
+function serializeValue(value: any): any {
+  if (value instanceof Decimal) return { __decimal: value.toString() };
+  if (Array.isArray(value)) return value.map(serializeValue);
+  if (value !== null && typeof value === 'object') {
+    const out: Record<string, any> = {};
+    for (const [key, v] of Object.entries(value)) {
+      if (key === 'rawSource') continue;
+      out[key] = serializeValue(v);
+    }
+    return out;
+  }
+  return value;
 }
 
-// ---------------------------------------------------------------------------
-// POST /api/contract-audit/run (server.ts) — proxies to the deployed
-// variance-guard-engine FastAPI service with server-side Basic auth.
-// Mirrors DealCloser's callDealCloserAI shape (throw on a failure/error
-// response rather than returning it).
-// ---------------------------------------------------------------------------
-export async function runContractAudit(
-  useCase: ContractAuditUseCase,
-  jurisdiction: string,
-  contract: EncodedUpload,
-  invoice: EncodedUpload
-): Promise<AuditResult> {
-  const res = await apiPostJson<any>('/api/contract-audit/run', { useCase, jurisdiction, contract, invoice });
-  if (!res || res.error) {
-    throw new Error(res?.error || 'Contract audit failed. Please try again.');
+function deserializeValue(value: any): any {
+  if (value !== null && typeof value === 'object') {
+    if (typeof value.__decimal === 'string') return new Decimal(value.__decimal);
+    if (Array.isArray(value)) return value.map(deserializeValue);
+    const out: Record<string, any> = {};
+    for (const [key, v] of Object.entries(value)) out[key] = deserializeValue(v);
+    return out;
   }
-  return res as AuditResult;
+  return value;
 }
 
-// Downloads can't be a plain <a href> — /api/contract-audit/download/* sits
-// behind the same Firebase-bearer-token gate as every other /api/* route,
-// which a static link has no way to attach. Fetch as a Blob and trigger a
-// synthetic click instead.
-export async function downloadAuditFile(auditId: string, kind: 'excel' | 'letter', suggestedFileName: string): Promise<void> {
-  const res = await apiFetch(`/api/contract-audit/download/${auditId}/${kind}`);
-  if (!res.ok) {
-    const body = await res.json().catch(() => null);
-    throw new Error(body?.error || 'Download failed. Please try again.');
+export function serializeAuditResult(result: AuditResult): Record<string, any> {
+  return serializeValue(result);
+}
+
+export function deserializeAuditResult(data: Record<string, any>): AuditResult {
+  const restored = deserializeValue(data) as AuditResult;
+  // rawSource was dropped at write time — put back an empty object so the
+  // rehydrated line items still satisfy their type; a saved/reopened result
+  // only ever gets displayed, never re-matched, so the field is unused.
+  for (const item of [...restored.unmatchedContractItems, ...restored.unmatchedInvoiceItems]) {
+    (item as any).rawSource = {};
   }
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = suggestedFileName;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  return restored;
 }
 
 // ---------------------------------------------------------------------------
@@ -98,24 +89,19 @@ export async function trackContractAuditUsage(useCase: ContractAuditUseCase): Pr
 }
 
 // ---------------------------------------------------------------------------
-// Per-user audit history ("My Audits") — persists the findings/summary
-// record so it survives independently of the upstream Python service's
-// ephemeral temp-file storage. Does NOT persist the original Excel/letter
-// files themselves; those still depend on that service's own temp-file
-// lifecycle (a re-deploy there clears them) — a durable copy would need
-// Firebase Storage, which isn't wired into this app yet. Re-running the
-// audit is the fallback if a download link has gone stale.
+// Per-user audit history ("My Audits"). Since the engine runs entirely
+// client-side now, there's no ephemeral upstream temp-file storage to worry
+// about — the saved record is the full, re-displayable result (see
+// serializeAuditResult above), so a saved audit never goes stale the way it
+// used to when it depended on a separately-deployed service's own file
+// lifecycle.
 // ---------------------------------------------------------------------------
 export async function saveContractAudit(uid: string, result: AuditResult): Promise<void> {
   try {
     await addDoc(collection(db, 'contractAudits'), {
       userId: uid,
-      auditId: result.auditId,
-      useCase: result.useCase,
-      jurisdiction: result.jurisdiction,
-      summary: result.summary,
-      findings: result.findings,
       createdAt: serverTimestamp(),
+      result: serializeAuditResult(result),
     });
   } catch (err) {
     // Best-effort — a failed history write should never block showing the
@@ -129,15 +115,7 @@ export async function listMyContractAudits(uid: string): Promise<SavedAudit[]> {
   const snap = await getDocs(q);
   return snap.docs.map((d) => {
     const data = d.data() as any;
-    return {
-      docId: d.id,
-      auditId: data.auditId,
-      useCase: data.useCase,
-      jurisdiction: data.jurisdiction,
-      summary: data.summary,
-      findings: data.findings,
-      createdAt: data.createdAt?.toDate?.()?.toISOString?.() || '',
-    } as SavedAudit;
+    return { docId: d.id, result: deserializeAuditResult(data.result) };
   });
 }
 
@@ -245,7 +223,9 @@ interface FileDropFieldProps {
   hint?: string;
 }
 
-const ACCEPTED_EXTENSIONS = '.csv,.xlsx,.xls,.pdf,.yaml,.yml';
+// CSV only — see engine/ingestion.ts's header comment for why Excel/PDF
+// ingestion is out of scope for this client-side port.
+const ACCEPTED_EXTENSIONS = '.csv';
 
 export const FileDropField: React.FC<FileDropFieldProps> = ({ label, file, onChange, hint }) => {
   const inputId = `contract-audit-file-${label.replace(/\s+/g, '-').toLowerCase()}`;
@@ -256,9 +236,7 @@ export const FileDropField: React.FC<FileDropFieldProps> = ({ label, file, onCha
         htmlFor={inputId}
         className="flex items-center justify-between gap-3 w-full bg-surface-0 border border-dashed border-hairline hover:border-accent-brass-400/50 rounded-xl px-3.5 py-3 text-xs cursor-pointer transition-colors focus-within:ring-2 focus-within:ring-accent-brass-400"
       >
-        <span className={file ? 'text-ink-primary truncate' : 'text-ink-muted'}>
-          {file ? file.name : 'Choose a file (.csv, .xlsx, .pdf, .yaml)'}
-        </span>
+        <span className={file ? 'text-ink-primary truncate' : 'text-ink-muted'}>{file ? file.name : 'Choose a CSV file'}</span>
         <span className="flex-shrink-0 text-[10px] font-bold uppercase tracking-wide text-accent-brass-400">Browse</span>
       </label>
       <input

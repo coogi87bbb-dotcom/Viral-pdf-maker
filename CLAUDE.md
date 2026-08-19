@@ -72,7 +72,7 @@ For any visual/UI change: serve the app (`npm run dev`, or via this environment'
 
 ## Testing & Verification Commands
 
-- `npm run test` — vitest, covers `auth-middleware.test.ts` and `server-utils.test.ts`.
+- `npm run test` — vitest, covers `auth-middleware.test.ts`, `server-utils.test.ts`, and `src/components/ContractAudit/engine/*.test.ts` (the Contract Audit variance-detection engine — matching, severity classification, duplicate-billing handling, totals).
 - `npm run lint` — `tsc --noEmit`.
 
 Run both after any change. Styling-only changes should produce zero regressions in either. For changes touching `PdfCanvas.tsx`, `Header.tsx`, `StudioControls.tsx`, or any modal, also manually exercise PDF export end-to-end (see load-bearing selectors above) and the browser's native print-to-PDF path.

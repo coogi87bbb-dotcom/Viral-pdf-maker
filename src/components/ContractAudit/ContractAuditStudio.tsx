@@ -1,10 +1,9 @@
-// Contract Audit shell — a native Studio OS wrapper around the separately
-// deployed High-Ticket-Contract-Financial-Auditing FastAPI service
-// (github.com/coogi87bbb-dotcom/High-Ticket-Contract-Financial-Auditing).
-// The Decimal-precision variance-detection engine stays in that service;
-// this component only collects inputs, calls server.ts's proxy routes
-// (/api/contract-audit/*), and renders results/history in this app's brass
-// "Modern Grand Hotel" Studio OS design system. Wired to this app's
+// Contract Audit shell — a native, entirely client-side Studio OS tool
+// (see types.ts's header comment). runAudit (engine/auditEngine.ts) parses
+// both CSVs, matches line items, and classifies every variance in the
+// browser — no server round-trip, no separately-hosted service. This
+// component only collects inputs and renders results/history in this app's
+// brass "Modern Grand Hotel" Studio OS design system. Wired to this app's
 // existing auth (no separate login — reaching this tab already means the
 // user is signed into Studio OS), matching the DealCloser precedent.
 import React, { useRef, useState } from 'react';
@@ -16,13 +15,9 @@ import { Badge, BadgeTone } from '../ui/Badge';
 import { exportPdfFromRef } from '../../utils/pdfExport';
 import type { DocumentData } from '../../types';
 import {
-  fileToBase64,
-  runContractAudit,
-  downloadAuditFile,
   trackContractAuditUsage,
   saveContractAudit,
   listMyContractAudits,
-  formatCurrency,
   MAX_UPLOAD_BYTES,
   TextField,
   SelectField,
@@ -32,15 +27,16 @@ import {
   FileDropField,
 } from './shared';
 import { USE_CASE_IDS, USE_CASE_LABELS, SEVERITY_LABELS } from './types';
-import type { AuditResult, AuditSeverity, ContractAuditUseCase, SavedAudit } from './types';
+import type { AuditResult, Severity, ContractAuditUseCase, SavedAudit } from './types';
+import { runAudit } from './engine/auditEngine';
+import { generateDisputeLetter, generateFindingsCsv, triggerTextDownload } from './engine/reportGenerator';
+import { formatCurrency } from './engine/decimalUtils';
 import { ContractAuditReportDocument, auditResultToDocument } from './ContractAuditReportDocument';
 
-const SEVERITY_TONE: Record<AuditSeverity, BadgeTone> = {
-  critical: 'danger',
-  high: 'warning',
-  medium: 'warning',
-  low: 'neutral',
-  info: 'brass',
+const SEVERITY_TONE: Record<Severity, BadgeTone> = {
+  WITHIN_TOLERANCE: 'positive',
+  REVIEW: 'warning',
+  DISPUTE: 'danger',
 };
 
 interface ContractAuditStudioProps {
@@ -54,7 +50,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
   const [view, setView] = useState<View>('form');
 
   // Form state
-  const [useCase, setUseCase] = useState<ContractAuditUseCase>('lease_cam');
+  const [useCase, setUseCase] = useState<ContractAuditUseCase>('expense');
   const [jurisdiction, setJurisdiction] = useState('');
   const [contractFile, setContractFile] = useState<File | null>(null);
   const [invoiceFile, setInvoiceFile] = useState<File | null>(null);
@@ -63,7 +59,6 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
   // Results / errors
   const [result, setResult] = useState<AuditResult | null>(null);
   const [error, setError] = useState('');
-  const [downloadingKind, setDownloadingKind] = useState<'excel' | 'letter' | null>(null);
   const [exportingPdf, setExportingPdf] = useState(false);
 
   // History
@@ -82,7 +77,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
   const handleRunAudit = async () => {
     setError('');
     if (!contractFile || !invoiceFile) {
-      setError('Choose both a contract file and an invoice file before running the audit.');
+      setError('Choose both a contract CSV and an invoice CSV before running the audit.');
       return;
     }
     if (contractFile.size > MAX_UPLOAD_BYTES || invoiceFile.size > MAX_UPLOAD_BYTES) {
@@ -92,8 +87,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
 
     setRunning(true);
     try {
-      const [contract, invoice] = await Promise.all([fileToBase64(contractFile), fileToBase64(invoiceFile)]);
-      const auditResult = await runContractAudit(useCase, jurisdiction.trim(), contract, invoice);
+      const auditResult = await runAudit(useCase, contractFile, invoiceFile, jurisdiction.trim());
       setResult(auditResult);
       setView('results');
       // Best-effort, non-blocking — never delay showing results on these.
@@ -106,17 +100,12 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
     }
   };
 
-  const handleDownload = async (kind: 'excel' | 'letter') => {
+  const handleDownload = (kind: 'csv' | 'letter') => {
     if (!result) return;
-    setError('');
-    setDownloadingKind(kind);
-    try {
-      const ext = kind === 'excel' ? 'xlsx' : 'md';
-      await downloadAuditFile(result.auditId, kind, `contract-audit-${result.auditId}.${ext}`);
-    } catch (err: any) {
-      setError(err?.message || 'Download failed. Please try again.');
-    } finally {
-      setDownloadingKind(null);
+    if (kind === 'csv') {
+      triggerTextDownload(generateFindingsCsv(result), `contract-audit-${result.auditId}-findings.csv`, 'text/csv');
+    } else {
+      triggerTextDownload(generateDisputeLetter(result), `contract-audit-${result.auditId}-dispute-letter.md`, 'text/markdown');
     }
   };
 
@@ -149,13 +138,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
   };
 
   const openSavedAudit = (saved: SavedAudit) => {
-    setResult({
-      auditId: saved.auditId,
-      useCase: saved.useCase,
-      jurisdiction: saved.jurisdiction,
-      summary: saved.summary,
-      findings: saved.findings,
-    });
+    setResult(saved.result);
     setView('results');
   };
 
@@ -172,7 +155,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
           <div>
             <h1 className="text-xl font-semibold tracking-[-0.02em] font-display text-ink-primary">Contract Audit</h1>
             <p className="text-xs text-ink-muted">
-              Decimal-precision variance detection — lease/CAM, freight, SaaS, expense, and medical.
+              Decimal-precision variance detection — expense reimbursement and SaaS subscriptions, entirely in your browser.
             </p>
           </div>
         </div>
@@ -212,8 +195,8 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            <FileDropField label="Contract" file={contractFile} onChange={setContractFile} />
-            <FileDropField label="Invoice" file={invoiceFile} onChange={setInvoiceFile} />
+            <FileDropField label="Contract CSV" file={contractFile} onChange={setContractFile} />
+            <FileDropField label="Invoice CSV" file={invoiceFile} onChange={setInvoiceFile} />
           </div>
 
           {error && <ErrorBanner message={error} />}
@@ -243,15 +226,15 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
                   className="w-full flex items-center justify-between gap-4 py-3 text-left hover:bg-surface-0/60 rounded-lg px-2 -mx-2 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-brass-400"
                 >
                   <div className="min-w-0">
-                    <p className="text-xs font-bold text-ink-primary truncate">{USE_CASE_LABELS[saved.useCase]}</p>
+                    <p className="text-xs font-bold text-ink-primary truncate">{USE_CASE_LABELS[saved.result.useCase]}</p>
                     <p className="text-[11px] text-ink-muted flex items-center gap-1.5 mt-0.5">
                       <Clock className="h-3 w-3" />
-                      {saved.createdAt ? new Date(saved.createdAt).toLocaleString() : 'Recently'}
+                      {saved.result.createdAt ? new Date(saved.result.createdAt).toLocaleString() : 'Recently'}
                     </p>
                   </div>
                   <div className="flex-shrink-0 text-right">
-                    <p className="text-xs font-bold text-accent-brass-400">{formatCurrency(saved.summary.totalVariance)}</p>
-                    <p className="text-[11px] text-ink-muted">{saved.findings.length} findings</p>
+                    <p className="text-xs font-bold text-accent-brass-400">{formatCurrency(saved.result.totalRecoverable)}</p>
+                    <p className="text-[11px] text-ink-muted">{saved.result.findings.length} findings</p>
                   </div>
                 </button>
               ))}
@@ -263,21 +246,21 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
       {view === 'results' && result && (
         <div className="space-y-6">
           <div className="grid sm:grid-cols-3 gap-4">
-            <StatTile icon={DollarSign} label="Total Variance" value={formatCurrency(result.summary.totalVariance)} />
+            <StatTile icon={DollarSign} label="Potentially Recoverable" value={formatCurrency(result.totalRecoverable)} />
             <StatTile icon={ListChecks} label="Findings" value={result.findings.length} />
             <StatTile
               icon={AlertOctagon}
-              label="Critical"
-              value={result.summary.findingCounts.critical || 0}
-              hint={(result.summary.findingCounts.critical || 0) > 0 ? 'Requires immediate review' : undefined}
+              label="Dispute-Grade"
+              value={result.findings.filter((f) => f.severity === 'DISPUTE').length}
+              hint={result.findings.some((f) => f.severity === 'DISPUTE') ? 'Requires immediate review' : undefined}
             />
           </div>
 
           {error && <ErrorBanner message={error} />}
 
           <div className="flex flex-wrap items-center gap-3">
-            <SecondaryButton icon={Download} label="Download Excel" onClick={() => handleDownload('excel')} loading={downloadingKind === 'excel'} />
-            <SecondaryButton icon={ScrollText} label="Download Dispute Letter" onClick={() => handleDownload('letter')} loading={downloadingKind === 'letter'} />
+            <SecondaryButton icon={Download} label="Download Findings CSV" onClick={() => handleDownload('csv')} />
+            <SecondaryButton icon={ScrollText} label="Download Dispute Letter" onClick={() => handleDownload('letter')} />
             <SecondaryButton icon={Download} label="Download PDF Report" onClick={handleDownloadPdf} loading={exportingPdf} />
             <SecondaryButton icon={FileOutput} label="Send Report to PDF Studio" onClick={() => onSendReportToPdf(auditResultToDocument(result))} />
           </div>
@@ -287,7 +270,7 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
               <table className="w-full text-xs">
                 <thead>
                   <tr className="bg-surface-0/60 border-b border-hairline">
-                    {['Clause', 'Description', 'Contract', 'Invoice', 'Variance', 'Severity'].map((h) => (
+                    {['Item Code', 'Description', 'Agreed', 'Billed', 'Variance', 'Severity'].map((h) => (
                       <th key={h} className="text-left px-4 py-2.5 font-bold uppercase tracking-wide text-[10px] text-ink-muted whitespace-nowrap">
                         {h}
                       </th>
@@ -297,11 +280,11 @@ export const ContractAuditStudio: React.FC<ContractAuditStudioProps> = ({ onSend
                 <tbody className="divide-y divide-hairline">
                   {result.findings.map((f) => (
                     <tr key={f.id}>
-                      <td className="px-4 py-2.5 text-ink-primary whitespace-nowrap">{f.clause}</td>
+                      <td className="px-4 py-2.5 text-ink-primary whitespace-nowrap">{f.itemCode}</td>
                       <td className="px-4 py-2.5 text-ink-secondary max-w-xs">{f.description}</td>
-                      <td className="px-4 py-2.5 text-ink-secondary whitespace-nowrap">{formatCurrency(f.contractAmount)}</td>
-                      <td className="px-4 py-2.5 text-ink-secondary whitespace-nowrap">{formatCurrency(f.invoiceAmount)}</td>
-                      <td className="px-4 py-2.5 font-bold text-ink-primary whitespace-nowrap">{formatCurrency(f.variance)}</td>
+                      <td className="px-4 py-2.5 text-ink-secondary whitespace-nowrap">{formatCurrency(f.agreedAmount)}</td>
+                      <td className="px-4 py-2.5 text-ink-secondary whitespace-nowrap">{formatCurrency(f.billedAmount)}</td>
+                      <td className="px-4 py-2.5 font-bold text-ink-primary whitespace-nowrap">{formatCurrency(f.varianceAmount)}</td>
                       <td className="px-4 py-2.5">
                         <Badge tone={SEVERITY_TONE[f.severity]}>{SEVERITY_LABELS[f.severity]}</Badge>
                       </td>

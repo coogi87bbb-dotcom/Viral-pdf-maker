@@ -470,7 +470,7 @@ function MainWorkspace() {
           </MotionPanel3D>
         </div>
       ) : appMode === 'contract-audit' ? (
-        /* APP G: CONTRACT AUDIT — DECIMAL-PRECISION VARIANCE DETECTION (5 USE CASES) */
+        /* APP G: CONTRACT AUDIT — DECIMAL-PRECISION VARIANCE DETECTION (CLIENT-SIDE) */
         <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
             <ContractAuditStudio onSendReportToPdf={handleSendContractAuditReportToPdfStudio} />
