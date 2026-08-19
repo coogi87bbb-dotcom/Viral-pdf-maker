@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, Flame, Zap, Package, Bot, Handshake, Crown, BookOpen, Bookmark, LayoutGrid } from 'lucide-react';
+import { FileText, Flame, Zap, Package, Bot, Handshake, Crown, BookOpen, Bookmark, LayoutGrid, FileSearch } from 'lucide-react';
 import type { AppMode } from '../App';
 import type { DocumentData } from '../types';
 import { MotionPanel3D } from './MotionPanel3D';
@@ -64,6 +64,13 @@ const TOOL_CARDS: ToolCard[] = [
     label: 'Deal Closer',
     description: '8 AI tools for real-estate underwriting, offers, and closing.',
     badge: '8 RE Tools',
+  },
+  {
+    id: 'contract-audit',
+    icon: FileSearch,
+    label: 'Contract Audit',
+    description: 'Decimal-precision contract-vs-invoice variance detection — lease/CAM, freight, SaaS, expense, and medical.',
+    badge: '5 Use Cases',
   },
   {
     id: 'owner-admin',

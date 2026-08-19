@@ -83,7 +83,8 @@ const SOFTWARE_STACK_TOOLS = [
   { id: 'design', name: 'Design & Thumbnail Engine (Canva / Midjourney)', monthly: 45, category: 'Visuals' },
   { id: 'teleprompter', name: 'Video Teleprompter App', monthly: 25, category: 'Video' },
   { id: 'agency-proposals', name: 'Client Proposal & Pitch Software', monthly: 120, category: 'Agency' },
-  { id: 'trend-listening', name: 'Social Trend & Virality Analytics', monthly: 85, category: 'Analytics' }
+  { id: 'trend-listening', name: 'Social Trend & Virality Analytics', monthly: 85, category: 'Analytics' },
+  { id: 'contract-audit', name: 'Contract & Invoice Audit Software (AP automation tools)', monthly: 149, category: 'Finance' }
 ];
 
 export const RoiCalculator: React.FC = () => {
@@ -107,7 +108,7 @@ export const RoiCalculator: React.FC = () => {
   const [leadCloseRate, setLeadCloseRate] = useState(12); // 12%
 
   // Tool Stack Consolidation State
-  const [selectedSoftwareTools, setSelectedSoftwareTools] = useState<string[]>(['copywriter', 'scheduler', 'design', 'teleprompter']);
+  const [selectedSoftwareTools, setSelectedSoftwareTools] = useState<string[]>(['copywriter', 'scheduler', 'design', 'teleprompter', 'contract-audit']);
 
   // Copy / Print UI State
   const [copiedSummary, setCopiedSummary] = useState(false);

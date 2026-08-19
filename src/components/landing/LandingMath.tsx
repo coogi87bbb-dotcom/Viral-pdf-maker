@@ -5,7 +5,7 @@ import { Reveal } from './Reveal';
  * 006 — The ledger. Ink zone, mirrored split (copy right, figures left) so it
  * doesn't repeat the capabilities section's left-thesis layout.
  *
- * Same sourcing as LandingStats: the four subscription prices are the
+ * Same sourcing as LandingStats: the five subscription prices are the
  * published list prices carried in RoiCalculator.tsx's SOFTWARE_STACK_TOOLS.
  */
 const LINE_ITEMS: { label: string; manual: string }[] = [
@@ -13,6 +13,7 @@ const LINE_ITEMS: { label: string; manual: string }[] = [
   { label: 'Social scheduler', manual: '$249' },
   { label: 'Design & thumbnails', manual: '$45' },
   { label: 'Teleprompter app', manual: '$25' },
+  { label: 'Contract audit software', manual: '$149' },
 ];
 
 export const LandingMath: React.FC = () => {
@@ -43,11 +44,11 @@ export const LandingMath: React.FC = () => {
                 <div className="mt-7 flex items-baseline justify-between gap-6">
                   <span className="lf-label text-lf-copper-light">Monthly total</span>
                   <span className="font-editorial text-4xl font-bold text-lf-copper-light sm:text-5xl">
-                    $418
+                    $567
                   </span>
                 </div>
                 <p className="mt-3 text-right font-sans text-xs text-lf-on-ink-muted">
-                  $5,016 a year, before a single hour of your own time.
+                  $6,804 a year, before a single hour of your own time.
                 </p>
               </div>
             </Reveal>
@@ -61,7 +62,7 @@ export const LandingMath: React.FC = () => {
               <h2 className="lf-heading text-lf-on-ink">
                 One workspace,
                 <br />
-                instead of four
+                instead of five
                 <br />
                 <em className="not-italic text-lf-copper-light">renewals</em>.
               </h2>

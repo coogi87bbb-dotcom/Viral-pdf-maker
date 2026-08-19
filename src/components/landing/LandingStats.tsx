@@ -10,12 +10,13 @@ import { Reveal, CountUp } from './Reveal';
  * cannot drift apart:
  *   - 9 hrs/wk  = 5 posts x 1.8 hrs x (4 channels / 4), the calculator's
  *                 `hoursSavedPerWeek` formula at a deliberately modest volume
- *   - $418/mo   = the calculator's SOFTWARE_STACK_TOOLS list prices for the
- *                 four tools LogFlow AI replaces outright
- *                 (99 + 249 + 45 + 25)
+ *   - $567/mo   = the calculator's SOFTWARE_STACK_TOOLS list prices for the
+ *                 five tools LogFlow AI replaces outright
+ *                 (99 + 249 + 45 + 25 + 149)
  *   - 30s       = the 7-channel campaign generation claim already made in
  *                 CompetitorDominationMatrix.tsx
- *   - 10 tools  = the shipped surface count
+ *   - 11 tools  = the shipped surface count (LandingCapabilities.tsx's
+ *                 CAPABILITIES.length)
  * The calculator's own default preset produces far larger figures; the
  * conservative end is used here on purpose.
  */
@@ -29,9 +30,9 @@ interface Stat {
 
 const STATS: Stat[] = [
   { value: 9, suffix: 'hrs / wk', label: 'Reclaimed at five posts a week' },
-  { value: 418, prefix: '$', suffix: '/ mo', label: 'Subscriptions replaced outright' },
+  { value: 567, prefix: '$', suffix: '/ mo', label: 'Subscriptions replaced outright' },
   { value: 30, suffix: 'sec', label: 'For a full seven-channel campaign' },
-  { value: 10, suffix: 'tools', label: 'One workspace, one login' },
+  { value: 11, suffix: 'tools', label: 'One workspace, one login' },
 ];
 
 export const LandingStats: React.FC = () => {

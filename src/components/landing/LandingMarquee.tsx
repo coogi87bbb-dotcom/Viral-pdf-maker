@@ -5,7 +5,7 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PHRASE = ['Hours back', 'Money back', 'Ten tools', 'One login'];
+const PHRASE = ['Hours back', 'Money back', 'Eleven tools', 'One login'];
 
 /**
  * 003 — Full-bleed oversized type that tracks horizontally with scroll.

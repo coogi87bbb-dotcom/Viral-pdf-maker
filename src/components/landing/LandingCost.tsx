@@ -53,7 +53,7 @@ export const LandingCost: React.FC = () => {
             <Reveal kind="fade-up" delay={0.3} className="mt-10 block">
               <hr className="lf-rule text-lf-on-ink" />
               <p className="mt-6 font-editorial text-2xl font-semibold leading-snug text-lf-on-ink text-legible sm:text-3xl">
-                And it's spread across four subscriptions you're already paying for.
+                And it's spread across five subscriptions you're already paying for.
               </p>
             </Reveal>
           </div>

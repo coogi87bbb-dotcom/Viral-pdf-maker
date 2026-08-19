@@ -22,3 +22,4 @@ pnpm-lock.yaml
 /examples/web-app/*
 !/examples/web-app/.gitkeep
 !/examples/web-app/README.md
+.vercel

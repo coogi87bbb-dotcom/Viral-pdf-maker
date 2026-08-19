@@ -34,7 +34,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
           LogFlow<span className="text-lf-copper"> AI</span>
         </span>
         <span className="lf-label hidden text-lf-on-ink-muted text-legible sm:inline">
-          Ten tools · One workspace
+          Eleven tools · One workspace
         </span>
       </Reveal>
 
@@ -54,9 +54,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onGetStarted }) => {
         <div className="mt-6 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <Reveal kind="fade-up" delay={0.26} immediate>
             <p className="lf-body text-lf-on-ink-muted text-legible">
-              Ten production tools in one workspace: campaigns, publishing,
-              proposals, real estate. The work that eats your evenings takes
-              minutes here.
+              Eleven production tools in one workspace: campaigns, publishing,
+              proposals, real estate, contract audits. The work that eats
+              your evenings takes minutes here.
             </p>
           </Reveal>
 

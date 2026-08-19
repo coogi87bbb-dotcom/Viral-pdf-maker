@@ -13,7 +13,7 @@ export const LandingFooter: React.FC = () => {
               LogFlow<span className="text-lf-copper"> AI</span>
             </span>
             <p className="mt-3 max-w-sm font-sans text-sm leading-relaxed text-lf-on-ink-muted">
-              Ten production tools in one workspace. Built to give you the week back.
+              Eleven production tools in one workspace. Built to give you the week back.
             </p>
           </div>
 

@@ -37,15 +37,16 @@ import { GigScale } from './components/GigScale';
 import { DigitalKitStudio } from './components/DigitalKitStudio';
 import { AgentOpsStudio } from './components/AgentOpsStudio';
 import { DealCloserStudio } from './components/DealCloser/DealCloserStudio';
+import { ContractAuditStudio } from './components/ContractAudit/ContractAuditStudio';
 
 import { DocumentData, DocSection, StudioSettings, StudioTheme } from './types';
 import { parseTextIntoDocument, cleanRawText } from './utils/textCleaner';
 import { SAMPLE_DOCUMENTS } from './data/sampleDocs';
 import { STUDIO_THEMES } from './data/themes';
-import { FileText, Flame, Zap, Crown, Package, Bot, Handshake, LayoutDashboard } from 'lucide-react';
+import { FileText, Flame, Zap, Crown, Package, Bot, Handshake, LayoutDashboard, FileSearch } from 'lucide-react';
 import { OWNER_EMAIL } from './lib/firebase';
 
-export type AppMode = 'home' | 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'deal-closer' | 'owner-admin';
+export type AppMode = 'home' | 'pdf-studio' | 'viral-os' | 'gig-scale' | 'digital-kit' | 'agent-ops' | 'deal-closer' | 'contract-audit' | 'owner-admin';
 
 function MainWorkspace() {
   const { user, userProfile, logout, loading, authError } = useAuth();
@@ -216,6 +217,17 @@ function MainWorkspace() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Same idea, for Contract Audit's branded report — already fully
+  // structured (executive summary, findings table, recommendations) via
+  // auditResultToDocument, so it's mapped directly into DocumentData
+  // rather than round-tripped through the raw-text importer.
+  const handleSendContractAuditReportToPdfStudio = (doc: DocumentData) => {
+    setDocument(doc);
+    applyDocumentThemeAndSettings(doc);
+    setAppMode('pdf-studio');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Handlers for Viral OS
   const handleViralQuickStart = () => {
     setViralTab('campaign');
@@ -278,6 +290,7 @@ function MainWorkspace() {
     { id: 'digital-kit', icon: Package, label: 'Digital Kit Studio', badge: 'Kit Builder', badgeTone: 'brass' },
     { id: 'agent-ops', icon: Bot, label: 'AI Agent Ops', badge: 'Self-Healing', badgeTone: 'positive' },
     { id: 'deal-closer', icon: Handshake, label: 'Deal Closer', badge: '8 RE Tools', badgeTone: 'brass' },
+    { id: 'contract-audit', icon: FileSearch, label: 'Contract Audit', badge: '5 Use Cases', badgeTone: 'brass' },
     ...(isOwner ? [{ id: 'owner-admin' as const, icon: Crown, label: 'Master Admin', emphasized: true }] : []),
   ];
 
@@ -454,6 +467,13 @@ function MainWorkspace() {
               onSendToPdf={handleSendToPdfStudio}
               onSendDealDeckToPdfStudio={handleSendDealDeckToPdfStudio}
             />
+          </MotionPanel3D>
+        </div>
+      ) : appMode === 'contract-audit' ? (
+        /* APP G: CONTRACT AUDIT — DECIMAL-PRECISION VARIANCE DETECTION (5 USE CASES) */
+        <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <MotionPanel3D delay={0.1} tiltX={10} hoverTilt={false}>
+            <ContractAuditStudio onSendReportToPdf={handleSendContractAuditReportToPdfStudio} />
           </MotionPanel3D>
         </div>
       ) : appMode === 'owner-admin' && user?.email?.toLowerCase() === OWNER_EMAIL.toLowerCase() ? (

@@ -84,6 +84,22 @@ service cloud.firestore {
       allow create, update: if isSignedIn();
     }
 
+    // Same aggregate-analytics shape as dealCloserUsage above, for the
+    // Contract Audit tool.
+    match /contractAuditUsage/{useCase} {
+      allow read: if isOwner();
+      allow create, update: if isSignedIn();
+    }
+
+    // --- Contract Audit history ("My Audits") ---
+    // Same user-owned-collection shape as campaigns/calendar_events/
+    // templates above — every document carries a userId field set to the
+    // creator's uid; only that user (or the owner) may read/modify/delete it.
+    match /contractAudits/{docId} {
+      allow read, update, delete: if isSignedIn() && (resource.data.userId == request.auth.uid || isOwner());
+      allow create: if isSignedIn() && request.resource.data.userId == request.auth.uid;
+    }
+
     // No catch-all: anything not explicitly matched above is denied by default.
   }
 }

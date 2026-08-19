@@ -97,7 +97,16 @@ const GENIUS_PERSONA_PREFIX =
 const FAST_MODEL = 'gemini-3.1-flash-lite';
 const NO_THINKING_CONFIG = { thinkingConfig: { thinkingBudget: 0 } };
 
-app.use(express.json({ limit: '10mb' }));
+// 30mb (raised from 10mb): Contract Audit's /api/contract-audit/run sends
+// two base64-encoded files (up to 10MB raw each, per the upstream Python
+// service's own per-file cap) in a single JSON body — base64's ~33%
+// inflation plus JSON envelope overhead can reach ~28MB combined. Global
+// bump rather than a route-scoped override: Express applies body-parsing
+// middleware once per request in registration order, so a route-specific
+// override would need its own express.json() registered ahead of this
+// blanket app.use() — fragile against future reordering — for a payload
+// ceiling that costs nothing to raise app-wide on this low-traffic surface.
+app.use(express.json({ limit: '30mb' }));
 
 // ---------------------------------------------------------------------------
 // Real Gemini call resilience: retry + exponential backoff + jitter, with
@@ -1607,6 +1616,114 @@ Use "verified" only if you found a specific, current, address-relevant source (r
   } catch (error: any) {
     console.warn('Underwriting verification research notice:', error?.message || error);
     return fallback();
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Contract Audit — server-to-server proxy to the separately-deployed
+// High-Ticket-Contract-Financial-Auditing FastAPI service (Render, service
+// name variance-guard-engine). That Decimal-precision variance-detection
+// engine stays as-is in Python; these two routes are the only bridge
+// between it and this app's native React UI (src/components/ContractAudit).
+// Both sit behind app.use('/api', requireAuth) above purely by file
+// position — no explicit wiring needed, matching every other feature route.
+//
+// CONTRACT_AUDIT_SERVICE_URL / CONTRACT_AUDIT_SERVICE_PASSWORD must be set
+// (see .env.example) — and the Render service must already be deployed
+// with a matching APP_PASSWORD — before this becomes anything but a 503.
+// ---------------------------------------------------------------------------
+app.post('/api/contract-audit/run', async (req, res) => {
+  try {
+    const { useCase, jurisdiction, contract, invoice } = req.body || {};
+
+    if (!useCase || !contract?.base64Data || !invoice?.base64Data) {
+      return res.status(400).json({ error: 'Use case and both contract and invoice files are required.' });
+    }
+
+    const serviceUrl = process.env.CONTRACT_AUDIT_SERVICE_URL;
+    const servicePassword = process.env.CONTRACT_AUDIT_SERVICE_PASSWORD;
+    if (!serviceUrl || !servicePassword) {
+      return res.status(503).json({ error: "Contract Audit isn't fully configured yet — contact the site owner." });
+    }
+
+    const form = new FormData();
+    form.append('use_case', useCase);
+    if (jurisdiction) form.append('jurisdiction', jurisdiction);
+    form.append(
+      'contract',
+      new Blob([Buffer.from(contract.base64Data, 'base64')], { type: contract.mimeType || 'application/octet-stream' }),
+      contract.fileName || 'contract'
+    );
+    form.append(
+      'invoice',
+      new Blob([Buffer.from(invoice.base64Data, 'base64')], { type: invoice.mimeType || 'application/octet-stream' }),
+      invoice.fileName || 'invoice'
+    );
+
+    // FastAPI's require_password() dependency (per that repo's web/app.py)
+    // only checks credentials.password via secrets.compare_digest() — the
+    // username half is unchecked, so any non-empty value satisfies it.
+    const basicAuth = Buffer.from(`auditor:${servicePassword}`).toString('base64');
+    const upstream = await fetch(`${serviceUrl.replace(/\/$/, '')}/api/audit`, {
+      method: 'POST',
+      headers: { Authorization: `Basic ${basicAuth}`, Accept: 'application/json' },
+      body: form as any,
+      signal: AbortSignal.timeout(45000), // stays under vercel.json's maxDuration: 60 with margin
+    });
+
+    if (upstream.status === 401 || upstream.status === 503) {
+      return res.status(upstream.status).json({ error: 'Contract Audit service authentication is misconfigured.' });
+    }
+    if (!upstream.ok) {
+      const text = await upstream.text().catch(() => '');
+      return res.status(upstream.status >= 500 ? 502 : upstream.status).json({ error: text || 'Contract Audit service rejected the request.' });
+    }
+
+    const result = await upstream.json();
+    return res.json(result);
+  } catch (error: any) {
+    if (error?.name === 'TimeoutError' || error?.name === 'AbortError') {
+      return res.status(504).json({ error: 'The audit took too long to run. Try a smaller file or contact support.' });
+    }
+    console.error('Contract Audit proxy error:', error);
+    return res.status(502).json({ error: 'Unable to reach the Contract Audit service. Please try again shortly.' });
+  }
+});
+
+app.get('/api/contract-audit/download/:auditId/:kind', async (req, res) => {
+  try {
+    const { auditId, kind } = req.params;
+    if (!/^\d{8}_\d{6}$/.test(auditId) || !['excel', 'letter'].includes(kind)) {
+      return res.status(400).json({ error: 'Invalid audit ID or download type.' });
+    }
+
+    const serviceUrl = process.env.CONTRACT_AUDIT_SERVICE_URL;
+    const servicePassword = process.env.CONTRACT_AUDIT_SERVICE_PASSWORD;
+    if (!serviceUrl || !servicePassword) {
+      return res.status(503).json({ error: "Contract Audit isn't fully configured yet — contact the site owner." });
+    }
+
+    const basicAuth = Buffer.from(`auditor:${servicePassword}`).toString('base64');
+    const upstream = await fetch(`${serviceUrl.replace(/\/$/, '')}/download/${auditId}/${kind}`, {
+      headers: { Authorization: `Basic ${basicAuth}` },
+      signal: AbortSignal.timeout(30000),
+    });
+
+    if (upstream.status === 404) {
+      return res.status(404).json({ error: 'This report is no longer available (temporary storage expired). Please re-run the audit.' });
+    }
+    if (!upstream.ok) {
+      return res.status(502).json({ error: 'Unable to fetch the report from the Contract Audit service.' });
+    }
+
+    res.setHeader('Content-Type', upstream.headers.get('content-type') || 'application/octet-stream');
+    const disposition = upstream.headers.get('content-disposition');
+    if (disposition) res.setHeader('Content-Disposition', disposition);
+    const buf = Buffer.from(await upstream.arrayBuffer());
+    return res.send(buf);
+  } catch (error: any) {
+    console.error('Contract Audit download proxy error:', error);
+    return res.status(502).json({ error: 'Unable to reach the Contract Audit service.' });
   }
 });
 

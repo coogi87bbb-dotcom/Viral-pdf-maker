@@ -2,7 +2,7 @@ import React from 'react';
 import { Reveal } from './Reveal';
 
 /**
- * 005 — The ten tools, as an editorial index rather than a card grid.
+ * 005 — The eleven tools, as an editorial index rather than a card grid.
  *
  * Deliberately no boxes: rank number, serif name, sans description and a
  * right-aligned time figure carry the hierarchy. A 3x3 card grid is the
@@ -81,6 +81,12 @@ const CAPABILITIES: Capability[] = [
       'Residential and commercial deal math with AI-verified comps via live search, plus an investor-ready Deal Deck PDF with a clear verdict.',
     saving: 'Verified before you offer',
   },
+  {
+    name: 'Contract Audit',
+    detail:
+      'Decimal-precision contract-vs-invoice variance detection across lease/CAM, freight, SaaS, expense and medical billing, with a branded dispute-ready report.',
+    saving: 'Overcharges caught',
+  },
 ];
 
 export const LandingCapabilities: React.FC = () => {
@@ -96,9 +102,9 @@ export const LandingCapabilities: React.FC = () => {
               </Reveal>
               <Reveal kind="slide-left" delay={0.1} className="mt-6 block">
                 <h2 className="lf-heading text-lf-on-ink text-legible">
-                  Ten tools that
+                  Eleven tools that
                   <br />
-                  used to be ten
+                  used to be eleven
                   <br />
                   <em className="not-italic text-lf-copper-light">invoices</em>.
                 </h2>
